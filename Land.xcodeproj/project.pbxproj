@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		672DEA5B14D2303D00EB7A66 /* AHHH.m in Sources */ = {isa = PBXBuildFile; fileRef = 672DEA5A14D2303D00EB7A66 /* AHHH.m */; };
 		6773850014D2251F00F1CDB7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 677384FF14D2251F00F1CDB7 /* UIKit.framework */; };
 		6773850214D2251F00F1CDB7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6773850114D2251F00F1CDB7 /* Foundation.framework */; };
 		6773850414D2251F00F1CDB7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6773850314D2251F00F1CDB7 /* CoreGraphics.framework */; };
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		672DEA5914D2303D00EB7A66 /* AHHH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHHH.h; sourceTree = "<group>"; };
+		672DEA5A14D2303D00EB7A66 /* AHHH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHHH.m; sourceTree = "<group>"; };
 		677384FB14D2251F00F1CDB7 /* Land.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Land.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		677384FF14D2251F00F1CDB7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6773850114D2251F00F1CDB7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -131,6 +134,8 @@
 				6773851D14D2251F00F1CDB7 /* MAKJAMDetailViewController.m */,
 				6773851614D2251F00F1CDB7 /* Land.xcdatamodeld */,
 				6773850814D2251F00F1CDB7 /* Supporting Files */,
+				672DEA5914D2303D00EB7A66 /* AHHH.h */,
+				672DEA5A14D2303D00EB7A66 /* AHHH.m */,
 			);
 			path = Land;
 			sourceTree = "<group>";
@@ -276,6 +281,7 @@
 				6773851814D2251F00F1CDB7 /* Land.xcdatamodeld in Sources */,
 				6773851B14D2251F00F1CDB7 /* MAKJAMMasterViewController.m in Sources */,
 				6773851E14D2251F00F1CDB7 /* MAKJAMDetailViewController.m in Sources */,
+				672DEA5B14D2303D00EB7A66 /* AHHH.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +453,7 @@
 				6773853914D2251F00F1CDB7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6773853A14D2251F00F1CDB7 /* Build configuration list for PBXNativeTarget "LandTests" */ = {
 			isa = XCConfigurationList;
@@ -455,6 +462,7 @@
 				6773853C14D2251F00F1CDB7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
