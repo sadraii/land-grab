@@ -25,6 +25,7 @@
 		6773852914D2251F00F1CDB7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6773850514D2251F00F1CDB7 /* CoreData.framework */; };
 		6773853114D2251F00F1CDB7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6773852F14D2251F00F1CDB7 /* InfoPlist.strings */; };
 		6773853414D2251F00F1CDB7 /* LandTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6773853314D2251F00F1CDB7 /* LandTests.m */; };
+		67E9534314D2364D0009ADA7 /* Object.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E9534214D2364D0009ADA7 /* Object.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,8 @@
 		6773853014D2251F00F1CDB7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6773853214D2251F00F1CDB7 /* LandTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LandTests.h; sourceTree = "<group>"; };
 		6773853314D2251F00F1CDB7 /* LandTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LandTests.m; sourceTree = "<group>"; };
+		67E9534114D2364D0009ADA7 /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
+		67E9534214D2364D0009ADA7 /* Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Object.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +130,8 @@
 			children = (
 				6773851014D2251F00F1CDB7 /* MAKJAMAppDelegate.h */,
 				6773851114D2251F00F1CDB7 /* MAKJAMAppDelegate.m */,
+				67E9534114D2364D0009ADA7 /* Object.h */,
+				67E9534214D2364D0009ADA7 /* Object.m */,
 				6773851314D2251F00F1CDB7 /* MainStoryboard.storyboard */,
 				6773851914D2251F00F1CDB7 /* MAKJAMMasterViewController.h */,
 				6773851A14D2251F00F1CDB7 /* MAKJAMMasterViewController.m */,
@@ -282,6 +287,7 @@
 				6773851B14D2251F00F1CDB7 /* MAKJAMMasterViewController.m in Sources */,
 				6773851E14D2251F00F1CDB7 /* MAKJAMDetailViewController.m in Sources */,
 				672DEA5B14D2303D00EB7A66 /* AHHH.m in Sources */,
+				67E9534314D2364D0009ADA7 /* Object.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
