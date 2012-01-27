@@ -8,6 +8,8 @@
 
 #import "Object.h"
 
+//jmoney
+
 @implementation Object
 
 @end
