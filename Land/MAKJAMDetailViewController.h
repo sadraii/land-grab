@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+//Andrew edited a file
+
 #import <UIKit/UIKit.h>
 
 @interface MAKJAMDetailViewController : UIViewController <UISplitViewControllerDelegate>
