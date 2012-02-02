@@ -16,7 +16,6 @@
 		6773850E14D2251F00F1CDB7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6773850D14D2251F00F1CDB7 /* main.m */; };
 		6773851214D2251F00F1CDB7 /* MAKJAMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6773851114D2251F00F1CDB7 /* MAKJAMAppDelegate.m */; };
 		6773851514D2251F00F1CDB7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6773851314D2251F00F1CDB7 /* MainStoryboard.storyboard */; };
-		6773851814D2251F00F1CDB7 /* Land.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6773851614D2251F00F1CDB7 /* Land.xcdatamodeld */; };
 		6773851B14D2251F00F1CDB7 /* MAKJAMMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6773851A14D2251F00F1CDB7 /* MAKJAMMasterViewController.m */; };
 		6773851E14D2251F00F1CDB7 /* MAKJAMDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6773851D14D2251F00F1CDB7 /* MAKJAMDetailViewController.m */; };
 		6773852614D2251F00F1CDB7 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6773852514D2251F00F1CDB7 /* SenTestingKit.framework */; };
@@ -25,6 +24,7 @@
 		6773852914D2251F00F1CDB7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6773850514D2251F00F1CDB7 /* CoreData.framework */; };
 		6773853114D2251F00F1CDB7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6773852F14D2251F00F1CDB7 /* InfoPlist.strings */; };
 		6773853414D2251F00F1CDB7 /* LandTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6773853314D2251F00F1CDB7 /* LandTests.m */; };
+		6781816C14D35509009D1C18 /* Land.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6781816A14D35509009D1C18 /* Land.xcdatamodeld */; };
 		67E9534314D2364D0009ADA7 /* Object.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E9534214D2364D0009ADA7 /* Object.m */; };
 /* End PBXBuildFile section */
 
@@ -53,7 +53,6 @@
 		6773851014D2251F00F1CDB7 /* MAKJAMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MAKJAMAppDelegate.h; sourceTree = "<group>"; };
 		6773851114D2251F00F1CDB7 /* MAKJAMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAKJAMAppDelegate.m; sourceTree = "<group>"; };
 		6773851414D2251F00F1CDB7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		6773851714D2251F00F1CDB7 /* Land.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Land.xcdatamodel; sourceTree = "<group>"; };
 		6773851914D2251F00F1CDB7 /* MAKJAMMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MAKJAMMasterViewController.h; sourceTree = "<group>"; };
 		6773851A14D2251F00F1CDB7 /* MAKJAMMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAKJAMMasterViewController.m; sourceTree = "<group>"; };
 		6773851C14D2251F00F1CDB7 /* MAKJAMDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MAKJAMDetailViewController.h; sourceTree = "<group>"; };
@@ -64,6 +63,7 @@
 		6773853014D2251F00F1CDB7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6773853214D2251F00F1CDB7 /* LandTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LandTests.h; sourceTree = "<group>"; };
 		6773853314D2251F00F1CDB7 /* LandTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LandTests.m; sourceTree = "<group>"; };
+		6781816B14D35509009D1C18 /* Land.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Land.xcdatamodel; sourceTree = "<group>"; };
 		67E9534114D2364D0009ADA7 /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
 		67E9534214D2364D0009ADA7 /* Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Object.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,7 +137,6 @@
 				6773851A14D2251F00F1CDB7 /* MAKJAMMasterViewController.m */,
 				6773851C14D2251F00F1CDB7 /* MAKJAMDetailViewController.h */,
 				6773851D14D2251F00F1CDB7 /* MAKJAMDetailViewController.m */,
-				6773851614D2251F00F1CDB7 /* Land.xcdatamodeld */,
 				6773850814D2251F00F1CDB7 /* Supporting Files */,
 				672DEA5914D2303D00EB7A66 /* AHHH.h */,
 				672DEA5A14D2303D00EB7A66 /* AHHH.m */,
@@ -148,6 +147,7 @@
 		6773850814D2251F00F1CDB7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6781816A14D35509009D1C18 /* Land.xcdatamodeld */,
 				6773850914D2251F00F1CDB7 /* Land-Info.plist */,
 				6773850A14D2251F00F1CDB7 /* InfoPlist.strings */,
 				6773850D14D2251F00F1CDB7 /* main.m */,
@@ -283,11 +283,11 @@
 			files = (
 				6773850E14D2251F00F1CDB7 /* main.m in Sources */,
 				6773851214D2251F00F1CDB7 /* MAKJAMAppDelegate.m in Sources */,
-				6773851814D2251F00F1CDB7 /* Land.xcdatamodeld in Sources */,
 				6773851B14D2251F00F1CDB7 /* MAKJAMMasterViewController.m in Sources */,
 				6773851E14D2251F00F1CDB7 /* MAKJAMDetailViewController.m in Sources */,
 				672DEA5B14D2303D00EB7A66 /* AHHH.m in Sources */,
 				67E9534314D2364D0009ADA7 /* Object.m in Sources */,
+				6781816C14D35509009D1C18 /* Land.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,12 +473,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		6773851614D2251F00F1CDB7 /* Land.xcdatamodeld */ = {
+		6781816A14D35509009D1C18 /* Land.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				6773851714D2251F00F1CDB7 /* Land.xcdatamodel */,
+				6781816B14D35509009D1C18 /* Land.xcdatamodel */,
 			);
-			currentVersion = 6773851714D2251F00F1CDB7 /* Land.xcdatamodel */;
+			currentVersion = 6781816B14D35509009D1C18 /* Land.xcdatamodel */;
 			path = Land.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
