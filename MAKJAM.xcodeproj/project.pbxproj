@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		676FB7B414DFC1060007A552 /* MJPieceImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 676FB7B314DFC1060007A552 /* MJPieceImageView.m */; };
 		67DDA52314DF9400009DC103 /* MJRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DDA52214DF9400009DC103 /* MJRootViewController.m */; };
 		67DDA52714DFAD73009DC103 /* MJToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DDA52614DFAD73009DC103 /* MJToolbar.m */; };
 		67DDA52A14DFB043009DC103 /* MJRootScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DDA52914DFB043009DC103 /* MJRootScene.m */; };
@@ -49,6 +50,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		676FB7B214DFC1060007A552 /* MJPieceImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPieceImageView.h; sourceTree = "<group>"; };
+		676FB7B314DFC1060007A552 /* MJPieceImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPieceImageView.m; sourceTree = "<group>"; };
 		67DDA52114DF9400009DC103 /* MJRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRootViewController.h; sourceTree = "<group>"; };
 		67DDA52214DF9400009DC103 /* MJRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRootViewController.m; sourceTree = "<group>"; };
 		67DDA52514DFAD73009DC103 /* MJToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJToolbar.h; sourceTree = "<group>"; };
@@ -228,6 +231,8 @@
 				DCC1A38E13A94F1A005BD75D /* AppDelegate.m */,
 				67DDA52114DF9400009DC103 /* MJRootViewController.h */,
 				67DDA52214DF9400009DC103 /* MJRootViewController.m */,
+				676FB7B214DFC1060007A552 /* MJPieceImageView.h */,
+				676FB7B314DFC1060007A552 /* MJPieceImageView.m */,
 				67DDA52514DFAD73009DC103 /* MJToolbar.h */,
 				67DDA52614DFAD73009DC103 /* MJToolbar.m */,
 				DCC1A39413A94F1A005BD75D /* Resources */,
@@ -373,6 +378,7 @@
 				67DDA52314DF9400009DC103 /* MJRootViewController.m in Sources */,
 				67DDA52714DFAD73009DC103 /* MJToolbar.m in Sources */,
 				67DDA52A14DFB043009DC103 /* MJRootScene.m in Sources */,
+				676FB7B414DFC1060007A552 /* MJPieceImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

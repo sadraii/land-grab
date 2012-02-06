@@ -38,8 +38,9 @@
 {
 	[super loadView];
 	NSLog(@"Load View");
-	int scrollViewHeight = 100;
-	_scrollView = [[MJToolbar alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - scrollViewHeight, self.view.bounds.size.width, scrollViewHeight)];
+	int toolbarHeight = 100;
+	_scrollView = [[MJToolbar alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - toolbarHeight, self.view.bounds.size.width, toolbarHeight)];
+	[_scrollView setToolbarHeight:toolbarHeight];
 }
 
 
@@ -53,6 +54,7 @@
 		NSLog(@"Added EAGLView");
 	}
 	if (_scrollView) {
+		[_scrollView createDebugPieces];
 		[self.view addSubview:_scrollView];
 		NSLog(@"Added ScrollView");
 	}
