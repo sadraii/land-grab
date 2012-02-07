@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "MJPieceImageViewDelegate.h"
+#import "MJPieceImageView.h"
 
-@interface MJRootScene : CCScene {
+@class MJPieceImageView;
+
+@interface MJRootScene : CCScene <MJPieceImageViewDelegate> {
     
 }
 

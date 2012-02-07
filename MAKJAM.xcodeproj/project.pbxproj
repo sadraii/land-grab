@@ -11,6 +11,10 @@
 		67DDA52314DF9400009DC103 /* MJRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DDA52214DF9400009DC103 /* MJRootViewController.m */; };
 		67DDA52714DFAD73009DC103 /* MJToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DDA52614DFAD73009DC103 /* MJToolbar.m */; };
 		67DDA52A14DFB043009DC103 /* MJRootScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DDA52914DFB043009DC103 /* MJRootScene.m */; };
+		67EA7B3714E10EE5001E4E00 /* Piece_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 67EA7B3314E10EE5001E4E00 /* Piece_up.png */; };
+		67EA7B3814E10EE5001E4E00 /* Piece_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 67EA7B3414E10EE5001E4E00 /* Piece_left.png */; };
+		67EA7B3914E10EE5001E4E00 /* Piece_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 67EA7B3514E10EE5001E4E00 /* Piece_down.png */; };
+		67EA7B3A14E10EE5001E4E00 /* Piece_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 67EA7B3614E10EE5001E4E00 /* Piece_right.png */; };
 		DC485B1113AA0E5600F2BC70 /* libchipmunk-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC485B0D13AA0E5600F2BC70 /* libchipmunk-mac.a */; };
 		DC485B1713AA0EBB00F2BC70 /* libbox2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC485B1613AA0EBB00F2BC70 /* libbox2d-mac.a */; };
 		DC485B4613AA18A600F2BC70 /* libcocosdenshion-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC485B4513AA18A600F2BC70 /* libcocosdenshion-mac.a */; };
@@ -59,6 +63,10 @@
 		67DDA52614DFAD73009DC103 /* MJToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJToolbar.m; sourceTree = "<group>"; };
 		67DDA52814DFB043009DC103 /* MJRootScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRootScene.h; sourceTree = "<group>"; };
 		67DDA52914DFB043009DC103 /* MJRootScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRootScene.m; sourceTree = "<group>"; };
+		67EA7B3314E10EE5001E4E00 /* Piece_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Piece_up.png; sourceTree = "<group>"; };
+		67EA7B3414E10EE5001E4E00 /* Piece_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Piece_left.png; sourceTree = "<group>"; };
+		67EA7B3514E10EE5001E4E00 /* Piece_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Piece_down.png; sourceTree = "<group>"; };
+		67EA7B3614E10EE5001E4E00 /* Piece_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Piece_right.png; sourceTree = "<group>"; };
 		DC3BE97813B4FB71003739CC /* BuildSettings-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-iOS.xcconfig"; sourceTree = "<group>"; };
 		DC485B0D13AA0E5600F2BC70 /* libchipmunk-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libchipmunk-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC485B1613AA0EBB00F2BC70 /* libbox2d-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libbox2d-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +150,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		67EA7B3C14E10EF0001E4E00 /* Piece Images */ = {
+			isa = PBXGroup;
+			children = (
+				67EA7B3314E10EE5001E4E00 /* Piece_up.png */,
+				67EA7B3414E10EE5001E4E00 /* Piece_left.png */,
+				67EA7B3514E10EE5001E4E00 /* Piece_down.png */,
+				67EA7B3614E10EE5001E4E00 /* Piece_right.png */,
+			);
+			name = "Piece Images";
+			sourceTree = "<group>";
+		};
 		DCC1A0D613A94EC0005BD75D = {
 			isa = PBXGroup;
 			children = (
@@ -237,6 +256,7 @@
 				676FB7B314DFC1060007A552 /* MJPieceImageView.m */,
 				67DDA52514DFAD73009DC103 /* MJToolbar.h */,
 				67DDA52614DFAD73009DC103 /* MJToolbar.m */,
+				67EA7B3C14E10EF0001E4E00 /* Piece Images */,
 				DCC1A39413A94F1A005BD75D /* Resources */,
 				DCC1A3CF13A94F2C005BD75D /* Supporting Files */,
 			);
@@ -353,6 +373,10 @@
 				DCC1A10813A94ED5005BD75D /* Icon@2x.png in Resources */,
 				DCC1A3AF13A94F1A005BD75D /* config.lua in Resources */,
 				DC599A43142289D70067495F /* iTunesArtwork in Resources */,
+				67EA7B3714E10EE5001E4E00 /* Piece_up.png in Resources */,
+				67EA7B3814E10EE5001E4E00 /* Piece_left.png in Resources */,
+				67EA7B3914E10EE5001E4E00 /* Piece_down.png in Resources */,
+				67EA7B3A14E10EE5001E4E00 /* Piece_right.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

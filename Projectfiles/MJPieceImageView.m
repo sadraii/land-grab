@@ -24,6 +24,12 @@
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	[super touchesBegan:touches withEvent:event];
 	CCLOG(@"%@: %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+	NSLog(@"Running Scene: %@", NSStringFromClass([[CCDirector sharedDirector] runningScene].class));
+	CCScene* runningScene = [[CCDirector sharedDirector] runningScene];
+	if (![runningScene conformsToProtocol:@protocol(MJPieceImageViewDelegate)]) {
+		return;
+	}
+	[self setDelegate:(id <MJPieceImageViewDelegate>)runningScene];
 	UITouch* touch = [touches anyObject];
 	UIView* backgroundView = self.superview.superview; 
 	CGPoint point = [touch locationInView:backgroundView];
@@ -86,7 +92,11 @@
 		NSLog(@"Added to toolbar");
 	}
 	else if ([backgroundView pointInside:[touch locationInView:backgroundView] withEvent:nil]) {
-		[backgroundView addSubview:self];
+		if (![_delegate handleDroppedPiece:self]) {
+			//Should animate
+			[self setCenter:startingPosition];
+			[_toolbar addPiece:self];
+		}
 		NSLog(@"Added to board");
 	}
 	else {

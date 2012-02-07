@@ -27,4 +27,13 @@
     return self;
 }
 
+- (BOOL) handleDroppedPiece:(MJPieceImageView *)piece {
+	CCLOG(@"%@: %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+	CCSprite* tmp = [[CCSprite alloc] initWithFile:@"Piece_right.png"];
+	[tmp setPosition:[[CCDirector sharedDirector] convertToGL:piece.center]];
+	NSLog(@"Added sprite: %f, %f",tmp.position.x, tmp.position.y);
+	[self addChild:tmp];
+	return true;
+}
+
 @end

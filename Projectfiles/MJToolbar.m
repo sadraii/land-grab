@@ -7,6 +7,7 @@
 //
 
 #import "MJToolbar.h"
+#import "MJRootViewController.h"
 
 @implementation MJToolbar
 @synthesize toolbarHeight = _toolbarHeight;
@@ -44,6 +45,10 @@
 }
 
 - (void) createDebugPieces {
+	
+	MJRootViewController* rvc = (MJRootViewController*)self.superview;
+	
+	
 	float height = self.frame.size.height - (2.0f * offset);
 	for (int i = 0; i < 100; i++) {
 		MJPieceImageView* piece = [[MJPieceImageView alloc] initWithFrame:CGRectMake(offset + maxX, offset, height, height)];
@@ -66,6 +71,7 @@
 //		[piece setBackgroundView:_pvc.view];
 //		[piece setBoard:_pvc.board];
 		[piece setToolbar:self];
+//		[piece setDelegate:(id<MJPieceImageViewDelegate>)];
 		
 //		[piece setDelegate:_pvc.board];
 		

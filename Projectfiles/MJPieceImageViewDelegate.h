@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+@class MJPieceImageView;
 
 @protocol MJPieceImageViewDelegate <NSObject>
+@required
+- (BOOL) handleDroppedPiece:(MJPieceImageView*)piece;
 
 @end
