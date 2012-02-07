@@ -6,7 +6,7 @@
  */
 
 #import "AppDelegate.h"
-#import "MJRootViewController.h"
+
 
 @implementation AppDelegate
 

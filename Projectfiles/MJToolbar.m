@@ -16,8 +16,13 @@
     if ((self = [super initWithFrame:frame]) == nil) {
 		return self;
     }
+	
+	maxX = 0;
+	offset = 20;
+	_pieces = [[NSMutableArray alloc] init];
+	
 	[self setToolbarHeight:100];
-    [self setBackgroundColor:[UIColor whiteColor]];
+    [self setBackgroundColor:[UIColor viewFlipsideBackgroundColor]];
 	[self setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
     return self;
 }
@@ -40,7 +45,7 @@
 
 - (void) createDebugPieces {
 	float height = self.frame.size.height - (2.0f * offset);
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 100; i++) {
 		MJPieceImageView* piece = [[MJPieceImageView alloc] initWithFrame:CGRectMake(offset + maxX, offset, height, height)];
 		//		furthestRight += piece.frame.size.width + offset;
 		switch (i % 3) {
@@ -64,6 +69,8 @@
 		
 //		[piece setDelegate:_pvc.board];
 		
+//		NSLog(@"Pieces: %@", _pieces);
+		
 		[self addPiece:piece];
 	}
 	
@@ -74,12 +81,26 @@
 		return;
 	}
 	int index= 0;
+//	if (_pieces.count == 0) {
+//		[_pieces addObject:piece];
+//		index = _pieces.count-1;
+//		NSLog(@"Added Piece at front");
+//	}
+	
 	for (MJPieceImageView* p in _pieces) {
 		if (piece.center.x <= p.center.x) break;
 		++index;
 	}
-	NSLog(@"Added Piece at index: %i", index);
-	[_pieces insertObject:piece atIndex:index];
+	if (index >= (int)_pieces.count) {
+		[_pieces addObject:piece];
+		NSLog(@"Added Piece at end: %i", [_pieces indexOfObject:piece]);
+		index = _pieces.count-1;
+//		[self addSubview:piece];
+	}
+	else {
+		NSLog(@"Inserting Piece at index: %i of %i", index, _pieces.count);
+		[_pieces insertObject:piece atIndex:index];
+	}
 	[self reloadToolbarStartingAtIndex:index];
 }
 
@@ -96,16 +117,27 @@
 }
 
 - (void) reloadToolbarStartingAtIndex:(NSUInteger)index {
-	NSLog(@"Reloading Toolbar at Index: %i", index);
-//	NSArray* tmp = [NSArray arrayWithArray:
-//					[_pieces objectsAtIndexes:
-//					 [NSIndexSet indexSetWithIndexesInRange:
-//					  NSMakeRange(index, _pieces.count-index-1)]]];
-	NSArray* tmp = [NSArray arrayWithArray:_pieces];
-	[_pieces removeObjectsInArray:tmp];
-	MJPieceImageView* lastObj = _pieces.lastObject;
-	maxX = lastObj.frame.origin.x + lastObj.frame.size.width;
+	NSLog(@"Reloading Toolbar at Index: %i, %i", index, _pieces.count - 1);
+	NSArray* tmp = nil;
+//	int endIndex = _pieces.count-1;
 	
+	int length = _pieces.count - index;//min length is one
+	
+	tmp = [NSArray arrayWithArray:
+		   [_pieces objectsAtIndexes:
+			[NSIndexSet indexSetWithIndexesInRange:
+			 NSMakeRange(index, length)]]];//min array is the last object
+	NSLog(@"TMP Count: %i", tmp.count);
+	[_pieces removeObjectsInArray:tmp];
+	NSLog(@"Piece Count: %i", _pieces.count);
+	
+	MJPieceImageView* lastObj = _pieces.lastObject;
+	if (lastObj) {
+		maxX = lastObj.frame.origin.x + lastObj.frame.size.width;
+	}
+	else {
+		maxX = 0;
+	}
 	for (MJPieceImageView* p in tmp) {
 		[p removeFromSuperview];
 		[p setFrame:CGRectMake(maxX + offset, 

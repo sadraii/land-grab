@@ -9,6 +9,8 @@
 #import "KKRootViewController.h"
 #import "MJToolbar.h"
 
+@class MJToolbar;
+
 @interface MJRootViewController : KKRootViewController
 
 @property (strong, nonatomic) EAGLView* eaglView;

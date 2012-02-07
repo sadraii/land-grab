@@ -6,6 +6,9 @@
  */
 
 #import "KKAppDelegate.h"
+#import "MJRootViewController.h"
+
+@class MJRootViewController;
 
 @interface AppDelegate : KKAppDelegate
 {

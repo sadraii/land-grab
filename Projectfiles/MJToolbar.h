@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "MJPieceImageView.h"
 
+@class MJPieceImageView;
+
 @interface MJToolbar : UIScrollView <UIScrollViewDelegate> {
 	CGFloat maxX;
 	CGFloat offset;
