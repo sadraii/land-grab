@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MJPieceImageViewDelegate.h"
+#import "MJToolbar.h"
+@class MJToolbar;
 
-@interface MJPieceImageView : UIImageView
+@interface MJPieceImageView : UIImageView {
+	CGPoint currentPosition;
+	CGPoint startingPosition;
+}
 
+@property (strong, nonatomic) id <MJPieceImageViewDelegate> delegate;
+@property (strong, nonatomic) MJToolbar* toolbar;
+
+- (CGPoint) centerFromPoint:(CGPoint)point;
 @end

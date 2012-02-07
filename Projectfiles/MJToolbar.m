@@ -65,7 +65,7 @@
 		
 //		[piece setBackgroundView:_pvc.view];
 //		[piece setBoard:_pvc.board];
-//		[piece setToolbar:_pvc.toolbar];
+		[piece setToolbar:self];
 		
 //		[piece setDelegate:_pvc.board];
 		

@@ -50,6 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		672BB83D14E0E8BE00B742F8 /* MJPieceImageViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPieceImageViewDelegate.h; sourceTree = "<group>"; };
 		676FB7B214DFC1060007A552 /* MJPieceImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPieceImageView.h; sourceTree = "<group>"; };
 		676FB7B314DFC1060007A552 /* MJPieceImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPieceImageView.m; sourceTree = "<group>"; };
 		67DDA52114DF9400009DC103 /* MJRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRootViewController.h; sourceTree = "<group>"; };
@@ -231,6 +232,7 @@
 				DCC1A38E13A94F1A005BD75D /* AppDelegate.m */,
 				67DDA52114DF9400009DC103 /* MJRootViewController.h */,
 				67DDA52214DF9400009DC103 /* MJRootViewController.m */,
+				672BB83D14E0E8BE00B742F8 /* MJPieceImageViewDelegate.h */,
 				676FB7B214DFC1060007A552 /* MJPieceImageView.h */,
 				676FB7B314DFC1060007A552 /* MJPieceImageView.m */,
 				67DDA52514DFAD73009DC103 /* MJToolbar.h */,
