@@ -59,8 +59,9 @@
 		scale = piece.frame.size.height / pieceHeight;
 	}
 	else return;
-	
-	[piece setFrame:CGRectMake(piece.frame.origin.x, piece.frame.origin.y, piece.frame.size.width * scale, pieceHeight)];
+	NSLog(@"Scale: %f", scale);
+	[piece setContentScaleFactor:scale];
+//	[piece setFrame:CGRectMake(piece.frame.origin.x, piece.frame.origin.y, piece.frame.size.width * scale, pieceHeight)];
 }
 
 - (void) reloadToolbarStartingAtIndex:(NSUInteger)index {
@@ -89,9 +90,10 @@
 	for (MJPiece* p in tmp) {
 		[p removeFromSuperview];
 		[p setFrame:CGRectMake(maxX + offset, 
-							   offset, 
+							   p.frame.origin.y, 
 							   p.frame.size.width, 
 							   p.frame.size.height)];
+		[p setCenter:CGPointMake(p.center.x, self.frame.size.height / 2)];
 		[self addSubview:p];
 		maxX += p.frame.size.width + offset;
 		[self setContentSize:CGSizeMake(maxX + offset, self.frame.size.height)];

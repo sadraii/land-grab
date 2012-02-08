@@ -15,6 +15,15 @@
 @synthesize board = _board;
 @synthesize toolbar = _toolbar;
 
+-(id) initWithImage:(UIImage *)image {
+    if ((self = [super initWithImage:image]) == nil) {
+		return self;
+    }
+    [self setUserInteractionEnabled:YES];
+    startingCenter = CGPointZero;
+    return self;
+}
+
 -(id) initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame]) == nil) {
 		return self;

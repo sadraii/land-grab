@@ -24,23 +24,21 @@
 	float height = _toolbar.frame.size.height - (2.0f * 10);
 	for (int i = 0; i < 20; i++) {
 //		MJPiece* piece = [[MJPiece alloc] initWithFrame:CGRectMake(offset + maxX, offset, height, height)];
-		MJPiece* piece = [[MJPiece alloc] initWithFrame:CGRectMake(0, 0, height, height)];
+		MJPiece* piece = nil;
+		
 		//		furthestRight += piece.frame.size.width + offset;
-		switch (i % 5) {
+		switch (i % 4) {
 			case 0:
-				[piece setBackgroundColor:[UIColor darkGrayColor]];
+				piece = [[MJPiece alloc] initWithImage:[UIImage imageNamed:@"Piece_up.png"]];
 				break;
 			case 1:
-				[piece setBackgroundColor:[UIColor whiteColor]];
+				piece = [[MJPiece alloc] initWithImage:[UIImage imageNamed:@"Piece_down.png"]];
 				break;
 			case 2:
-				[piece setBackgroundColor:[UIColor lightGrayColor]];
+				piece = [[MJPiece alloc] initWithImage:[UIImage imageNamed:@"Piece_left.png"]];
 				break;
 			case 3:
-				[piece setBackgroundColor:[UIColor blackColor]];
-				break;
-			case 4:
-				[piece setBackgroundColor:[UIColor lightTextColor]];
+				piece = [[MJPiece alloc] initWithImage:[UIImage imageNamed:@"Piece_right.png"]];
 				break;
 				
 			default:
