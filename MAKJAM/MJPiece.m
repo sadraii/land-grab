@@ -14,6 +14,8 @@
 @synthesize parentViewController = _parentViewController;
 @synthesize board = _board;
 @synthesize toolbar = _toolbar;
+@synthesize scale = _scale;
+@synthesize startingSize = _startingSize;
 
 -(id) initWithImage:(UIImage *)image {
     if ((self = [super initWithImage:image]) == nil) {
@@ -21,6 +23,8 @@
     }
     [self setUserInteractionEnabled:YES];
     startingCenter = CGPointZero;
+	_scale = 1;
+	_startingSize = self.image.size;
     return self;
 }
 
@@ -30,12 +34,14 @@
     }
 	[self setUserInteractionEnabled:YES];
     startingCenter = CGPointZero;
+	_scale = 1;
+	_startingSize = self.frame.size;
     return self;
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	[super touchesBegan:touches withEvent:event];
-	NSLog(@"%@: %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+//	NSLog(@"%@: %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
 	startingCenter = self.center;
 	[_toolbar setScrollEnabled:NO];
 	
@@ -44,12 +50,12 @@
 	currentPosition = point;
 	
 	if ([_board isEqual:self.superview]) {
-		NSLog(@"Touch in Board");
+//		NSLog(@"Touch in Board");
 		[self setDelegate:_board];
 		startingView = _board;
 	}
 	else if ([_toolbar isEqual:self.superview]) {
-		NSLog(@"Touch in Toolbar");
+//		NSLog(@"Touch in Toolbar");
 		[self setDelegate:_toolbar];
 		startingView = _toolbar;
 	}
@@ -93,20 +99,28 @@
 					   self.center.y + (point.y - currentPosition.y));
 }
 
+- (void) revertToStartingSize {
+	if (!CGSizeEqualToSize(self.frame.size, self.startingSize)) {
+		CGPoint originalCenter = self.center;
+		[self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.startingSize.width, self.startingSize.height)];
+		[self setCenter:originalCenter];
+	}
+}
+
 - (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-	NSLog(@"%@: %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+//	NSLog(@"%@: %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
 	[_toolbar setScrollEnabled:YES];
 	if ([startingView conformsToProtocol:@protocol(MJPieceDelegate)]) {
 		[self setDelegate:(id <MJPieceDelegate>)startingView];
 		[self setCenter:startingCenter];
-		NSLog(@"Adding back to: %@ at (%f, %f)", NSStringFromClass(startingView.class), self.center.x, self.center.y);
+//		NSLog(@"Adding back to: %@ at (%f, %f)", NSStringFromClass(startingView.class), self.center.x, self.center.y);
 		[_delegate removePiece:self];
 		[_delegate addPiece:self];
 	}
 }
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-	NSLog(@"%@: %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+//	NSLog(@"%@: %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
 	UITouch* touch = [touches anyObject];
 	
 	[(id <MJPieceDelegate>)startingView removePiece:self];

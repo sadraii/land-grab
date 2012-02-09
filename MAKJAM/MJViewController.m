@@ -21,7 +21,7 @@
 }
 
 - (void) createDebugPieces {
-	float height = _toolbar.frame.size.height - (2.0f * 10);
+//	float height = _toolbar.frame.size.height - (2.0f * 10);
 	for (int i = 0; i < 20; i++) {
 //		MJPiece* piece = [[MJPiece alloc] initWithFrame:CGRectMake(offset + maxX, offset, height, height)];
 		MJPiece* piece = nil;
@@ -60,6 +60,7 @@
 
 - (BOOL) addPiece:(MJPiece *)piece {
 	NSLog(@"VC: addPiece");
+	[piece revertToStartingSize];
 	[self.view addSubview:piece];
 	return YES;
 }

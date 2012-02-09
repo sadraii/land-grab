@@ -10,6 +10,10 @@
 #import "MJPieceDelegate.h"
 #import "MJPiece.h"
 
-@interface MJBoard : UIScrollView <MJPieceDelegate>
+@interface MJBoard : UIScrollView <MJPieceDelegate> {
+	NSUInteger unitLength;
+}
+
+-(CGPoint) snapPieceToPoint:(MJPiece*)piece;
 
 @end

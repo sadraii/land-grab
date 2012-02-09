@@ -16,6 +16,8 @@
 	CGFloat maxX;
 	CGFloat offset;
 	NSMutableArray* pieces;
+	CGFloat scale;
+	CGFloat pieceHeight;
 }
 
 @property (weak, nonatomic) MJViewController* parentViewController;

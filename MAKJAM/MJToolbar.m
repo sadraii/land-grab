@@ -33,8 +33,10 @@
     }
 	
     maxX = 0;
-	offset = 20;
+	offset = 5;
 	_pieces = [[NSMutableArray alloc] init];
+	
+	scale = 1;
 	
     return self;
 }
@@ -50,22 +52,24 @@
 //}
 
 - (void) scalePiece:(MJPiece*)piece {
-	CGFloat pieceHeight = self.frame.size.height - (2.0f * offset);
-	CGFloat scale = 1;
-	if (piece.frame.size.height > pieceHeight) {
-		scale = pieceHeight / piece.frame.size.height;
+	pieceHeight = self.frame.size.height - (2.0f * offset);
+	NSLog(@"Piece Height: %f", pieceHeight);
+	NSLog(@"Start Height: %f", piece.startingSize.height);
+	NSLog(@" Start Width: %f", piece.startingSize.width);
+	if (piece.startingSize.height > pieceHeight || scale <= piece.scale) {
+		if (pieceHeight / piece.startingSize.height < scale) {
+			scale = pieceHeight / piece.startingSize.height;
+			NSLog(@"New Scale: %f", scale);
+//			[self reloadToolbarStartingAtIndex:0];
+		}
+//		NSLog(@"Scale: %f", scale);
+		[piece setFrame:CGRectMake(piece.frame.origin.x, offset, piece.startingSize.width * scale, piece.startingSize.height * scale)];
+		piece.scale = scale;
 	}
-	else if (piece.frame.size.height < pieceHeight) {
-		scale = piece.frame.size.height / pieceHeight;
-	}
-	else return;
-	NSLog(@"Scale: %f", scale);
-	[piece setContentScaleFactor:scale];
-//	[piece setFrame:CGRectMake(piece.frame.origin.x, piece.frame.origin.y, piece.frame.size.width * scale, pieceHeight)];
 }
 
 - (void) reloadToolbarStartingAtIndex:(NSUInteger)index {
-	NSLog(@"Reloading Toolbar at Index: %i, %i", index, _pieces.count - 1);
+//	NSLog(@"Reloading Toolbar at Index: %i, %i", index, _pieces.count - 1);
 	
 	NSArray* tmp = nil;
 	
@@ -75,9 +79,7 @@
 		   [_pieces objectsAtIndexes:
 			[NSIndexSet indexSetWithIndexesInRange:
 			 NSMakeRange(index, length)]]];//min array is the last object
-	NSLog(@"TMP Count: %i", tmp.count);
 	[_pieces removeObjectsInArray:tmp];
-	NSLog(@"Piece Count: %i", _pieces.count);
 	
 	MJPiece* lastObj = _pieces.lastObject;
 	if (lastObj) {
@@ -122,12 +124,12 @@
 	}
 	if (index >= (int)_pieces.count) {
 		[_pieces addObject:piece];
-		NSLog(@"Added Piece at end: %i", [_pieces indexOfObject:piece]);
+//		NSLog(@"Added Piece at end: %i", [_pieces indexOfObject:piece]);
 		index = _pieces.count-1;
 		//		[self addSubview:piece];
 	}
 	else {
-		NSLog(@"Inserting Piece at index: %i of %i", index, _pieces.count);
+//		NSLog(@"Inserting Piece at index: %i of %i", index, _pieces.count);
 		[_pieces insertObject:piece atIndex:index];
 	}
 	[self reloadToolbarStartingAtIndex:index];
@@ -140,7 +142,7 @@
 	if (![_pieces containsObject:piece]) return false;
 	
 	int index = [_pieces indexOfObject:piece];
-	NSLog(@"Removing piece at index: %i", index);
+//	NSLog(@"Removing piece at index: %i", index);
 	[_pieces removeObject:piece];
 	
 	[self reloadToolbarStartingAtIndex:index];
@@ -150,7 +152,7 @@
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-	NSLog(@"Will Begin Dragging");
+//	NSLog(@"Will Begin Dragging");
 }
 
 @end
