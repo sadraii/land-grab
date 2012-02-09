@@ -25,6 +25,7 @@
 @property (nonatomic) CGFloat toolbarHeight;
 @property (strong, nonatomic) NSMutableArray* pieces;
 
+- (void) clearToolbar;
 - (void) scalePiece:(MJPiece*)piece;
 - (void) reloadToolbarStartingAtIndex:(NSUInteger)index;
 

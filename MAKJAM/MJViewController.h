@@ -17,7 +17,11 @@
 
 @property (strong, nonatomic) IBOutlet MJToolbar* toolbar;
 @property (strong, nonatomic) IBOutlet MJBoard* board;
+@property (strong, nonatomic) IBOutlet UIView *topToolbar;
+@property (strong, nonatomic) IBOutlet UIButton *resetButton;
+@property (strong, nonatomic) IBOutlet UIButton *addButton;
 
-- (void) createDebugPieces;
+- (IBAction)addButtonPressed:(id)sender;
+- (IBAction)resetButtonPressed:(id)sender;
 
 @end

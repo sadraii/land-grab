@@ -20,11 +20,19 @@
 }
 
 #pragma mark - Board methods
+- (void) clearBoard {
+	for (MJPiece* p in self.subviews) {
+		[p removeFromSuperview];
+	}
+}
+
 -(CGPoint) snapPieceToPoint:(MJPiece*)piece {
-	int offX = (NSUInteger)piece.frame.origin.x % unitLength;
-	int offY = (NSUInteger)piece.frame.origin.y % unitLength;
-	NSLog(@"Off X: %f", offX / (float)unitLength);
-	NSLog(@"Off Y: %f", offY / (float)unitLength);
+	/*
+	 I added one to offX and offY because the coordinate system starts at 0
+	 i beleive that this fixes the problem where their is a whitespace between the snapped pieces.
+	 */
+	int offX = ((NSUInteger)piece.frame.origin.x % unitLength) + 1;
+	int offY = ((NSUInteger)piece.frame.origin.y % unitLength) + 1;
 	
 	CGPoint newCenter = piece.center;
 	if ((offX / (float)unitLength) > 0.5f) {
@@ -56,7 +64,7 @@
 	}
 	NSLog(@"Added to board at: (%f, %f)", piece.center.x, piece.center.y);
 	[piece setCenter:[self snapPieceToPoint:piece]];
-	NSLog(@" Snap to board at: (%f, %f)", piece.center.x, piece.center.y);
+	NSLog(@" Snap to board at: (%f, %f)", piece.frame.origin.x, piece.frame.origin.y);
 	return YES;
 }
 

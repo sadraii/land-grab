@@ -34,8 +34,6 @@
 	
     maxX = 0;
 	offset = 5;
-	_pieces = [[NSMutableArray alloc] init];
-	
 	scale = 1;
 	
     return self;
@@ -51,15 +49,23 @@
 //	frame.size.height = _toolbarHeight;
 //}
 
+- (void) clearToolbar {
+	[self setPieces:nil];
+	for (MJPiece* p in self.subviews) {
+		[p removeFromSuperview];
+	}
+//	[self reloadToolbarStartingAtIndex:0];
+}
+
 - (void) scalePiece:(MJPiece*)piece {
 	pieceHeight = self.frame.size.height - (2.0f * offset);
-	NSLog(@"Piece Height: %f", pieceHeight);
-	NSLog(@"Start Height: %f", piece.startingSize.height);
-	NSLog(@" Start Width: %f", piece.startingSize.width);
+//	NSLog(@"Piece Height: %f", pieceHeight);
+//	NSLog(@"Start Height: %f", piece.startingSize.height);
+//	NSLog(@" Start Width: %f", piece.startingSize.width);
 	if (piece.startingSize.height > pieceHeight || scale <= piece.scale) {
 		if (pieceHeight / piece.startingSize.height < scale) {
 			scale = pieceHeight / piece.startingSize.height;
-			NSLog(@"New Scale: %f", scale);
+//			NSLog(@"New Scale: %f", scale);
 //			[self reloadToolbarStartingAtIndex:0];
 		}
 //		NSLog(@"Scale: %f", scale);
@@ -109,6 +115,9 @@
 - (BOOL) addPiece:(MJPiece*)piece {
 	if (!piece) {
 		return NO;
+	}
+	if (_pieces == nil) {
+		_pieces = [[NSMutableArray alloc] init];
 	}
 	
 	[self scalePiece:piece];

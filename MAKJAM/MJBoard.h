@@ -14,6 +14,7 @@
 	NSUInteger unitLength;
 }
 
+- (void) clearBoard;
 -(CGPoint) snapPieceToPoint:(MJPiece*)piece;
 
 @end

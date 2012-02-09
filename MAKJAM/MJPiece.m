@@ -22,6 +22,7 @@
 		return self;
     }
     [self setUserInteractionEnabled:YES];
+	[self setContentMode:UIViewContentModeScaleAspectFill];
     startingCenter = CGPointZero;
 	_scale = 1;
 	_startingSize = self.image.size;

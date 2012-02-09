@@ -12,6 +12,9 @@
 @implementation MJViewController
 
 @synthesize board = _board;
+@synthesize topToolbar = _topToolbar;
+@synthesize resetButton = _resetButton;
+@synthesize addButton = _addButton;
 @synthesize toolbar = _toolbar;
 
 - (void)didReceiveMemoryWarning
@@ -20,13 +23,18 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void) createDebugPieces {
+- (IBAction)addButtonPressed:(id)sender {
+}
+
+- (IBAction)resetButtonPressed:(id)sender {
+	[_toolbar clearToolbar];
+	[_board clearBoard];
 	NSArray* pieceNames = [[NSArray alloc] initWithObjects:@"down_left", @"down_right", @"up_left", @"up_right", @"left_down", @"left_up", @"right_down", @"right_up", nil];
-//	float height = _toolbar.frame.size.height - (2.0f * 10);
+	//	float height = _toolbar.frame.size.height - (2.0f * 10);
 	int diffPieces = [pieceNames count];
-	int numPieces = diffPieces;
+	int numPieces = diffPieces * 3;
 	for (int i = 0; i < numPieces; i++) {
-		MJPiece* piece = [[MJPiece alloc] initWithImage:[UIImage imageNamed:[pieceNames objectAtIndex:i]]];
+		MJPiece* piece = [[MJPiece alloc] initWithImage:[UIImage imageNamed:[pieceNames objectAtIndex:i % diffPieces]]];
 		
 		[piece setParentViewController:self];
 		[piece setBoard:_board];
@@ -35,7 +43,6 @@
 		[piece setDelegate:_toolbar];
 		[piece.delegate addPiece:piece];
 	}
-	
 }
 
 
@@ -61,11 +68,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	[self createDebugPieces];
+//	[self createDebugPieces];
 }
 
 - (void)viewDidUnload
 {
+	[self setTopToolbar:nil];
+	[self setResetButton:nil];
+	[self setAddButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
