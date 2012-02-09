@@ -11,6 +11,9 @@
 
 @implementation MJBoard
 
+@synthesize pieces = _pieces;
+@synthesize containerView = _containerView;
+
 -(id) initWithCoder:(NSCoder *)aDecoder {
     if ((self = [super initWithCoder:aDecoder]) == nil) {
 		return self;
@@ -21,55 +24,64 @@
 
 #pragma mark - Board methods
 - (void) clearBoard {
+	_pieces = [[NSMutableArray alloc] init];
+	
+	[_containerView removeFromSuperview];
+	_containerView = [[UIView alloc] init];
 	for (MJPiece* p in self.subviews) {
 		[p removeFromSuperview];
 	}
+	[self addSubview:_containerView];
+}
+
+- (void) setBoardSize:(CGSize)size {
+	[self setContentSize:CGSizeMake((int)(size.width * unitLength), (int)(size.width * unitLength))];
+	[_containerView setFrame:CGRectMake(0, 0, self.contentSize.width, self.contentSize.height)];
 }
 
 -(CGPoint) snapPieceToPoint:(MJPiece*)piece {
 	/*
-	 I added one to offX and offY because the coordinate system starts at 0
-	 i beleive that this fixes the problem where their is a whitespace between the snapped pieces.
+	 The problem causing the whitespace was a small fraction added on to the pieces origin.
+	 By rounding the origin to a whole number it fixes the whitespace problem.
+	 YAY!!!!
 	 */
-	int offX = ((NSUInteger)piece.frame.origin.x % unitLength) + 1;
-	int offY = ((NSUInteger)piece.frame.origin.y % unitLength) + 1;
+	[piece setFrame:CGRectMake(roundf(piece.frame.origin.x), roundf(piece.frame.origin.y), piece.frame.size.width, piece.frame.size.height)];
+	
+	int offX = ((NSUInteger)piece.frame.origin.x % unitLength);
+	int offY = ((NSUInteger)piece.frame.origin.y % unitLength);
 	
 	CGPoint newCenter = piece.center;
-	if ((offX / (float)unitLength) > 0.5f) {
+	
+	if ((offX / (float)unitLength) > 0.5f) 
 		newCenter.x += (unitLength - offX);
-	}
-	else {
+	else 
 		newCenter.x -= offX;
-	}
-	if ((offY / (float)unitLength) > 0.5f) {
+	
+	
+	if ((offY / (float)unitLength) > 0.5f) 
 		newCenter.y += (unitLength - offY);
-	}
-	else {
+	else 
 		newCenter.y -= offY;
-	}
 	return newCenter;
 }
 
 
 #pragma mark - MJPieceDelegate Methods
 - (BOOL) addPiece:(MJPiece *)piece {
-	//[piece setCenter:CGPointMake(piece.center.x + piece.superview.frame.origin.x, piece.center.y + (self.view.frame.size.height - (self.view.frame.size.height - piece.superview.frame.origin.y)))];
-	if ([self isEqual:piece.superview]) {
-		[piece setCenter:CGPointMake(piece.center.x + self.frame.origin.x, piece.center.y + self.frame.origin.y)];
-		[self addSubview:piece];
-	}
-	else {
-		[piece setCenter:CGPointMake(piece.center.x - self.frame.origin.x, piece.center.y - (piece.superview.frame.size.height - (piece.superview.frame.size.height - self.frame.origin.y)))];
-		[self addSubview:piece];
-	}
-	NSLog(@"Added to board at: (%f, %f)", piece.center.x, piece.center.y);
+	[_containerView addSubview:piece];
 	[piece setCenter:[self snapPieceToPoint:piece]];
-	NSLog(@" Snap to board at: (%f, %f)", piece.frame.origin.x, piece.frame.origin.y);
+	[_pieces addObject:piece];
 	return YES;
 }
 
 - (BOOL) removePiece:(MJPiece *)piece {
-	return NO;
+	if (![_pieces containsObject:piece]) return NO;
+	
+	int index = [_pieces indexOfObject:piece];
+	NSLog(@"Removing board piece at index: %i", index);
+	[_pieces removeObject:piece];
+	
+	return YES;
 }
 
 @end

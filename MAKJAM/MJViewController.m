@@ -43,6 +43,8 @@
 		[piece setDelegate:_toolbar];
 		[piece.delegate addPiece:piece];
 	}
+	int boardSize = 25;
+	[_board setBoardSize:CGSizeMake(boardSize, boardSize)];
 }
 
 

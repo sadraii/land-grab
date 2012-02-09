@@ -14,7 +14,11 @@
 	NSUInteger unitLength;
 }
 
+@property (strong, nonatomic) NSMutableArray* pieces;
+@property (strong, nonatomic) UIView* containerView;
+
 - (void) clearBoard;
+- (void) setBoardSize:(CGSize)size;
 -(CGPoint) snapPieceToPoint:(MJPiece*)piece;
 
 @end

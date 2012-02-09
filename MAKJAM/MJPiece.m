@@ -43,14 +43,16 @@
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	[super touchesBegan:touches withEvent:event];
 //	NSLog(@"%@: %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+	NSLog(@"Setting center with superview: %@", NSStringFromClass([self.superview class]));
 	startingCenter = self.center;
 	[_toolbar setScrollEnabled:NO];
+	[_board setScrollEnabled:NO];
 	
 	UITouch* touch = [touches anyObject];
 	CGPoint point = [touch locationInView:_parentViewController.view];
 	currentPosition = point;
 	
-	if ([_board isEqual:self.superview]) {
+	if ([_board.containerView isEqual:self.superview]) {
 //		NSLog(@"Touch in Board");
 		[self setDelegate:_board];
 		startingView = _board;
@@ -111,10 +113,11 @@
 - (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
 //	NSLog(@"%@: %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
 	[_toolbar setScrollEnabled:YES];
+	[_board setScrollEnabled:YES];
 	if ([startingView conformsToProtocol:@protocol(MJPieceDelegate)]) {
 		[self setDelegate:(id <MJPieceDelegate>)startingView];
 		[self setCenter:startingCenter];
-//		NSLog(@"Adding back to: %@ at (%f, %f)", NSStringFromClass(startingView.class), self.center.x, self.center.y);
+		NSLog(@"Adding back to: %@ at (%f, %f)", NSStringFromClass(startingView.class), self.frame.origin.x, self.frame.origin.y);
 		[_delegate removePiece:self];
 		[_delegate addPiece:self];
 	}
@@ -127,6 +130,7 @@
 	[(id <MJPieceDelegate>)startingView removePiece:self];
 	[_delegate removePiece:self];
 	[_toolbar setScrollEnabled:YES];
+	[_board setScrollEnabled:YES];
 	
 	if ([_toolbar pointInside:[touch locationInView:_toolbar] withEvent:nil]) {
 		/*
@@ -134,12 +138,10 @@
 		 allowing for a more natural dropping experience.
 		 */
 		[self setCenter:[touch locationInView:_toolbar]];
-		NSLog(@"Add to toolbar");
 		[self setDelegate:_toolbar];
 	}
-	else if ([_board pointInside:[touch locationInView:_board] withEvent:nil]) {
-//	else if ([_board pointInside:self.center withEvent:nil]) {
-		NSLog(@"Add to board");
+	else if ([_board.containerView pointInside:[touch locationInView:_board.containerView] withEvent:nil]) {
+		[self setCenter:[self centerFromPoint:[touch locationInView:_board.containerView]]];
 		[self setDelegate:_board];
 	}
 	else {

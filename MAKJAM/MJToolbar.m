@@ -146,12 +146,10 @@
 }
 
 - (BOOL) removePiece:(MJPiece*)piece {
-	//	furthestRight -= piece.frame.size.width + offset;
-	//	[piece removeFromSuperview];
-	if (![_pieces containsObject:piece]) return false;
+	if (![_pieces containsObject:piece]) return NO;
 	
 	int index = [_pieces indexOfObject:piece];
-//	NSLog(@"Removing piece at index: %i", index);
+	NSLog(@"Removing toolbar piece at index: %i", index);
 	[_pieces removeObject:piece];
 	
 	[self reloadToolbarStartingAtIndex:index];
