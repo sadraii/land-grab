@@ -21,29 +21,12 @@
 }
 
 - (void) createDebugPieces {
+	NSArray* pieceNames = [[NSArray alloc] initWithObjects:@"down_left", @"down_right", @"up_left", @"up_right", @"left_down", @"left_up", @"right_down", @"right_up", nil];
 //	float height = _toolbar.frame.size.height - (2.0f * 10);
-	for (int i = 0; i < 20; i++) {
-//		MJPiece* piece = [[MJPiece alloc] initWithFrame:CGRectMake(offset + maxX, offset, height, height)];
-		MJPiece* piece = nil;
-		
-		//		furthestRight += piece.frame.size.width + offset;
-		switch (i % 4) {
-			case 0:
-				piece = [[MJPiece alloc] initWithImage:[UIImage imageNamed:@"Piece_up.png"]];
-				break;
-			case 1:
-				piece = [[MJPiece alloc] initWithImage:[UIImage imageNamed:@"Piece_down.png"]];
-				break;
-			case 2:
-				piece = [[MJPiece alloc] initWithImage:[UIImage imageNamed:@"Piece_left.png"]];
-				break;
-			case 3:
-				piece = [[MJPiece alloc] initWithImage:[UIImage imageNamed:@"Piece_right.png"]];
-				break;
-				
-			default:
-				break;
-		}
+	int diffPieces = [pieceNames count];
+	int numPieces = diffPieces;
+	for (int i = 0; i < numPieces; i++) {
+		MJPiece* piece = [[MJPiece alloc] initWithImage:[UIImage imageNamed:[pieceNames objectAtIndex:i]]];
 		
 		[piece setParentViewController:self];
 		[piece setBoard:_board];

@@ -27,14 +27,14 @@
 	NSLog(@"Off Y: %f", offY / (float)unitLength);
 	
 	CGPoint newCenter = piece.center;
-	if ((offX / (float)unitLength) >= 0.5f) {
-		newCenter.x += offX;
+	if ((offX / (float)unitLength) > 0.5f) {
+		newCenter.x += (unitLength - offX);
 	}
 	else {
 		newCenter.x -= offX;
 	}
-	if ((offY / (float)unitLength) >= 0.5f) {
-		newCenter.y += offY;
+	if ((offY / (float)unitLength) > 0.5f) {
+		newCenter.y += (unitLength - offY);
 	}
 	else {
 		newCenter.y -= offY;

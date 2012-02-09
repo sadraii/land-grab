@@ -128,7 +128,11 @@
 	[_toolbar setScrollEnabled:YES];
 	
 	if ([_toolbar pointInside:[touch locationInView:_toolbar] withEvent:nil]) {
-//	if ([_toolbar pointInside:self.center withEvent:nil]) {
+		/*
+		 Chaing center to the users touch point so that when added to the toolbar it drops at users touch instead of piece center
+		 allowing for a more natural dropping experience.
+		 */
+		[self setCenter:[touch locationInView:_toolbar]];
 		NSLog(@"Add to toolbar");
 		[self setDelegate:_toolbar];
 	}
