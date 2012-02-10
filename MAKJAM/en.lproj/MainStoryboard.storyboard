@@ -60,7 +60,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="g2T-no-18Y" customClass="MJBoard">
                                 <rect key="frame" x="10" y="82" width="748" height="776"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                             </scrollView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Xm3-3C-3KB" customClass="MJToolbar">
                                 <rect key="frame" x="10" y="868" width="748" height="128"/>

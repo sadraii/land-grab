@@ -59,17 +59,13 @@
 
 - (void) scalePiece:(MJPiece*)piece {
 	pieceHeight = self.frame.size.height - (2.0f * offset);
-//	NSLog(@"Piece Height: %f", pieceHeight);
-//	NSLog(@"Start Height: %f", piece.startingSize.height);
-//	NSLog(@" Start Width: %f", piece.startingSize.width);
 	if (piece.startingSize.height > pieceHeight || scale <= piece.scale) {
-		if (pieceHeight / piece.startingSize.height < scale) {
+		if (pieceHeight / piece.startingSize.height < scale) 
 			scale = pieceHeight / piece.startingSize.height;
-//			NSLog(@"New Scale: %f", scale);
-//			[self reloadToolbarStartingAtIndex:0];
-		}
-//		NSLog(@"Scale: %f", scale);
-		[piece setFrame:CGRectMake(piece.frame.origin.x, offset, piece.startingSize.width * scale, piece.startingSize.height * scale)];
+		[piece setFrame:CGRectMake(piece.frame.origin.x, 
+								   offset, 
+								   piece.startingSize.width * scale, 
+								   piece.startingSize.height * scale)];
 		piece.scale = scale;
 	}
 }

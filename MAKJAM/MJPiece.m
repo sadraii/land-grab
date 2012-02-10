@@ -42,8 +42,6 @@
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	[super touchesBegan:touches withEvent:event];
-//	NSLog(@"%@: %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
-	NSLog(@"Setting center with superview: %@", NSStringFromClass([self.superview class]));
 	startingCenter = self.center;
 	[_toolbar setScrollEnabled:NO];
 	[_board setScrollEnabled:NO];
@@ -52,40 +50,39 @@
 	CGPoint point = [touch locationInView:_parentViewController.view];
 	currentPosition = point;
 	
+	CGPoint tmpTouch = [touch locationInView:self.superview];
+	
 	if ([_board.containerView isEqual:self.superview]) {
-//		NSLog(@"Touch in Board");
 		[self setDelegate:_board];
 		startingView = _board;
+		
+		distanceFromCenter.x = (self.center.x - tmpTouch.x) * _board.zoomScale;
+		distanceFromCenter.y = (self.center.y - tmpTouch.y) * _board.zoomScale;
+		CGFloat newX = point.x + distanceFromCenter.x;
+		CGFloat newY = point.y + distanceFromCenter.y;
+		[self setCenter:CGPointMake(newX, newY)];
 	}
 	else if ([_toolbar isEqual:self.superview]) {
-//		NSLog(@"Touch in Toolbar");
 		[self setDelegate:_toolbar];
 		startingView = _toolbar;
+		
+		distanceFromCenter.x = self.center.x - tmpTouch.x;
+		distanceFromCenter.y = self.center.y - tmpTouch.y;
+		
+		CGFloat newX = point.x + distanceFromCenter.x;
+		CGFloat newY = point.y + distanceFromCenter.y;
+		
+		[self setCenter:CGPointMake(newX, newY)];
 	}
 	else {
 		NSLog(@"ERROR: unknown superview: %@", NSStringFromClass(self.superview.class));
-//		if ([self.superview conformsToProtocol:@protocol(MJPieceDelegate)]) {
-////			[self setDelegate:self.superview];
-//		}
 		abort();
 	}
-	
-	CGPoint tmpTouch = [touch locationInView:self.superview];
-	distanceFromCenter.x = self.center.x - tmpTouch.x;
-	distanceFromCenter.y = self.center.y - tmpTouch.y;
-	
-	CGFloat newX = point.x + distanceFromCenter.x;
-	CGFloat newY = point.y + distanceFromCenter.y;
-//	CGFloat newX = self.center.x + self.superview.frame.origin.x;
-//	CGFloat newY = self.center.y + self.superview.frame.origin.y;
-	[self setCenter:CGPointMake(newX, newY)];
-	
 	[self setDelegate:_parentViewController];
 	[_parentViewController addPiece:self];
 }
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-//	NSLog(@"%@: %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
 	UITouch* touch = [touches anyObject];
 	CGPoint point = [touch locationInView:_parentViewController.view];
 	
@@ -97,7 +94,6 @@
  Returns a new center point for the piece. Finger stays in same position during draggin. Adds the difference of the last recorded point and the new point to both the x and y of the center
  */
 - (CGPoint) centerFromPoint:(CGPoint)point {
-//	NSLog(@"%@: %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
 	return CGPointMake(self.center.x + (point.x - currentPosition.x), 
 					   self.center.y + (point.y - currentPosition.y));
 }
@@ -105,13 +101,13 @@
 - (void) revertToStartingSize {
 	if (!CGSizeEqualToSize(self.frame.size, self.startingSize)) {
 		CGPoint originalCenter = self.center;
-		[self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.startingSize.width, self.startingSize.height)];
+		[self setFrame:CGRectMake(0, 0, self.startingSize.width, self.startingSize.height)];
 		[self setCenter:originalCenter];
 	}
 }
 
 - (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-//	NSLog(@"%@: %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+	NSLog(@"%@: %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
 	[_toolbar setScrollEnabled:YES];
 	[_board setScrollEnabled:YES];
 	if ([startingView conformsToProtocol:@protocol(MJPieceDelegate)]) {

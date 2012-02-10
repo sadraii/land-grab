@@ -19,6 +19,7 @@
 		return self;
     }
     unitLength = 64;
+	[super setDelegate:self];
     return self;
 }
 
@@ -28,6 +29,8 @@
 	
 	[_containerView removeFromSuperview];
 	_containerView = [[UIView alloc] init];
+	[_containerView setBackgroundColor:[UIColor whiteColor]];
+	
 	for (MJPiece* p in self.subviews) {
 		[p removeFromSuperview];
 	}
@@ -37,9 +40,21 @@
 - (void) setBoardSize:(CGSize)size {
 	[self setContentSize:CGSizeMake((int)(size.width * unitLength), (int)(size.width * unitLength))];
 	[_containerView setFrame:CGRectMake(0, 0, self.contentSize.width, self.contentSize.height)];
+	[self setMinimumZoomScale:(self.frame.size.width / _containerView.frame.size.width)];
+	NSLog(@"Zoom scale: %f", self.minimumZoomScale);
+}
+
+- (void) scalePiece:(MJPiece*)piece {
+	CGPoint originalCenter = piece.center;
+	[piece revertToStartingSize];
+//	[piece setFrame:CGRectMake(piece.frame.origin.x, piece.frame.origin.y, piece.startingSize.width * self.zoomScale, piece.startingSize.height * self.zoomScale)];
+	[piece setFrame:CGRectMake(originalCenter.x, originalCenter.y, piece.startingSize.width * self.zoomScale, piece.startingSize.height * self.zoomScale)];
+	[piece setCenter:originalCenter];
+	piece.scale = self.zoomScale;
 }
 
 -(CGPoint) snapPieceToPoint:(MJPiece*)piece {
+	[piece revertToStartingSize];
 	/*
 	 The problem causing the whitespace was a small fraction added on to the pieces origin.
 	 By rounding the origin to a whole number it fixes the whitespace problem.
@@ -68,8 +83,8 @@
 
 #pragma mark - MJPieceDelegate Methods
 - (BOOL) addPiece:(MJPiece *)piece {
-	[_containerView addSubview:piece];
 	[piece setCenter:[self snapPieceToPoint:piece]];
+	[_containerView addSubview:piece];
 	[_pieces addObject:piece];
 	return YES;
 }
@@ -77,11 +92,21 @@
 - (BOOL) removePiece:(MJPiece *)piece {
 	if (![_pieces containsObject:piece]) return NO;
 	
-	int index = [_pieces indexOfObject:piece];
-	NSLog(@"Removing board piece at index: %i", index);
+//	int index = [_pieces indexOfObject:piece];
+//	NSLog(@"Removing board piece at index: %i", index);
 	[_pieces removeObject:piece];
 	
 	return YES;
+}
+
+#pragma mark - UISCrollViewDelegate Methods
+
+- (UIView*) viewForZoomingInScrollView:(UIScrollView *)scrollView {
+	return _containerView;
+}
+
+- (void) scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
+	NSLog(@"Zoom scale: %f", scale);
 }
 
 @end

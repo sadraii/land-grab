@@ -10,7 +10,7 @@
 #import "MJPieceDelegate.h"
 #import "MJPiece.h"
 
-@interface MJBoard : UIScrollView <MJPieceDelegate> {
+@interface MJBoard : UIScrollView <MJPieceDelegate, UIScrollViewDelegate> {
 	NSUInteger unitLength;
 }
 
@@ -20,5 +20,6 @@
 - (void) clearBoard;
 - (void) setBoardSize:(CGSize)size;
 -(CGPoint) snapPieceToPoint:(MJPiece*)piece;
+- (void) scalePiece:(MJPiece*)piece;
 
 @end

@@ -43,7 +43,7 @@
 		[piece setDelegate:_toolbar];
 		[piece.delegate addPiece:piece];
 	}
-	int boardSize = 25;
+	int boardSize = 50;
 	[_board setBoardSize:CGSizeMake(boardSize, boardSize)];
 }
 
@@ -51,8 +51,7 @@
 #pragma mark - MJPieceDelegate Methods
 
 - (BOOL) addPiece:(MJPiece *)piece {
-	NSLog(@"VC: addPiece");
-	[piece revertToStartingSize];
+	[_board scalePiece:piece];//Scales the piece to the current board zoom scale
 	[self.view addSubview:piece];
 	return YES;
 }
@@ -70,7 +69,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//	[self createDebugPieces];
+	[self resetButtonPressed:self];
 }
 
 - (void)viewDidUnload
