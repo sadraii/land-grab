@@ -51,6 +51,7 @@
 #pragma mark - MJPieceDelegate Methods
 
 - (BOOL) addPiece:(MJPiece *)piece {
+	//need to animate this!!!!!!!!
 	[_board scalePiece:piece];//Scales the piece to the current board zoom scale
 	[self.view addSubview:piece];
 	return YES;

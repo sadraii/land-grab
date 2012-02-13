@@ -41,7 +41,6 @@
 	[self setContentSize:CGSizeMake((int)(size.width * unitLength), (int)(size.width * unitLength))];
 	[_containerView setFrame:CGRectMake(0, 0, self.contentSize.width, self.contentSize.height)];
 	[self setMinimumZoomScale:(self.frame.size.width / _containerView.frame.size.width)];
-	NSLog(@"Zoom scale: %f", self.minimumZoomScale);
 }
 
 - (void) scalePiece:(MJPiece*)piece {
@@ -72,11 +71,27 @@
 	else 
 		newCenter.x -= offX;
 	
-	
 	if ((offY / (float)unitLength) > 0.5f) 
 		newCenter.y += (unitLength - offY);
 	else 
 		newCenter.y -= offY;
+	
+	
+	
+	if (newCenter.x - (piece.frame.size.width / 2) < 0) {
+		newCenter.x = piece.frame.size.width / 2;
+	}
+	else if (newCenter.x + (piece.frame.size.width / 2) > _containerView.bounds.size.width) {
+		newCenter.x = _containerView.bounds.size.width - (piece.frame.size.width / 2);
+	}
+	
+	if (newCenter.y - (piece.frame.size.height / 2) < 0) {
+		newCenter.y = piece.frame.size.height / 2;
+	}
+	else if (newCenter.y + (piece.frame.size.width / 2) > _containerView.bounds.size.height) {
+		newCenter.y = _containerView.bounds.size.height - (piece.frame.size.height / 2);
+	}
+	
 	return newCenter;
 }
 

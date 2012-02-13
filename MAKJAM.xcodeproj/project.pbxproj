@@ -13,7 +13,7 @@
 		672E62B114E19ED600BD0F15 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 672E62AF14E19ED600BD0F15 /* InfoPlist.strings */; };
 		672E62B314E19ED600BD0F15 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 672E62B214E19ED600BD0F15 /* main.m */; };
 		672E62B714E19ED600BD0F15 /* MJAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 672E62B614E19ED600BD0F15 /* MJAppDelegate.m */; };
-		672E62BA14E19ED700BD0F15 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 672E62B814E19ED700BD0F15 /* MainStoryboard.storyboard */; };
+		672E62BA14E19ED700BD0F15 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 672E62B814E19ED700BD0F15 /* MainStoryboard_iPad.storyboard */; };
 		672E62BD14E19ED700BD0F15 /* MJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 672E62BC14E19ED700BD0F15 /* MJViewController.m */; };
 		672E62C514E19ED700BD0F15 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 672E62C414E19ED700BD0F15 /* SenTestingKit.framework */; };
 		672E62C614E19ED700BD0F15 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 672E62A614E19ED600BD0F15 /* UIKit.framework */; };
@@ -31,6 +31,9 @@
 		6793E9A614E3504300FABC2F /* right_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 6793E99E14E3504300FABC2F /* right_up.png */; };
 		6793E9A714E3504300FABC2F /* up_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 6793E99F14E3504300FABC2F /* up_left.png */; };
 		6793E9A814E3504300FABC2F /* up_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 6793E9A014E3504300FABC2F /* up_right.png */; };
+		67C8C01514E5F78400CD488E /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67C8C01314E5F78400CD488E /* MainStoryboard_iPhone.storyboard */; };
+		67DF1B4C14E7307000649B1E /* GCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DF1B4B14E7307000649B1E /* GCHelper.m */; };
+		67DF1B4E14E7338000649B1E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67DF1B4D14E7338000649B1E /* GameKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +57,7 @@
 		672E62B414E19ED600BD0F15 /* MAKJAM-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MAKJAM-Prefix.pch"; sourceTree = "<group>"; };
 		672E62B514E19ED600BD0F15 /* MJAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJAppDelegate.h; sourceTree = "<group>"; };
 		672E62B614E19ED600BD0F15 /* MJAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJAppDelegate.m; sourceTree = "<group>"; };
-		672E62B914E19ED700BD0F15 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		672E62B914E19ED700BD0F15 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		672E62BB14E19ED700BD0F15 /* MJViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJViewController.h; sourceTree = "<group>"; };
 		672E62BC14E19ED700BD0F15 /* MJViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJViewController.m; sourceTree = "<group>"; };
 		672E62C314E19ED700BD0F15 /* MAKJAMTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MAKJAMTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +81,10 @@
 		6793E99E14E3504300FABC2F /* right_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_up.png; sourceTree = "<group>"; };
 		6793E99F14E3504300FABC2F /* up_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up_left.png; sourceTree = "<group>"; };
 		6793E9A014E3504300FABC2F /* up_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up_right.png; sourceTree = "<group>"; };
+		67C8C01414E5F78400CD488E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		67DF1B4A14E7307000649B1E /* GCHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCHelper.h; sourceTree = "<group>"; };
+		67DF1B4B14E7307000649B1E /* GCHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCHelper.m; sourceTree = "<group>"; };
+		67DF1B4D14E7338000649B1E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67DF1B4E14E7338000649B1E /* GameKit.framework in Frameworks */,
 				672E62A714E19ED600BD0F15 /* UIKit.framework in Frameworks */,
 				672E62A914E19ED600BD0F15 /* Foundation.framework in Frameworks */,
 				672E62AB14E19ED600BD0F15 /* CoreGraphics.framework in Frameworks */,
@@ -126,6 +134,7 @@
 		672E62A514E19ED600BD0F15 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				67DF1B4D14E7338000649B1E /* GameKit.framework */,
 				672E62A614E19ED600BD0F15 /* UIKit.framework */,
 				672E62A814E19ED600BD0F15 /* Foundation.framework */,
 				672E62AA14E19ED600BD0F15 /* CoreGraphics.framework */,
@@ -139,7 +148,8 @@
 			children = (
 				672E62B514E19ED600BD0F15 /* MJAppDelegate.h */,
 				672E62B614E19ED600BD0F15 /* MJAppDelegate.m */,
-				672E62B814E19ED700BD0F15 /* MainStoryboard.storyboard */,
+				672E62B814E19ED700BD0F15 /* MainStoryboard_iPad.storyboard */,
+				67C8C01314E5F78400CD488E /* MainStoryboard_iPhone.storyboard */,
 				672E62BB14E19ED700BD0F15 /* MJViewController.h */,
 				672E62BC14E19ED700BD0F15 /* MJViewController.m */,
 				672E62E414E1A28F00BD0F15 /* MJPieceDelegate.h */,
@@ -149,6 +159,8 @@
 				672E62DF14E1A12B00BD0F15 /* MJToolbar.m */,
 				672E62E114E1A13D00BD0F15 /* MJBoard.h */,
 				672E62E214E1A13D00BD0F15 /* MJBoard.m */,
+				67DF1B4A14E7307000649B1E /* GCHelper.h */,
+				67DF1B4B14E7307000649B1E /* GCHelper.m */,
 				672E62ED14E228CB00BD0F15 /* Piece Images */,
 				672E62AD14E19ED600BD0F15 /* Supporting Files */,
 			);
@@ -271,7 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				672E62B114E19ED600BD0F15 /* InfoPlist.strings in Resources */,
-				672E62BA14E19ED700BD0F15 /* MainStoryboard.storyboard in Resources */,
+				672E62BA14E19ED700BD0F15 /* MainStoryboard_iPad.storyboard in Resources */,
 				6793E9A114E3504300FABC2F /* down_left.png in Resources */,
 				6793E9A214E3504300FABC2F /* down_right.png in Resources */,
 				6793E9A314E3504300FABC2F /* left_down.png in Resources */,
@@ -280,6 +292,7 @@
 				6793E9A614E3504300FABC2F /* right_up.png in Resources */,
 				6793E9A714E3504300FABC2F /* up_left.png in Resources */,
 				6793E9A814E3504300FABC2F /* up_right.png in Resources */,
+				67C8C01514E5F78400CD488E /* MainStoryboard_iPhone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +333,7 @@
 				672E62DD14E1A10D00BD0F15 /* MJPiece.m in Sources */,
 				672E62E014E1A12B00BD0F15 /* MJToolbar.m in Sources */,
 				672E62E314E1A13D00BD0F15 /* MJBoard.m in Sources */,
+				67DF1B4C14E7307000649B1E /* GCHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,12 +364,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		672E62B814E19ED700BD0F15 /* MainStoryboard.storyboard */ = {
+		672E62B814E19ED700BD0F15 /* MainStoryboard_iPad.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				672E62B914E19ED700BD0F15 /* en */,
 			);
-			name = MainStoryboard.storyboard;
+			name = MainStoryboard_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 		672E62CD14E19ED700BD0F15 /* InfoPlist.strings */ = {
@@ -364,6 +378,14 @@
 				672E62CE14E19ED700BD0F15 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		67C8C01314E5F78400CD488E /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				67C8C01414E5F78400CD488E /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -421,6 +443,8 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MAKJAM/MAKJAM-Prefix.pch";
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
 				INFOPLIST_FILE = "MAKJAM/MAKJAM-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -433,6 +457,8 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MAKJAM/MAKJAM-Prefix.pch";
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
 				INFOPLIST_FILE = "MAKJAM/MAKJAM-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

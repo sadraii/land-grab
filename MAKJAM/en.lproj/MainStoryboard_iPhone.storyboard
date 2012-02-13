@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11D50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="yed-bx-TkN">
+    <dependencies>
+        <development defaultVersion="4200" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
+    </dependencies>
+    <scenes>
+        <scene sceneID="te1-lh-S9L">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X2L-U9-YE7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="yed-bx-TkN" customClass="MJViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DYa-if-n2J">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Iae-tk-kLn" customClass="MJToolbar">
+                                <rect key="frame" x="0.0" y="396" width="320" height="64"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                            </scrollView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="EzR-Zn-w9j" customClass="MJBoard">
+                                <rect key="frame" x="5" y="49" width="310" height="342"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                            </scrollView>
+                            <navigationBar contentMode="scaleToFill" id="N8m-bM-gOR">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="Z40-OT-Qk5">
+                                        <barButtonItem key="leftBarButtonItem" title="Reset" id="uLy-FS-ItP">
+                                            <connections>
+                                                <action selector="resetButtonPressed:" destination="yed-bx-TkN" id="Ao4-lE-OQS"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Item" id="PPC-sT-hcH"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="board" destination="EzR-Zn-w9j" id="4GX-cd-t5c"/>
+                        <outlet property="toolbar" destination="Iae-tk-kLn" id="DiB-Yd-2rz"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="211" y="171"/>
+        </scene>
+    </scenes>
+    <classes>
+        <class className="MJBoard" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJBoard.h"/>
+        </class>
+        <class className="MJToolbar" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJToolbar.h"/>
+        </class>
+        <class className="MJViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addButtonPressed:"/>
+                <relationship kind="action" name="resetButtonPressed:"/>
+                <relationship kind="outlet" name="addButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="board" candidateClass="MJBoard"/>
+                <relationship kind="outlet" name="resetButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="MJToolbar"/>
+                <relationship kind="outlet" name="topToolbar" candidateClass="UIView"/>
+            </relationships>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

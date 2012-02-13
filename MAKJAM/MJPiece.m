@@ -53,6 +53,8 @@
 	CGPoint tmpTouch = [touch locationInView:self.superview];
 	
 	if ([_board.containerView isEqual:self.superview]) {
+		//need to animate this!!!!!!!!
+		
 		[self setDelegate:_board];
 		startingView = _board;
 		
