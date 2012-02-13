@@ -5,6 +5,7 @@
 //  Created by Andrew Huss on 2/7/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 // a comment made by Kristi
+// test comment
 
 #import "MJAppDelegate.h"
 
