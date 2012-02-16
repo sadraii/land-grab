@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		670E479F14ECE426004461BC /* Cross.png in Resources */ = {isa = PBXBuildFile; fileRef = 670E479E14ECE426004461BC /* Cross.png */; };
+		670E47A614ECE5C4004461BC /* H.png in Resources */ = {isa = PBXBuildFile; fileRef = 670E47A114ECE5C4004461BC /* H.png */; };
+		670E47A814ECE5C4004461BC /* U.png in Resources */ = {isa = PBXBuildFile; fileRef = 670E47A314ECE5C4004461BC /* U.png */; };
+		670E47A914ECE5C4004461BC /* vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = 670E47A414ECE5C4004461BC /* vertical.png */; };
+		670E47AA14ECE5C4004461BC /* W.png in Resources */ = {isa = PBXBuildFile; fileRef = 670E47A514ECE5C4004461BC /* W.png */; };
 		672E62A714E19ED600BD0F15 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 672E62A614E19ED600BD0F15 /* UIKit.framework */; };
 		672E62A914E19ED600BD0F15 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 672E62A814E19ED600BD0F15 /* Foundation.framework */; };
 		672E62AB14E19ED600BD0F15 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 672E62AA14E19ED600BD0F15 /* CoreGraphics.framework */; };
@@ -49,6 +54,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		670E479E14ECE426004461BC /* Cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cross.png; sourceTree = "<group>"; };
+		670E47A114ECE5C4004461BC /* H.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = H.png; sourceTree = "<group>"; };
+		670E47A314ECE5C4004461BC /* U.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = U.png; sourceTree = "<group>"; };
+		670E47A414ECE5C4004461BC /* vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vertical.png; sourceTree = "<group>"; };
+		670E47A514ECE5C4004461BC /* W.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = W.png; sourceTree = "<group>"; };
 		672E62A214E19ED600BD0F15 /* MAKJAM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MAKJAM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		672E62A614E19ED600BD0F15 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		672E62A814E19ED600BD0F15 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -205,6 +215,11 @@
 		672E62ED14E228CB00BD0F15 /* Piece Images */ = {
 			isa = PBXGroup;
 			children = (
+				670E47A114ECE5C4004461BC /* H.png */,
+				670E47A314ECE5C4004461BC /* U.png */,
+				670E47A414ECE5C4004461BC /* vertical.png */,
+				670E47A514ECE5C4004461BC /* W.png */,
+				670E479E14ECE426004461BC /* Cross.png */,
 				6793E99914E3504300FABC2F /* down_left.png */,
 				6793E99A14E3504300FABC2F /* down_right.png */,
 				6793E99B14E3504300FABC2F /* left_down.png */,
@@ -309,6 +324,11 @@
 				6793E9A814E3504300FABC2F /* up_right.png in Resources */,
 				67C8C01514E5F78400CD488E /* MainStoryboard_iPhone.storyboard in Resources */,
 				679F382114EACFD3007DDB75 /* Rotate.png in Resources */,
+				670E479F14ECE426004461BC /* Cross.png in Resources */,
+				670E47A614ECE5C4004461BC /* H.png in Resources */,
+				670E47A814ECE5C4004461BC /* U.png in Resources */,
+				670E47A914ECE5C4004461BC /* vertical.png in Resources */,
+				670E47AA14ECE5C4004461BC /* W.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,7 +27,7 @@
     [self setUserInteractionEnabled:YES];
 	[self setContentMode:UIViewContentModeScaleAspectFit];
 	[self clipsToBounds];
-	[self setBackgroundColor:[UIColor redColor]];
+//	[self setBackgroundColor:[UIColor redColor]];
 	
     startingCenter = CGPointZero;
 	currentRotation = 0;

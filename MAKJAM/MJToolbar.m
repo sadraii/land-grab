@@ -34,7 +34,7 @@
     }
 	
     maxX = 0;
-	_offset = 5;
+	_offset = 10;
 	scale = 1;
 	
     return self;
@@ -60,27 +60,15 @@
 
 - (void) scalePiece:(MJPiece*)piece {
 	pieceHeight = self.frame.size.height - (2.0f * _offset);
-//	if (piece.startingSize.height > pieceHeight || scale <= piece.scale) {
-//		if (pieceHeight / piece.startingSize.height < scale) 
-//			scale = pieceHeight / piece.startingSize.height;
-//		[piece setFrame:CGRectMake(piece.frame.origin.x, 
-//								   _offset, 
-//								   piece.startingSize.width * scale, 
-//								   piece.startingSize.height * scale)];
-//		piece.scale = scale;
-//	}
-	if (piece.frame.size.height > pieceHeight || scale <= piece.scale) {
-		if (pieceHeight / piece.frame.size.height < scale) 
-			scale = pieceHeight / piece.frame.size.height;
-		[piece setFrame:CGRectMake(piece.frame.origin.x, 
-								   _offset, 
-								   piece.frame.size.width * scale, 
-								   piece.frame.size.height * scale)];
+
+	if (pieceHeight / piece.frame.size.height != scale) {
+		scale = pieceHeight / piece.frame.size.height;
 		piece.scale = scale;
 	}
-	else {
-		
-	}
+	[piece setFrame:CGRectMake(piece.frame.origin.x, 
+							   _offset, 
+							   piece.frame.size.width * scale, 
+							   pieceHeight)];
 }
 
 - (void) reloadToolbarStartingAtIndex:(NSUInteger)index {

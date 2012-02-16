@@ -34,10 +34,11 @@
 - (IBAction)resetButtonPressed:(id)sender {
 	[_toolbar clearToolbar];
 	[_board clearBoard];
-	NSArray* pieceNames = [[NSArray alloc] initWithObjects:@"down_left", @"down_right", @"up_left", @"up_right", @"left_down", @"left_up", @"right_down", @"right_up", nil];
+	//@"up_left", @"up_right", @"left_down", @"left_up", @"right_down", @"right_up", 
+	NSArray* pieceNames = [[NSArray alloc] initWithObjects:@"Cross", @"down_left", @"down_right", @"H", @"U", @"vertical", @"W", nil];
 	//	float height = _toolbar.frame.size.height - (2.0f * 10);
 	int diffPieces = [pieceNames count];
-	int numPieces = diffPieces * 3;
+	int numPieces = diffPieces;
 	for (int i = 0; i < numPieces; i++) {
 		MJPiece* piece = [[MJPiece alloc] initWithImage:[UIImage imageNamed:[pieceNames objectAtIndex:i % diffPieces]]];
 		
