@@ -6,8 +6,11 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "MJPiece.h"
 #import "MJViewController.h"
+
+#define degreesToRadians(x) (M_PI * x / 180.0)
 
 @implementation MJPiece
 @synthesize delegate = _delegate;
@@ -22,8 +25,12 @@
 		return self;
     }
     [self setUserInteractionEnabled:YES];
-	[self setContentMode:UIViewContentModeScaleAspectFill];
+	[self setContentMode:UIViewContentModeScaleAspectFit];
+	[self clipsToBounds];
+	[self setBackgroundColor:[UIColor redColor]];
+	
     startingCenter = CGPointZero;
+	currentRotation = 0;
 	_scale = 1;
 	_startingSize = self.image.size;
     return self;
@@ -40,8 +47,24 @@
     return self;
 }
 
+- (void) rotatePiece {
+	NSLog(@"Starting Origin: (%f, %f)", self.frame.origin.x, self.frame.origin.y);
+	CGPoint originalOrigin = self.frame.origin;
+	self.layer.anchorPoint = CGPointMake(.5,.5);
+	currentRotation >= 3 ? currentRotation = 0 : currentRotation++;
+	NSLog(@"Current Rotation: %i", currentRotation);
+	self.transform = CGAffineTransformRotate(self.transform, degreesToRadians(90));
+	
+	[self setFrame:CGRectMake(originalOrigin.x, originalOrigin.y, self.frame.size.width, self.frame.size.height)];
+	
+	NSLog(@"Self Bounds: (%f X %f)", self.bounds.size.width, self.bounds.size.height);
+	NSLog(@" Self Frame: (%f X %f)", self.frame.size.width, self.frame.size.height);
+	NSLog(@"Ending Origin: (%f, %f)", self.frame.origin.x, self.frame.origin.y);
+}
+
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	[super touchesBegan:touches withEvent:event];
+	
 	startingCenter = self.center;
 	[_toolbar setScrollEnabled:NO];
 	[_board setScrollEnabled:NO];
@@ -82,6 +105,7 @@
 	}
 	[self setDelegate:_parentViewController];
 	[_parentViewController addPiece:self];
+	[self setRotateButtonHidden:NO];
 }
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -101,11 +125,17 @@
 }
 
 - (void) revertToStartingSize {
-	if (!CGSizeEqualToSize(self.frame.size, self.startingSize)) {
-		CGPoint originalCenter = self.center;
-		[self setFrame:CGRectMake(0, 0, self.startingSize.width, self.startingSize.height)];
-		[self setCenter:originalCenter];
-	}
+	//NEED TO FIGURE OUT HOW TO DO THIS!!
+	/*
+	 need to record the starting width and starting size
+	 need to store the current rotation (1 , 2 ,3, 4) or (0, 1, 2, 3)
+	 if rotation % 2 is 0 then piece is upside down
+		set size to starting size (width X height)
+	 if rotation % 2 is 1 then piece is sideways
+		set size to flipped starting size (height X width)
+	 */
+	currentRotation % 2 ? NSLog(@"Rotation is 1") : NSLog(@"Rotation is 0");
+	currentRotation % 2 ? [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, _startingSize.height, _startingSize.width)] : [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, _startingSize.width, _startingSize.height)]; 
 }
 
 - (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -119,6 +149,7 @@
 		[_delegate removePiece:self];
 		[_delegate addPiece:self];
 	}
+	[self setRotateButtonHidden:YES];
 }
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -150,6 +181,25 @@
 	if (![_delegate addPiece:self]) {
 		//Should animate
 		[self touchesCancelled:nil withEvent:nil];
+	}
+	else {
+		[self setRotateButtonHidden:YES];
+	}
+}
+
+- (void) setRotateButtonHidden:(BOOL)hidden {
+	[_parentViewController.rotateButton setHidden:hidden];
+	if (hidden) {
+		[_parentViewController.rotateButton removeTarget:self action:@selector(rotatePiece) forControlEvents:UIControlEventTouchUpInside];
+		CGRect tFrame = _toolbar.frame;
+		CGRect rFrame = _parentViewController.rotateButton.frame;
+		[_toolbar setFrame:CGRectMake(tFrame.origin.x - rFrame.size.width - (2 * _toolbar.offset), tFrame.origin.y, tFrame.size.width + rFrame.size.width/* + (2 * offset)*/, tFrame.size.height)];
+	}
+	else {
+		[_parentViewController.rotateButton addTarget:self action:@selector(rotatePiece) forControlEvents:UIControlEventTouchUpInside];
+		CGRect tFrame = _toolbar.frame;
+		CGRect rFrame = _parentViewController.rotateButton.frame;
+		[_toolbar setFrame:CGRectMake(tFrame.origin.x + rFrame.size.width + (2 * _toolbar.offset), tFrame.origin.y, tFrame.size.width - rFrame.size.width/* - (2 * offset)*/, tFrame.size.height)];
 	}
 }
 

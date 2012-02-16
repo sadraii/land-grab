@@ -22,7 +22,8 @@
 
 @property (weak, nonatomic) MJViewController* parentViewController;
 
-@property (nonatomic) CGFloat toolbarHeight;
+@property (nonatomic) BOOL offset;
+//@property (nonatomic) CGFloat toolbarHeight;
 @property (strong, nonatomic) NSMutableArray* pieces;
 
 - (void) clearToolbar;

@@ -22,6 +22,7 @@
 	CGPoint distanceFromCenter;
 	CGFloat scale;
 	CGSize startingSize;
+	NSInteger currentRotation;
 }
 
 @property (strong, nonatomic) id <MJPieceDelegate> delegate;
@@ -33,4 +34,7 @@
 
 - (CGPoint) centerFromPoint:(CGPoint)point;
 - (void) revertToStartingSize;
+- (void) setRotateButtonHidden:(BOOL)hidden;
+- (void) rotatePiece;
+
 @end

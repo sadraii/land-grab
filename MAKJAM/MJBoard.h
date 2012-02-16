@@ -11,7 +11,9 @@
 #import "MJPiece.h"
 
 @interface MJBoard : UIScrollView <MJPieceDelegate, UIScrollViewDelegate> {
+	CGSize boardSize;
 	NSUInteger unitLength;
+	id table;
 }
 
 @property (strong, nonatomic) NSMutableArray* pieces;
@@ -19,7 +21,8 @@
 
 - (void) clearBoard;
 - (void) setBoardSize:(CGSize)size;
--(CGPoint) snapPieceToPoint:(MJPiece*)piece;
+- (CGPoint) snapPieceToPoint:(MJPiece*)piece;
 - (void) scalePiece:(MJPiece*)piece;
+- (CGPoint) originOfPiece:(MJPiece*)piece;
 
 @end

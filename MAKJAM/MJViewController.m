@@ -14,16 +14,21 @@
 @synthesize board = _board;
 @synthesize topToolbar = _topToolbar;
 @synthesize resetButton = _resetButton;
-@synthesize addButton = _addButton;
 @synthesize toolbar = _toolbar;
+@synthesize rotateButton = _rotateButton;
+
+-(id) initWithCoder:(NSCoder *)aDecoder {
+    if ((self = [super initWithCoder:aDecoder]) == nil) {
+		return self;
+    }
+    
+    return self;
+}
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
-}
-
-- (IBAction)addButtonPressed:(id)sender {
 }
 
 - (IBAction)resetButtonPressed:(id)sender {
@@ -43,16 +48,18 @@
 		[piece setDelegate:_toolbar];
 		[piece.delegate addPiece:piece];
 	}
-	int boardSize = 50;
-	[_board setBoardSize:CGSizeMake(boardSize, boardSize)];
+	int boardWidth = 27;
+	int boardHeight = 27;
+	[_board setBoardSize:CGSizeMake(boardWidth, boardHeight)];
 }
-
 
 #pragma mark - MJPieceDelegate Methods
 
 - (BOOL) addPiece:(MJPiece *)piece {
 	//need to animate this!!!!!!!!
-	[_board scalePiece:piece];//Scales the piece to the current board zoom scale
+	if (![piece.superview isEqual:_board]) {
+		[_board scalePiece:piece];//Scales the piece to the current board zoom scale
+	}
 	[self.view addSubview:piece];
 	return YES;
 }
@@ -77,7 +84,6 @@
 {
 	[self setTopToolbar:nil];
 	[self setResetButton:nil];
-	[self setAddButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

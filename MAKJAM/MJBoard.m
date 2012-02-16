@@ -18,6 +18,7 @@
     if ((self = [super initWithCoder:aDecoder]) == nil) {
 		return self;
     }
+	boardSize = CGSizeMake(10, 10);
     unitLength = 64;
 	[super setDelegate:self];
     return self;
@@ -37,8 +38,12 @@
 	[self addSubview:_containerView];
 }
 
+
 - (void) setBoardSize:(CGSize)size {
-	[self setContentSize:CGSizeMake((int)(size.width * unitLength), (int)(size.width * unitLength))];
+	if(!CGSizeEqualToSize(CGSizeZero, size)) boardSize = size;
+	NSLog(@"Setting board size: (%f X %f)", boardSize.width, boardSize.height);
+	
+	[self setContentSize:CGSizeMake((boardSize.width * unitLength), (boardSize.height * unitLength))];
 	[_containerView setFrame:CGRectMake(0, 0, self.contentSize.width, self.contentSize.height)];
 	[self setMinimumZoomScale:(self.frame.size.width / _containerView.frame.size.width)];
 }
@@ -47,7 +52,8 @@
 	CGPoint originalCenter = piece.center;
 	[piece revertToStartingSize];
 //	[piece setFrame:CGRectMake(piece.frame.origin.x, piece.frame.origin.y, piece.startingSize.width * self.zoomScale, piece.startingSize.height * self.zoomScale)];
-	[piece setFrame:CGRectMake(originalCenter.x, originalCenter.y, piece.startingSize.width * self.zoomScale, piece.startingSize.height * self.zoomScale)];
+//	[piece setFrame:CGRectMake(originalCenter.x, originalCenter.y, piece.frame.size.width * self.zoomScale, piece.frame.size.height * self.zoomScale)];
+	[piece setFrame:CGRectMake(originalCenter.x, originalCenter.y, piece.frame.size.width * self.zoomScale, piece.frame.size.height * self.zoomScale)];
 	[piece setCenter:originalCenter];
 	piece.scale = self.zoomScale;
 }
@@ -63,6 +69,7 @@
 	
 	int offX = ((NSUInteger)piece.frame.origin.x % unitLength);
 	int offY = ((NSUInteger)piece.frame.origin.y % unitLength);
+//	NSLog(@"Off X&Y: (%i, %i)", offX, offY);
 	
 	CGPoint newCenter = piece.center;
 	
@@ -95,12 +102,21 @@
 	return newCenter;
 }
 
+- (CGPoint) originOfPiece:(MJPiece*)piece {
+	CGPoint origin = piece.frame.origin;
+	origin.x /= unitLength;
+	origin.y /= unitLength;
+	NSLog(@"Piece Coordinates: (%i, %i)", (int)origin.x, (int)origin.y);
+	return origin;
+}
+
 
 #pragma mark - MJPieceDelegate Methods
 - (BOOL) addPiece:(MJPiece *)piece {
 	[piece setCenter:[self snapPieceToPoint:piece]];
 	[_containerView addSubview:piece];
 	[_pieces addObject:piece];
+	[self originOfPiece:piece];
 	return YES;
 }
 
@@ -121,7 +137,41 @@
 }
 
 - (void) scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
-	NSLog(@"Zoom scale: %f", scale);
+//	NSLog(@"Zoom scale: %f", scale);
+//	NSLog(@"Scroll View: %f X %f", scrollView.contentSize.width, scrollView.contentSize.height);
+	CGSize contentSize = CGSizeMake(roundf(scrollView.contentSize.width), roundf(scrollView.contentSize.width));
+	
+	int offW = (int)contentSize.width % unitLength;
+	int offH = (int)contentSize.height % unitLength;
+	while (offW != 0 || offH != 0) {
+		if (offW / (float)unitLength > 0.5f) {
+			contentSize.width += (unitLength - offW);
+			contentSize.height += (unitLength - offW);
+			offW = (int)contentSize.width % unitLength;
+			offH = (int)contentSize.height % unitLength;
+		}
+		else {
+			contentSize.width -= offW;
+			contentSize.height -= offW;
+			offW = (int)contentSize.width % unitLength;
+			offH = (int)contentSize.height % unitLength;
+		}
+		
+		if (offH / (float)unitLength > 0.5f) {
+			contentSize.height += (unitLength - offH);
+			contentSize.width += (unitLength - offH);
+			offW = (int)contentSize.width % unitLength;
+			offH = (int)contentSize.height % unitLength;
+		}
+		else {
+			contentSize.height -= offH;
+			contentSize.width -= offH;
+			offW = (int)contentSize.width % unitLength;
+			offH = (int)contentSize.height % unitLength;
+		}
+	}
+	[scrollView setZoomScale:contentSize.width / (scrollView.contentSize.width / scale) animated:YES];
+	[scrollView setContentSize:contentSize];
 }
 
 @end

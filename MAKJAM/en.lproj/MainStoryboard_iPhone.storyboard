@@ -37,11 +37,24 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Gj8-mQ-tzS">
+                                <rect key="frame" x="5" y="401" width="54" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="Rotate.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                     </view>
                     <connections>
                         <outlet property="board" destination="EzR-Zn-w9j" id="4GX-cd-t5c"/>
+                        <outlet property="rotateButton" destination="Gj8-mQ-tzS" id="AAu-YT-d0e"/>
                         <outlet property="toolbar" destination="Iae-tk-kLn" id="DiB-Yd-2rz"/>
                     </connections>
                 </viewController>
@@ -49,6 +62,9 @@
             <point key="canvasLocation" x="211" y="171"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Rotate.png" width="505" height="509"/>
+    </resources>
     <classes>
         <class className="MJBoard" superclassName="UIScrollView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MJBoard.h"/>
@@ -59,11 +75,10 @@
         <class className="MJViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MJViewController.h"/>
             <relationships>
-                <relationship kind="action" name="addButtonPressed:"/>
                 <relationship kind="action" name="resetButtonPressed:"/>
-                <relationship kind="outlet" name="addButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="board" candidateClass="MJBoard"/>
                 <relationship kind="outlet" name="resetButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="rotateButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="toolbar" candidateClass="MJToolbar"/>
                 <relationship kind="outlet" name="topToolbar" candidateClass="UIView"/>
             </relationships>

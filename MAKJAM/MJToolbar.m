@@ -13,7 +13,8 @@
 @implementation MJToolbar
 
 @synthesize parentViewController = _parentViewController;
-@synthesize toolbarHeight = _toolbarHeight;
+//@synthesize toolbarHeight = _toolbarHeight;
+@synthesize offset = _offset;
 @synthesize pieces = _pieces;
 
 //-(id) initWithFrame:(CGRect)frame {
@@ -22,7 +23,7 @@
 //    }
 //	
 //	maxX = 0;
-//	offset = 20;
+//	_offset = 20;
 //	_pieces = [[NSMutableArray alloc] init];
 //    return self;
 //}
@@ -33,7 +34,7 @@
     }
 	
     maxX = 0;
-	offset = 5;
+	_offset = 5;
 	scale = 1;
 	
     return self;
@@ -58,15 +59,27 @@
 }
 
 - (void) scalePiece:(MJPiece*)piece {
-	pieceHeight = self.frame.size.height - (2.0f * offset);
-	if (piece.startingSize.height > pieceHeight || scale <= piece.scale) {
-		if (pieceHeight / piece.startingSize.height < scale) 
-			scale = pieceHeight / piece.startingSize.height;
+	pieceHeight = self.frame.size.height - (2.0f * _offset);
+//	if (piece.startingSize.height > pieceHeight || scale <= piece.scale) {
+//		if (pieceHeight / piece.startingSize.height < scale) 
+//			scale = pieceHeight / piece.startingSize.height;
+//		[piece setFrame:CGRectMake(piece.frame.origin.x, 
+//								   _offset, 
+//								   piece.startingSize.width * scale, 
+//								   piece.startingSize.height * scale)];
+//		piece.scale = scale;
+//	}
+	if (piece.frame.size.height > pieceHeight || scale <= piece.scale) {
+		if (pieceHeight / piece.frame.size.height < scale) 
+			scale = pieceHeight / piece.frame.size.height;
 		[piece setFrame:CGRectMake(piece.frame.origin.x, 
-								   offset, 
-								   piece.startingSize.width * scale, 
-								   piece.startingSize.height * scale)];
+								   _offset, 
+								   piece.frame.size.width * scale, 
+								   piece.frame.size.height * scale)];
 		piece.scale = scale;
+	}
+	else {
+		
 	}
 }
 
@@ -86,21 +99,21 @@
 	MJPiece* lastObj = _pieces.lastObject;
 	if (lastObj) {
 		maxX = lastObj.frame.origin.x + lastObj.frame.size.width;
-		[self setContentSize:CGSizeMake(maxX + offset, self.frame.size.height)];
+		[self setContentSize:CGSizeMake(maxX + _offset, self.frame.size.height)];
 	}
 	else {
 		maxX = 0;
 	}
 	for (MJPiece* p in tmp) {
 		[p removeFromSuperview];
-		[p setFrame:CGRectMake(maxX + offset, 
+		[p setFrame:CGRectMake(maxX + _offset, 
 							   p.frame.origin.y, 
 							   p.frame.size.width, 
 							   p.frame.size.height)];
 		[p setCenter:CGPointMake(p.center.x, self.frame.size.height / 2)];
 		[self addSubview:p];
-		maxX += p.frame.size.width + offset;
-		[self setContentSize:CGSizeMake(maxX + offset, self.frame.size.height)];
+		maxX += p.frame.size.width + _offset;
+		[self setContentSize:CGSizeMake(maxX + _offset, self.frame.size.height)];
 		[_pieces addObject:p];
 	}
 }
@@ -109,13 +122,11 @@
 #pragma mark - MJPieceDelegate Methods
 
 - (BOOL) addPiece:(MJPiece*)piece {
-	if (!piece) {
-		return NO;
-	}
 	if (_pieces == nil) {
 		_pieces = [[NSMutableArray alloc] init];
 	}
 	
+	[piece revertToStartingSize];
 	[self scalePiece:piece];
 	
 	int index= 0;
