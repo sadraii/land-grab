@@ -9,15 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "MJPieceDelegate.h"
 #import "MJPiece.h"
+#import "MJContainerView.h"
 
 @interface MJBoard : UIScrollView <MJPieceDelegate, UIScrollViewDelegate> {
 	CGSize boardSize;
-	NSUInteger unitLength;
+	NSUInteger tileSize;
 	id table;
 }
 
 @property (strong, nonatomic) NSMutableArray* pieces;
-@property (strong, nonatomic) UIView* containerView;
+@property (readonly)CGSize boardSize;
+@property (strong, nonatomic) MJContainerView* containerView;
+@property (readonly)NSUInteger tileSize;
 
 - (void) clearBoard;
 - (void) setBoardSize:(CGSize)size;

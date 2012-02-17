@@ -49,8 +49,8 @@
 		[piece setDelegate:_toolbar];
 		[piece.delegate addPiece:piece];
 	}
-	int boardWidth = 27;
-	int boardHeight = 27;
+	int boardWidth = 30;
+	int boardHeight = 30;
 	[_board setBoardSize:CGSizeMake(boardWidth, boardHeight)];
 }
 
