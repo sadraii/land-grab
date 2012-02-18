@@ -12,14 +12,16 @@
 @implementation MJBoard
 
 @synthesize pieces = _pieces;
+@synthesize boardSize;
 @synthesize containerView = _containerView;
+@synthesize tileSize;
 
 -(id) initWithCoder:(NSCoder *)aDecoder {
     if ((self = [super initWithCoder:aDecoder]) == nil) {
 		return self;
     }
 	boardSize = CGSizeMake(10, 10);
-    unitLength = 64;
+    tileSize = 64;
 	[super setDelegate:self];
     return self;
 }
@@ -29,7 +31,8 @@
 	_pieces = [[NSMutableArray alloc] init];
 	
 	[_containerView removeFromSuperview];
-	_containerView = [[UIView alloc] init];
+	_containerView = [[MJContainerView alloc] init];
+    [_containerView setBoard:self];
 	[_containerView setBackgroundColor:[UIColor whiteColor]];
 	
 	for (MJPiece* p in self.subviews) {
@@ -43,9 +46,9 @@
 	if(!CGSizeEqualToSize(CGSizeZero, size)) boardSize = size;
 	NSLog(@"Setting board size: (%f X %f)", boardSize.width, boardSize.height);
 	
-	[self setContentSize:CGSizeMake((boardSize.width * unitLength), (boardSize.height * unitLength))];
+	[self setContentSize:CGSizeMake((boardSize.width * tileSize), (boardSize.height * tileSize))];
 	[_containerView setFrame:CGRectMake(0, 0, self.contentSize.width, self.contentSize.height)];
-	[self setMinimumZoomScale:(self.frame.size.width / _containerView.frame.size.width)];
+	[self setMinimumZoomScale:(self.frame.size.width / _containerView.frame.size.width-50)];
 }
 
 - (void) scalePiece:(MJPiece*)piece {
@@ -67,19 +70,19 @@
 	 */
 	[piece setFrame:CGRectMake(roundf(piece.frame.origin.x), roundf(piece.frame.origin.y), piece.frame.size.width, piece.frame.size.height)];
 	
-	int offX = ((NSUInteger)piece.frame.origin.x % unitLength);
-	int offY = ((NSUInteger)piece.frame.origin.y % unitLength);
+	int offX = ((NSUInteger)piece.frame.origin.x % tileSize);
+	int offY = ((NSUInteger)piece.frame.origin.y % tileSize);
 //	NSLog(@"Off X&Y: (%i, %i)", offX, offY);
 	
 	CGPoint newCenter = piece.center;
 	
-	if ((offX / (float)unitLength) > 0.5f) 
-		newCenter.x += (unitLength - offX);
+	if ((offX / (float)tileSize) > 0.5f) 
+		newCenter.x += (tileSize - offX);
 	else 
 		newCenter.x -= offX;
 	
-	if ((offY / (float)unitLength) > 0.5f) 
-		newCenter.y += (unitLength - offY);
+	if ((offY / (float)tileSize) > 0.5f) 
+		newCenter.y += (tileSize - offY);
 	else 
 		newCenter.y -= offY;
 	
@@ -104,8 +107,8 @@
 
 - (CGPoint) originOfPiece:(MJPiece*)piece {
 	CGPoint origin = piece.frame.origin;
-	origin.x /= unitLength;
-	origin.y /= unitLength;
+	origin.x /= tileSize;
+	origin.y /= tileSize;
 	NSLog(@"Piece Coordinates: (%i, %i)", (int)origin.x, (int)origin.y);
 	return origin;
 }
@@ -141,37 +144,38 @@
 //	NSLog(@"Scroll View: %f X %f", scrollView.contentSize.width, scrollView.contentSize.height);
 	CGSize contentSize = CGSizeMake(roundf(scrollView.contentSize.width), roundf(scrollView.contentSize.width));
 	
-	int offW = (int)contentSize.width % unitLength;
-	int offH = (int)contentSize.height % unitLength;
+	int offW = (int)contentSize.width % tileSize;
+	int offH = (int)contentSize.height % tileSize;
 	while (offW != 0 || offH != 0) {
-		if (offW / (float)unitLength > 0.5f) {
-			contentSize.width += (unitLength - offW);
-			contentSize.height += (unitLength - offW);
-			offW = (int)contentSize.width % unitLength;
-			offH = (int)contentSize.height % unitLength;
+		if (offW / (float)tileSize > 0.5f) {
+			contentSize.width += (tileSize - offW);
+			contentSize.height += (tileSize - offW);
+			offW = (int)contentSize.width % tileSize;
+			offH = (int)contentSize.height % tileSize;
 		}
 		else {
 			contentSize.width -= offW;
 			contentSize.height -= offW;
-			offW = (int)contentSize.width % unitLength;
-			offH = (int)contentSize.height % unitLength;
+			offW = (int)contentSize.width % tileSize;
+			offH = (int)contentSize.height % tileSize;
 		}
 		
-		if (offH / (float)unitLength > 0.5f) {
-			contentSize.height += (unitLength - offH);
-			contentSize.width += (unitLength - offH);
-			offW = (int)contentSize.width % unitLength;
-			offH = (int)contentSize.height % unitLength;
+		if (offH / (float)tileSize > 0.5f) {
+			contentSize.height += (tileSize - offH);
+			contentSize.width += (tileSize - offH);
+			offW = (int)contentSize.width % tileSize;
+			offH = (int)contentSize.height % tileSize;
 		}
 		else {
 			contentSize.height -= offH;
 			contentSize.width -= offH;
-			offW = (int)contentSize.width % unitLength;
-			offH = (int)contentSize.height % unitLength;
+			offW = (int)contentSize.width % tileSize;
+			offH = (int)contentSize.height % tileSize;
 		}
 	}
 	[scrollView setZoomScale:contentSize.width / (scrollView.contentSize.width / scale) animated:YES];
 	[scrollView setContentSize:contentSize];
 }
+
 
 @end
