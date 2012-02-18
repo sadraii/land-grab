@@ -73,6 +73,8 @@
 
 - (void) reloadToolbarStartingAtIndex:(NSUInteger)index {
 //	NSLog(@"Reloading Toolbar at Index: %i, %i", index, _pieces.count - 1);
+//	dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//	dispatch_sync(concurrentQueue, ^{
 	
 	NSArray* tmp = nil;
 	
@@ -99,17 +101,20 @@
 							   p.frame.size.width, 
 							   p.frame.size.height)];
 		[p setCenter:CGPointMake(p.center.x, self.frame.size.height / 2)];
-		[self addSubview:p];
 		maxX += p.frame.size.width + _offset;
 		[self setContentSize:CGSizeMake(maxX + _offset, self.frame.size.height)];
 		[_pieces addObject:p];
+		[self addSubview:p];
 	}
+//	});
 }
 
 
 #pragma mark - MJPieceDelegate Methods
 
 - (BOOL) addPiece:(MJPiece*)piece {
+//	dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//	dispatch_async(concurrentQueue, ^{
 	if (_pieces == nil) {
 		_pieces = [[NSMutableArray alloc] init];
 	}
@@ -137,6 +142,7 @@
 		[_pieces insertObject:piece atIndex:index];
 	}
 	[self reloadToolbarStartingAtIndex:index];
+//	});
 	return YES;
 }
 

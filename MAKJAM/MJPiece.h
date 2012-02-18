@@ -29,6 +29,8 @@
 @property (weak, nonatomic) MJViewController* parentViewController;
 @property (weak, nonatomic) MJBoard* board;
 @property (weak, nonatomic) MJToolbar* toolbar;
+
+@property (strong, nonatomic) NSArray* transparentTiles;
 @property (nonatomic) CGFloat scale;
 @property (nonatomic) CGSize startingSize;
 

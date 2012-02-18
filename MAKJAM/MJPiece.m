@@ -17,6 +17,7 @@
 @synthesize parentViewController = _parentViewController;
 @synthesize board = _board;
 @synthesize toolbar = _toolbar;
+@synthesize transparentTiles = _transparentTiles;
 @synthesize scale = _scale;
 @synthesize startingSize = _startingSize;
 

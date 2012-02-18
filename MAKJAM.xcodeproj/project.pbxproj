@@ -39,6 +39,7 @@
 		679F382114EACFD3007DDB75 /* Rotate.png in Resources */ = {isa = PBXBuildFile; fileRef = 679F382014EACFD3007DDB75 /* Rotate.png */; };
 		679F382314EAEBEE007DDB75 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 679F382214EAEBEE007DDB75 /* QuartzCore.framework */; };
 		67C8C01514E5F78400CD488E /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67C8C01314E5F78400CD488E /* MainStoryboard_iPhone.storyboard */; };
+		67CD475614ED7F1500DB9ABE /* PieceData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67CD475514ED7F1500DB9ABE /* PieceData.plist */; };
 		67DF1B4C14E7307000649B1E /* GCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DF1B4B14E7307000649B1E /* GCHelper.m */; };
 		67DF1B4E14E7338000649B1E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67DF1B4D14E7338000649B1E /* GameKit.framework */; };
 /* End PBXBuildFile section */
@@ -96,6 +97,7 @@
 		679F382014EACFD3007DDB75 /* Rotate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rotate.png; sourceTree = "<group>"; };
 		679F382214EAEBEE007DDB75 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		67C8C01414E5F78400CD488E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		67CD475514ED7F1500DB9ABE /* PieceData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PieceData.plist; sourceTree = "<group>"; };
 		67DF1B4A14E7307000649B1E /* GCHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCHelper.h; sourceTree = "<group>"; };
 		67DF1B4B14E7307000649B1E /* GCHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCHelper.m; sourceTree = "<group>"; };
 		67DF1B4D14E7338000649B1E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -228,6 +230,7 @@
 				6793E99E14E3504300FABC2F /* right_up.png */,
 				6793E99F14E3504300FABC2F /* up_left.png */,
 				6793E9A014E3504300FABC2F /* up_right.png */,
+				67CD475514ED7F1500DB9ABE /* PieceData.plist */,
 			);
 			name = "Piece Images";
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				670E47A814ECE5C4004461BC /* U.png in Resources */,
 				670E47A914ECE5C4004461BC /* vertical.png in Resources */,
 				670E47AA14ECE5C4004461BC /* W.png in Resources */,
+				67CD475614ED7F1500DB9ABE /* PieceData.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
