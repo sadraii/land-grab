@@ -29,6 +29,7 @@
 @property (weak, nonatomic) MJViewController* parentViewController;
 @property (weak, nonatomic) MJBoard* board;
 @property (weak, nonatomic) MJToolbar* toolbar;
+@property (readwrite) BOOL played;
 
 @property (strong, nonatomic) NSArray* transparentTiles;
 @property (nonatomic) CGFloat scale;
@@ -38,5 +39,6 @@
 - (void) revertToStartingSize;
 - (void) setRotateButtonHidden:(BOOL)hidden;
 - (void) rotatePiece;
+
 
 @end

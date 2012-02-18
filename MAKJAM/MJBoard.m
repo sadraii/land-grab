@@ -8,11 +8,12 @@
 
 
 #import "MJBoard.h"
+#import "MJPlayer.h"
 
 @implementation MJBoard
 
 @synthesize pieces = _pieces;
-@synthesize boardSize;
+@synthesize boardSize = _boardSize;
 @synthesize containerView = _containerView;
 @synthesize tileSize;
 
@@ -20,33 +21,33 @@
     if ((self = [super initWithCoder:aDecoder]) == nil) {
 		return self;
     }
-	boardSize = CGSizeMake(10, 10);
+	_boardSize = CGSizeMake(30, 30);
     tileSize = 64;
 	[super setDelegate:self];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newGame) name:@"NewGame" object:nil];
     return self;
 }
 
 #pragma mark - Board methods
-- (void) clearBoard {
-	_pieces = [[NSMutableArray alloc] init];
-	
-	[_containerView removeFromSuperview];
+- (void) newGame {
+	NSLog(@"Board: received new game notification");
+//	_pieces = [[NSMutableArray alloc] init];
+//	[_containerView removeFromSuperview];
+	[self setContainerView:nil];
 	_containerView = [[MJContainerView alloc] init];
     [_containerView setBoard:self];
-	[_containerView setBackgroundColor:[UIColor whiteColor]];
-	
-	for (MJPiece* p in self.subviews) {
-		[p removeFromSuperview];
-	}
+	[_containerView setBackgroundColor:[UIColor darkGrayColor]];
 	[self addSubview:_containerView];
+	[self setBoardSize:_boardSize];
 }
 
 
 - (void) setBoardSize:(CGSize)size {
-	if(!CGSizeEqualToSize(CGSizeZero, size)) boardSize = size;
-	NSLog(@"Setting board size: (%f X %f)", boardSize.width, boardSize.height);
+	if(!CGSizeEqualToSize(CGSizeZero, size)) _boardSize = size;
+	NSLog(@"Setting board size: (%f X %f)", _boardSize.width, _boardSize.height);
 	
-	[self setContentSize:CGSizeMake((boardSize.width * tileSize), (boardSize.height * tileSize))];
+	[self setContentSize:CGSizeMake((_boardSize.width * tileSize), (_boardSize.height * tileSize))];
 	[_containerView setFrame:CGRectMake(0, 0, self.contentSize.width, self.contentSize.height)];
 	[self setMinimumZoomScale:(self.frame.size.width / _containerView.frame.size.width-50)];
 }
@@ -116,6 +117,7 @@
 
 #pragma mark - MJPieceDelegate Methods
 - (BOOL) addPiece:(MJPiece *)piece {
+	[piece setPlayed:YES];
 	[piece setCenter:[self snapPieceToPoint:piece]];
 	[_containerView addSubview:piece];
 	[_pieces addObject:piece];

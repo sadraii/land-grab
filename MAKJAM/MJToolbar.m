@@ -9,6 +9,7 @@
 #import "MJToolbar.h"
 #import "MJPiece.h"
 #import "MJViewController.h"
+#import "MJPlayer.h"
 
 @implementation MJToolbar
 
@@ -37,6 +38,7 @@
 	_offset = 10;
 	scale = 1;
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newGame) name:@"NewGame" object:nil];
     return self;
 }
 
@@ -50,10 +52,12 @@
 //	frame.size.height = _toolbarHeight;
 //}
 
-- (void) clearToolbar {
+- (void) newGame {
+	NSLog(@"Toolbar: received new game notification");
 	[self setPieces:nil];
 	for (MJPiece* p in self.subviews) {
-		[p removeFromSuperview];
+		[self removePiece:p];
+//		[p removeFromSuperview];
 	}
 //	[self reloadToolbarStartingAtIndex:0];
 }
@@ -104,6 +108,22 @@
 	}
 }
 
+
+- (void) loadPlayersPieces:(MJPlayer*)player {
+	[self clear];
+	for (MJPiece* p in player.pieces) {
+		if (!p.played) {
+			[self addPiece:p];
+		}
+	}
+}
+
+- (void) clear {
+	for (MJPiece* p in _pieces) {
+		[p removeFromSuperview];
+	}
+	_pieces = nil;
+}
 
 #pragma mark - MJPieceDelegate Methods
 

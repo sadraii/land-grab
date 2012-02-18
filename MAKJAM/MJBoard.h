@@ -18,11 +18,12 @@
 }
 
 @property (strong, nonatomic) NSMutableArray* pieces;
+
 @property (readonly)CGSize boardSize;
 @property (strong, nonatomic) MJContainerView* containerView;
 @property (readonly)NSUInteger tileSize;
 
-- (void) clearBoard;
+- (void) newGame;
 - (void) setBoardSize:(CGSize)size;
 - (CGPoint) snapPieceToPoint:(MJPiece*)piece;
 - (void) scalePiece:(MJPiece*)piece;

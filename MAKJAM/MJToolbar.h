@@ -11,6 +11,7 @@
 
 @class MJPiece;
 @class MJViewController;
+@class MJPlayer;
 
 @interface MJToolbar : UIScrollView <UIScrollViewDelegate, MJPieceDelegate> {
 	CGFloat maxX;
@@ -26,8 +27,10 @@
 //@property (nonatomic) CGFloat toolbarHeight;
 @property (strong, nonatomic) NSMutableArray* pieces;
 
-- (void) clearToolbar;
+- (void) newGame;
 - (void) scalePiece:(MJPiece*)piece;
 - (void) reloadToolbarStartingAtIndex:(NSUInteger)index;
+- (void) loadPlayersPieces:(MJPlayer*)player;
+- (void) clear;
 
 @end

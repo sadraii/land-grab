@@ -29,6 +29,7 @@
 		672E62DD14E1A10D00BD0F15 /* MJPiece.m in Sources */ = {isa = PBXBuildFile; fileRef = 672E62DC14E1A10D00BD0F15 /* MJPiece.m */; };
 		672E62E014E1A12B00BD0F15 /* MJToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 672E62DF14E1A12B00BD0F15 /* MJToolbar.m */; };
 		672E62E314E1A13D00BD0F15 /* MJBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 672E62E214E1A13D00BD0F15 /* MJBoard.m */; };
+		6763CA9D14EF57BB00E9A0D2 /* MJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6763CA9C14EF57BB00E9A0D2 /* MJPlayer.m */; };
 		6793E9A114E3504300FABC2F /* down_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 6793E99914E3504300FABC2F /* down_left.png */; };
 		6793E9A214E3504300FABC2F /* down_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 6793E99A14E3504300FABC2F /* down_right.png */; };
 		6793E9A314E3504300FABC2F /* left_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 6793E99B14E3504300FABC2F /* left_down.png */; };
@@ -89,6 +90,8 @@
 		672E62E114E1A13D00BD0F15 /* MJBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJBoard.h; sourceTree = "<group>"; };
 		672E62E214E1A13D00BD0F15 /* MJBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJBoard.m; sourceTree = "<group>"; };
 		672E62E414E1A28F00BD0F15 /* MJPieceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPieceDelegate.h; sourceTree = "<group>"; };
+		6763CA9B14EF57BB00E9A0D2 /* MJPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPlayer.h; sourceTree = "<group>"; };
+		6763CA9C14EF57BB00E9A0D2 /* MJPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPlayer.m; sourceTree = "<group>"; };
 		6793E99914E3504300FABC2F /* down_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down_left.png; sourceTree = "<group>"; };
 		6793E99A14E3504300FABC2F /* down_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down_right.png; sourceTree = "<group>"; };
 		6793E99B14E3504300FABC2F /* left_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_down.png; sourceTree = "<group>"; };
@@ -173,11 +176,13 @@
 				67C8C01314E5F78400CD488E /* MainStoryboard_iPhone.storyboard */,
 				672E62BB14E19ED700BD0F15 /* MJViewController.h */,
 				672E62BC14E19ED700BD0F15 /* MJViewController.m */,
-				679F381314EACA3B007DDB75 /* Piece */,
-				672E62DE14E1A12A00BD0F15 /* MJToolbar.h */,
-				672E62DF14E1A12B00BD0F15 /* MJToolbar.m */,
 				672E62E114E1A13D00BD0F15 /* MJBoard.h */,
 				672E62E214E1A13D00BD0F15 /* MJBoard.m */,
+				672E62DE14E1A12A00BD0F15 /* MJToolbar.h */,
+				672E62DF14E1A12B00BD0F15 /* MJToolbar.m */,
+				6763CA9B14EF57BB00E9A0D2 /* MJPlayer.h */,
+				6763CA9C14EF57BB00E9A0D2 /* MJPlayer.m */,
+				679F381314EACA3B007DDB75 /* Piece */,
 				3FB9C2AF14EDF8B90030EDA2 /* MJContainerView.h */,
 				3FB9C2B014EDF8B90030EDA2 /* MJContainerView.m */,
 				67DF1B4A14E7307000649B1E /* GCHelper.h */,
@@ -380,6 +385,7 @@
 				672E62E314E1A13D00BD0F15 /* MJBoard.m in Sources */,
 				67DF1B4C14E7307000649B1E /* GCHelper.m in Sources */,
 				3FB9C2B114EDF8BA0030EDA2 /* MJContainerView.m in Sources */,
+				6763CA9D14EF57BB00E9A0D2 /* MJPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

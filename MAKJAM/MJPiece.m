@@ -17,6 +17,7 @@
 @synthesize parentViewController = _parentViewController;
 @synthesize board = _board;
 @synthesize toolbar = _toolbar;
+@synthesize played = _played;
 @synthesize transparentTiles = _transparentTiles;
 @synthesize scale = _scale;
 @synthesize startingSize = _startingSize;
@@ -47,6 +48,16 @@
 	_startingSize = self.frame.size;
     return self;
 }
+
+- (void) setTransparentTiles:(NSArray *)transparentTiles {
+	_transparentTiles = nil;
+	NSMutableArray* array = [[NSMutableArray alloc] init];
+	for (NSString* p in transparentTiles) {
+		[array addObject:[NSString stringWithFormat:@"{%@}",p]];
+	}
+	_transparentTiles = [NSArray arrayWithArray:array];
+}
+
 
 - (void) rotatePiece {
 	NSLog(@"Starting Origin: (%f, %f)", self.frame.origin.x, self.frame.origin.y);

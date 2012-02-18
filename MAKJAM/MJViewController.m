@@ -8,20 +8,26 @@
 
 #import "MJViewController.h"
 #import "MJPiece.h"
+#import "MJPlayer.h"
 
 @implementation MJViewController
 
 @synthesize board = _board;
 @synthesize topToolbar = _topToolbar;
 @synthesize resetButton = _resetButton;
+
 @synthesize toolbar = _toolbar;
+@synthesize titleLabel = _titleLabel;
+@synthesize doneButton = _doneButton;
 @synthesize rotateButton = _rotateButton;
+
+@synthesize pieceData = _pieceData;
+@synthesize players = _players;
 
 -(id) initWithCoder:(NSCoder *)aDecoder {
     if ((self = [super initWithCoder:aDecoder]) == nil) {
 		return self;
     }
-    
     return self;
 }
 
@@ -30,7 +36,7 @@
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
-
+/*
 //- (void)setGameState:(GameState)state {
 //    
 //    gameState = state;
@@ -170,16 +176,14 @@
 //        
 //    }    
 //}
-
+*/
 
 - (IBAction)resetButtonPressed:(id)sender {
+	/*
 //	ourRandom = arc4random();
 //	[self setGameState:kGameStateWaitingForMatch];
 //	[[GCHelper sharedInstance] findMatchWithMinPlayers:2 maxPlayers:2 viewController:self delegate:self];
 	
-	
-	[_toolbar clearToolbar];
-	[_board clearBoard];
 	//@"up_left", @"up_right", @"left_down", @"left_up", @"right_down", @"right_up", 
 	NSArray* pieceNames = [[NSArray alloc] initWithObjects:@"Cross", @"down_left", @"down_right", @"H", @"U", @"vertical", @"W", nil];
 	//	float height = _toolbar.frame.size.height - (2.0f * 10);
@@ -195,44 +199,93 @@
 		[piece setDelegate:_toolbar];
 		[piece.delegate addPiece:piece];
 	}
-//	for (int i = 0; i < 1; i++) {
-//		[self loadPieces];
-//	}
-	int boardWidth = 27;
-	int boardHeight = 27;
-	[_board setBoardSize:CGSizeMake(boardWidth, boardHeight)];
+	*/
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"NewGame" object:self];
 }
 
-- (void) loadPieces {
-	NSDictionary *pieces;
+- (IBAction)doneButtonPressed:(id)sender {
+	NSLog(@"Done Button Pressed");
+	[self nextPlayer];
+}
+
+- (void) newGame {
+	NSLog(@"ViewController: received new game notification");
+	if (!_pieceData) [self retrievePieceData];
+	currentPlayer = -1;
+	int numPlayers = 2;
+	for (int i = 0; i < numPlayers; i++) {
+		[self addPlayer];
+	}
+	
+	[self nextPlayer];
+//	[_toolbar resetToolbar];
+//	[_board resetBoard];
+//	int boardWidth = 30;
+//	int boardHeight = 30;
+//	[_board setBoardSize:CGSizeMake(boardWidth, boardHeight)];
+
+}
+
+- (void) addPlayer {
+	NSLog(@"Adding new player");
+	if (!_players) _players = [[NSMutableArray alloc] init];
+	MJPlayer* player = [[MJPlayer alloc] init];
+	player.handle = [NSString stringWithFormat:@"%i", _players.count+1];
+	for (NSString* key in _pieceData) {
+		MJPiece* piece = [[MJPiece alloc] initWithImage:[UIImage imageNamed:key]];
+		[piece setTransparentTiles:[_pieceData objectForKey:key]];
+		[piece setParentViewController:self];
+		[piece setBoard:_board];
+		[piece setToolbar:_toolbar];
+		[piece setPlayed:NO];
+		[player.pieces addObject:piece];
+		NSLog(@"Added Piece: %@", key);
+	}
+	[_players addObject:player];
+}
+
+- (void) nextPlayer {
+	currentPlayer < _players.count - 1 ? ++currentPlayer : (currentPlayer = 0);
+	MJPlayer* player = (MJPlayer*)[_players objectAtIndex:currentPlayer];
+	[_toolbar loadPlayersPieces:player];
+	_titleLabel.text = player.handle;
+	NSLog(@"Current Player: %i", currentPlayer);
+	NSLog(@"Number of pieces on toolbar: %i", player.pieces.count - [player piecesInPlay]);
+}
+
+- (void) retrievePieceData {
 	NSString *errorDesc = nil;
 	NSPropertyListFormat format;
 	NSString *plistPath;
 	plistPath = [[NSBundle mainBundle] pathForResource:@"PieceData" ofType:@"plist"];
 	NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
-	pieces = (NSDictionary *)[NSPropertyListSerialization
+	_pieceData = (NSDictionary *)[NSPropertyListSerialization
 							  propertyListFromData:plistXML
 							  mutabilityOption:NSPropertyListMutableContainersAndLeaves
 							  format:&format
 							  errorDescription:&errorDesc];
-	if (!pieces) {
+	if (!_pieceData) {
 		NSLog(@"Error reading plist: %@, format: %d", errorDesc, format);
+		abort();
 	}
-	
-	for (NSString* key in pieces) {
-		MJPiece* piece = nil;
-		piece = [[MJPiece alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.png", key]]];
-		NSMutableArray* transparentTiles = [[NSMutableArray alloc] init];
-		for (NSString* s in (NSArray*)[pieces objectForKey:key]) {
-			[transparentTiles addObject:[NSString stringWithFormat:@"{%@}", s]];
-		}
-		piece.transparentTiles = transparentTiles;
-		[piece setParentViewController:self];
-		[piece setBoard:_board];
-		[piece setToolbar:_toolbar];
-		[piece setDelegate:_toolbar];
-		[piece.delegate addPiece:piece];
-	}
+	NSLog(@"Retrieved Piece Data");
+//	NSMutableArray* tmp = [[NSMutableArray alloc] init];
+//	for (NSString* key in _pieceData) {
+//		MJPiece* piece = nil;
+//		piece = [[MJPiece alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.png", key]]];
+//		NSMutableArray* transparentTiles = [[NSMutableArray alloc] init];
+//		for (NSString* s in (NSArray*)[_pieceData objectForKey:key]) {
+//			[transparentTiles addObject:[NSString stringWithFormat:@"{%@}", s]];
+//		}
+//		
+//		[piece setTransparentTiles:transparentTiles];
+//		[piece setParentViewController:self];
+//		[piece setBoard:_board];
+//		[piece setToolbar:_toolbar];
+//		[piece setPlayed:NO];
+//		[tmp addObject:piece];
+//		NSLog(@"Added new piece");
+//	}
 }
 
 #pragma mark - MJPieceDelegate Methods
@@ -259,7 +312,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	[self resetButtonPressed:self];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newGame) name:@"NewGame" object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"NewGame" object:self];
 }
 
 - (void)viewDidUnload

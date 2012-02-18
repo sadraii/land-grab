@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "MJPieceDelegate.h"
-#import "GCHelper.h"
+//#import "GCHelper.h"
 
 @class MJPiece;
 @class MJToolbar;
 @class MJBoard;
+@class MJPlayer;
 
 //typedef enum {
 //    kGameStateWaitingForMatch = 0,
@@ -57,20 +58,33 @@
 //    BOOL player1Won;
 //} MessageGameOver;
 
-@interface MJViewController : UIViewController <MJPieceDelegate, GCHelperDelegate> {
+@interface MJViewController : UIViewController <MJPieceDelegate> {// , GCHelperDelegate> {
 //	uint32_t ourRandom;
 //	BOOL receivedRandom;
 //	NSString *otherPlayerID;
 //	BOOL isPlayer1;
 //	GameState gameState;
+	NSInteger currentPlayer;
 }
 @property (strong, nonatomic) IBOutlet MJToolbar* toolbar;
 @property (strong, nonatomic) IBOutlet MJBoard* board;
+
 @property (strong, nonatomic) IBOutlet UIView *topToolbar;
 @property (strong, nonatomic) IBOutlet UIButton *resetButton;
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UIButton *doneButton;
+
+
 @property (strong, nonatomic) IBOutlet UIButton* rotateButton;
+@property (strong, nonatomic) NSDictionary* pieceData;
+@property (strong, nonatomic) NSMutableArray* players;
 
 - (IBAction)resetButtonPressed:(id)sender;
-- (void) loadPieces;
+- (IBAction)doneButtonPressed:(id)sender;
+- (void) retrievePieceData;
+- (void) newGame;
+- (void) nextPlayer;
+- (void) addPlayer;
+//- (void) loadPieces;
 
 @end
