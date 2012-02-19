@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11D50" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11C74" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="2">
     <dependencies>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
@@ -32,7 +32,7 @@
                                             <action selector="resetButtonPressed:" destination="2" eventType="touchUpInside" id="Mqj-gY-7fs"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="MAKJAM" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="R9f-57-9w5">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LandGrab!" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="R9f-57-9w5">
                                         <rect key="frame" x="100" y="13" width="554" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
@@ -99,6 +99,28 @@
     <resources>
         <image name="Rotate.png" width="505" height="509"/>
     </resources>
+    <classes>
+        <class className="MJBoard" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJBoard.h"/>
+        </class>
+        <class className="MJToolbar" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJToolbar.h"/>
+        </class>
+        <class className="MJViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="doneButtonPressed:"/>
+                <relationship kind="action" name="resetButtonPressed:"/>
+                <relationship kind="outlet" name="board" candidateClass="MJBoard"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="resetButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="rotateButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="MJToolbar"/>
+                <relationship kind="outlet" name="topToolbar" candidateClass="UIView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
