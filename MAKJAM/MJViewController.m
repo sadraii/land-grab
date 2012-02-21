@@ -15,7 +15,7 @@
 @synthesize board = _board;
 @synthesize topToolbar = _topToolbar;
 @synthesize resetButton = _resetButton;
-
+@synthesize volume = _volume;
 @synthesize toolbar = _toolbar;
 @synthesize titleLabel = _titleLabel;
 @synthesize doneButton = _doneButton;
@@ -320,6 +320,7 @@
 {
 	[self setTopToolbar:nil];
 	[self setResetButton:nil];
+    [self setVolume:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

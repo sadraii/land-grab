@@ -21,6 +21,7 @@
 @synthesize transparentTiles = _transparentTiles;
 @synthesize scale = _scale;
 @synthesize startingSize = _startingSize;
+@synthesize volume = _volume;
 
 -(id) initWithImage:(UIImage *)image {
     if ((self = [super initWithImage:image]) == nil) {
@@ -35,6 +36,7 @@
 	currentRotation = 0;
 	_scale = 1;
 	_startingSize = self.image.size;
+    _volume = [_transparentTiles count]*64;
     return self;
 }
 
