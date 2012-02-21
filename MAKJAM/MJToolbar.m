@@ -18,17 +18,10 @@
 @synthesize offset = _offset;
 @synthesize pieces = _pieces;
 
-//-(id) initWithFrame:(CGRect)frame {
-//    if ((self = [super initWithFrame:frame]) == nil) {
-//		return self;
-//    }
-//	
-//	maxX = 0;
-//	_offset = 20;
-//	_pieces = [[NSMutableArray alloc] init];
-//    return self;
-//}
-
+/*
+ Called by the storyboard
+ Adds ourself as an observer to all New Game notifications and calls the method newGame on Notification post
+ */
 -(id) initWithCoder:(NSCoder *)aDecoder {
     if ((self = [super initWithCoder:aDecoder]) == nil) {
 		return self;
@@ -42,27 +35,26 @@
     return self;
 }
 
-//- (void) setToolbarHeight:(CGFloat)toolbarHeight {
-//	NSLog(@"Chaning toolbar height");
-//	CGRect frame = self.frame;
-//	if (frame.origin.y) {
-//		frame.origin.y += (_toolbarHeight - toolbarHeight);
-//	}
-//	_toolbarHeight = toolbarHeight;
-//	frame.size.height = _toolbarHeight;
-//}
-
+/*
+ The method called after receiving a New Game notification
+ Calls the clear method
+ */
 - (void) newGame {
 	NSLog(@"Toolbar: received new game notification");
-	[self setPieces:nil];
-	for (MJPiece* p in self.subviews) {
-		[self removePiece:p];
-//		[p removeFromSuperview];
-	}
-//	[self reloadToolbarStartingAtIndex:0];
+//	[self setPieces:nil];
+//	for (MJPiece* p in self.subviews) {
+//		[self removePiece:p];
+//	}
+	[self clear];
 }
 
+/*
+ Scales the piece to the size needed to fit in the toolbar
+ First it needs to revert the piece to its original starting size
+ The pieces height will be the height of the toolbar with an offset at the top and the bottom (specified in the iVar offset)
+ */
 - (void) scalePiece:(MJPiece*)piece {
+	[piece revertToStartingSize];
 	pieceHeight = self.frame.size.height - (2.0f * _offset);
 
 	if (pieceHeight / piece.frame.size.height != scale) {
@@ -75,6 +67,10 @@
 							   pieceHeight)];
 }
 
+/*
+ Loops over all pieces after the index parameter and removes the piece then adds the piece back to the toolbar.
+ This is needed after we remove or add a piece to the toolbar so that it can refresh itsself and shift the pieces accordingly.
+ */
 - (void) reloadToolbarStartingAtIndex:(NSUInteger)index {
 	NSArray* tmp = nil;
 	
@@ -108,7 +104,11 @@
 	}
 }
 
-
+/*
+ Calls the clear method
+ Then adds all of the players pieces to the toolbar
+ It only adds pieces that are not on the board.
+ */
 - (void) loadPlayersPieces:(MJPlayer*)player {
 	[self clear];
 	for (MJPiece* p in player.pieces) {
@@ -118,6 +118,11 @@
 	}
 }
 
+/*
+ All pieces in the toolbar call remove from superview
+ Sets the pieces array to nil
+ Ammounts to a blank toolbar
+ */
 - (void) clear {
 	for (MJPiece* p in _pieces) {
 		[p removeFromSuperview];
@@ -127,12 +132,15 @@
 
 #pragma mark - MJPieceDelegate Methods
 
+/*
+ Loops over the pieces in the pieces array and finds the location to add the new piece
+ It finds the new location by looking at the inserting pieces center and finds the first piece that has a center greater than it.
+ Calls reloadToolbarStartingAtIndex with the index we inserted the piece at.
+ */
 - (BOOL) addPiece:(MJPiece*)piece {
 	if (_pieces == nil) {
 		_pieces = [[NSMutableArray alloc] init];
 	}
-	
-	[piece revertToStartingSize];
 	[self scalePiece:piece];
 	
 	int index= 0;
@@ -146,18 +154,21 @@
 	}
 	if (index >= (int)_pieces.count) {
 		[_pieces addObject:piece];
-//		NSLog(@"Added Piece at end: %i", [_pieces indexOfObject:piece]);
 		index = _pieces.count-1;
-		//		[self addSubview:piece];
 	}
 	else {
-//		NSLog(@"Inserting Piece at index: %i of %i", index, _pieces.count);
 		[_pieces insertObject:piece atIndex:index];
 	}
 	[self reloadToolbarStartingAtIndex:index];
 	return YES;
 }
 
+/*
+ Checks to see if the pieces array contains the piece we are trying to remove
+ Stores the index of the piece we want to remove
+ Removes the piece from the pieces array
+ Reloads the toolbar starting at index of the removing piece.
+ */
 - (BOOL) removePiece:(MJPiece*)piece {
 	if (![_pieces containsObject:piece]) return NO;
 	
@@ -170,6 +181,10 @@
 
 #pragma mark - UIScrollViewDelegate
 
+/*
+ Does not do anyting as of yet
+ it is called when the user starts scrolling(left or right)
+ */
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
 //	NSLog(@"Will Begin Dragging");
 }

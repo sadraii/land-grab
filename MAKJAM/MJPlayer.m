@@ -25,14 +25,15 @@
     return self;
 }
 
+
+/*
+ Returns the number of pieces that are NOT in the toolbar, or the number of pieces that ARE on the board.
+ */
 - (NSUInteger) piecesInPlay {
 	NSUInteger n = 0;
 	for (MJPiece* p in _pieces) {
 		if (p.played) {
 			n++;
-		}
-		else {
-			NSLog(@"Piece Not in play");
 		}
 	}
 	return n;

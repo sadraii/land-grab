@@ -36,6 +36,10 @@
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
+
+/*
+ Code needed for GameCenter
+ */
 /*
 //- (void)setGameState:(GameState)state {
 //    
@@ -203,29 +207,37 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"NewGame" object:self];
 }
 
+/*
+ Calls the next player method
+ */
 - (IBAction)doneButtonPressed:(id)sender {
 	NSLog(@"Done Button Pressed");
 	[self nextPlayer];
 }
 
+/*
+ Called when the NewGame notification is posted
+ Sets the currentPlayer to -1 so that when next player is called it will start off at player 0
+ Clears the player array
+ adds players into the player array
+ Calls next player
+ */
 - (void) newGame {
 	NSLog(@"ViewController: received new game notification");
 	if (!_pieceData) [self retrievePieceData];
 	currentPlayer = -1;
 	int numPlayers = 2;
+	[self setPlayers:nil];
 	for (int i = 0; i < numPlayers; i++) {
 		[self addPlayer];
 	}
 	
 	[self nextPlayer];
-//	[_toolbar resetToolbar];
-//	[_board resetBoard];
-//	int boardWidth = 30;
-//	int boardHeight = 30;
-//	[_board setBoardSize:CGSizeMake(boardWidth, boardHeight)];
-
 }
 
+/*
+ Initializes a new player and adds it to the Player array
+ */
 - (void) addPlayer {
 	NSLog(@"Adding new player");
 	if (!_players) _players = [[NSMutableArray alloc] init];
@@ -244,6 +256,9 @@
 	[_players addObject:player];
 }
 
+/*
+ Loads the next player
+ */
 - (void) nextPlayer {
 	currentPlayer < _players.count - 1 ? ++currentPlayer : (currentPlayer = 0);
 	MJPlayer* player = (MJPlayer*)[_players objectAtIndex:currentPlayer];
@@ -253,6 +268,11 @@
 	NSLog(@"Number of pieces on toolbar: %i", player.pieces.count - [player piecesInPlay]);
 }
 
+/*
+ Loads the piece data from the plist file
+ The file contains the image name and the coordinates of the transparent tiles
+ This information is stored in the pieceData dictionary
+ */
 - (void) retrievePieceData {
 	NSString *errorDesc = nil;
 	NSPropertyListFormat format;

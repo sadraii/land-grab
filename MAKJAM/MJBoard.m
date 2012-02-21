@@ -17,6 +17,12 @@
 @synthesize containerView = _containerView;
 @synthesize tileSize;
 
+#pragma mark - Board methods
+/*
+ The board size is set
+ We specify what tile size we have used to design the tiles (default 64px)
+ Add ourself as an observer to the NewGame notification, and will call the newGame method on any posts of this notificaiton.
+ */
 -(id) initWithCoder:(NSCoder *)aDecoder {
     if ((self = [super initWithCoder:aDecoder]) == nil) {
 		return self;
@@ -29,7 +35,11 @@
     return self;
 }
 
-#pragma mark - Board methods
+/*
+ Sets the container view to nil
+ Sets up the container view
+ Set the board size.
+ */
 - (void) newGame {
 	NSLog(@"Board: received new game notification");
 //	_pieces = [[NSMutableArray alloc] init];
@@ -42,7 +52,10 @@
 	[self setBoardSize:_boardSize];
 }
 
-
+/*
+ Sets the board size reletative to the tile size.
+ You should pass this a cgsize with the number of tiles for width and height instead of number of points.
+ */
 - (void) setBoardSize:(CGSize)size {
 	if(!CGSizeEqualToSize(CGSizeZero, size)) _boardSize = size;
 	NSLog(@"Setting board size: (%f X %f)", _boardSize.width, _boardSize.height);
@@ -52,16 +65,31 @@
 	[self setMinimumZoomScale:(self.frame.size.width / _containerView.frame.size.width-50)];
 }
 
+/*
+ Scales the piece back the original starting size
+ then scales it down to the current board zoom scale
+ 
+ THIS IS NOT USED TO ADD PIECE TO THE BOARD
+ PIECES MUST BE THE ORIGINAL STARTING SIZE WHEN ADDING TO THE BOARD.
+ 
+ Pieces center stays the same as the starting parameter piece
+ */
 - (void) scalePiece:(MJPiece*)piece {
 	CGPoint originalCenter = piece.center;
 	[piece revertToStartingSize];
-//	[piece setFrame:CGRectMake(piece.frame.origin.x, piece.frame.origin.y, piece.startingSize.width * self.zoomScale, piece.startingSize.height * self.zoomScale)];
-//	[piece setFrame:CGRectMake(originalCenter.x, originalCenter.y, piece.frame.size.width * self.zoomScale, piece.frame.size.height * self.zoomScale)];
 	[piece setFrame:CGRectMake(originalCenter.x, originalCenter.y, piece.frame.size.width * self.zoomScale, piece.frame.size.height * self.zoomScale)];
 	[piece setCenter:originalCenter];
 	piece.scale = self.zoomScale;
 }
 
+/*
+ Finds the closest tile origin to the origin of the piece.
+ Can be:
+ Top Left
+ Top Right
+ Bottom Left
+ Bottom Right
+ */
 -(CGPoint) snapPieceToPoint:(MJPiece*)piece {
 	[piece revertToStartingSize];
 	/*
@@ -106,6 +134,11 @@
 	return newCenter;
 }
 
+
+/*
+ Returns a coordinate that is relative to our tile size.
+ E.G. a piece has an origin at point (64,64) it will be at coordinate (1,1).
+ */
 - (CGPoint) originOfPiece:(MJPiece*)piece {
 	CGPoint origin = piece.frame.origin;
 	origin.x /= tileSize;
@@ -116,6 +149,13 @@
 
 
 #pragma mark - MJPieceDelegate Methods
+
+/*
+ Sets the pieces played flag to YES
+ snaps piece to point
+ Adds piece to the containerview
+ Finds the origin of the piece relative to tile size
+ */
 - (BOOL) addPiece:(MJPiece *)piece {
 	[piece setPlayed:YES];
 	[piece setCenter:[self snapPieceToPoint:piece]];
@@ -125,25 +165,31 @@
 	return YES;
 }
 
+/*
+ Removes the piece from the pieces array.
+ */
 - (BOOL) removePiece:(MJPiece *)piece {
 	if (![_pieces containsObject:piece]) return NO;
-	
-//	int index = [_pieces indexOfObject:piece];
-//	NSLog(@"Removing board piece at index: %i", index);
 	[_pieces removeObject:piece];
-	
 	return YES;
 }
 
 #pragma mark - UISCrollViewDelegate Methods
 
+/*
+ Sets the containerview as the view we want to be zoomable
+ */
 - (UIView*) viewForZoomingInScrollView:(UIScrollView *)scrollView {
 	return _containerView;
 }
 
+/*
+ Attempts to round the zoom scale to a scale that will work nicley with the tile size
+ If it does not work nicley it will mess up the snap the piece method.
+ Still needs some fine tuning
+ */
 - (void) scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
-//	NSLog(@"Zoom scale: %f", scale);
-//	NSLog(@"Scroll View: %f X %f", scrollView.contentSize.width, scrollView.contentSize.height);
+
 	CGSize contentSize = CGSizeMake(roundf(scrollView.contentSize.width), roundf(scrollView.contentSize.width));
 	
 	int offW = (int)contentSize.width % tileSize;

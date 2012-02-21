@@ -23,7 +23,7 @@
 	CGFloat scale;
 	CGSize startingSize;
 	NSInteger currentRotation;
-    NSUInteger volume;
+    NSUInteger area;
 }
 
 @property (strong, nonatomic) id <MJPieceDelegate> delegate;
@@ -31,7 +31,7 @@
 @property (weak, nonatomic) MJBoard* board;
 @property (weak, nonatomic) MJToolbar* toolbar;
 @property (readwrite) BOOL played;
-@property (nonatomic) NSUInteger volume;
+@property (nonatomic) NSUInteger area;
 @property (strong, nonatomic) NSArray* transparentTiles;
 @property (nonatomic) CGFloat scale;
 @property (nonatomic) CGSize startingSize;
