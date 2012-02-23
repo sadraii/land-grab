@@ -15,6 +15,7 @@
 @implementation MJPiece
 @synthesize delegate = _delegate;
 @synthesize parentViewController = _parentViewController;
+@synthesize player = _player;
 @synthesize board = _board;
 @synthesize toolbar = _toolbar;
 @synthesize played = _played;
@@ -57,6 +58,8 @@
 	}
 	_transparentTiles = [NSArray arrayWithArray:array];
 	_area = ((self.frame.size.width * self.frame.size.height) / pow(2, _board.tileSize)) - [_transparentTiles count];
+	NSLog(@"Tile Size: %i", _board.tileSize);
+	NSLog(@"Piece Area: %i", _area);
 }
 
 /*
@@ -150,7 +153,7 @@
  Keeps the origin the same as before the revert to original size.
  */
 - (void) revertToStartingSize {
-	currentRotation % 2 ? NSLog(@"Rotation is odd") : NSLog(@"Rotation is even");
+//	currentRotation % 2 ? NSLog(@"Rotation is odd") : NSLog(@"Rotation is even");
 	currentRotation % 2 ? [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, _startingSize.height, _startingSize.width)] : [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, _startingSize.width, _startingSize.height)]; 
 }
 

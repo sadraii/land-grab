@@ -225,6 +225,7 @@
 - (void) newGame {
 	NSLog(@"ViewController: received new game notification");
 	if (!_pieceData) [self retrievePieceData];
+	[_board setBoardSize:CGSizeMake(30, 30)];
 	currentPlayer = -1;
 	int numPlayers = 2;
 	[self setPlayers:nil];
@@ -250,6 +251,7 @@
 		[piece setBoard:_board];
 		[piece setToolbar:_toolbar];
 		[piece setPlayed:NO];
+		[piece setPlayer:player];
 		[player.pieces addObject:piece];
 		NSLog(@"Added Piece: %@", key);
 	}

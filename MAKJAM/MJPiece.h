@@ -28,6 +28,7 @@
 
 @property (strong, nonatomic) id <MJPieceDelegate> delegate;
 @property (weak, nonatomic) MJViewController* parentViewController;
+@property (weak, nonatomic) MJPlayer* player;
 @property (weak, nonatomic) MJBoard* board;
 @property (weak, nonatomic) MJToolbar* toolbar;
 @property (readwrite) BOOL played;

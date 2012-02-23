@@ -47,7 +47,7 @@
 	[self setContainerView:nil];
 	_containerView = [[MJContainerView alloc] init];
     [_containerView setBoard:self];
-	[_containerView setBackgroundColor:[UIColor blackColor]];
+	[_containerView setBackgroundColor:[UIColor darkGrayColor]];
 	[self addSubview:_containerView];
 	[self setBoardSize:_boardSize];
 }
