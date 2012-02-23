@@ -14,5 +14,4 @@
 @required
 - (BOOL) addPiece:(MJPiece*)piece;
 - (BOOL) removePiece:(MJPiece*)piece;
-
 @end

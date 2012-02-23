@@ -2,45 +2,33 @@
 //  MJPiece.h
 //  MAKJAM
 //
-//  Created by Andrew Huss on 2/7/12.
+//  Created by Andrew Huss on 2/23/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "MJTileDelegate.h"
 #import "MJPieceDelegate.h"
-#import "MJToolbar.h"
-#import "MJBoard.h"
 
-@class MJViewController;
-@class MJToolbar;
-@class MJBoard;
+@class MJTile;
 
-@interface MJPiece : UIImageView {
-	CGPoint currentPosition;
-	CGPoint startingCenter;
-	UIView* startingView;
-	CGPoint distanceFromCenter;
-	CGFloat scale;
-	CGSize startingSize;
-	NSInteger currentRotation;
-    NSUInteger area;
+@interface MJPiece : NSObject <MJTileDelegate> {
+	CGPoint coordinate;
+	NSMutableArray* tiles;
+	NSInteger rotation;
+	UIImage* image;
+	NSString* name;
 }
 
 @property (strong, nonatomic) id <MJPieceDelegate> delegate;
-@property (weak, nonatomic) MJViewController* parentViewController;
-@property (weak, nonatomic) MJPlayer* player;
-@property (weak, nonatomic) MJBoard* board;
-@property (weak, nonatomic) MJToolbar* toolbar;
-@property (readwrite) BOOL played;
-@property (nonatomic) NSUInteger area;
-@property (strong, nonatomic) NSArray* transparentTiles;
-@property (nonatomic) CGFloat scale;
-@property (nonatomic) CGSize startingSize;
+@property (readwrite) CGPoint coordinate;
+@property (strong, nonatomic) NSMutableArray* tiles;
+@property (readwrite) NSInteger rotation;
+@property (strong, nonatomic) UIImage* image;
+@property (strong, nonatomic) NSString* name;
 
-- (CGPoint) centerFromPoint:(CGPoint)point;
-- (void) revertToStartingSize;
-- (void) setRotateButtonHidden:(BOOL)hidden;
-- (void) rotatePiece;
-
+- (id) initWithCoordinate:(CGPoint) aCoordinate tiles:(NSArray*)aTiles image:(UIImage*)aImage andName:(NSString*)aName;
+- (void) setOrigin:(CGPoint)origin;
+- (void) moveTiles:(CGSize)distance;
 
 @end
