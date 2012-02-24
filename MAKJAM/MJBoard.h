@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "MJPieceDelegate.h"
-#import "MJPiece.h"
-#import "MJContainerView.h"
+
+@class MJPiece;
+@class MJContainerView;
+@class MJBoard;
+@class MJPlayer;
 
 @interface MJBoard : UIScrollView <MJPieceDelegate, UIScrollViewDelegate> {
 	CGSize boardSize;

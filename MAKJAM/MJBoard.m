@@ -6,7 +6,8 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-
+#import "MJPiece.h"
+#import "MJContainerView.h"
 #import "MJBoard.h"
 #import "MJPlayer.h"
 
@@ -75,11 +76,15 @@
  Pieces center stays the same as the starting parameter piece
  */
 - (void) scalePiece:(MJPiece*)piece {
-	CGPoint originalCenter = piece.center;
-	[piece revertToStartingSize];
-	[piece setFrame:CGRectMake(originalCenter.x, originalCenter.y, piece.frame.size.width * self.zoomScale, piece.frame.size.height * self.zoomScale)];
-	[piece setCenter:originalCenter];
+//	CGPoint originalCenter = piece.center;
+//	[piece revertToStartingSize];
+//	[piece setFrame:CGRectMake(originalCenter.x, originalCenter.y, piece.frame.size.width * self.zoomScale, piece.frame.size.height * self.zoomScale)];
+//	[piece setCenter:originalCenter];
 	piece.scale = self.zoomScale;
+
+	CGPoint startingOrigin = piece.origin;
+	[piece setScale:self.zoomScale];
+	
 }
 
 /*
@@ -90,49 +95,51 @@
  Bottom Left
  Bottom Right
  */
--(CGPoint) snapPieceToPoint:(MJPiece*)piece {
-	[piece revertToStartingSize];
-	/*
-	 The problem causing the whitespace was a small fraction added on to the pieces origin.
-	 By rounding the origin to a whole number it fixes the whitespace problem.
-	 YAY!!!!
-	 */
-	[piece setFrame:CGRectMake(roundf(piece.frame.origin.x), roundf(piece.frame.origin.y), piece.frame.size.width, piece.frame.size.height)];
-	
-	int offX = ((NSUInteger)piece.frame.origin.x % tileSize);
-	int offY = ((NSUInteger)piece.frame.origin.y % tileSize);
-//	NSLog(@"Off X&Y: (%i, %i)", offX, offY);
-	
-	CGPoint newCenter = piece.center;
-	
-	if ((offX / (float)tileSize) > 0.5f) 
-		newCenter.x += (tileSize - offX);
-	else 
-		newCenter.x -= offX;
-	
-	if ((offY / (float)tileSize) > 0.5f) 
-		newCenter.y += (tileSize - offY);
-	else 
-		newCenter.y -= offY;
-	
-	
-	
-	if (newCenter.x - (piece.frame.size.width / 2) < 0) {
-		newCenter.x = piece.frame.size.width / 2;
-	}
-	else if (newCenter.x + (piece.frame.size.width / 2) > _containerView.bounds.size.width) {
-		newCenter.x = _containerView.bounds.size.width - (piece.frame.size.width / 2);
-	}
-	
-	if (newCenter.y - (piece.frame.size.height / 2) < 0) {
-		newCenter.y = piece.frame.size.height / 2;
-	}
-	else if (newCenter.y + (piece.frame.size.width / 2) > _containerView.bounds.size.height) {
-		newCenter.y = _containerView.bounds.size.height - (piece.frame.size.height / 2);
-	}
-	
-	return newCenter;
-}
+//-(CGPoint) snapPieceToPoint:(MJPiece*)piece {
+//	[piece snapToPoint];
+//	return CGPointZero;//FIX
+//	[piece revertToStartingSize];
+//	/*
+//	 The problem causing the whitespace was a small fraction added on to the pieces origin.
+//	 By rounding the origin to a whole number it fixes the whitespace problem.
+//	 YAY!!!!
+//	 */
+//	[piece setFrame:CGRectMake(roundf(piece.frame.origin.x), roundf(piece.frame.origin.y), piece.frame.size.width, piece.frame.size.height)];
+//	
+//	int offX = ((NSUInteger)piece.frame.origin.x % tileSize);
+//	int offY = ((NSUInteger)piece.frame.origin.y % tileSize);
+////	NSLog(@"Off X&Y: (%i, %i)", offX, offY);
+//	
+//	CGPoint newCenter = piece.center;
+//	
+//	if ((offX / (float)tileSize) > 0.5f) 
+//		newCenter.x += (tileSize - offX);
+//	else 
+//		newCenter.x -= offX;
+//	
+//	if ((offY / (float)tileSize) > 0.5f) 
+//		newCenter.y += (tileSize - offY);
+//	else 
+//		newCenter.y -= offY;
+//	
+//	
+//	
+//	if (newCenter.x - (piece.frame.size.width / 2) < 0) {
+//		newCenter.x = piece.frame.size.width / 2;
+//	}
+//	else if (newCenter.x + (piece.frame.size.width / 2) > _containerView.bounds.size.width) {
+//		newCenter.x = _containerView.bounds.size.width - (piece.frame.size.width / 2);
+//	}
+//	
+//	if (newCenter.y - (piece.frame.size.height / 2) < 0) {
+//		newCenter.y = piece.frame.size.height / 2;
+//	}
+//	else if (newCenter.y + (piece.frame.size.width / 2) > _containerView.bounds.size.height) {
+//		newCenter.y = _containerView.bounds.size.height - (piece.frame.size.height / 2);
+//	}
+//	
+//	return newCenter;
+//}
 
 
 /*
@@ -140,7 +147,7 @@
  E.G. a piece has an origin at point (64,64) it will be at coordinate (1,1).
  */
 - (CGPoint) originOfPiece:(MJPiece*)piece {
-	CGPoint origin = piece.frame.origin;
+	CGPoint origin = piece.origin;
 	origin.x /= tileSize;
 	origin.y /= tileSize;
 	NSLog(@"Piece Coordinates: (%i, %i)", (int)origin.x, (int)origin.y);
@@ -157,9 +164,12 @@
  Finds the origin of the piece relative to tile size
  */
 - (BOOL) addPiece:(MJPiece *)piece {
-	[piece setPlayed:YES];
-	[piece setCenter:[self snapPieceToPoint:piece]];
-	[_containerView addSubview:piece];
+	[piece revertToStartingSize];
+	[piece setIsPlayed:YES];
+	[piece snapToPoint];
+	[piece addAsSubviewToView:_containerView];
+//	[piece setCenter:[self snapPieceToPoint:piece]];
+//	[_containerView addSubview:piece];
 	[_pieces addObject:piece];
 	[self originOfPiece:piece];
 	return YES;
@@ -190,39 +200,39 @@
  */
 - (void) scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
 
-	CGSize contentSize = CGSizeMake(roundf(scrollView.contentSize.width), roundf(scrollView.contentSize.width));
-	
-	int offW = (int)contentSize.width % tileSize;
-	int offH = (int)contentSize.height % tileSize;
-	while (offW != 0 || offH != 0) {
-		if (offW / (float)tileSize > 0.5f) {
-			contentSize.width += (tileSize - offW);
-			contentSize.height += (tileSize - offW);
-			offW = (int)contentSize.width % tileSize;
-			offH = (int)contentSize.height % tileSize;
-		}
-		else {
-			contentSize.width -= offW;
-			contentSize.height -= offW;
-			offW = (int)contentSize.width % tileSize;
-			offH = (int)contentSize.height % tileSize;
-		}
-		
-		if (offH / (float)tileSize > 0.5f) {
-			contentSize.height += (tileSize - offH);
-			contentSize.width += (tileSize - offH);
-			offW = (int)contentSize.width % tileSize;
-			offH = (int)contentSize.height % tileSize;
-		}
-		else {
-			contentSize.height -= offH;
-			contentSize.width -= offH;
-			offW = (int)contentSize.width % tileSize;
-			offH = (int)contentSize.height % tileSize;
-		}
-	}
-	[scrollView setZoomScale:contentSize.width / (scrollView.contentSize.width / scale) animated:YES];
-	[scrollView setContentSize:contentSize];
+//	CGSize contentSize = CGSizeMake(roundf(scrollView.contentSize.width), roundf(scrollView.contentSize.width));
+//	
+//	int offW = (int)contentSize.width % tileSize;
+//	int offH = (int)contentSize.height % tileSize;
+//	while (offW != 0 || offH != 0) {
+//		if (offW / (float)tileSize > 0.5f) {
+//			contentSize.width += (tileSize - offW);
+//			contentSize.height += (tileSize - offW);
+//			offW = (int)contentSize.width % tileSize;
+//			offH = (int)contentSize.height % tileSize;
+//		}
+//		else {
+//			contentSize.width -= offW;
+//			contentSize.height -= offW;
+//			offW = (int)contentSize.width % tileSize;
+//			offH = (int)contentSize.height % tileSize;
+//		}
+//		
+//		if (offH / (float)tileSize > 0.5f) {
+//			contentSize.height += (tileSize - offH);
+//			contentSize.width += (tileSize - offH);
+//			offW = (int)contentSize.width % tileSize;
+//			offH = (int)contentSize.height % tileSize;
+//		}
+//		else {
+//			contentSize.height -= offH;
+//			contentSize.width -= offH;
+//			offW = (int)contentSize.width % tileSize;
+//			offH = (int)contentSize.height % tileSize;
+//		}
+//	}
+//	[scrollView setZoomScale:contentSize.width / (scrollView.contentSize.width / scale) animated:YES];
+//	[scrollView setContentSize:contentSize];
 }
 
 

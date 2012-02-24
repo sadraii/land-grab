@@ -53,56 +53,56 @@
  First it needs to revert the piece to its original starting size
  The pieces height will be the height of the toolbar with an offset at the top and the bottom (specified in the iVar offset)
  */
-- (void) scalePiece:(MJPiece*)piece {
-	[piece revertToStartingSize];
-	pieceHeight = self.frame.size.height - (2.0f * _offset);
-
-	if (pieceHeight / piece.frame.size.height != scale) {
-		scale = pieceHeight / piece.frame.size.height;
-		piece.scale = scale;
-	}
-	[piece setFrame:CGRectMake(piece.frame.origin.x, 
-							   _offset, 
-							   piece.frame.size.width * scale, 
-							   pieceHeight)];
-}
+//- (void) scalePiece:(MJPiece*)piece {
+//	[piece revertToStartingSize];
+//	pieceHeight = self.frame.size.height - (2.0f * _offset);
+//
+//	if (pieceHeight / piece.frame.size.height != scale) {
+//		scale = pieceHeight / piece.frame.size.height;
+//		piece.scale = scale;
+//	}
+//	[piece setFrame:CGRectMake(piece.frame.origin.x, 
+//							   _offset, 
+//							   piece.frame.size.width * scale, 
+//							   pieceHeight)];
+//}
 
 /*
  Loops over all pieces after the index parameter and removes the piece then adds the piece back to the toolbar.
  This is needed after we remove or add a piece to the toolbar so that it can refresh itsself and shift the pieces accordingly.
  */
-- (void) reloadToolbarStartingAtIndex:(NSUInteger)index {
-	NSArray* tmp = nil;
-	
-	int length = _pieces.count - index;//min length is one
-	
-	tmp = [NSArray arrayWithArray:
-		   [_pieces objectsAtIndexes:
-			[NSIndexSet indexSetWithIndexesInRange:
-			 NSMakeRange(index, length)]]];//min array is the last object
-	[_pieces removeObjectsInArray:tmp];
-	
-	MJPiece* lastObj = _pieces.lastObject;
-	if (lastObj) {
-		maxX = lastObj.frame.origin.x + lastObj.frame.size.width;
-		[self setContentSize:CGSizeMake(maxX + _offset, self.frame.size.height)];
-	}
-	else {
-		maxX = 0;
-	}
-	for (MJPiece* p in tmp) {
-		[p removeFromSuperview];
-		[p setFrame:CGRectMake(maxX + _offset, 
-							   p.frame.origin.y, 
-							   p.frame.size.width, 
-							   p.frame.size.height)];
-		[p setCenter:CGPointMake(p.center.x, self.frame.size.height / 2)];
-		maxX += p.frame.size.width + _offset;
-		[self setContentSize:CGSizeMake(maxX + _offset, self.frame.size.height)];
-		[_pieces addObject:p];
-		[self addSubview:p];
-	}
-}
+//- (void) reloadToolbarStartingAtIndex:(NSUInteger)index {
+//	NSArray* tmp = nil;
+//	
+//	int length = _pieces.count - index;//min length is one
+//	
+//	tmp = [NSArray arrayWithArray:
+//		   [_pieces objectsAtIndexes:
+//			[NSIndexSet indexSetWithIndexesInRange:
+//			 NSMakeRange(index, length)]]];//min array is the last object
+//	[_pieces removeObjectsInArray:tmp];
+//	
+//	MJPiece* lastObj = _pieces.lastObject;
+//	if (lastObj) {
+//		maxX = lastObj.frame.origin.x + lastObj.frame.size.width;
+//		[self setContentSize:CGSizeMake(maxX + _offset, self.frame.size.height)];
+//	}
+//	else {
+//		maxX = 0;
+//	}
+//	for (MJPiece* p in tmp) {
+//		[p removeFromSuperview];
+//		[p setFrame:CGRectMake(maxX + _offset, 
+//							   p.frame.origin.y, 
+//							   p.frame.size.width, 
+//							   p.frame.size.height)];
+//		[p setCenter:CGPointMake(p.center.x, self.frame.size.height / 2)];
+//		maxX += p.frame.size.width + _offset;
+//		[self setContentSize:CGSizeMake(maxX + _offset, self.frame.size.height)];
+//		[_pieces addObject:p];
+//		[self addSubview:p];
+//	}
+//}
 
 /*
  Calls the clear method
@@ -110,11 +110,8 @@
  It only adds pieces that are not on the board.
  */
 - (void) loadPlayersPieces:(MJPlayer*)player {
-	[self clear];
 	for (MJPiece* p in player.pieces) {
-		if (!p.played) {
-			[self addPiece:p];
-		}
+		[self addPiece:p];
 	}
 }
 
@@ -138,18 +135,21 @@
  Calls reloadToolbarStartingAtIndex with the index we inserted the piece at.
  */
 - (BOOL) addPiece:(MJPiece*)piece {
-	if (_pieces == nil) {
-		_pieces = [[NSMutableArray alloc] init];
+	if (piece.isPlayed) {
+		return NO;
 	}
-	[self scalePiece:piece];
-	
+	UIView* view = [[UIView alloc] initWithFrame:CGRectMake(offset, offset, piece.size.width, piece.size.height)];
+	[piece setScale:piece.size.height / pieceHeight];
+	[piece addAsSubviewToView:view];
+	[self addSubview:view];
+	NSLog(@"Toolbar subview count: %i", self.subviews.count);
 	int index= 0;
 	
 	/*
 	 Changing the if condition inside of the for loop to check instead of piece.center, to check piece.lastPosition(of the finger) then the piece would be inserted into the toolbar at the users finger instead of the piece center. You may need to make lastPosition a property in MJPiece.
 	 */
 	for (MJPiece* p in _pieces) {
-		if (piece.center.x <= p.center.x) break;
+		if (piece.origin.x <= p.origin.x) break;
 		++index;
 	}
 	if (index >= (int)_pieces.count) {
@@ -161,6 +161,29 @@
 	}
 	[self reloadToolbarStartingAtIndex:index];
 	return YES;
+//	if (_pieces == nil) {
+//		_pieces = [[NSMutableArray alloc] init];
+//	}
+//	[self scalePiece:piece];
+//	
+//	int index= 0;
+//	
+//	/*
+//	 Changing the if condition inside of the for loop to check instead of piece.center, to check piece.lastPosition(of the finger) then the piece would be inserted into the toolbar at the users finger instead of the piece center. You may need to make lastPosition a property in MJPiece.
+//	 */
+//	for (MJPiece* p in _pieces) {
+//		if (piece.center.x <= p.center.x) break;
+//		++index;
+//	}
+//	if (index >= (int)_pieces.count) {
+//		[_pieces addObject:piece];
+//		index = _pieces.count-1;
+//	}
+//	else {
+//		[_pieces insertObject:piece atIndex:index];
+//	}
+//	[self reloadToolbarStartingAtIndex:index];
+//	return YES;
 }
 
 /*
@@ -170,12 +193,11 @@
  Reloads the toolbar starting at index of the removing piece.
  */
 - (BOOL) removePiece:(MJPiece*)piece {
-	if (![_pieces containsObject:piece]) return NO;
+//	if (![_pieces containsObject:piece]) return NO;
 	
-	int index = [_pieces indexOfObject:piece];
+//	int index = [_pieces indexOfObject:piece];
 	[_pieces removeObject:piece];
-	
-	[self reloadToolbarStartingAtIndex:index];
+//	[self reloadToolbarStartingAtIndex:index];
 	return YES;
 }
 

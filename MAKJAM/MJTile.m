@@ -16,8 +16,10 @@
 @synthesize coordinate = _coordinate;
 @synthesize frame = _frame;
 
+const NSUInteger TILE_SIZE = 64;
+
 -(id) initWithCoordinate:(CGPoint)aCoordinate {
-    if ((self = [super init]) == nil) {
+    if ((self = [super initWithFrame:CGRectMake(aCoordinate.x * TILE_SIZE, aCoordinate.y * TILE_SIZE, TILE_SIZE, TILE_SIZE)]) == nil) {
 		return self;
     }
     _coordinate = coordinate;
@@ -27,6 +29,9 @@
 }
 
 #pragma mark - Class Metods
++ (NSUInteger) tileSize {
+	return TILE_SIZE;
+}
 - (CGPoint) centerFromPoint:(CGPoint)point {
 	return CGPointMake(self.center.x + (point.x - currentPoint.x), 
 					   self.center.y + (point.y - currentPoint.y));

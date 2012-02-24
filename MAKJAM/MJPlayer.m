@@ -32,7 +32,7 @@
 - (NSUInteger) piecesInPlay {
 	NSUInteger n = 0;
 	for (MJPiece* p in _pieces) {
-		if (p.played) {
+		if (p.isPlayed) {
 			n++;
 		}
 	}

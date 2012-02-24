@@ -11,8 +11,6 @@
 
 @class MJPiece;
 
-const NSUInteger TILE_SIZE = 64;
-
 @interface MJTile : UIView {
 @public
 	CGPoint coordinate;
@@ -26,6 +24,8 @@ const NSUInteger TILE_SIZE = 64;
 @property (weak, nonatomic) MJPiece* piece;
 @property (readwrite) CGPoint coordinate;
 @property (readwrite) CGRect frame;
+
++ (NSUInteger) tileSize;
 
 - (id) initWithCoordinate:(CGPoint)aCoordinate;
 - (CGPoint) centerFromPoint:(CGPoint)point;

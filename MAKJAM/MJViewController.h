@@ -15,49 +15,6 @@
 @class MJBoard;
 @class MJPlayer;
 
-//typedef enum {
-//    kGameStateWaitingForMatch = 0,
-//    kGameStateWaitingForRandomNumber,
-//    kGameStateWaitingForStart,
-//    kGameStateActive,
-//    kGameStateDone
-//} GameState;
-//
-//typedef enum {
-//    kEndReasonWin,
-//    kEndReasonLose,
-//    kEndReasonDisconnect
-//} EndReason;
-//
-//typedef enum {
-//    kMessageTypeRandomNumber = 0,
-//    kMessageTypeGameBegin,
-//    kMessageTypeMove,
-//    kMessageTypeGameOver
-//} MessageType;
-//
-//typedef struct {
-//    MessageType messageType;
-//} Message;
-//
-//typedef struct {
-//    Message message;
-//    uint32_t randomNumber;
-//} MessageRandomNumber;
-//
-//typedef struct {
-//    Message message;
-//} MessageGameBegin;
-//
-//typedef struct {
-//    Message message;
-//} MessageMove;
-//
-//typedef struct {
-//    Message message;
-//    BOOL player1Won;
-//} MessageGameOver;
-
 @interface MJViewController : UIViewController <MJPieceDelegate> {// , GCHelperDelegate> {
 //	uint32_t ourRandom;
 //	BOOL receivedRandom;
@@ -79,12 +36,10 @@
 
 
 @property (strong, nonatomic) IBOutlet UIButton* rotateButton;
-@property (strong, nonatomic) NSDictionary* pieceData;
 @property (strong, nonatomic) NSMutableArray* players;
 
 - (IBAction)resetButtonPressed:(id)sender;
 - (IBAction)doneButtonPressed:(id)sender;
-- (void) retrievePieceData;
 - (void) newGame;
 - (void) nextPlayer;
 - (void) addPlayer;

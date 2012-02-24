@@ -10,8 +10,9 @@
 @class MJPiece;
 
 @protocol MJPieceDelegate <NSObject>
-
 @required
 - (BOOL) addPiece:(MJPiece*)piece;
 - (BOOL) removePiece:(MJPiece*)piece;
+@optional
+- (BOOL) snapToPoint;
 @end

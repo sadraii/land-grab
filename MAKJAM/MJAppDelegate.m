@@ -8,7 +8,6 @@
 // test comment
 
 #import "MJAppDelegate.h"
-#import "GCHelper.h"
 
 @implementation MJAppDelegate
 
