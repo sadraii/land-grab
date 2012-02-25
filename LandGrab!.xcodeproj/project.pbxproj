@@ -1,0 +1,560 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		675674E914F748F300A8E1B6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 675674E814F748F300A8E1B6 /* UIKit.framework */; };
+		675674EB14F748F300A8E1B6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 675674EA14F748F300A8E1B6 /* Foundation.framework */; };
+		675674ED14F748F300A8E1B6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 675674EC14F748F300A8E1B6 /* CoreGraphics.framework */; };
+		675674F314F748F300A8E1B6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 675674F114F748F300A8E1B6 /* InfoPlist.strings */; };
+		675674F514F748F300A8E1B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 675674F414F748F300A8E1B6 /* main.m */; };
+		675674F914F748F300A8E1B6 /* MJAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 675674F814F748F300A8E1B6 /* MJAppDelegate.m */; };
+		675674FC14F748F300A8E1B6 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 675674FA14F748F300A8E1B6 /* MainStoryboard_iPhone.storyboard */; };
+		675674FF14F748F300A8E1B6 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 675674FD14F748F300A8E1B6 /* MainStoryboard_iPad.storyboard */; };
+		6756750214F748F300A8E1B6 /* MJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756750114F748F300A8E1B6 /* MJViewController.m */; };
+		6756750A14F748F300A8E1B6 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6756750914F748F300A8E1B6 /* SenTestingKit.framework */; };
+		6756750B14F748F300A8E1B6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 675674E814F748F300A8E1B6 /* UIKit.framework */; };
+		6756750C14F748F300A8E1B6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 675674EA14F748F300A8E1B6 /* Foundation.framework */; };
+		6756751414F748F400A8E1B6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6756751214F748F400A8E1B6 /* InfoPlist.strings */; };
+		6756751714F748F400A8E1B6 /* LandGrab_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756751614F748F400A8E1B6 /* LandGrab_Tests.m */; };
+		6756752714F7551300A8E1B6 /* MJBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756752614F7551300A8E1B6 /* MJBoard.m */; };
+		6756752B14F7553200A8E1B6 /* MJToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756752A14F7553200A8E1B6 /* MJToolbar.m */; };
+		6756753114F756AA00A8E1B6 /* MJPiece.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756753014F756AA00A8E1B6 /* MJPiece.m */; };
+		6756753514F756DD00A8E1B6 /* MJTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756753414F756DD00A8E1B6 /* MJTile.m */; };
+		6756753914F7592200A8E1B6 /* MJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756753814F7592200A8E1B6 /* MJPlayer.m */; };
+		6756753D14F759D100A8E1B6 /* MJContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756753C14F759D100A8E1B6 /* MJContainerView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6756750D14F748F300A8E1B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 675674DB14F748F200A8E1B6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 675674E314F748F300A8E1B6;
+			remoteInfo = "LandGrab!";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		675674E414F748F300A8E1B6 /* LandGrab!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LandGrab!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		675674E814F748F300A8E1B6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		675674EA14F748F300A8E1B6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		675674EC14F748F300A8E1B6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		675674F014F748F300A8E1B6 /* LandGrab!-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LandGrab!-Info.plist"; sourceTree = "<group>"; };
+		675674F214F748F300A8E1B6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		675674F414F748F300A8E1B6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		675674F614F748F300A8E1B6 /* LandGrab!-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LandGrab!-Prefix.pch"; sourceTree = "<group>"; };
+		675674F714F748F300A8E1B6 /* MJAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJAppDelegate.h; sourceTree = "<group>"; };
+		675674F814F748F300A8E1B6 /* MJAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJAppDelegate.m; sourceTree = "<group>"; };
+		675674FB14F748F300A8E1B6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		675674FE14F748F300A8E1B6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		6756750014F748F300A8E1B6 /* MJViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJViewController.h; sourceTree = "<group>"; };
+		6756750114F748F300A8E1B6 /* MJViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJViewController.m; sourceTree = "<group>"; };
+		6756750814F748F300A8E1B6 /* LandGrab!Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LandGrab!Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6756750914F748F300A8E1B6 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		6756751114F748F400A8E1B6 /* LandGrab!Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LandGrab!Tests-Info.plist"; sourceTree = "<group>"; };
+		6756751314F748F400A8E1B6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6756751514F748F400A8E1B6 /* LandGrab_Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LandGrab_Tests.h; sourceTree = "<group>"; };
+		6756751614F748F400A8E1B6 /* LandGrab_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LandGrab_Tests.m; sourceTree = "<group>"; };
+		6756752514F7551300A8E1B6 /* MJBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJBoard.h; sourceTree = "<group>"; };
+		6756752614F7551300A8E1B6 /* MJBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJBoard.m; sourceTree = "<group>"; };
+		6756752914F7553200A8E1B6 /* MJToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJToolbar.h; sourceTree = "<group>"; };
+		6756752A14F7553200A8E1B6 /* MJToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJToolbar.m; sourceTree = "<group>"; };
+		6756752F14F756AA00A8E1B6 /* MJPiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPiece.h; sourceTree = "<group>"; };
+		6756753014F756AA00A8E1B6 /* MJPiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPiece.m; sourceTree = "<group>"; };
+		6756753314F756DD00A8E1B6 /* MJTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJTile.h; sourceTree = "<group>"; };
+		6756753414F756DD00A8E1B6 /* MJTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJTile.m; sourceTree = "<group>"; };
+		6756753714F7592200A8E1B6 /* MJPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPlayer.h; sourceTree = "<group>"; };
+		6756753814F7592200A8E1B6 /* MJPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPlayer.m; sourceTree = "<group>"; };
+		6756753B14F759D100A8E1B6 /* MJContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJContainerView.h; sourceTree = "<group>"; };
+		6756753C14F759D100A8E1B6 /* MJContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJContainerView.m; sourceTree = "<group>"; };
+		6756753E14F765D700A8E1B6 /* MJTileDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJTileDelegate.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		675674E114F748F300A8E1B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				675674E914F748F300A8E1B6 /* UIKit.framework in Frameworks */,
+				675674EB14F748F300A8E1B6 /* Foundation.framework in Frameworks */,
+				675674ED14F748F300A8E1B6 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6756750414F748F300A8E1B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6756750A14F748F300A8E1B6 /* SenTestingKit.framework in Frameworks */,
+				6756750B14F748F300A8E1B6 /* UIKit.framework in Frameworks */,
+				6756750C14F748F300A8E1B6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		675674D914F748F200A8E1B6 = {
+			isa = PBXGroup;
+			children = (
+				675674EE14F748F300A8E1B6 /* LandGrab! */,
+				6756750F14F748F300A8E1B6 /* LandGrab!Tests */,
+				675674E714F748F300A8E1B6 /* Frameworks */,
+				675674E514F748F300A8E1B6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		675674E514F748F300A8E1B6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				675674E414F748F300A8E1B6 /* LandGrab!.app */,
+				6756750814F748F300A8E1B6 /* LandGrab!Tests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		675674E714F748F300A8E1B6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				675674E814F748F300A8E1B6 /* UIKit.framework */,
+				675674EA14F748F300A8E1B6 /* Foundation.framework */,
+				675674EC14F748F300A8E1B6 /* CoreGraphics.framework */,
+				6756750914F748F300A8E1B6 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		675674EE14F748F300A8E1B6 /* LandGrab! */ = {
+			isa = PBXGroup;
+			children = (
+				6756752E14F7555700A8E1B6 /* AppDelegate */,
+				6756752D14F7554900A8E1B6 /* Storyboards */,
+				6756752414F74B3F00A8E1B6 /* ViewController */,
+				6756752814F7551800A8E1B6 /* Board */,
+				6756752C14F7553800A8E1B6 /* Toolbar */,
+				6756753A14F7592600A8E1B6 /* Player */,
+				6756753214F756AF00A8E1B6 /* Piece */,
+				6756753614F756E600A8E1B6 /* Tile */,
+				675674EF14F748F300A8E1B6 /* Supporting Files */,
+			);
+			path = "LandGrab!";
+			sourceTree = "<group>";
+		};
+		675674EF14F748F300A8E1B6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				675674F014F748F300A8E1B6 /* LandGrab!-Info.plist */,
+				675674F114F748F300A8E1B6 /* InfoPlist.strings */,
+				675674F414F748F300A8E1B6 /* main.m */,
+				675674F614F748F300A8E1B6 /* LandGrab!-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6756750F14F748F300A8E1B6 /* LandGrab!Tests */ = {
+			isa = PBXGroup;
+			children = (
+				6756751514F748F400A8E1B6 /* LandGrab_Tests.h */,
+				6756751614F748F400A8E1B6 /* LandGrab_Tests.m */,
+				6756751014F748F400A8E1B6 /* Supporting Files */,
+			);
+			path = "LandGrab!Tests";
+			sourceTree = "<group>";
+		};
+		6756751014F748F400A8E1B6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6756751114F748F400A8E1B6 /* LandGrab!Tests-Info.plist */,
+				6756751214F748F400A8E1B6 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6756752414F74B3F00A8E1B6 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6756750014F748F300A8E1B6 /* MJViewController.h */,
+				6756750114F748F300A8E1B6 /* MJViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		6756752814F7551800A8E1B6 /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				6756752514F7551300A8E1B6 /* MJBoard.h */,
+				6756752614F7551300A8E1B6 /* MJBoard.m */,
+				6756753B14F759D100A8E1B6 /* MJContainerView.h */,
+				6756753C14F759D100A8E1B6 /* MJContainerView.m */,
+			);
+			name = Board;
+			sourceTree = "<group>";
+		};
+		6756752C14F7553800A8E1B6 /* Toolbar */ = {
+			isa = PBXGroup;
+			children = (
+				6756752914F7553200A8E1B6 /* MJToolbar.h */,
+				6756752A14F7553200A8E1B6 /* MJToolbar.m */,
+			);
+			name = Toolbar;
+			sourceTree = "<group>";
+		};
+		6756752D14F7554900A8E1B6 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				675674FA14F748F300A8E1B6 /* MainStoryboard_iPhone.storyboard */,
+				675674FD14F748F300A8E1B6 /* MainStoryboard_iPad.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		6756752E14F7555700A8E1B6 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				675674F714F748F300A8E1B6 /* MJAppDelegate.h */,
+				675674F814F748F300A8E1B6 /* MJAppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		6756753214F756AF00A8E1B6 /* Piece */ = {
+			isa = PBXGroup;
+			children = (
+				6756752F14F756AA00A8E1B6 /* MJPiece.h */,
+				6756753014F756AA00A8E1B6 /* MJPiece.m */,
+			);
+			name = Piece;
+			sourceTree = "<group>";
+		};
+		6756753614F756E600A8E1B6 /* Tile */ = {
+			isa = PBXGroup;
+			children = (
+				6756753314F756DD00A8E1B6 /* MJTile.h */,
+				6756753414F756DD00A8E1B6 /* MJTile.m */,
+				6756753E14F765D700A8E1B6 /* MJTileDelegate.h */,
+			);
+			name = Tile;
+			sourceTree = "<group>";
+		};
+		6756753A14F7592600A8E1B6 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				6756753714F7592200A8E1B6 /* MJPlayer.h */,
+				6756753814F7592200A8E1B6 /* MJPlayer.m */,
+			);
+			name = Player;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		675674E314F748F300A8E1B6 /* LandGrab! */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6756751A14F748F400A8E1B6 /* Build configuration list for PBXNativeTarget "LandGrab!" */;
+			buildPhases = (
+				675674E014F748F300A8E1B6 /* Sources */,
+				675674E114F748F300A8E1B6 /* Frameworks */,
+				675674E214F748F300A8E1B6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "LandGrab!";
+			productName = "LandGrab!";
+			productReference = 675674E414F748F300A8E1B6 /* LandGrab!.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6756750714F748F300A8E1B6 /* LandGrab!Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6756751D14F748F400A8E1B6 /* Build configuration list for PBXNativeTarget "LandGrab!Tests" */;
+			buildPhases = (
+				6756750314F748F300A8E1B6 /* Sources */,
+				6756750414F748F300A8E1B6 /* Frameworks */,
+				6756750514F748F300A8E1B6 /* Resources */,
+				6756750614F748F300A8E1B6 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6756750E14F748F300A8E1B6 /* PBXTargetDependency */,
+			);
+			name = "LandGrab!Tests";
+			productName = "LandGrab!Tests";
+			productReference = 6756750814F748F300A8E1B6 /* LandGrab!Tests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		675674DB14F748F200A8E1B6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 675674DE14F748F200A8E1B6 /* Build configuration list for PBXProject "LandGrab!" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 675674D914F748F200A8E1B6;
+			productRefGroup = 675674E514F748F300A8E1B6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				675674E314F748F300A8E1B6 /* LandGrab! */,
+				6756750714F748F300A8E1B6 /* LandGrab!Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		675674E214F748F300A8E1B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				675674F314F748F300A8E1B6 /* InfoPlist.strings in Resources */,
+				675674FC14F748F300A8E1B6 /* MainStoryboard_iPhone.storyboard in Resources */,
+				675674FF14F748F300A8E1B6 /* MainStoryboard_iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6756750514F748F300A8E1B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6756751414F748F400A8E1B6 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6756750614F748F300A8E1B6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		675674E014F748F300A8E1B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				675674F514F748F300A8E1B6 /* main.m in Sources */,
+				675674F914F748F300A8E1B6 /* MJAppDelegate.m in Sources */,
+				6756750214F748F300A8E1B6 /* MJViewController.m in Sources */,
+				6756752714F7551300A8E1B6 /* MJBoard.m in Sources */,
+				6756752B14F7553200A8E1B6 /* MJToolbar.m in Sources */,
+				6756753114F756AA00A8E1B6 /* MJPiece.m in Sources */,
+				6756753514F756DD00A8E1B6 /* MJTile.m in Sources */,
+				6756753914F7592200A8E1B6 /* MJPlayer.m in Sources */,
+				6756753D14F759D100A8E1B6 /* MJContainerView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6756750314F748F300A8E1B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6756751714F748F400A8E1B6 /* LandGrab_Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6756750E14F748F300A8E1B6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 675674E314F748F300A8E1B6 /* LandGrab! */;
+			targetProxy = 6756750D14F748F300A8E1B6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		675674F114F748F300A8E1B6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				675674F214F748F300A8E1B6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		675674FA14F748F300A8E1B6 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				675674FB14F748F300A8E1B6 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		675674FD14F748F300A8E1B6 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				675674FE14F748F300A8E1B6 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		6756751214F748F400A8E1B6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6756751314F748F400A8E1B6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6756751814F748F400A8E1B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6756751914F748F400A8E1B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6756751B14F748F400A8E1B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LandGrab!/LandGrab!-Prefix.pch";
+				INFOPLIST_FILE = "LandGrab!/LandGrab!-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6756751C14F748F400A8E1B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LandGrab!/LandGrab!-Prefix.pch";
+				INFOPLIST_FILE = "LandGrab!/LandGrab!-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		6756751E14F748F400A8E1B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LandGrab!.app/LandGrab!";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LandGrab!/LandGrab!-Prefix.pch";
+				INFOPLIST_FILE = "LandGrab!Tests/LandGrab!Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		6756751F14F748F400A8E1B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LandGrab!.app/LandGrab!";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LandGrab!/LandGrab!-Prefix.pch";
+				INFOPLIST_FILE = "LandGrab!Tests/LandGrab!Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		675674DE14F748F200A8E1B6 /* Build configuration list for PBXProject "LandGrab!" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6756751814F748F400A8E1B6 /* Debug */,
+				6756751914F748F400A8E1B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6756751A14F748F400A8E1B6 /* Build configuration list for PBXNativeTarget "LandGrab!" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6756751B14F748F400A8E1B6 /* Debug */,
+				6756751C14F748F400A8E1B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6756751D14F748F400A8E1B6 /* Build configuration list for PBXNativeTarget "LandGrab!Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6756751E14F748F400A8E1B6 /* Debug */,
+				6756751F14F748F400A8E1B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 675674DB14F748F200A8E1B6 /* Project object */;
+}
