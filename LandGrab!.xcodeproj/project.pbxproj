@@ -545,6 +545,7 @@
 				6756751C14F748F400A8E1B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6756751D14F748F400A8E1B6 /* Build configuration list for PBXNativeTarget "LandGrab!Tests" */ = {
 			isa = XCConfigurationList;
@@ -553,6 +554,7 @@
 				6756751F14F748F400A8E1B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

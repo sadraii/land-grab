@@ -11,6 +11,14 @@
 
 @implementation MJTile
 
+@synthesize piece;
+@synthesize coordinate;
+@synthesize frame;
+
++ (NSUInteger) tileSize {
+    return 64;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

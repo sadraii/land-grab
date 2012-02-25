@@ -36,7 +36,7 @@
 @property (readwrite) BOOL isPlayed;
 
 - (void) setOrigin:(CGPoint)point;
-- (CGPoint) origin;
+//- (CGPoint) origin;
 - (void) moveTiles:(CGSize)distance;
 - (void) snapToPoint;
 - (void) addAsSubviewToView:(UIView*)view;
@@ -45,5 +45,9 @@
 - (void) addTile:(MJTile*)tile;
 - (void) revertToStartingSize;
 - (void) setScale:(CGFloat)scale;
+- (void) touchesBegan:(CGPoint)point;
+- (void) touchesMoved:(CGSize)distance;
+- (void) touchesEnded:(CGPoint)point;
+- (void) touchesCanceled: (CGSize)distanceTraveled;
 
 @end
