@@ -13,6 +13,7 @@
 @class MJPlayer;
 @class MJPiece;
 
+
 @interface MJViewController : UIViewController {
 	NSInteger currentPlayer;
 }

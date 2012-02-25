@@ -17,7 +17,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+		[self setUserInteractionEnabled:YES];
     }
     return self;
 }
@@ -34,11 +34,11 @@
  CGContextSetLineWidth(ctx, 2);
  CGContextBeginPath(ctx);
  // Draw verticle lines
- for (int i=0; i<self.frame.size.width;i+=64) {
+ for (int i=0; i<self.frame.size.width;i+=TILE_SIZE) {
  CGContextMoveToPoint(ctx, 0+i, 0);
  CGContextAddLineToPoint(ctx, 0+i, self.frame.size.height);
  }
- for (int i=0; i<self.frame.size.height;i+=_board.tileSize) {
+ for (int i=0; i<self.frame.size.height;i+=TILE_SIZE) {
  CGContextMoveToPoint(ctx, 0, 0+i);
  CGContextAddLineToPoint(ctx, self.frame.size.width, 0+i);
  }

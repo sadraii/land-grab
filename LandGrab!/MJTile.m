@@ -15,14 +15,11 @@
 @synthesize coordinate;
 @synthesize frame;
 
-+ (NSUInteger) tileSize {
-    return 64;
-}
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+		
         // Initialization code
     }
     return self;

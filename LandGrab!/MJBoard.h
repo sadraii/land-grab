@@ -13,16 +13,14 @@
 @class MJBoard;
 @class MJPlayer;
 
-@interface MJBoard : UIScrollView
+@interface MJBoard : UIScrollView <UIScrollViewDelegate>
 {
-    CGSize boardSize;
-    NSUInteger tileSize;
+    CGSize boardSize;//Size relative to tilesize
 }
 
 @property (strong, nonatomic) NSMutableArray* pieces;
 @property (readonly)CGSize boardSize;
 @property (strong, nonatomic) MJContainerView* containerView;
-@property (readonly)NSUInteger tileSize;
 
 - (void) newGame;
 - (void) setBoardSize:(CGSize)size;

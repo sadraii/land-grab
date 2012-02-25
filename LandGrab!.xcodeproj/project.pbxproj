@@ -73,6 +73,7 @@
 		6756753B14F759D100A8E1B6 /* MJContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJContainerView.h; sourceTree = "<group>"; };
 		6756753C14F759D100A8E1B6 /* MJContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJContainerView.m; sourceTree = "<group>"; };
 		6756753E14F765D700A8E1B6 /* MJTileDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJTileDelegate.h; sourceTree = "<group>"; };
+		678A661114F97D9B006F9E25 /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +149,7 @@
 		675674EF14F748F300A8E1B6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				678A661114F97D9B006F9E25 /* Globals.h */,
 				675674F014F748F300A8E1B6 /* LandGrab!-Info.plist */,
 				675674F114F748F300A8E1B6 /* InfoPlist.strings */,
 				675674F414F748F300A8E1B6 /* main.m */,
