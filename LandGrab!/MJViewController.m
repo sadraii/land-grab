@@ -134,7 +134,8 @@
 #pragma mark - Piece Delegate
 
 - (void) addPiece:(MJPiece *)piece {
-	NSLog(@"Adding to viewController at: (%f, %f)", piece.lastTouch.x, piece.lastTouch.y);
+	NSLog(@"Adding to viewController at: (%f, %f)", [piece origin].x, [piece origin].y);
+	
 	[piece addAsSubviewToView:self.view];
 }
 

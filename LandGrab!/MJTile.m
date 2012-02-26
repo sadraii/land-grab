@@ -12,8 +12,9 @@
 @implementation MJTile
 
 @synthesize delegate = _delegate;
-@synthesize piece = _piecece;
+@synthesize piece = _piece;
 @synthesize coordinate = _coordinate;
+@synthesize currentPoint = _currentPoint;
 
 #pragma mark - Class Methods
 -(id) initWithCoordinate:(CGPoint)aCoordinate; {
@@ -54,26 +55,28 @@
 #pragma mark - Touches
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch* touch = [touches anyObject];
-	currentPoint = [touch locationInView:self];
+//	NSLog(@"Tile: ((%f, %f), (%f X %f))", self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+	[_piece setLastTouchedTile:self];
+	_currentPoint = [touch locationInView:_piece.superview];
+	NSLog(@"Tile Current Touch: (%f, %f)", _currentPoint.x, _currentPoint.y);
 	distanceTraveled = CGSizeMake(0, 0);
-	
 	[_delegate touchesBegan:touch];
 }
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch* touch = [touches anyObject];
-	CGPoint point = [touch locationInView:self];
-	CGSize distance = CGSizeMake(point.x - currentPoint.x, point.y - currentPoint.y);
+	CGPoint point = [touch locationInView:_piece.superview];
+	CGSize distance = CGSizeMake(point.x - _currentPoint.x, point.y - _currentPoint.y);
 	distanceTraveled.width += distance.width;
 	distanceTraveled.height += distance.height;
 	[_delegate touchesMoved:distance];
-	currentPoint = point;
+	_currentPoint = point;
 }
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch* touch = [touches anyObject];
-	CGPoint point = [touch locationInView:self];
-	NSLog(@"Distance Traveled: %f X %f", distanceTraveled.width, distanceTraveled.height);
+//	CGPoint point = [touch locationInView:_piece.superview];
+//	NSLog(@"Distance Traveled: %f X %f", distanceTraveled.width, distanceTraveled.height);
 	[_delegate touchesEnded:touch];
 }
 

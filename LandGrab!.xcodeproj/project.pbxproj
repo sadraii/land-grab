@@ -157,7 +157,6 @@
 				6756752C14F7553800A8E1B6 /* Toolbar */,
 				6756753A14F7592600A8E1B6 /* Player */,
 				6756753214F756AF00A8E1B6 /* Piece */,
-				3FED6D4F14F9A261007155CA /* Images */,
 				6756753614F756E600A8E1B6 /* Tile */,
 				675674EF14F748F300A8E1B6 /* Supporting Files */,
 			);
@@ -167,6 +166,7 @@
 		675674EF14F748F300A8E1B6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3FED6D4F14F9A261007155CA /* Images */,
 				3FED6D5314F9BE70007155CA /* Graphics.h */,
 				3FED6D5414F9BE70007155CA /* Graphics.m */,
 				678A661114F97D9B006F9E25 /* Globals.h */,

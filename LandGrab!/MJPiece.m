@@ -26,8 +26,8 @@
 @synthesize coordinate = _coordinate;
 @synthesize size = _size;
 @synthesize lastTouch = _lastTouch;
+@synthesize lastTouchedTile = _lastTouchedTile;
 @synthesize tiles = _tiles;
-
 @synthesize image = _image;
 @synthesize name = _name;
 @synthesize isPlayed = _isPlayed;
@@ -35,7 +35,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-		origin = CGPointZero;
+		_origin = CGPointZero;
 		_tiles = [[NSMutableArray alloc] init];
 		_image = nil;
 		_name = nil;
@@ -45,6 +45,7 @@
 
 - (void) setOrigin:(CGPoint)point
 {
+	
 	CGSize distance = CGSizeMake(point.x - origin.x, point.y - origin.y);
 	[self moveTiles:distance];
 	origin = point;
@@ -58,6 +59,7 @@
  
 - (void) moveTiles:(CGSize) distance
 {
+	NSLog(@"Moving Piece: %f X %f", distance.width, distance.height);
     for (MJTile* t in _tiles) {
 		[t moveDistance:distance];
 	}
@@ -88,6 +90,7 @@
 
 - (void) addAsSubviewToView:(UIView*)view
 {
+	NSLog(@"Adding Piece to View: %@", NSStringFromClass(view.class));
     for (MJTile* t in _tiles) {
 		[view addSubview:t];
 		NSLog(@"Adding tile at point: (%f, %f)", t.frame.origin.x, t.frame.origin.y);
@@ -134,8 +137,20 @@
     
 }
 
+- (UIView*) view {
+	UIView* view = [[UIView alloc] initWithFrame:CGRectMake(origin.x, origin.y, size.width, size.height)];
+	return view;
+}
+
 #pragma mark - MJTileDelegate Methods
 - (void) touchesBegan:(UITouch*)touch {
+	NSLog(@"Piece Origin: (%f, %f)", origin.x, origin.y);
+	CGPoint pointInVC = [touch locationInView:_viewController.view];
+	CGSize distance = CGSizeMake((_lastTouchedTile.currentPoint.x - origin.x), (_lastTouchedTile.currentPoint.y - origin.y));
+	NSLog(@"Distance: %f X %f", distance.width, distance.height);
+	
+	CGPoint newOrigin = CGPointMake(pointInVC.x - distance.width, pointInVC.y - distance.height);
+	[self setOrigin:newOrigin];
 	[_viewController addPiece:self];
 	//Highlight piece
 }
@@ -143,12 +158,12 @@
 	[self moveTiles:distance];
 }
 - (void) touchesEnded:(UITouch*)touch {
-	CGPoint point = [touch locationInView:_viewController.view];
-	if ([_board pointInside:point withEvent:nil]) {
+//	CGPoint point = [touch locationInView:_viewController.view];
+	if ([_board pointInside:[touch locationInView:_board] withEvent:nil]) {
 		[self setDelegate:_board];
 		lastTouch = [touch locationInView:(UIView*)_board.containerView];
 	}
-	else if ([_toolbar pointInside:point withEvent:nil]) {
+	else if ([_toolbar pointInside:[touch locationInView:_toolbar] withEvent:nil]) {
 		[self setDelegate:_toolbar];
 		lastTouch = [touch locationInView:_toolbar];
 	}
@@ -156,7 +171,7 @@
 		NSLog(@"Piece dropped in unsupported view");
 		abort();
 	}
-	lastTouch = point;
+//	lastTouch = point;
 	#warning Remove from starting view
 	[_delegate addPiece:self];
 }

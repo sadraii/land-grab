@@ -64,6 +64,12 @@
 
 #pragma mark - Piece Delegate
 
+- (void) addPiece:(MJPiece *)piece {
+	
+}
 
+- (void) removePiece:(MJPiece *)piece {
+	
+}
 
 @end

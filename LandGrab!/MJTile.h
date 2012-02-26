@@ -22,6 +22,7 @@ CGSize distanceTraveled;
 @property (strong, nonatomic) id <MJTileDelegate> delegate;
 @property (weak, nonatomic) MJPiece* piece;
 @property (readwrite) CGPoint coordinate;
+@property (readwrite) CGPoint currentPoint;
 
 - (id) initWithCoordinate:(CGPoint)aCoordinate;
 - (CGPoint) centerFromPoint:(CGPoint)point;

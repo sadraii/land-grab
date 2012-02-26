@@ -18,13 +18,13 @@
 
 @interface MJPiece : NSObject <MJTileDelegate> {
 @public
+	CGPoint origin;
+	CGSize size;
+	CGPoint lastTouch;
 	CGPoint coordinate;
 	NSString* name;
 	BOOL isPlayed;//Yes:is on board No:is on toolbar
 @private
-	CGPoint origin;
-	CGSize size;
-	CGPoint lastTouch;
 	NSMutableArray* tiles;
 	UIImage* image;
 	
@@ -36,14 +36,15 @@
 @property (weak, nonatomic) MJToolbar* toolbar;
 @property (weak, nonatomic) id superview;
 @property (weak, nonatomic) MJPlayer* player;
-@property (readonly) CGPoint origin;
-@property (readonly) CGPoint coordinate;
-@property (readonly) CGSize size;
-@property (readonly) CGPoint lastTouch;
+@property (readwrite, nonatomic) CGPoint origin;
+@property (readwrite, nonatomic) CGPoint coordinate;
+@property (readwrite, nonatomic) CGSize size;
+@property (readwrite, nonatomic) CGPoint lastTouch;
+@property (weak, nonatomic) MJTile* lastTouchedTile;
 @property (strong, nonatomic) NSMutableArray* tiles;
 @property (strong, nonatomic) UIImage* image;
 @property (strong, nonatomic) NSString* name;
-@property (readwrite) BOOL isPlayed;
+@property (readwrite, nonatomic) BOOL isPlayed;
 
 - (void) setOrigin:(CGPoint)point;
 - (void) moveTiles:(CGSize)distance;
@@ -55,5 +56,6 @@
 - (void) addTile:(MJTile*)tile;
 - (void) revertToStartingSize;
 - (void) setScale:(CGFloat)scale;
+- (UIView*) view;
 
 @end
