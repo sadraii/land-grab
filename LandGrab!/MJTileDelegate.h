@@ -10,8 +10,8 @@
 
 @protocol MJTileDelegate <NSObject>
 @required
-- (void) touchesBegan:(CGPoint)point;
+- (void) touchesBegan:(UITouch*)touch;
 - (void) touchesMoved:(CGSize)distance;
-- (void) touchesEnded:(CGPoint)point;
+- (void) touchesEnded:(UITouch*)touch;
 - (void) touchesCanceled: (CGSize)distanceTraveled;
 @end

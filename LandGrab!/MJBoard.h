@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MJPieceDelegate.h"
 
 @class MJPiece;
 @class MJContainerView;
 @class MJBoard;
 @class MJPlayer;
 
-@interface MJBoard : UIScrollView <UIScrollViewDelegate>
+@interface MJBoard : UIScrollView <UIScrollViewDelegate, MJPieceDelegate>
 {
     CGSize boardSize;//Size relative to tilesize
 }
@@ -24,7 +25,6 @@
 
 - (void) newGame;
 - (void) setBoardSize:(CGSize)size;
-- (CGPoint) snapPieceToPoint:(MJPiece*)piece;
 - (void) scalePiece:(MJPiece*)piece;
 - (CGPoint) originOfPiece:(MJPiece*)piece;
 

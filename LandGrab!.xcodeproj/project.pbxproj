@@ -74,6 +74,7 @@
 		6756753C14F759D100A8E1B6 /* MJContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJContainerView.m; sourceTree = "<group>"; };
 		6756753E14F765D700A8E1B6 /* MJTileDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJTileDelegate.h; sourceTree = "<group>"; };
 		678A661114F97D9B006F9E25 /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
+		678A661714F9A12B006F9E25 /* MJPieceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPieceDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +230,7 @@
 			children = (
 				6756752F14F756AA00A8E1B6 /* MJPiece.h */,
 				6756753014F756AA00A8E1B6 /* MJPiece.m */,
+				678A661714F9A12B006F9E25 /* MJPieceDelegate.h */,
 			);
 			name = Piece;
 			sourceTree = "<group>";

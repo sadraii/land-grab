@@ -14,7 +14,6 @@
 @interface MJTile : UIView {
 @public
 CGPoint coordinate;
-CGRect frame;
 @private
 CGPoint currentPoint;
 CGSize distanceTraveled;
@@ -23,10 +22,9 @@ CGSize distanceTraveled;
 @property (strong, nonatomic) id <MJTileDelegate> delegate;
 @property (weak, nonatomic) MJPiece* piece;
 @property (readwrite) CGPoint coordinate;
-@property (readwrite) CGRect frame;
-
-+ (NSUInteger) tileSize;
 
 - (id) initWithCoordinate:(CGPoint)aCoordinate;
 - (CGPoint) centerFromPoint:(CGPoint)point;
+- (void) moveDistance:(CGSize) distance;
+- (void) updateCoordinate;
 @end

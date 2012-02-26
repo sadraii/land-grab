@@ -10,15 +10,24 @@
 #import "MJTile.h"
 #import "MJViewController.h"
 #import "MJPlayer.h"
+#import "MJBoard.h"
+#import "MJToolbar.h"
 
 @implementation MJPiece
 
+@synthesize delegate = _delegate;
 @synthesize viewController = _viewController;
+@synthesize board = _board;
+@synthesize toolbar = _toolbar;
 @synthesize superview = _superview;
 @synthesize player = _player;
+
+@synthesize origin = _origin;
+@synthesize coordinate = _coordinate;
 @synthesize size = _size;
+@synthesize lastTouch = _lastTouch;
 @synthesize tiles = _tiles;
-@synthesize rotation = _rotation;
+
 @synthesize image = _image;
 @synthesize name = _name;
 @synthesize isPlayed = _isPlayed;
@@ -26,53 +35,93 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _player = nil;
-        _size = CGSizeZero;
-        _isPlayed = NO;
+		origin = CGPointZero;
+		_tiles = [[NSMutableArray alloc] init];
+		_image = nil;
+		_name = nil;
     }
     return self;
 }
 
 - (void) setOrigin:(CGPoint)point
 {
-    
+	CGSize distance = CGSizeMake(point.x - origin.x, point.y - origin.y);
+	[self moveTiles:distance];
+	origin = point;
 }
 
-/*
-- (CGPoint) origin
-{
-    
+- (void) setCoordinate:(CGPoint)point {
+	CGPoint newOrigin = CGPointMake(point.x * TILE_SIZE, point.y * TILE_SIZE);
+	[self setOrigin:newOrigin];
+	coordinate = point;
 }
-*/
  
 - (void) moveTiles:(CGSize) distance
 {
-    
+    for (MJTile* t in _tiles) {
+		[t moveDistance:distance];
+	}
+	origin = CGPointMake(origin.x + distance.width, origin.y + distance.height);
 }
 
 - (void) snapToPoint
 {
-    
+    CGSize distance = CGSizeZero;
+	int offX = (int)origin.x % TILE_SIZE;
+	int offY = (int)origin.y % TILE_SIZE;
+	if ((offX / ((CGFloat)TILE_SIZE - 1)) > 0.5f) {
+		distance.width += (TILE_SIZE - offX);
+	}
+	else {
+		distance.width -= offX;
+	}
+	if ((offY / ((CGFloat)TILE_SIZE - 1)) > 0.5f) {
+		distance.height += (TILE_SIZE - offY);
+	}
+	else {
+		distance.height -= offY;
+	}
+	
+	[self moveTiles:distance];
+	
 }
 
 - (void) addAsSubviewToView:(UIView*)view
 {
-    
+    for (MJTile* t in _tiles) {
+		[view addSubview:t];
+		NSLog(@"Adding tile at point: (%f, %f)", t.frame.origin.x, t.frame.origin.y);
+	}
+	[self setSuperview:view];
 }
 
 - (void) removeFromSuperview
 {
-    
+    for (MJTile* t in _tiles) {
+		NSLog(@"Removing Tile From Superview");
+		[t removeFromSuperview];
+	}
+	[self setSuperview:nil];
 }
 
-- (void) loadDefaultTiles
+- (void) loadDebugTiles
 {
-    
+    MJTile* tile = [[MJTile alloc] initWithCoordinate:CGPointMake(0, 0)];
+	[tile setPiece:self];
+	[tile setDelegate:self];
+	[self addTile:tile];
 }
 
 - (void) addTile:(MJTile*)tile
 {
-    
+    if (tile.frame.size.width > size.width) {
+		size.width = tile.frame.size.width;
+	}
+	if (tile.frame.size.height > size.height) {
+		size.height = tile.frame.size.height;
+	}
+	
+	[_tiles addObject:tile];
 }
 
 - (void) revertToStartingSize
@@ -85,24 +134,34 @@
     
 }
 
-- (void) touchesBegan:(CGPoint)point
-{
-    
+#pragma mark - MJTileDelegate Methods
+- (void) touchesBegan:(UITouch*)touch {
+	[_viewController addPiece:self];
+	//Highlight piece
 }
-
-- (void) touchesMoved:(CGSize)distance
-{
-    
+- (void) touchesMoved:(CGSize)distance {
+	[self moveTiles:distance];
 }
-
-- (void) touchesEnded:(CGPoint)point
-{
-    
+- (void) touchesEnded:(UITouch*)touch {
+	CGPoint point = [touch locationInView:_viewController.view];
+	if ([_board pointInside:point withEvent:nil]) {
+		[self setDelegate:_board];
+		lastTouch = [touch locationInView:(UIView*)_board.containerView];
+	}
+	else if ([_toolbar pointInside:point withEvent:nil]) {
+		[self setDelegate:_toolbar];
+		lastTouch = [touch locationInView:_toolbar];
+	}
+	else {
+		NSLog(@"Piece dropped in unsupported view");
+		abort();
+	}
+	lastTouch = point;
+	#warning Remove from starting view
+	[_delegate addPiece:self];
 }
-
-- (void) touchesCanceled:(CGSize)distanceTraveled
-{
-    
+- (void) touchesCanceled: (CGSize)distanceTraveled {
+	[self moveTiles:CGSizeMake(distanceTraveled.width * -1, distanceTraveled.height * -1)];
 }
 
 @end

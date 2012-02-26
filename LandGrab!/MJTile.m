@@ -11,27 +11,74 @@
 
 @implementation MJTile
 
-@synthesize piece;
-@synthesize coordinate;
-@synthesize frame;
+@synthesize delegate = _delegate;
+@synthesize piece = _piecece;
+@synthesize coordinate = _coordinate;
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-		
-        // Initialization code
+#pragma mark - Class Methods
+-(id) initWithCoordinate:(CGPoint)aCoordinate; {
+    if ((self = [super init]) == nil) {
+		return self;
     }
+    _coordinate = aCoordinate;
+	[self setFrame:CGRectMake(_coordinate.x * TILE_SIZE, _coordinate.y * TILE_SIZE, TILE_SIZE, TILE_SIZE)];
+	[self setBackgroundColor:[UIColor blackColor]];
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+//- (id)initWithFrame:(CGRect)frame
+//{
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//		_coordinate = CGPointMake(frame.origin.x / TILE_SIZE, frame.origin.y / TILE_SIZE);
+//        [self setBackgroundColor:[UIColor whiteColor]];
+//    }
+//    return self;
+//}
+
+- (CGPoint) centerFromPoint:(CGPoint)point {
+	return CGPointMake(self.center.x + (point.x - currentPoint.x), 
+					   self.center.y + (point.y - currentPoint.y));
 }
-*/
+
+- (void) moveDistance:(CGSize) distance {
+	[self setFrame:CGRectMake(self.frame.origin.x + distance.width, self.frame.origin.y + distance.height, self.frame.size.width, self.frame.size.height)];
+	[self updateCoordinate];
+}
+
+- (void) updateCoordinate {
+	CGPoint origin = self.frame.origin;
+	coordinate = CGPointMake(origin.x / TILE_SIZE, origin.y / TILE_SIZE);
+}
+
+#pragma mark - Touches
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	UITouch* touch = [touches anyObject];
+	currentPoint = [touch locationInView:self];
+	distanceTraveled = CGSizeMake(0, 0);
+	
+	[_delegate touchesBegan:touch];
+}
+
+- (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+	UITouch* touch = [touches anyObject];
+	CGPoint point = [touch locationInView:self];
+	CGSize distance = CGSizeMake(point.x - currentPoint.x, point.y - currentPoint.y);
+	distanceTraveled.width += distance.width;
+	distanceTraveled.height += distance.height;
+	[_delegate touchesMoved:distance];
+	currentPoint = point;
+}
+
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	UITouch* touch = [touches anyObject];
+	CGPoint point = [touch locationInView:self];
+	NSLog(@"Distance Traveled: %f X %f", distanceTraveled.width, distanceTraveled.height);
+	[_delegate touchesEnded:touch];
+}
+
+- (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+	[_delegate touchesCanceled:distanceTraveled];
+}
 
 @end

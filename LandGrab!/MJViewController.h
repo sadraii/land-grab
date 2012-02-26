@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MJPieceDelegate.h"
 
 @class MJToolbar;
 @class MJBoard;
@@ -14,7 +15,7 @@
 @class MJPiece;
 
 
-@interface MJViewController : UIViewController {
+@interface MJViewController : UIViewController <MJPieceDelegate> {
 	NSInteger currentPlayer;
 }
 
@@ -25,6 +26,13 @@
 
 @property (strong, nonatomic) IBOutlet MJBoard* board;
 @property (strong, nonatomic) IBOutlet MJToolbar* toolbar;
+
+@property (strong, nonatomic) NSMutableArray* players;
+
+- (void) newGame;
+- (void) addPlayer;
+- (void) nextPlayer;
+- (void) createDebugPiece;
 
 
 @end

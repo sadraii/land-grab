@@ -46,11 +46,6 @@
 	_boardSize = size;
 }
 
-- (CGPoint) snapPieceToPoint:(MJPiece*)piece
-{
-    
-}
-
 - (void) scalePiece:(MJPiece*)piece
 {
     
@@ -66,5 +61,9 @@
 - (UIView*) viewForZoomingInScrollView:(UIScrollView *)scrollView {
 	return _containerView;
 }
+
+#pragma mark - Piece Delegate
+
+
 
 @end
