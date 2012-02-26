@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MJPieceDelegate.h"
 
+@class MJTopBar;
 @class MJToolbar;
 @class MJBoard;
 @class MJPlayer;
@@ -19,7 +20,7 @@
 	NSInteger currentPlayer;
 }
 
-@property (strong, nonatomic) IBOutlet UIView* topbar;
+@property (strong, nonatomic) IBOutlet MJTopBar* topbar;
 @property (strong, nonatomic) IBOutlet UILabel* score;
 @property (strong, nonatomic) IBOutlet UILabel* handle;
 @property (strong, nonatomic) IBOutlet UILabel* territory;
@@ -33,6 +34,5 @@
 - (void) addPlayer;
 - (void) nextPlayer;
 - (void) createDebugPiece;
-
 
 @end

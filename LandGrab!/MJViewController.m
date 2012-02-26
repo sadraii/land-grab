@@ -10,6 +10,7 @@
 #import "MJPiece.h"
 #import "MJPlayer.h"
 #import "MJToolbar.h"
+#import "MJTopBar.h"
 
 @implementation MJViewController
 
