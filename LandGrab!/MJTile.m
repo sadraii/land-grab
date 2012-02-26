@@ -23,7 +23,7 @@
     }
     _coordinate = aCoordinate;
 	[self setFrame:CGRectMake(_coordinate.x * TILE_SIZE, _coordinate.y * TILE_SIZE, TILE_SIZE, TILE_SIZE)];
-	[self setBackgroundColor:[UIColor blackColor]];
+	[self setBackgroundColor:[UIColor whiteColor]];
     return self;
 }
 

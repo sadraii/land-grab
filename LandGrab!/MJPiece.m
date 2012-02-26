@@ -45,7 +45,6 @@
 
 - (void) setOrigin:(CGPoint)point
 {
-	
 	CGSize distance = CGSizeMake(point.x - origin.x, point.y - origin.y);
 	[self moveTiles:distance];
 	origin = point;
@@ -144,14 +143,9 @@
 
 #pragma mark - MJTileDelegate Methods
 - (void) touchesBegan:(UITouch*)touch {
-	NSLog(@"Piece Origin: (%f, %f)", origin.x, origin.y);
-	CGPoint pointInVC = [touch locationInView:_viewController.view];
-	CGSize distance = CGSizeMake((_lastTouchedTile.currentPoint.x - origin.x), (_lastTouchedTile.currentPoint.y - origin.y));
-	NSLog(@"Distance: %f X %f", distance.width, distance.height);
-	
-	CGPoint newOrigin = CGPointMake(pointInVC.x - distance.width, pointInVC.y - distance.height);
-	[self setOrigin:newOrigin];
 	[_viewController addPiece:self];
+//	[self moveTiles:<#(CGSize)#>];
+	
 	//Highlight piece
 }
 - (void) touchesMoved:(CGSize)distance {
