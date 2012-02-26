@@ -10,6 +10,7 @@
 #import "MJPiece.h"
 #import "MJPlayer.h"
 #import "MJToolbar.h"
+#import "MJTopBar.h"
 
 @implementation MJViewController
 
@@ -70,6 +71,13 @@
 	} else {
 	    return YES;
 	}
+}
+
+- (void) drawDebugPiece 
+{
+    MJPiece* piece = [[MJPiece alloc] init];
+    [piece setOrigin:CGPointMake(0, 0)];
+    
 }
 
 @end
