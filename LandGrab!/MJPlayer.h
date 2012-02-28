@@ -24,6 +24,8 @@
 @property (weak, nonatomic) MJToolbar* toolbar;
 
 @property (strong, nonatomic) NSMutableArray* pieces;
+@property (strong, nonatomic) NSString* handle;
+@property (strong, nonatomic) UIColor* color;
 @property (readwrite, nonatomic) NSUInteger score;
 @property (readwrite, nonatomic) NSUInteger money;
 

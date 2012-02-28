@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11C74" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11D50" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="2">
     <dependencies>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
@@ -14,14 +14,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="gE6-AP-9Rm" customClass="MJBoard">
-                                <rect key="frame" x="0.0" y="143" width="768" height="675"/>
+                                <rect key="frame" x="0.0" y="143" width="768" height="769"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <connections>
+                                    <outlet property="viewController" destination="2" id="21H-qd-7zK"/>
+                                </connections>
                             </scrollView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="wvy-gq-fg5" customClass="MJToolbar">
-                                <rect key="frame" x="0.0" y="820" width="768" height="184"/>
+                                <rect key="frame" x="0.0" y="920" width="768" height="84"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="0.40000000596046448" green="0.80000001192092896" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="viewController" destination="2" id="CTs-9o-dt3"/>
+                                </connections>
                             </scrollView>
                             <view contentMode="scaleToFill" id="naf-t9-EUm" customClass="MJTopBar">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="143"/>
@@ -61,7 +67,7 @@
                                         <size key="shadowOffset" width="5" height="6"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Player" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="cUh-Sy-Mp7">
-                                        <rect key="frame" x="-75" y="102" width="221" height="21"/>
+                                        <rect key="frame" x="274" y="102" width="221" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -75,6 +81,7 @@
                     </view>
                     <connections>
                         <outlet property="board" destination="gE6-AP-9Rm" id="UUt-dG-xA3"/>
+                        <outlet property="handle" destination="cUh-Sy-Mp7" id="GsV-GE-Vrk"/>
                         <outlet property="toolbar" destination="wvy-gq-fg5" id="KN2-Fo-qs7"/>
                         <outlet property="topbar" destination="naf-t9-EUm" id="FDN-6E-1uH"/>
                     </connections>
@@ -85,9 +92,15 @@
     <classes>
         <class className="MJBoard" superclassName="UIScrollView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MJBoard.h"/>
+            <relationships>
+                <relationship kind="outlet" name="viewController" candidateClass="MJViewController"/>
+            </relationships>
         </class>
         <class className="MJToolbar" superclassName="UIScrollView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MJToolbar.h"/>
+            <relationships>
+                <relationship kind="outlet" name="viewController" candidateClass="MJViewController"/>
+            </relationships>
         </class>
         <class className="MJTopBar" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MJTopBar.h"/>
@@ -97,8 +110,6 @@
             <relationships>
                 <relationship kind="outlet" name="board" candidateClass="MJBoard"/>
                 <relationship kind="outlet" name="handle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="score" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="territory" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="toolbar" candidateClass="MJToolbar"/>
                 <relationship kind="outlet" name="topbar" candidateClass="MJTopBar"/>
             </relationships>

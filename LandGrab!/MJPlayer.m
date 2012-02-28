@@ -21,6 +21,8 @@
 @synthesize toolbar = _toolbar;
 
 @synthesize pieces = _pieces;
+@synthesize handle = _handle;
+@synthesize color = _color;
 @synthesize score = _score;
 @synthesize money = _money;
 
@@ -29,6 +31,8 @@
 		return self;
     }
 	_pieces = nil;
+	_handle = nil;
+	_color = nil;
 	_money = 0;
 	_score = 0;
     return self;

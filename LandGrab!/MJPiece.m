@@ -144,13 +144,9 @@
 
 #pragma mark - MJTileDelegate Methods
 - (void) touchesBegan:(UITouch*)touch {
-	[_board setScrollEnabled:NO];
 	[self setOrigin:[touch locationInView:_viewController.view]];
 	[_lastTouchedTile setCurrentPoint:_origin];
 	[_viewController addPiece:self];
-//	[self moveTiles:<#(CGSize)#>];
-	
-	//Highlight piece
 }
 - (void) touchesMoved:(CGSize)distance {
 	[self moveTiles:distance];

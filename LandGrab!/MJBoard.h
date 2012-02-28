@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MJPieceDelegate.h"
 
+@class MJViewController;
 @class MJPiece;
 @class MJContainerView;
 @class MJBoard;
@@ -19,6 +20,7 @@
     CGSize boardSize;//Size relative to tilesize
 }
 
+@property (weak, nonatomic) IBOutlet MJViewController* viewController;
 @property (strong, nonatomic) NSMutableArray* pieces;
 @property (readonly)CGSize boardSize;
 @property (strong, nonatomic) MJContainerView* containerView;

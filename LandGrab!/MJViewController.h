@@ -22,9 +22,7 @@
 }
 
 @property (strong, nonatomic) IBOutlet MJTopBar* topbar;
-@property (strong, nonatomic) IBOutlet UILabel* score;
 @property (strong, nonatomic) IBOutlet UILabel* handle;
-@property (strong, nonatomic) IBOutlet UILabel* territory;
 
 @property (strong, nonatomic) IBOutlet MJBoard* board;
 @property (strong, nonatomic) IBOutlet MJToolbar* toolbar;
@@ -32,8 +30,6 @@
 @property (strong, nonatomic) NSMutableArray* players;
 
 - (void) newGame;
-- (void) addPlayer;
 - (void) nextPlayer;
-- (void) createDebugPiece;
 
 @end

@@ -70,7 +70,8 @@
 	[tile setViewController:_viewController];
 	[tile setBoard:_viewController.board];
 	[tile setToolbar:_viewController.toolbar];
-	[tile setBackgroundColor:[UIColor purpleColor]];
+	[tile setPlayer:player];
+	[tile setBackgroundColor:player.color];
 	[self addPiece:tile];
 	
 	for (MJPiece* p  in player.pieces) {
@@ -93,23 +94,32 @@
 
 - (void) addPiece:(id)piece {
 	int index = 0;
-	if ([piece isMemberOfClass:NSClassFromString(@"MJTile")]) {
+	if ([piece isKindOfClass:[MJTile class]]) {
 		MJTile* tile = (MJTile*)piece;
 		[tile setFrame:CGRectMake(offset, offset, TILE_SIZE, TILE_SIZE)];
 		[tile setIsPlayed:NO];
 		[self addSubview:tile];
-//		[self insertPiece:(MJTile*)piece AtIndex:index];
 	}
-//	for (id p in _pieces) {
-//		if ((p.size.width / 2) < piece.lastTouch.x)	break;
-//		index++;
-//	}
-//	if ([piece isMemberOfClass:NSClassFromString(@"MJPiece")]) {
-//		[self insertPiece:(MJPiece*) piece AtIndex:index];
-//	}
+	else if ([piece isKindOfClass:[MJPiece class]]) {
+		MJPiece* piece = (MJPiece*)piece;
+		for (MJPiece* p in _pieces) {
+			if ((p.size.width / 2) < piece.lastTouch.x)	break;
+			index++;
+		}
+		if ([piece isMemberOfClass:NSClassFromString(@"MJPiece")]) {
+			[self insertPiece:(MJPiece*) piece AtIndex:index];
+		}
+	}
+	else abort();
 }
 
 - (void) removePiece:(MJPiece*)piece {
-	
+	if ([piece isKindOfClass:[MJTile class]]) {
+		MJTile* tile = (MJTile*)piece;
+	}
+	else if ([piece isKindOfClass:[MJPiece class]]) {
+		MJPiece* piece = (MJPiece*)piece;
+	}
+	else abort();
 }
 @end

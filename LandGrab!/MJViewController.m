@@ -16,9 +16,7 @@
 @implementation MJViewController
 
 @synthesize topbar = _topbar;
-@synthesize score = _score;
 @synthesize handle = _handle;
-@synthesize territory = _territory;
 
 @synthesize board = _board;
 @synthesize toolbar = _toolbar;
@@ -36,31 +34,46 @@
 
 - (void) newGame {
 	NSLog(@"ViewController: received new game notification");
-	[self setPlayers:nil];
+	[self setPlayers:[[NSMutableArray alloc] init]];
 	currentPlayer = -1;
-	int numPlayers = 1;
+	int numPlayers = 5;
 	for (int i = 0; i < numPlayers; i++) {
-		[self addPlayer];
+		MJPlayer* player = [[MJPlayer alloc] init];
+		[player setViewController:self];
+		[player setBoard:_board];
+		[player setToolbar:_toolbar];
+		switch (i) {
+			case 0:
+				[player setHandle:@"Andrew"];
+				[player setColor:[UIColor blueColor]];
+				break;
+			case 1:
+				[player setHandle:@"Jason"];
+				[player setColor:[UIColor redColor]];
+				break;
+			case 2:
+				[player setHandle:@"Max"];
+				[player setColor:[UIColor greenColor]];
+				break;
+			case 3:	
+				[player setHandle:@"Mostafa"];
+				[player setColor:[UIColor brownColor]];
+				break;
+			case 4:
+				[player setHandle:@"Kristi"];
+				[player setColor:[UIColor yellowColor]];
+				break;
+		}
+		[_players addObject:player];
 	}
 	[self nextPlayer];
 	
 }
-- (void) addPlayer {
-	if (!_players) {
-		_players = [[NSMutableArray alloc] init];
-	}
-	MJPlayer* player = [[MJPlayer alloc] init];
-	[player setViewController:self];
-	[player setBoard:_board];
-	[player setToolbar:_toolbar];
-	[_players addObject:player];
-}
+
 - (void) nextPlayer {
 	currentPlayer < _players.count - 1 ? ++currentPlayer : (currentPlayer = 0);
-	NSLog(@"Current Player: %i", currentPlayer);
-	
 	MJPlayer* player = (MJPlayer*)[_players objectAtIndex:currentPlayer];
-	NSLog(@"Piece Count: %i", player.pieces.count);
+	[_handle setText:player.handle];
 	[_toolbar loadPlayer:player];
 }
 
@@ -84,7 +97,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	[_toolbar setViewController:self];
 	[self newGame];
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -129,25 +141,28 @@
 #pragma mark - Piece Delegate
 
 - (void) addPiece:(id)piece {
-	if ([piece isMemberOfClass:NSClassFromString(@"MJTile")]) {
+	if ([piece isKindOfClass:[MJTile class]]) {
 		MJTile* tile = (MJTile*)piece;
 		[self.view addSubview:tile];
-		return;
 	}
-	
-	NSLog(@"Adding to viewController at: (%f, %f)", [piece origin].x, [piece origin].y);
-	
-	[piece addAsSubviewToView:self.view];
+	else if ([piece isKindOfClass:[MJPiece class]]) {
+		MJPiece* piece = (MJPiece*)piece;
+		[piece addAsSubviewToView:self.view];
+	}
+	else abort();
 }
 
 - (void) removePiece:(id)piece {
-	if ([piece isMemberOfClass:NSClassFromString(@"MJTile")]) {
-		
+	if ([piece isKindOfClass:[MJTile class]]) {
+		MJTile* tile = (MJTile*)piece;
 	}
-//	if ([piece.superview isEqual:self.view]) {
-//		[piece removeFromSuperview];
-//	}
-//	else abort();
+	else if ([piece isKindOfClass:[MJPiece class]]) {
+		MJPiece* piece = (MJPiece*)piece;
+		if ([piece.superview isEqual:self.view]) {
+			[piece removeFromSuperview];
+		}
+	}
+	else abort();
 }
 
 @end

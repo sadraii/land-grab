@@ -22,7 +22,7 @@
 	NSUInteger maxX;
 }
 
-@property (weak, nonatomic) MJViewController* viewController;
+@property (weak, nonatomic) IBOutlet MJViewController* viewController;
 @property (weak, nonatomic) MJPlayer* player;
 @property (strong, nonatomic) NSMutableArray* pieces;
 

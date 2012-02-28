@@ -7,6 +7,7 @@
 //
 
 #import "MJBoard.h"
+#import "MJViewController.h"
 #import "MJContainerView.h"
 #import "MJPlayer.h"
 #import "MJPiece.h"
@@ -14,6 +15,7 @@
 
 @implementation MJBoard
 
+@synthesize viewController = _viewController;
 @synthesize pieces = _pieces;
 @synthesize boardSize = _boardSize; 
 @synthesize containerView = _containerView;
@@ -67,28 +69,43 @@
 #pragma mark - Piece Delegate
 
 - (void) addPiece:(id)piece {
-	if ([piece isMemberOfClass:NSClassFromString(@"MJTile")]) {
-		MJTile* tile = (MJTile*) piece;
-		CGPoint newOrigin = tile.frame.origin;
+	if ([piece isKindOfClass:[MJTile class]]) {
+		MJTile* tile = (MJTile*)piece;
+//		CGPoint newOrigin = tile.frame.origin;
+//		newOrigin.x -= self.frame.origin.x;
+//		newOrigin.y -= self.frame.origin.y;
+//		[tile setFrame:CGRectMake(newOrigin.x, newOrigin.y, tile.frame.size.width, tile.frame.size.height)];
+		[tile snapToPoint];
+		[tile setIsPlayed:YES];
+		[tile setUserInteractionEnabled:NO];
+		
+		[_containerView addSubview:tile];
+
+	}
+	else if ([piece isKindOfClass:[MJPiece class]]) {
+		MJPiece* piece = (MJPiece*)piece;
+		CGPoint newOrigin = piece.origin;
 		newOrigin.x -= self.frame.origin.x;
 		newOrigin.y -= self.frame.origin.y;
-		[tile setFrame:CGRectMake(newOrigin.x, newOrigin.y, tile.frame.size.width, tile.frame.size.height)];
-		[tile snapToPoint];
-		[_containerView addSubview:tile];
-		return;
+		[piece setOrigin:newOrigin];
+		[piece snapToPoint];
+		[piece setIsPlayed:YES];
+		
+		[piece addAsSubviewToView:_containerView];
 	}
-//	NSLog(@"Adding to board");
-//	CGPoint newOrigin = piece.origin;
-//	newOrigin.x -= self.frame.origin.x;
-//	newOrigin.y -= self.frame.origin.y;
-//	[piece setOrigin:newOrigin];
-//	[piece snapToPoint];
-//	[piece addAsSubviewToView:_containerView];
+	else abort();
 	
+	[_viewController nextPlayer];
 }
 
-- (void) removePiece:(MJPiece *)piece {
-	
+- (void) removePiece:(id)piece {
+	if ([piece isKindOfClass:[MJTile class]]) {
+		MJTile* tile = (MJTile*)piece;
+	}
+	else if ([piece isKindOfClass:[MJPiece class]]) {
+		MJPiece* piece = (MJPiece*)piece;
+	}
+	else abort();
 }
 
 @end
