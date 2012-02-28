@@ -21,14 +21,20 @@
 @synthesize toolbar = _toolbar;
 
 @synthesize pieces = _pieces;
+@synthesize score = _score;
+@synthesize money = _money;
+
 -(id) init {
     if ((self = [super init]) == nil) {
 		return self;
     }
 	_pieces = nil;
+	_money = 0;
+	_score = 0;
     return self;
 }
 
+/*
 - (void) loadDebugPieces {
 	if (!_pieces) _pieces = [[NSMutableArray alloc] init];
 	for (int i = 0; i < 5; i++) {
@@ -42,5 +48,6 @@
 		[_pieces addObject:p];
 	}
 }
+ */
 
 @end

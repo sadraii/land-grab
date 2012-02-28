@@ -14,6 +14,7 @@
 @class MJBoard;
 @class MJPlayer;
 @class MJPiece;
+@class MJTile;
 
 
 @interface MJViewController : UIViewController <MJPieceDelegate> {

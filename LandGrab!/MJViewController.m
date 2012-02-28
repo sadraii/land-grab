@@ -11,6 +11,7 @@
 #import "MJPlayer.h"
 #import "MJToolbar.h"
 #import "MJTopBar.h"
+#import "MJTile.h"
 
 @implementation MJViewController
 
@@ -52,7 +53,6 @@
 	[player setViewController:self];
 	[player setBoard:_board];
 	[player setToolbar:_toolbar];
-	[player loadDebugPieces];
 	[_players addObject:player];
 }
 - (void) nextPlayer {
@@ -84,6 +84,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	[_toolbar setViewController:self];
 	[self newGame];
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -127,17 +128,26 @@
 
 #pragma mark - Piece Delegate
 
-- (void) addPiece:(MJPiece *)piece {
+- (void) addPiece:(id)piece {
+	if ([piece isMemberOfClass:NSClassFromString(@"MJTile")]) {
+		MJTile* tile = (MJTile*)piece;
+		[self.view addSubview:tile];
+		return;
+	}
+	
 	NSLog(@"Adding to viewController at: (%f, %f)", [piece origin].x, [piece origin].y);
 	
 	[piece addAsSubviewToView:self.view];
 }
 
-- (void) removePiece:(MJPiece *)piece {
-	if ([piece.superview isEqual:self.view]) {
-		[piece removeFromSuperview];
+- (void) removePiece:(id)piece {
+	if ([piece isMemberOfClass:NSClassFromString(@"MJTile")]) {
+		
 	}
-	else abort();
+//	if ([piece.superview isEqual:self.view]) {
+//		[piece removeFromSuperview];
+//	}
+//	else abort();
 }
 
 @end

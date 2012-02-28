@@ -10,6 +10,7 @@
 #import "MJContainerView.h"
 #import "MJPlayer.h"
 #import "MJPiece.h"
+#import "MJTile.h"
 
 @implementation MJBoard
 
@@ -65,14 +66,24 @@
 
 #pragma mark - Piece Delegate
 
-- (void) addPiece:(MJPiece *)piece {
-	NSLog(@"Adding to board");
-	CGPoint newOrigin = piece.origin;
-	newOrigin.x -= self.frame.origin.x;
-	newOrigin.y -= self.frame.origin.y;
-	[piece setOrigin:newOrigin];
-	[piece snapToPoint];
-	[piece addAsSubviewToView:_containerView];
+- (void) addPiece:(id)piece {
+	if ([piece isMemberOfClass:NSClassFromString(@"MJTile")]) {
+		MJTile* tile = (MJTile*) piece;
+		CGPoint newOrigin = tile.frame.origin;
+		newOrigin.x -= self.frame.origin.x;
+		newOrigin.y -= self.frame.origin.y;
+		[tile setFrame:CGRectMake(newOrigin.x, newOrigin.y, tile.frame.size.width, tile.frame.size.height)];
+		[tile snapToPoint];
+		[_containerView addSubview:tile];
+		return;
+	}
+//	NSLog(@"Adding to board");
+//	CGPoint newOrigin = piece.origin;
+//	newOrigin.x -= self.frame.origin.x;
+//	newOrigin.y -= self.frame.origin.y;
+//	[piece setOrigin:newOrigin];
+//	[piece snapToPoint];
+//	[piece addAsSubviewToView:_containerView];
 	
 }
 

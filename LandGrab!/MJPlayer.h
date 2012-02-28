@@ -15,14 +15,20 @@
 @class MJPiece;
 
 
-@interface MJPlayer : NSObject
+@interface MJPlayer : NSObject {
+	
+}
 
 @property (weak, nonatomic) MJViewController* viewController;
 @property (weak, nonatomic) MJBoard* board;
 @property (weak, nonatomic) MJToolbar* toolbar;
 
 @property (strong, nonatomic) NSMutableArray* pieces;
+@property (readwrite, nonatomic) NSUInteger score;
+@property (readwrite, nonatomic) NSUInteger money;
 
-- (void) loadDebugPieces;
+
+
+//- (void) loadDebugPieces;
 
 @end

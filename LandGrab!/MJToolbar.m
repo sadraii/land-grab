@@ -10,6 +10,7 @@
 #import "MJPiece.h"
 #import "MJViewController.h"
 #import "MJPlayer.h"
+#import "MJTile.h"
 
 @implementation MJToolbar
 
@@ -32,7 +33,7 @@
 	
 }
 
-- (void) insertPiece:(MJPiece*) piece AtIndex:(NSUInteger)index {
+- (void) insertPiece:(id) piece AtIndex:(NSUInteger)index {
 	NSLog(@"Inserting Piece at index: %i", index);
 	NSArray* tmp = nil;
 	
@@ -63,33 +64,49 @@
 }
 
 - (void) loadPlayer:(MJPlayer *)player {
-	if ([player isEqual:_player]) return;
+	if ([player isEqual:_player]) abort();
 	[self removeAllPieces];
+	MJTile * tile = [[MJTile alloc] initWithCoordinate:CGPointZero];
+	[tile setViewController:_viewController];
+	[tile setBoard:_viewController.board];
+	[tile setToolbar:_viewController.toolbar];
+	[tile setBackgroundColor:[UIColor purpleColor]];
+	[self addPiece:tile];
+	
 	for (MJPiece* p  in player.pieces) {
-		MJPiece* lastPiece = [_pieces lastObject];
-		if (lastPiece) {
-			//Force the piece to insert at end of _pieces array
-			[p setOrigin:CGPointMake(maxX + lastPiece.origin.x + lastPiece.size.width, p.origin.y)];
-		}
-		[self addPiece:p];
+//		MJPiece* lastPiece = [_pieces lastObject];
+//		if (lastPiece) {
+//			//Force the piece to insert at end of _pieces array
+//			[p setOrigin:CGPointMake(maxX + lastPiece.origin.x + lastPiece.size.width, p.origin.y)];
+//		}
+//		[self addPiece:p];
 	}
 }
 
 - (void) removeAllPieces {
-	for (MJPiece* p in _pieces) {
-		[p removeFromSuperview];
+	for (id p in _pieces) {
+		
 	}
 }
 
 #pragma mark - Piece Delegate
 
-- (void) addPiece:(MJPiece*)piece {
+- (void) addPiece:(id)piece {
 	int index = 0;
-	for (MJPiece* p in _pieces) {
-		if ((p.size.width / 2) < piece.lastTouch.x)	break;
-		index++;
+	if ([piece isMemberOfClass:NSClassFromString(@"MJTile")]) {
+		MJTile* tile = (MJTile*)piece;
+		[tile setFrame:CGRectMake(offset, offset, TILE_SIZE, TILE_SIZE)];
+		[tile setIsPlayed:NO];
+		[self addSubview:tile];
+//		[self insertPiece:(MJTile*)piece AtIndex:index];
 	}
-	[self insertPiece:piece AtIndex:index];
+//	for (id p in _pieces) {
+//		if ((p.size.width / 2) < piece.lastTouch.x)	break;
+//		index++;
+//	}
+//	if ([piece isMemberOfClass:NSClassFromString(@"MJPiece")]) {
+//		[self insertPiece:(MJPiece*) piece AtIndex:index];
+//	}
 }
 
 - (void) removePiece:(MJPiece*)piece {

@@ -12,6 +12,6 @@
 
 @protocol MJPieceDelegate <NSObject>
 @required
-- (void) addPiece:(MJPiece*)piece;
-- (void) removePiece:(MJPiece*)piece;
+- (void) addPiece:(id)piece;
+- (void) removePiece:(id)piece;
 @end
