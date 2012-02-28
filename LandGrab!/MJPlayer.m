@@ -31,7 +31,7 @@
 
 - (void) loadDebugPieces {
 	if (!_pieces) _pieces = [[NSMutableArray alloc] init];
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 5; i++) {
 		NSLog(@"Creating piece");
 		MJPiece* p = [[MJPiece alloc] init];
 		[p setDelegate:_toolbar];

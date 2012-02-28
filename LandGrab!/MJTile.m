@@ -58,7 +58,6 @@
 //	NSLog(@"Tile: ((%f, %f), (%f X %f))", self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
 	[_piece setLastTouchedTile:self];
 	_currentPoint = [touch locationInView:_piece.superview];
-	NSLog(@"Tile Current Touch: (%f, %f)", _currentPoint.x, _currentPoint.y);
 	distanceTraveled = CGSizeMake(0, 0);
 	[_delegate touchesBegan:touch];
 }

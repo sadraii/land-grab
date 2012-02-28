@@ -9,6 +9,7 @@
 #import "MJBoard.h"
 #import "MJContainerView.h"
 #import "MJPlayer.h"
+#import "MJPiece.h"
 
 @implementation MJBoard
 
@@ -65,6 +66,13 @@
 #pragma mark - Piece Delegate
 
 - (void) addPiece:(MJPiece *)piece {
+	NSLog(@"Adding to board");
+	CGPoint newOrigin = piece.origin;
+	newOrigin.x -= self.frame.origin.x;
+	newOrigin.y -= self.frame.origin.y;
+	[piece setOrigin:newOrigin];
+	[piece snapToPoint];
+	[piece addAsSubviewToView:_containerView];
 	
 }
 

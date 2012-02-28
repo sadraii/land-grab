@@ -73,12 +73,6 @@
 	[piece addAsSubviewToView:self.view];
 }
 
-
-
-
-
-
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

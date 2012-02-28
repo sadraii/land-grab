@@ -45,9 +45,9 @@
 
 - (void) setOrigin:(CGPoint)point
 {
-	CGSize distance = CGSizeMake(point.x - origin.x, point.y - origin.y);
+	CGSize distance = CGSizeMake(point.x - _origin.x, point.y - _origin.y);
 	[self moveTiles:distance];
-	origin = point;
+	_origin = point;
 }
 
 - (void) setCoordinate:(CGPoint)point {
@@ -58,18 +58,18 @@
  
 - (void) moveTiles:(CGSize) distance
 {
-	NSLog(@"Moving Piece: %f X %f", distance.width, distance.height);
+//	NSLog(@"Moving Piece: %f X %f", distance.width, distance.height);
     for (MJTile* t in _tiles) {
 		[t moveDistance:distance];
 	}
-	origin = CGPointMake(origin.x + distance.width, origin.y + distance.height);
+	_origin = CGPointMake(_origin.x + distance.width, _origin.y + distance.height);
 }
 
 - (void) snapToPoint
 {
     CGSize distance = CGSizeZero;
-	int offX = (int)origin.x % TILE_SIZE;
-	int offY = (int)origin.y % TILE_SIZE;
+	int offX = (int)_origin.x % TILE_SIZE;
+	int offY = (int)_origin.y % TILE_SIZE;
 	if ((offX / ((CGFloat)TILE_SIZE - 1)) > 0.5f) {
 		distance.width += (TILE_SIZE - offX);
 	}
@@ -82,6 +82,7 @@
 	else {
 		distance.height -= offY;
 	}
+	
 	
 	[self moveTiles:distance];
 	
@@ -108,7 +109,7 @@
 
 - (void) loadDebugTiles
 {
-    MJTile* tile = [[MJTile alloc] initWithCoordinate:CGPointMake(0, 0)];
+	MJTile* tile = [[MJTile alloc] initWithCoordinate:CGPointMake(0, 0)];
 	[tile setPiece:self];
 	[tile setDelegate:self];
 	[self addTile:tile];
@@ -143,6 +144,9 @@
 
 #pragma mark - MJTileDelegate Methods
 - (void) touchesBegan:(UITouch*)touch {
+	[_board setScrollEnabled:NO];
+	[self setOrigin:[touch locationInView:_viewController.view]];
+	[_lastTouchedTile setCurrentPoint:_origin];
 	[_viewController addPiece:self];
 //	[self moveTiles:<#(CGSize)#>];
 	
@@ -155,11 +159,14 @@
 //	CGPoint point = [touch locationInView:_viewController.view];
 	if ([_board pointInside:[touch locationInView:_board] withEvent:nil]) {
 		[self setDelegate:_board];
-		lastTouch = [touch locationInView:(UIView*)_board.containerView];
+		_lastTouch = [touch locationInView:(UIView*)_board.containerView];
+		//add the orgin of the containerview to last touch so it doesnt jump around.
+		_lastTouch.x += _board.frame.origin.x;
+		_lastTouch.y += _board.frame.origin.y;
 	}
 	else if ([_toolbar pointInside:[touch locationInView:_toolbar] withEvent:nil]) {
 		[self setDelegate:_toolbar];
-		lastTouch = [touch locationInView:_toolbar];
+		_lastTouch = [touch locationInView:_toolbar];
 	}
 	else {
 		NSLog(@"Piece dropped in unsupported view");
@@ -167,7 +174,9 @@
 	}
 //	lastTouch = point;
 	#warning Remove from starting view
+	[self setOrigin:_lastTouch];
 	[_delegate addPiece:self];
+	[_board setScrollEnabled:YES];
 }
 - (void) touchesCanceled: (CGSize)distanceTraveled {
 	[self moveTiles:CGSizeMake(distanceTraveled.width * -1, distanceTraveled.height * -1)];

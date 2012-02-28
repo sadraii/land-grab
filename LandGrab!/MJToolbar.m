@@ -54,7 +54,9 @@
 	for (int i = 0; i < tmp.count; i++) {
 		MJPiece* p = [tmp objectAtIndex:i];
 		[p setOrigin:CGPointMake(maxX + offset, offset)];
+		maxX = p.origin.x + p.size.width;
 		NSLog(@"Toolbar: (%f, %f)", p.origin.x, p.origin.y);
+		
 		[_pieces addObject:p];
 		[p addAsSubviewToView:self];
 	}
