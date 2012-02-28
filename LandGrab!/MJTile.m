@@ -166,4 +166,106 @@
 	}
 }
 
+- (void)drawRect:(CGRect)rect{
+    [super drawRect:rect];
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    
+    //Define Colors
+    CGColorRef lighterRedColor = [UIColor colorWithRed:1.0 green:0.0 
+                                           blue:0.0 alpha:1.0].CGColor;
+    CGColorRef redColor = [UIColor colorWithRed:0.6 green:0.0 
+                                           blue:0.0 alpha:1.0].CGColor;
+    CGColorRef darkerRedColor = [UIColor colorWithRed:0.4 green:0.0 
+                                           blue:0.0 alpha:1.0].CGColor;
+    
+    CGColorRef lighterBlueColor = [UIColor colorWithRed:0.0 green:0.0 
+                                                   blue:1.0 alpha:1.0].CGColor;
+    CGColorRef blueColor = [UIColor colorWithRed:0.0 green:0.0 
+                                           blue:0.6 alpha:1.0].CGColor;
+    CGColorRef darkerBlueColor = [UIColor colorWithRed:0.0 green:0.0 
+                                                 blue:0.4 alpha:1.0].CGColor;
+    
+    
+    CGColorRef lighterGreenColor = [UIColor colorWithRed:0.0 green:1.0 
+                                            blue:0.0 alpha:1.0].CGColor;
+    CGColorRef greenColor = [UIColor colorWithRed:0.0 green:0.6 
+                                                   blue:0.0 alpha:1.0].CGColor;
+    
+    CGColorRef lighterTealColor = [UIColor colorWithRed:0.0 green:1.0 
+                                            blue:1.0 alpha:1.0].CGColor;
+    CGColorRef tealColor = [UIColor colorWithRed:0.0 green:0.5 
+                                                   blue:0.5 alpha:1.0].CGColor;
+    
+    CGColorRef lighterYellowColor = [UIColor colorWithRed:1.0 green:1.0 
+                                                    blue:0.0 alpha:1.0].CGColor;
+    CGColorRef yellowColor = [UIColor colorWithRed:0.6 green:0.6 
+                                             blue:0.0 alpha:1.0].CGColor;
+    
+    CGFloat outerMargin = 3.0f;
+    CGRect outerRect = CGRectInset(self.bounds, outerMargin, outerMargin);
+
+    
+    if (self.player.handle == @"Andrew") {
+        
+        CGMutablePathRef outerPath = createRoundedRectForRect(outerRect, 10.0);
+        CGContextSetFillColorWithColor(ctx, lighterBlueColor); // outline
+        CGContextFillRect(ctx, self.bounds);
+        CGContextSaveGState(ctx);
+        CGContextSetFillColorWithColor(ctx, blueColor); // fill
+        CGContextAddPath(ctx, outerPath);
+        CGContextFillPath(ctx);
+        drawLinearGradient(ctx, outerRect, lighterBlueColor, darkerBlueColor);
+        CGContextRestoreGState(ctx);
+    }
+    
+    if (self.player.handle == @"Jason") {
+        
+        CGMutablePathRef outerPath = createRoundedRectForRect(outerRect, 10.0);
+        CGContextSetFillColorWithColor(ctx, lighterRedColor); // outline
+        CGContextFillRect(ctx, self.bounds);
+        CGContextSaveGState(ctx);
+        CGContextSetFillColorWithColor(ctx, redColor); // fill
+        CGContextAddPath(ctx, outerPath);
+        CGContextFillPath(ctx);
+        drawLinearGradient(ctx, outerRect, lighterRedColor, darkerRedColor);
+        CGContextRestoreGState(ctx);
+    }
+    
+    if (self.player.handle == @"Max") {
+        
+        CGMutablePathRef outerPath = createRoundedRectForRect(outerRect, 10.0);
+        CGContextSetFillColorWithColor(ctx, lighterGreenColor); // outline
+        CGContextFillRect(ctx, self.bounds);
+        CGContextSaveGState(ctx);
+        CGContextSetFillColorWithColor(ctx, greenColor); // fill
+        CGContextAddPath(ctx, outerPath);
+        CGContextFillPath(ctx);
+        CGContextRestoreGState(ctx);
+    }
+    
+    if (self.player.handle == @"Mostafa") {
+        
+        CGMutablePathRef outerPath = createRoundedRectForRect(outerRect, 10.0);
+        CGContextSetFillColorWithColor(ctx, lighterTealColor); // outline
+        CGContextFillRect(ctx, self.bounds);
+        CGContextSaveGState(ctx);
+        CGContextSetFillColorWithColor(ctx, tealColor); // fill
+        CGContextAddPath(ctx, outerPath);
+        CGContextFillPath(ctx);
+        CGContextRestoreGState(ctx);
+    }
+    
+    if (self.player.handle == @"Kristi") {
+        
+        CGMutablePathRef outerPath = createRoundedRectForRect(outerRect, 10.0);
+        CGContextSetFillColorWithColor(ctx, lighterYellowColor); // outline
+        CGContextFillRect(ctx, self.bounds);
+        CGContextSaveGState(ctx);
+        CGContextSetFillColorWithColor(ctx, yellowColor); // fill
+        CGContextAddPath(ctx, outerPath);
+        CGContextFillPath(ctx);
+        CGContextRestoreGState(ctx);
+    }
+}
+
 @end

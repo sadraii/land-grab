@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MJTileDelegate.h"
+#import "Graphics.h"
 
 @class MJPiece;
 @class MJPlayer;
@@ -41,4 +42,5 @@
 - (void) moveDistance:(CGSize) distance;
 - (void) updateCoordinate;
 - (void) snapToPoint;
+
 @end
