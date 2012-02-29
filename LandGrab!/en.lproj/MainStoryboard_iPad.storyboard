@@ -107,7 +107,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="NewGame" destination="EEp-wq-xqe" id="Kb1-5E-Gq5"/>
                         <outlet property="board" destination="gE6-AP-9Rm" id="UUt-dG-xA3"/>
                         <outlet property="handle" destination="cUh-Sy-Mp7" id="GsV-GE-Vrk"/>
                         <outlet property="territory" destination="hQz-6b-hcx" id="cQd-6k-eqJ"/>
@@ -139,7 +138,6 @@
             <relationships>
                 <relationship kind="action" name="newGame:"/>
                 <relationship kind="action" name="zoomToCapital:"/>
-                <relationship kind="outlet" name="NewGame" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="board" candidateClass="MJBoard"/>
                 <relationship kind="outlet" name="handle" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="territory" candidateClass="UILabel"/>

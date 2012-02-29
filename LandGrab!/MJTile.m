@@ -46,7 +46,7 @@
 - (void) updateCoordinate {
 	CGPoint origin = self.frame.origin;
 	_coordinate = CGPointMake(origin.x / TILE_SIZE, origin.y / TILE_SIZE);
-	NSLog(@"Tile Coordinate: (%i, %i)", (int)_coordinate.x, (int)_coordinate.y);
+//	NSLog(@"Tile Coordinate: (%i, %i)", (int)_coordinate.x, (int)_coordinate.y);
 }
 
 - (void) snapToPoint
@@ -75,10 +75,14 @@
 
 - (CGSize) distanceFromOrigin:(CGPoint)point {
 	CGSize distance = CGSizeZero;
-	CGPoint origin = self.frame.origin;
 	distance.width = point.x;
 	distance.height = point.y;
 	return distance;
+}
+
+- (void) setCoordinate:(CGPoint)coordinate {
+	[self setFrame:CGRectMake(coordinate.x * TILE_SIZE, coordinate.y * TILE_SIZE, self.frame.size.width, self.frame.size.height)];
+	_coordinate = coordinate;
 }
 
 #pragma mark - Touches
@@ -99,7 +103,7 @@
 		point.x -= distanceFromOrigin.width;
 		point.y -= distanceFromOrigin.height;
 		[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
-		[_viewController addPiece:self];
+		[_viewController addTile:self];
 	}
 }
 
@@ -135,12 +139,12 @@
 			point.y -= distanceFromOrigin.height;
 			[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
 			
-			[_board addPiece:self];
+			[_board addTile:self];
 		}
 		else if ([_toolbar pointInside:[touch locationInView:_toolbar] withEvent:nil]) {
 			point = [touch locationInView:_toolbar];
 			[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
-			[_toolbar addPiece:self];
+			[_toolbar addTile:self];
 		}
 		else {
 			NSLog(@"Piece dropped in unsupported view");
@@ -157,7 +161,7 @@
 	else {
 		[self setFrame:CGRectMake(startingOrigin.x, startingOrigin.y, self.frame.size.width, self.frame.size.height)];
 		if ([startingView isEqual:_toolbar]) {
-			[_toolbar addPiece:self];
+			[_toolbar addTile:self];
 		}
 		else {
 			abort();

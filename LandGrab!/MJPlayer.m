@@ -25,7 +25,7 @@
 @synthesize lastPlayedTile = _lastPlayedTile;
 @synthesize handle = _handle;
 @synthesize color = _color;
-@synthesize capitalLocation = _capitalLocation;
+@synthesize capital = _capital;
 @synthesize score = _score;
 @synthesize territory = _territory;
 @synthesize money = _money;
@@ -40,19 +40,20 @@
 	_money = 0;
 	_score = 0;
 	_territory = 0;
-	_capitalLocation = CGPointMake(0, 0);
+	_capital = nil;
 	_playedPieces = [[NSMutableArray alloc] init];
     return self;
 }
 
 - (void) updateTerritory {
 	_territory = 0;
-	[self updateTerritoryStartingAtCoordinate:_capitalLocation];
-	NSLog(@"Territory: %i", _territory);
+	for (MJTile* t in _playedPieces) {
+		t.tag = 0;
+	}
+	[self updateTerritoryStartingAtCoordinate:_capital.coordinate];
 }
 
 - (void) updateTerritoryStartingAtCoordinate:(CGPoint)point {
-	NSLog(@"Update: (%f, %f)", point.x, point.y);
 	CGPoint up = CGPointMake(point.x, point.y + 1);
 	CGPoint down = CGPointMake(point.x, point.y - 1);
 	CGPoint left = CGPointMake(point.x - 1, point.y);
@@ -78,13 +79,11 @@
 		_territory++;
 		[self updateTerritoryStartingAtCoordinate:right];
 	}
-	tmp = [_board tileAtCoordinate:point];
-	tmp.tag = 0;
+//	tmp = [_board tileAtCoordinate:point];
+//	tmp.tag = 0;
 }
 
 - (BOOL) coordinate:(CGPoint)a TouchesCoordinate:(CGPoint)b {
-	NSLog(@"A: (%i, %i)", (int)a.x, (int)a.y);
-	NSLog(@"B: (%i, %i)", (int)b.x, (int)b.y);
 	if (b.x == a.x && (b.y == a.y+1 || b.y == a.y-1)) {
 		return YES;
 	}

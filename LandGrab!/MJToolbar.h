@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "MJPieceDelegate.h"
 
-@class MJPiece;
+
 @class MJViewController;
 @class MJPlayer;
+@class MJPiece;
+@class MJTile;
 
 @interface MJToolbar : UIScrollView <MJPieceDelegate> {
 @public
@@ -27,9 +29,11 @@
 @property (strong, nonatomic) NSMutableArray* pieces;
 
 - (void) newGame;
-- (void) snapPieceToPoint:(MJPiece*)piece;
 - (void) insertPiece:(MJPiece*) piece AtIndex:(NSUInteger)index;
 - (void) loadPlayer:(MJPlayer*) player;
 - (void) removeAllPieces;
+
+- (void) addTile:(MJTile*)tile;
+- (void) addPiece:(MJPiece*)piece;
 
 @end

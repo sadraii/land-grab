@@ -7,28 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MJPieceDelegate.h"
 
 @class MJTopBar;
-@class MJToolbar;
 @class MJBoard;
+@class MJToolbar;
+
 @class MJPlayer;
 @class MJPiece;
 @class MJTile;
 
-
-@interface MJViewController : UIViewController <MJPieceDelegate> {
+@interface MJViewController : UIViewController {
 	NSInteger currentPlayerIndex;
 	NSUInteger turnCount;
 }
-
-@property (strong, nonatomic) IBOutlet UIButton *NewGame;
-
 @property (strong, nonatomic) IBOutlet MJTopBar* topbar;
 @property (strong, nonatomic) IBOutlet UILabel* handle;
 @property (strong, nonatomic) IBOutlet UILabel *territory;
-
-
 @property (strong, nonatomic) IBOutlet MJBoard* board;
 @property (strong, nonatomic) IBOutlet MJToolbar* toolbar;
 
@@ -37,6 +31,10 @@
 
 - (IBAction)newGame:(id)sender;
 - (IBAction)zoomToCapital:(id)sender;
+- (void) zoomToRect:(CGRect)rect;
 - (void) nextPlayer;
+
+- (void) addTile:(MJTile*)tile;
+- (void) addPiece:(MJPiece*)piece;
 
 @end

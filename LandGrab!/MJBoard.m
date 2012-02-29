@@ -36,7 +36,6 @@
 {
 	_containerView = NULL;
 	_pieces = [[NSMutableArray alloc] init];
-	[self setBoardSize:CGSizeMake(12, 12)];
 }
 
 - (void) setBoardSize:(CGSize)size
@@ -64,62 +63,43 @@
 	return YES;
 }
 
+- (void) addTile:(MJTile*)tile {
+	[tile snapToPoint];
+	if ([self tileAtCoordinate:tile.coordinate]) {
+		NSLog(@"Cannot place a piece on top of another");
+		[tile touchesCancelled:nil withEvent:nil];
+		return;
+	}
+	else if(![self isCoordinateOnBoard:tile.coordinate]) {
+		NSLog(@"Cannot place a piece off the board;");
+		[tile touchesCancelled:nil withEvent:nil];
+		return;
+	}
+	[tile setIsPlayed:YES];
+	[tile setUserInteractionEnabled:NO];
+	[_containerView addSubview:tile];
+	
+	MJPlayer* player = _viewController.currentPlayer;
+	[player setLastPlayedTile:tile];
+	[[player playedPieces] addObject:tile];
+	[_pieces addObject:tile];
+	[_viewController nextPlayer];
+}
+- (void) addPiece:(MJPiece*)piece {
+	CGPoint newOrigin = piece.origin;
+	newOrigin.x -= self.frame.origin.x;
+	newOrigin.y -= self.frame.origin.y;
+	[piece setOrigin:newOrigin];
+	[piece snapToPoint];
+	[piece setIsPlayed:YES];
+	[piece addAsSubviewToView:_containerView];
+	[_viewController nextPlayer];
+}
+
 #pragma mark - Scroll View Delegate Methods
 
 - (UIView*) viewForZoomingInScrollView:(UIScrollView *)scrollView {
 	return _containerView;
-}
-
-#pragma mark - Piece Delegate
-
-- (void) addPiece:(id)piece {
-	if ([piece isKindOfClass:[MJTile class]]) {
-		MJTile* tile = (MJTile*)piece;
-		[tile snapToPoint];
-		if ([self tileAtCoordinate:tile.coordinate]) {
-			NSLog(@"Cannot place a piece on top of another");
-			[tile touchesCancelled:nil withEvent:nil];
-			return;
-		}
-		else if(![self isCoordinateOnBoard:tile.coordinate]) {
-			NSLog(@"Cannot place a piece off the board;");
-			[tile touchesCancelled:nil withEvent:nil];
-			return;
-		}
-		[tile setIsPlayed:YES];
-		[tile setUserInteractionEnabled:NO];
-		[_containerView addSubview:tile];
-		
-		MJPlayer* player = _viewController.currentPlayer;
-		[player setLastPlayedTile:tile];
-		[[player playedPieces] addObject:tile];
-		[_pieces addObject:tile];
-		NSLog(@"MJBoard: Played Pieces Count: %i", player.playedPieces.count);
-	}
-	else if ([piece isKindOfClass:[MJPiece class]]) {
-		MJPiece* piece = (MJPiece*)piece;
-		CGPoint newOrigin = piece.origin;
-		newOrigin.x -= self.frame.origin.x;
-		newOrigin.y -= self.frame.origin.y;
-		[piece setOrigin:newOrigin];
-		[piece snapToPoint];
-		[piece setIsPlayed:YES];
-		
-		[piece addAsSubviewToView:_containerView];
-	}
-	else abort();
-	
-	[_viewController nextPlayer];
-}
-
-- (void) removePiece:(id)piece {
-	if ([piece isKindOfClass:[MJTile class]]) {
-		MJTile* tile = (MJTile*)piece;
-	}
-	else if ([piece isKindOfClass:[MJPiece class]]) {
-		MJPiece* piece = (MJPiece*)piece;
-	}
-	else abort();
 }
 
 @end

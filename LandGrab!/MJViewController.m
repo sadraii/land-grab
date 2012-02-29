@@ -16,11 +16,9 @@
 
 @implementation MJViewController
 
-@synthesize NewGame = _NewGame;
 @synthesize topbar = _topbar;
 @synthesize handle = _handle;
 @synthesize territory = _territory;
-
 @synthesize board = _board;
 @synthesize toolbar = _toolbar;
 
@@ -29,84 +27,107 @@
 
 #pragma mark - Object Methods
 
-- (id)initWithCoder:(NSCoder *)coder {
-    self = [super initWithCoder:coder];
-    if (self) {
-    }
-    return self;
-}
-
 - (IBAction)newGame:(id)sender {
 	[_board newGame];
+	[_board setBoardSize:CGSizeMake(30, 30)];
 	[_toolbar newGame];
 	[self setPlayers:[[NSMutableArray alloc] init]];
 	currentPlayerIndex = -1;
 	turnCount = 0;
-	int numPlayers = 4;
+	int numPlayers = 5;
 	for (int i = 0; i < numPlayers; i++) {
 		MJPlayer* player = [[MJPlayer alloc] init];
 		[player setViewController:self];
 		[player setBoard:_board];
 		[player setToolbar:_toolbar];
+		
+		
+		MJTile* capital = [[MJTile alloc] initWithCoordinate:CGPointZero];
+		
+		
+		int capitalOffset = 6;
+		
 		switch (i) {
 			case 0:
 				[player setHandle:@"Andrew"];
 				[player setColor:[UIColor blueColor]];
-				[player setCapitalLocation:CGPointMake(0, 0)];
+				[capital setCoordinate:CGPointMake(capitalOffset, capitalOffset)];
 				break;
 			case 1:
 				[player setHandle:@"Jason"];
 				[player setColor:[UIColor redColor]];
-				[player setCapitalLocation:CGPointMake(0, _board.boardSize.height - 1)];
+				[capital setCoordinate:CGPointMake(capitalOffset, _board.boardSize.height - 1 - capitalOffset)];
 				break;
 			case 2:
 				[player setHandle:@"Max"];
 				[player setColor:[UIColor greenColor]];
-				[player setCapitalLocation:CGPointMake(_board.boardSize.width - 1, _board.boardSize.height - 1)];
+				[capital setCoordinate:CGPointMake(_board.boardSize.width - 1 - capitalOffset, _board.boardSize.height - 1 - capitalOffset)];
 				break;
 			case 3:	
 				[player setHandle:@"Mostafa"];
 				[player setColor:[UIColor brownColor]];
-				[player setCapitalLocation:CGPointMake(_board.boardSize.width - 1, 0)];
+				[capital setCoordinate:CGPointMake(_board.boardSize.width - 1 - capitalOffset, capitalOffset)];
 				break;
 			case 4:
 				[player setHandle:@"Kristi"];
 				[player setColor:[UIColor yellowColor]];
-				[player setCapitalLocation:CGPointMake((int)((_board.boardSize.width - 1) / 2), (int)((_board.boardSize.height - 1)/2))];
+				[capital setCoordinate:CGPointMake((int)((_board.boardSize.width - 1) / 2), (int)((_board.boardSize.height - 1)/2))];
 				break;
 		}
 		[_players addObject:player];
-		MJTile* capital = [[MJTile alloc] initWithCoordinate:player.capitalLocation];
+		
+		[player setCapital:capital];
+		
+		[capital setIsPlayed:YES];
+		[capital setTag:1];
 		[capital setBackgroundColor:player.color];
 		[capital setPlayer:player];
-//		[capital setViewController:self];
-//		[capital setBoard:_board];
-		[_board addPiece:capital];
+		
+		[_board.pieces addObject:capital];
+		[_board addSubview:capital];
+//		[_board addTile:capital];
 	}
 	[self nextPlayer];
+}
+
+- (IBAction)zoomToCapital:(id)sender {
+	[self zoomToRect:_currentPlayer.capital.frame];
+}
+
+- (void) zoomToRect:(CGRect)rect {
+	CGRect boardRect = _board.bounds;
+	boardRect.origin.x = (rect.origin.x + (rect.size.width / 2)) - (boardRect.size.width / 2);
+	boardRect.origin.y = (rect.origin.y + (rect.size.height / 2)) - (boardRect.size.height / 2);
+	[_board scrollRectToVisible:boardRect animated:YES];
 }
 
 - (void) nextPlayer {
 	currentPlayerIndex < _players.count - 1 ? ++currentPlayerIndex : (currentPlayerIndex = 0);
 	if (!(currentPlayerIndex % _players.count - 1)) turnCount++;
+	NSLog(@"Current Player: %i", currentPlayerIndex);
 	_currentPlayer = (MJPlayer*)[_players objectAtIndex:currentPlayerIndex];
 	[_currentPlayer updateTerritory];
 	[_toolbar loadPlayer:_currentPlayer];
 	[_handle setText:_currentPlayer.handle];
 	[_territory setText:[NSString stringWithFormat:@"%i",_currentPlayer.territory]];
 	if (_currentPlayer.lastPlayedTile) {
-		[self zoomToCapital:self];
-//		[_board scrollRectToVisible:_currentPlayer.lastPlayedTile.frame animated:YES];
+		[self zoomToRect:_currentPlayer.lastPlayedTile.frame];
 	}
 	else {
-		[self zoomToCapital:self];
+		[self zoomToRect:_currentPlayer.capital.frame];
 	}
 }
 
-- (IBAction)zoomToCapital:(id)sender {
-	[_board scrollRectToVisible:CGRectMake(_currentPlayer.capitalLocation.x * TILE_SIZE, _currentPlayer.capitalLocation.y * TILE_SIZE, TILE_SIZE, TILE_SIZE) animated:YES];
+- (void) addTile:(MJTile *)tile {
+	[self.view addSubview:tile];
 }
 
+- (void) addPiece:(MJPiece *)piece {
+	[piece addAsSubviewToView:self.view];
+}
+
+
+#pragma mark - Memory Warning
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -124,11 +145,17 @@
 
 - (void)viewDidUnload
 {
-	[self setNewGame:nil];
-	[self setTerritory:nil];
+	//IBOutlets
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+	[self setTopbar:nil];
+	[self setHandle:nil];
+	[self setTerritory:nil];
+	[self setBoard:nil];
+	[self setTopbar:nil];
+	
+	//Others
+	[self setPlayers:nil];
+	[self setCurrentPlayer:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -159,33 +186,6 @@
 	} else {
 	    return YES;
 	}
-}
-
-#pragma mark - Piece Delegate
-
-- (void) addPiece:(id)piece {
-	if ([piece isKindOfClass:[MJTile class]]) {
-		MJTile* tile = (MJTile*)piece;
-		[self.view addSubview:tile];
-	}
-	else if ([piece isKindOfClass:[MJPiece class]]) {
-		MJPiece* piece = (MJPiece*)piece;
-		[piece addAsSubviewToView:self.view];
-	}
-	else abort();
-}
-
-- (void) removePiece:(id)piece {
-	if ([piece isKindOfClass:[MJTile class]]) {
-		MJTile* tile = (MJTile*)piece;
-	}
-	else if ([piece isKindOfClass:[MJPiece class]]) {
-		MJPiece* piece = (MJPiece*)piece;
-		if ([piece.superview isEqual:self.view]) {
-			[piece removeFromSuperview];
-		}
-	}
-	else abort();
 }
 
 @end

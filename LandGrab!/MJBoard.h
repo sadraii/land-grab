@@ -31,4 +31,7 @@
 - (MJTile*) tileAtCoordinate:(CGPoint)coordinate;
 - (BOOL) isCoordinateOnBoard:(CGPoint)coordinate;
 
+- (void) addTile:(MJTile*)tile;
+- (void) addPiece:(MJPiece*)piece;
+
 @end

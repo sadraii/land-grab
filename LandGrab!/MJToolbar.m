@@ -34,11 +34,7 @@
 	}
 }
 
-- (void) snapPieceToPoint:(MJPiece*)piece {
-	
-}
-
-- (void) insertPiece:(id) piece AtIndex:(NSUInteger)index {
+- (void) insertPiece:(MJPiece*)piece AtIndex:(NSUInteger)index {
 	NSLog(@"Inserting Piece at index: %i", index);
 	NSArray* tmp = nil;
 	
@@ -70,6 +66,8 @@
 
 - (void) loadPlayer:(MJPlayer *)player {
 	[self removeAllPieces];
+	
+	//Add a single tile to the first index of the board
 	MJTile * tile = [[MJTile alloc] initWithCoordinate:CGPointZero];
 	[tile setViewController:_viewController];
 	[tile setBoard:_viewController.board];
@@ -77,54 +75,26 @@
 	[tile setPlayer:player];
 	[tile setTag:0];
 	[tile setBackgroundColor:player.color];
-	[self addPiece:tile];
-	
-	for (MJPiece* p  in player.pieces) {
-//		MJPiece* lastPiece = [_pieces lastObject];
-//		if (lastPiece) {
-//			//Force the piece to insert at end of _pieces array
-//			[p setOrigin:CGPointMake(maxX + lastPiece.origin.x + lastPiece.size.width, p.origin.y)];
-//		}
-//		[self addPiece:p];
-	}
+	[self addTile:tile];
 }
 
 - (void) removeAllPieces {
 	for (id p in _pieces) {
-		
+		[p removeFromSuperview];
 	}
 }
 
-#pragma mark - Piece Delegate
-
-- (void) addPiece:(id)piece {
+- (void) addTile:(MJTile*)tile {
+	[tile setFrame:CGRectMake(offset, offset, TILE_SIZE, TILE_SIZE)];
+	[tile setIsPlayed:NO];
+	[self addSubview:tile];
+}
+- (void) addPiece:(MJPiece*)piece {
 	int index = 0;
-	if ([piece isKindOfClass:[MJTile class]]) {
-		MJTile* tile = (MJTile*)piece;
-		[tile setFrame:CGRectMake(offset, offset, TILE_SIZE, TILE_SIZE)];
-		[tile setIsPlayed:NO];
-		[self addSubview:tile];
+	for (MJPiece* p in _pieces) {
+		if ((p.size.width / 2) < piece.lastTouch.x)	break;
+		index++;
 	}
-	else if ([piece isKindOfClass:[MJPiece class]]) {
-		MJPiece* piece = (MJPiece*)piece;
-		for (MJPiece* p in _pieces) {
-			if ((p.size.width / 2) < piece.lastTouch.x)	break;
-			index++;
-		}
-		if ([piece isMemberOfClass:NSClassFromString(@"MJPiece")]) {
-			[self insertPiece:(MJPiece*) piece AtIndex:index];
-		}
-	}
-	else abort();
-}
-
-- (void) removePiece:(MJPiece*)piece {
-	if ([piece isKindOfClass:[MJTile class]]) {
-		MJTile* tile = (MJTile*)piece;
-	}
-	else if ([piece isKindOfClass:[MJPiece class]]) {
-		MJPiece* piece = (MJPiece*)piece;
-	}
-	else abort();
+	[self insertPiece:(MJPiece*) piece AtIndex:index];
 }
 @end
