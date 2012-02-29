@@ -16,7 +16,6 @@
 
 
 @interface MJPlayer : NSObject {
-	CGPoint capitalLocation;
 }
 
 @property (weak, nonatomic) MJViewController* viewController;
@@ -25,8 +24,11 @@
 
 @property (strong, nonatomic) NSMutableArray* pieces;
 @property (strong, nonatomic) NSMutableArray* playedPieces;
+@property (weak, nonatomic) MJTile* lastPlayedTile;
+
 @property (strong, nonatomic) NSString* handle;
 @property (strong, nonatomic) UIColor* color;
+@property (readwrite, nonatomic) CGPoint capitalLocation;
 @property (readwrite, nonatomic) NSUInteger score;
 @property (readwrite, nonatomic) NSUInteger territory;
 @property (readwrite, nonatomic) NSUInteger money;

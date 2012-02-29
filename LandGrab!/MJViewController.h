@@ -18,7 +18,7 @@
 
 
 @interface MJViewController : UIViewController <MJPieceDelegate> {
-	NSInteger currentPlayer;
+	NSInteger currentPlayerIndex;
 	NSUInteger turnCount;
 }
 
@@ -33,8 +33,10 @@
 @property (strong, nonatomic) IBOutlet MJToolbar* toolbar;
 
 @property (strong, nonatomic) NSMutableArray* players;
+@property (weak, nonatomic) MJPlayer* currentPlayer;
 
 - (IBAction)newGame:(id)sender;
+- (IBAction)zoomToCapital:(id)sender;
 - (void) nextPlayer;
 
 @end

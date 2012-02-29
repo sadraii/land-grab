@@ -36,7 +36,7 @@
 {
 	_containerView = NULL;
 	_pieces = [[NSMutableArray alloc] init];
-	[self setBoardSize:CGSizeMake(30, 30)];
+	[self setBoardSize:CGSizeMake(100, 100)];
 }
 
 - (void) setBoardSize:(CGSize)size
@@ -53,12 +53,15 @@
 
 - (MJTile*) tileAtCoordinate:(CGPoint)coordinate {
 	
-	for (MJTile* t in _pieces) {
-		if (CGPointEqualToPoint(coordinate, t.coordinate)) {
-			return t;
-		}
-	}
+	for (MJTile* t in _pieces)
+		if (CGPointEqualToPoint(coordinate, t.coordinate)) return t;
 	return nil;
+}
+
+- (BOOL) isCoordinateOnBoard:(CGPoint)coordinate {
+	if (coordinate.x < 0 || coordinate.x > _boardSize.width - 1) return NO;
+	if (coordinate.y < 0 || coordinate.y > _boardSize.height - 1) return NO;
+	return YES;
 }
 
 #pragma mark - Scroll View Delegate Methods
@@ -73,11 +76,22 @@
 	if ([piece isKindOfClass:[MJTile class]]) {
 		MJTile* tile = (MJTile*)piece;
 		[tile snapToPoint];
+		if ([self tileAtCoordinate:tile.coordinate]) {
+			NSLog(@"Cannot place a piece on top of another");
+			[tile touchesCancelled:nil withEvent:nil];
+			return;
+		}
+		else if(![self isCoordinateOnBoard:tile.coordinate]) {
+			NSLog(@"Cannot place a piece off the board;");
+			[tile touchesCancelled:nil withEvent:nil];
+			return;
+		}
 		[tile setIsPlayed:YES];
 		[tile setUserInteractionEnabled:NO];
 		[_containerView addSubview:tile];
 		
-		MJPlayer* player = tile.player;
+		MJPlayer* player = _viewController.currentPlayer;
+		[player setLastPlayedTile:tile];
 		[[player playedPieces] addObject:tile];
 		[_pieces addObject:tile];
 		NSLog(@"MJBoard: Played Pieces Count: %i", player.playedPieces.count);

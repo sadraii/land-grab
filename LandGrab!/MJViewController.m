@@ -25,6 +25,7 @@
 @synthesize toolbar = _toolbar;
 
 @synthesize players = _players;
+@synthesize currentPlayer = _currentPlayer;
 
 #pragma mark - Object Methods
 
@@ -39,9 +40,9 @@
 	[_board newGame];
 	[_toolbar newGame];
 	[self setPlayers:[[NSMutableArray alloc] init]];
-	currentPlayer = -1;
+	currentPlayerIndex = -1;
 	turnCount = 0;
-	int numPlayers = 1;
+	int numPlayers = 4;
 	for (int i = 0; i < numPlayers; i++) {
 		MJPlayer* player = [[MJPlayer alloc] init];
 		[player setViewController:self];
@@ -51,22 +52,27 @@
 			case 0:
 				[player setHandle:@"Andrew"];
 				[player setColor:[UIColor blueColor]];
+				[player setCapitalLocation:CGPointMake(0, 0)];
 				break;
 			case 1:
 				[player setHandle:@"Jason"];
 				[player setColor:[UIColor redColor]];
+				[player setCapitalLocation:CGPointMake(0, _board.boardSize.height - 1)];
 				break;
 			case 2:
 				[player setHandle:@"Max"];
 				[player setColor:[UIColor greenColor]];
+				[player setCapitalLocation:CGPointMake(_board.boardSize.width - 1, _board.boardSize.height - 1)];
 				break;
 			case 3:	
 				[player setHandle:@"Mostafa"];
 				[player setColor:[UIColor brownColor]];
+				[player setCapitalLocation:CGPointMake(_board.boardSize.width - 1, 0)];
 				break;
 			case 4:
 				[player setHandle:@"Kristi"];
 				[player setColor:[UIColor yellowColor]];
+				[player setCapitalLocation:CGPointMake((int)((_board.boardSize.width - 1) / 2), (int)((_board.boardSize.height - 1)/2))];
 				break;
 		}
 		[_players addObject:player];
@@ -75,22 +81,23 @@
 }
 
 - (void) nextPlayer {
-	currentPlayer < _players.count - 1 ? ++currentPlayer : (currentPlayer = 0);
-	if (!(currentPlayer % _players.count - 1)) turnCount++;
-	MJPlayer* player = (MJPlayer*)[_players objectAtIndex:currentPlayer];
-	[player updateTerritory];
-	[_toolbar loadPlayer:player];
-	[_handle setText:player.handle];
-	[_territory setText:[NSString stringWithFormat:@"%i",player.territory]];
+	currentPlayerIndex < _players.count - 1 ? ++currentPlayerIndex : (currentPlayerIndex = 0);
+	if (!(currentPlayerIndex % _players.count - 1)) turnCount++;
+	_currentPlayer = (MJPlayer*)[_players objectAtIndex:currentPlayerIndex];
+	[_currentPlayer updateTerritory];
+	[_toolbar loadPlayer:_currentPlayer];
+	[_handle setText:_currentPlayer.handle];
+	[_territory setText:[NSString stringWithFormat:@"%i",_currentPlayer.territory]];
+	if (_currentPlayer.lastPlayedTile) {
+		[_board scrollRectToVisible:_currentPlayer.lastPlayedTile.frame animated:YES];
+	}
+	else {
+		[self zoomToCapital:self];
+	}
 }
 
-- (void) createDebugPiece {
-	MJPiece* piece = [[MJPiece alloc] init];
-	[piece setViewController:self];
-	[piece setBoard:_board];
-	[piece setToolbar:_toolbar];
-	[piece loadDebugTiles];
-	[piece addAsSubviewToView:self.view];
+- (IBAction)zoomToCapital:(id)sender {
+	[_board scrollRectToVisible:CGRectMake(_currentPlayer.capitalLocation.x * TILE_SIZE, _currentPlayer.capitalLocation.y * TILE_SIZE, TILE_SIZE, TILE_SIZE) animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

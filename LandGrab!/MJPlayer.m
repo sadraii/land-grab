@@ -22,8 +22,10 @@
 
 @synthesize pieces = _pieces;
 @synthesize playedPieces = _playedPieces;
+@synthesize lastPlayedTile = _lastPlayedTile;
 @synthesize handle = _handle;
 @synthesize color = _color;
+@synthesize capitalLocation = _capitalLocation;
 @synthesize score = _score;
 @synthesize territory = _territory;
 @synthesize money = _money;
@@ -38,14 +40,14 @@
 	_money = 0;
 	_score = 0;
 	_territory = 0;
-	capitalLocation = CGPointMake(0, 0);
+	_capitalLocation = CGPointMake(0, 0);
 	_playedPieces = [[NSMutableArray alloc] init];
     return self;
 }
 
 - (void) updateTerritory {
 	_territory = 0;
-	[self updateTerritoryStartingAtCoordinate:capitalLocation];
+	[self updateTerritoryStartingAtCoordinate:_capitalLocation];
 	NSLog(@"Territory: %i", _territory);
 }
 

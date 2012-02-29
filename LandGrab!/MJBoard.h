@@ -29,4 +29,5 @@
 - (void) newGame;
 - (void) setBoardSize:(CGSize)size;
 - (MJTile*) tileAtCoordinate:(CGPoint)coordinate;
+- (BOOL) isCoordinateOnBoard:(CGPoint)coordinate;
 @end
