@@ -8,6 +8,7 @@
 
 #import "MJToolbar.h"
 #import "MJPiece.h"
+#import "MJBoard.h"
 #import "MJViewController.h"
 #import "MJPlayer.h"
 #import "MJTile.h"
@@ -85,7 +86,7 @@
 }
 
 - (void) addTile:(MJTile*)tile {
-	[tile setFrame:CGRectMake(offset, offset, TILE_SIZE, TILE_SIZE)];
+	[tile setFrame:CGRectMake(offset, offset, [MJBoard tileSize], [MJBoard tileSize])];
 	[tile setIsPlayed:NO];
 	[self addSubview:tile];
 }

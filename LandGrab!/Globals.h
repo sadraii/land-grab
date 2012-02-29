@@ -9,6 +9,6 @@
 #ifndef LandGrab__Globals_h
 #define LandGrab__Globals_h
 
-#define TILE_SIZE 64
+#define [MJBoard tileSize] 64
 
 #endif

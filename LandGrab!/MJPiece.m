@@ -50,7 +50,7 @@
 }
 
 - (void) setCoordinate:(CGPoint)point {
-	CGPoint newOrigin = CGPointMake(point.x * TILE_SIZE, point.y * TILE_SIZE);
+	CGPoint newOrigin = CGPointMake(point.x * [MJBoard tileSize], point.y * [MJBoard tileSize]);
 	[self setOrigin:newOrigin];
 	coordinate = point;
 }
@@ -67,16 +67,16 @@
 - (void) snapToPoint
 {
     CGSize distance = CGSizeZero;
-	int offX = (int)_origin.x % TILE_SIZE;
-	int offY = (int)_origin.y % TILE_SIZE;
-	if ((offX / ((CGFloat)TILE_SIZE - 1)) > 0.5f) {
-		distance.width += (TILE_SIZE - offX);
+	int offX = (int)_origin.x % [MJBoard tileSize];
+	int offY = (int)_origin.y % [MJBoard tileSize];
+	if ((offX / ((CGFloat)[MJBoard tileSize] - 1)) > 0.5f) {
+		distance.width += ([MJBoard tileSize] - offX);
 	}
 	else {
 		distance.width -= offX;
 	}
-	if ((offY / ((CGFloat)TILE_SIZE - 1)) > 0.5f) {
-		distance.height += (TILE_SIZE - offY);
+	if ((offY / ((CGFloat)[MJBoard tileSize] - 1)) > 0.5f) {
+		distance.height += ([MJBoard tileSize] - offY);
 	}
 	else {
 		distance.height -= offY;

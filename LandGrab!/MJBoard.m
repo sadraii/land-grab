@@ -20,6 +20,15 @@
 @synthesize boardSize = _boardSize; 
 @synthesize containerView = _containerView;
 
++ (NSUInteger) tileSize {
+	NSString* deviceName = [UIDevice currentDevice].model;
+//	NSLog(@"Device: %@", deviceName);
+	if ([deviceName isEqualToString:@"iPhone Simulator"] || [deviceName isEqualToString:@"iPhone"]) {
+		return 32;
+	}
+	return 64;
+}
+
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
@@ -41,7 +50,7 @@
 
 - (void) setBoardSize:(CGSize)size
 {
-	CGRect frame = CGRectMake(0, 0, size.width*TILE_SIZE, size.height*TILE_SIZE);
+	CGRect frame = CGRectMake(0, 0, size.width*[MJBoard tileSize], size.height*[MJBoard tileSize]);
 	if (!_containerView) {
 		_containerView = [[MJContainerView alloc] initWithFrame:frame];
 		_containerView.board = self;

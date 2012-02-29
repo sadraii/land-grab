@@ -7,6 +7,7 @@
 //
 
 #import "MJTopBar.h"
+#import "Graphics.h"
 
 @implementation MJTopBar
 
@@ -19,7 +20,7 @@
     return self;
 }
 
-
+/*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
@@ -32,8 +33,7 @@
                                            blue:0.0 alpha:1.0].CGColor;
     CGColorRef blackColor = [UIColor blackColor].CGColor;
     CGColorRef blueColor = [UIColor blueColor].CGColor;
-    /*CGColorRef purpleColor = [UIColor colorWithRed:132.0 green:112.0 
-                                              blue:255.0 alpha:1.0].CGColor; 99;184;255 */
+ //CGColorRef purpleColor = [UIColor colorWithRed:132.0 green:112.0 blue:255.0 alpha:1.0].CGColor; 99;184;255 
     CGColorRef purpleColor = [UIColor colorWithRed:0 green:255
                                               blue:255 alpha:1.0].CGColor; 
     CGColorRef lightGrayColor = [UIColor colorWithRed:230.0/255.0 green:230.0/255.0 
@@ -69,6 +69,6 @@
     CGContextSetLineWidth(ctx, 1.0);
     CGContextStrokeRect(ctx, strokeRect);
 }
-
+*/
 
 @end

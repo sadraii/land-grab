@@ -25,6 +25,8 @@
 @property (readonly)CGSize boardSize;
 @property (strong, nonatomic) MJContainerView* containerView;
 
++ (NSUInteger) tileSize;
+
 - (void) newGame;
 - (void) setBoardSize:(CGSize)size;
 - (MJTile*) tileAtCoordinate:(CGPoint)coordinate;

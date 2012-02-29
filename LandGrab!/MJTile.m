@@ -34,7 +34,7 @@
 		return self;
     }
     _coordinate = aCoordinate;
-	[self setFrame:CGRectMake(_coordinate.x * TILE_SIZE, _coordinate.y * TILE_SIZE, TILE_SIZE, TILE_SIZE)];
+	[self setFrame:CGRectMake(_coordinate.x * [MJBoard tileSize], _coordinate.y * [MJBoard tileSize], [MJBoard tileSize], [MJBoard tileSize])];
 	[self setBackgroundColor:[UIColor whiteColor]];
     return self;
 }
@@ -45,7 +45,7 @@
 
 - (void) updateCoordinate {
 	CGPoint origin = self.frame.origin;
-	_coordinate = CGPointMake(origin.x / TILE_SIZE, origin.y / TILE_SIZE);
+	_coordinate = CGPointMake(origin.x / [MJBoard tileSize], origin.y / [MJBoard tileSize]);
 //	NSLog(@"Tile Coordinate: (%i, %i)", (int)_coordinate.x, (int)_coordinate.y);
 }
 
@@ -55,16 +55,16 @@
 	origin.x = roundf(origin.x);
 	origin.y = roundf(origin.y);
     CGSize distance = CGSizeZero;
-	int offX = (int)origin.x % TILE_SIZE;
-	int offY = (int)origin.y % TILE_SIZE;
-	if ((offX / ((CGFloat)TILE_SIZE - 1)) >= 0.5f) {
-		distance.width += (TILE_SIZE - offX);
+	int offX = (int)origin.x % [MJBoard tileSize];
+	int offY = (int)origin.y % [MJBoard tileSize];
+	if ((offX / ((CGFloat)[MJBoard tileSize] - 1)) >= 0.5f) {
+		distance.width += ([MJBoard tileSize] - offX);
 	}
 	else {
 		distance.width -= offX;
 	}
-	if ((offY / ((CGFloat)TILE_SIZE - 1)) >= 0.5f) {
-		distance.height += (TILE_SIZE - offY);
+	if ((offY / ((CGFloat)[MJBoard tileSize] - 1)) >= 0.5f) {
+		distance.height += ([MJBoard tileSize] - offY);
 	}
 	else {
 		distance.height -= offY;
@@ -83,7 +83,7 @@
 }
 
 - (void) setCoordinate:(CGPoint)coordinate {
-	[self setFrame:CGRectMake(coordinate.x * TILE_SIZE, coordinate.y * TILE_SIZE, self.frame.size.width, self.frame.size.height)];
+	[self setFrame:CGRectMake(coordinate.x * [MJBoard tileSize], coordinate.y * [MJBoard tileSize], self.frame.size.width, self.frame.size.height)];
 	_coordinate = coordinate;
 }
 
@@ -177,7 +177,7 @@
 		}
 	}
 }
-
+/*
 - (void)drawRect:(CGRect)rect{
     [super drawRect:rect];
     CGContextRef ctx = UIGraphicsGetCurrentContext();
@@ -279,5 +279,5 @@
         CGContextRestoreGState(ctx);
     }
 }
-
+*/
 @end

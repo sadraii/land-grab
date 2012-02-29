@@ -8,6 +8,7 @@
 
 #import "MJContainerView.h"
 #import "MJBoard.h"
+#import "MJViewController.h"
 
 @implementation MJContainerView
 
@@ -34,11 +35,11 @@
  CGContextSetLineWidth(ctx, 2);
  CGContextBeginPath(ctx);
  // Draw verticle lines
- for (int i=0; i<self.frame.size.width;i+=TILE_SIZE) {
+ for (int i=0; i<self.frame.size.width;i+=[MJBoard tileSize]) {
  CGContextMoveToPoint(ctx, 0+i, 0);
  CGContextAddLineToPoint(ctx, 0+i, self.frame.size.height);
  }
- for (int i=0; i<self.frame.size.height;i+=TILE_SIZE) {
+ for (int i=0; i<self.frame.size.height;i+=[MJBoard tileSize]) {
  CGContextMoveToPoint(ctx, 0, 0+i);
  CGContextAddLineToPoint(ctx, self.frame.size.width, 0+i);
  }
