@@ -14,6 +14,7 @@
 @class MJContainerView;
 @class MJBoard;
 @class MJPlayer;
+@class MJTile;
 
 @interface MJBoard : UIScrollView <UIScrollViewDelegate, MJPieceDelegate>
 {
@@ -27,7 +28,5 @@
 
 - (void) newGame;
 - (void) setBoardSize:(CGSize)size;
-- (void) scalePiece:(MJPiece*)piece;
-- (CGPoint) originOfPiece:(MJPiece*)piece;
-
+- (MJTile*) tileAtCoordinate:(CGPoint)coordinate;
 @end

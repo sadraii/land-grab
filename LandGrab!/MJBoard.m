@@ -35,6 +35,7 @@
 - (void) newGame
 {
 	_containerView = NULL;
+	_pieces = [[NSMutableArray alloc] init];
 	[self setBoardSize:CGSizeMake(30, 30)];
 }
 
@@ -50,14 +51,14 @@
 	_boardSize = size;
 }
 
-- (void) scalePiece:(MJPiece*)piece
-{
-    
-}
-
-- (CGPoint) originOfPiece:(MJPiece*)piece
-{
-    
+- (MJTile*) tileAtCoordinate:(CGPoint)coordinate {
+	
+	for (MJTile* t in _pieces) {
+		if (CGPointEqualToPoint(coordinate, t.coordinate)) {
+			return t;
+		}
+	}
+	return nil;
 }
 
 #pragma mark - Scroll View Delegate Methods
@@ -71,16 +72,15 @@
 - (void) addPiece:(id)piece {
 	if ([piece isKindOfClass:[MJTile class]]) {
 		MJTile* tile = (MJTile*)piece;
-//		CGPoint newOrigin = tile.frame.origin;
-//		newOrigin.x -= self.frame.origin.x;
-//		newOrigin.y -= self.frame.origin.y;
-//		[tile setFrame:CGRectMake(newOrigin.x, newOrigin.y, tile.frame.size.width, tile.frame.size.height)];
 		[tile snapToPoint];
 		[tile setIsPlayed:YES];
 		[tile setUserInteractionEnabled:NO];
-		
 		[_containerView addSubview:tile];
-
+		
+		MJPlayer* player = tile.player;
+		[[player playedPieces] addObject:tile];
+		[_pieces addObject:tile];
+		NSLog(@"MJBoard: Played Pieces Count: %i", player.playedPieces.count);
 	}
 	else if ([piece isKindOfClass:[MJPiece class]]) {
 		MJPiece* piece = (MJPiece*)piece;

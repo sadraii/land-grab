@@ -168,8 +168,6 @@
 		NSLog(@"Piece dropped in unsupported view");
 		abort();
 	}
-//	lastTouch = point;
-	#warning Remove from starting view
 	[self setOrigin:_lastTouch];
 	[_delegate addPiece:self];
 	[_board setScrollEnabled:YES];

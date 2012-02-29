@@ -51,7 +51,6 @@
 
 - (void) snapToPoint
 {
-	NSLog(@"Origin: (%f, %f)", self.frame.origin.x, self.frame.origin.y);
 	CGPoint origin = self.frame.origin;
     CGSize distance = CGSizeZero;
 	int offX = (int)origin.x % TILE_SIZE;

@@ -10,13 +10,16 @@
 #import "MJPiece.h"
 #import "MJPlayer.h"
 #import "MJToolbar.h"
+#import "MJBoard.h"
 #import "MJTopBar.h"
 #import "MJTile.h"
 
 @implementation MJViewController
 
+@synthesize NewGame = _NewGame;
 @synthesize topbar = _topbar;
 @synthesize handle = _handle;
+@synthesize territory = _territory;
 
 @synthesize board = _board;
 @synthesize toolbar = _toolbar;
@@ -32,11 +35,13 @@
     return self;
 }
 
-- (void) newGame {
-	NSLog(@"ViewController: received new game notification");
+- (IBAction)newGame:(id)sender {
+	[_board newGame];
+	[_toolbar newGame];
 	[self setPlayers:[[NSMutableArray alloc] init]];
 	currentPlayer = -1;
-	int numPlayers = 5;
+	turnCount = 0;
+	int numPlayers = 1;
 	for (int i = 0; i < numPlayers; i++) {
 		MJPlayer* player = [[MJPlayer alloc] init];
 		[player setViewController:self];
@@ -67,14 +72,16 @@
 		[_players addObject:player];
 	}
 	[self nextPlayer];
-	
 }
 
 - (void) nextPlayer {
 	currentPlayer < _players.count - 1 ? ++currentPlayer : (currentPlayer = 0);
+	if (!(currentPlayer % _players.count - 1)) turnCount++;
 	MJPlayer* player = (MJPlayer*)[_players objectAtIndex:currentPlayer];
-	[_handle setText:player.handle];
+	[player updateTerritory];
 	[_toolbar loadPlayer:player];
+	[_handle setText:player.handle];
+	[_territory setText:[NSString stringWithFormat:@"%i",player.territory]];
 }
 
 - (void) createDebugPiece {
@@ -97,12 +104,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	[self newGame];
+	[self newGame:self];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)viewDidUnload
 {
+	[self setNewGame:nil];
+	[self setTerritory:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

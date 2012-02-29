@@ -28,6 +28,11 @@
     return self;
 }
 
+- (void) newGame {
+	for (id p in self.subviews) {
+		[p removeFromSuperview];
+	}
+}
 
 - (void) snapPieceToPoint:(MJPiece*)piece {
 	
@@ -71,6 +76,7 @@
 	[tile setBoard:_viewController.board];
 	[tile setToolbar:_viewController.toolbar];
 	[tile setPlayer:player];
+	[tile setTag:0];
 	[tile setBackgroundColor:player.color];
 	[self addPiece:tile];
 	

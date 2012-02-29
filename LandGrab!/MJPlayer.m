@@ -11,7 +11,7 @@
 #import "MJViewController.h"
 #import "MJBoard.h"
 #import "MJToolbar.h"
-
+#import "MJTile.h"
 #import "MJPiece.h"
 
 @implementation MJPlayer
@@ -21,9 +21,11 @@
 @synthesize toolbar = _toolbar;
 
 @synthesize pieces = _pieces;
+@synthesize playedPieces = _playedPieces;
 @synthesize handle = _handle;
 @synthesize color = _color;
 @synthesize score = _score;
+@synthesize territory = _territory;
 @synthesize money = _money;
 
 -(id) init {
@@ -35,23 +37,59 @@
 	_color = nil;
 	_money = 0;
 	_score = 0;
+	_territory = 0;
+	capitalLocation = CGPointMake(0, 0);
+	_playedPieces = [[NSMutableArray alloc] init];
     return self;
 }
 
-/*
-- (void) loadDebugPieces {
-	if (!_pieces) _pieces = [[NSMutableArray alloc] init];
-	for (int i = 0; i < 5; i++) {
-		NSLog(@"Creating piece");
-		MJPiece* p = [[MJPiece alloc] init];
-		[p setDelegate:_toolbar];
-		[p setViewController:_viewController];
-		[p setBoard:_board];
-		[p setToolbar:_toolbar];
-		[p loadDebugTiles];
-		[_pieces addObject:p];
-	}
+- (void) updateTerritory {
+	_territory = 0;
+	[self updateTerritoryStartingAtCoordinate:capitalLocation];
+	NSLog(@"Territory: %i", _territory);
 }
- */
+
+- (void) updateTerritoryStartingAtCoordinate:(CGPoint)point {
+	NSLog(@"Update: (%f, %f)", point.x, point.y);
+	CGPoint up = CGPointMake(point.x, point.y + 1);
+	CGPoint down = CGPointMake(point.x, point.y - 1);
+	CGPoint left = CGPointMake(point.x - 1, point.y);
+	CGPoint right = CGPointMake(point.x + 1, point.y);
+	MJTile* tmp = nil;
+	if ((tmp = [_board tileAtCoordinate:up]) && [tmp.player isEqual:self] && tmp.tag == 0) {
+		[tmp setTag:1];
+		_territory++;
+		[self updateTerritoryStartingAtCoordinate:up];
+	}
+	if ((tmp = [_board tileAtCoordinate:down]) && [tmp.player isEqual:self] && tmp.tag == 0) {
+		[tmp setTag:1];
+		_territory++;
+		[self updateTerritoryStartingAtCoordinate:down];
+	}
+	if ((tmp = [_board tileAtCoordinate:left]) && [tmp.player isEqual:self] && tmp.tag == 0) {
+		[tmp setTag:1];
+		_territory++;
+		[self updateTerritoryStartingAtCoordinate:left];
+	}
+	if ((tmp = [_board tileAtCoordinate:right]) && [tmp.player isEqual:self] && tmp.tag == 0) {
+		[tmp setTag:1];
+		_territory++;
+		[self updateTerritoryStartingAtCoordinate:right];
+	}
+	tmp = [_board tileAtCoordinate:point];
+	tmp.tag = 0;
+}
+
+- (BOOL) coordinate:(CGPoint)a TouchesCoordinate:(CGPoint)b {
+	NSLog(@"A: (%i, %i)", (int)a.x, (int)a.y);
+	NSLog(@"B: (%i, %i)", (int)b.x, (int)b.y);
+	if (b.x == a.x && (b.y == a.y+1 || b.y == a.y-1)) {
+		return YES;
+	}
+	else if (b.y == a.y && (b.x == a.x+1 || b.x == a.x-1)) {
+		return YES;
+	}
+	return NO;
+}
 
 @end

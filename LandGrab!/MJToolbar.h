@@ -26,6 +26,7 @@
 @property (weak, nonatomic) MJPlayer* player;
 @property (strong, nonatomic) NSMutableArray* pieces;
 
+- (void) newGame;
 - (void) snapPieceToPoint:(MJPiece*)piece;
 - (void) insertPiece:(MJPiece*) piece AtIndex:(NSUInteger)index;
 - (void) loadPlayer:(MJPlayer*) player;
