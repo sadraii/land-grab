@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "MJTileDelegate.h"
-#import "MJPieceDelegate.h"
 
 @class MJTile;
 @class MJViewController;
@@ -30,7 +29,6 @@
 	
 }
 
-@property (strong, nonatomic) id <MJPieceDelegate> delegate;
 @property (weak, nonatomic) MJViewController* viewController;
 @property (weak, nonatomic) MJBoard* board;
 @property (weak, nonatomic) MJToolbar* toolbar;

@@ -7,15 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MJPieceDelegate.h"
-
 
 @class MJViewController;
 @class MJPlayer;
 @class MJPiece;
 @class MJTile;
 
-@interface MJToolbar : UIScrollView <MJPieceDelegate> {
+@interface MJToolbar : UIScrollView {
 @public
 	
 @private

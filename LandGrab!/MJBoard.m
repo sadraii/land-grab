@@ -27,6 +27,7 @@
         _boardSize = CGSizeZero;
         _containerView = NULL;
         [self newGame];
+		[super setDelegate:self];
         
     }
     return self;
@@ -48,6 +49,9 @@
 	}
 	[self setContentSize:frame.size];
 	_boardSize = size;
+	CGFloat scale = self.bounds.size.width / _containerView.bounds.size.width;
+	[self setMinimumZoomScale:scale];
+	[self setMaximumZoomScale:1];
 }
 
 - (MJTile*) tileAtCoordinate:(CGPoint)coordinate {
@@ -100,6 +104,10 @@
 
 - (UIView*) viewForZoomingInScrollView:(UIScrollView *)scrollView {
 	return _containerView;
+}
+
+- (void) scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
+	
 }
 
 @end

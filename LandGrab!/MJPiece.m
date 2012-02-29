@@ -15,7 +15,6 @@
 
 @implementation MJPiece
 
-@synthesize delegate = _delegate;
 @synthesize viewController = _viewController;
 @synthesize board = _board;
 @synthesize toolbar = _toolbar;
@@ -154,14 +153,14 @@
 - (void) touchesEnded:(UITouch*)touch {
 //	CGPoint point = [touch locationInView:_viewController.view];
 	if ([_board pointInside:[touch locationInView:_board] withEvent:nil]) {
-		[self setDelegate:_board];
+//		[self setDelegate:_board];
 		_lastTouch = [touch locationInView:(UIView*)_board.containerView];
 		//add the orgin of the containerview to last touch so it doesnt jump around.
 		_lastTouch.x += _board.frame.origin.x;
 		_lastTouch.y += _board.frame.origin.y;
 	}
 	else if ([_toolbar pointInside:[touch locationInView:_toolbar] withEvent:nil]) {
-		[self setDelegate:_toolbar];
+//		[self setDelegate:_toolbar];
 		_lastTouch = [touch locationInView:_toolbar];
 	}
 	else {
@@ -169,7 +168,7 @@
 		abort();
 	}
 	[self setOrigin:_lastTouch];
-	[_delegate addPiece:self];
+//	[_delegate addPiece:self];need to add piece inside the toolbar and board
 	[_board setScrollEnabled:YES];
 }
 - (void) touchesCanceled: (CGSize)distanceTraveled {

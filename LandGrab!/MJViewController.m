@@ -79,25 +79,27 @@
 		[player setCapital:capital];
 		
 		[capital setIsPlayed:YES];
+		[capital setUserInteractionEnabled:NO];
 		[capital setTag:1];
 		[capital setBackgroundColor:player.color];
 		[capital setPlayer:player];
 		
 		[_board.pieces addObject:capital];
-		[_board addSubview:capital];
+		[(UIView*)_board.containerView addSubview:capital];
 //		[_board addTile:capital];
 	}
 	[self nextPlayer];
 }
 
 - (IBAction)zoomToCapital:(id)sender {
-	[self zoomToRect:_currentPlayer.capital.frame];
+	[self scrollToRect:_currentPlayer.capital.frame];
 }
 
-- (void) zoomToRect:(CGRect)rect {
+- (void) scrollToRect:(CGRect)rect {
 	CGRect boardRect = _board.bounds;
 	boardRect.origin.x = (rect.origin.x + (rect.size.width / 2)) - (boardRect.size.width / 2);
 	boardRect.origin.y = (rect.origin.y + (rect.size.height / 2)) - (boardRect.size.height / 2);
+	[_board setZoomScale:1 animated:YES];
 	[_board scrollRectToVisible:boardRect animated:YES];
 }
 
@@ -111,10 +113,10 @@
 	[_handle setText:_currentPlayer.handle];
 	[_territory setText:[NSString stringWithFormat:@"%i",_currentPlayer.territory]];
 	if (_currentPlayer.lastPlayedTile) {
-		[self zoomToRect:_currentPlayer.lastPlayedTile.frame];
+		[self scrollToRect:_currentPlayer.lastPlayedTile.frame];
 	}
 	else {
-		[self zoomToRect:_currentPlayer.capital.frame];
+		[self scrollToRect:_currentPlayer.capital.frame];
 	}
 }
 

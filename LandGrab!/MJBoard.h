@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MJPieceDelegate.h"
 
 @class MJViewController;
 @class MJPiece;
@@ -16,7 +15,7 @@
 @class MJPlayer;
 @class MJTile;
 
-@interface MJBoard : UIScrollView <UIScrollViewDelegate, MJPieceDelegate>
+@interface MJBoard : UIScrollView <UIScrollViewDelegate>
 {
     CGSize boardSize;//Size relative to tilesize
 }

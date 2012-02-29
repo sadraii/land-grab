@@ -31,7 +31,7 @@
 
 - (IBAction)newGame:(id)sender;
 - (IBAction)zoomToCapital:(id)sender;
-- (void) zoomToRect:(CGRect)rect;
+- (void) scrollToRect:(CGRect)rect;
 - (void) nextPlayer;
 
 - (void) addTile:(MJTile*)tile;

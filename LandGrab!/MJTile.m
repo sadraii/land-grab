@@ -52,6 +52,8 @@
 - (void) snapToPoint
 {
 	CGPoint origin = self.frame.origin;
+	origin.x = roundf(origin.x);
+	origin.y = roundf(origin.y);
     CGSize distance = CGSizeZero;
 	int offX = (int)origin.x % TILE_SIZE;
 	int offY = (int)origin.y % TILE_SIZE;
@@ -134,12 +136,19 @@
 	else {
 		CGPoint point = CGPointZero;
 		if ([_board pointInside:[touch locationInView:_board] withEvent:nil]) {
-			point = [touch locationInView:(UIView*)_board.containerView];
-			point.x -= distanceFromOrigin.width;
-			point.y -= distanceFromOrigin.height;
-			[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
-			
-			[_board addTile:self];
+			if (_board.zoomScale != 1) {
+				UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:@"Must zoom all the way in to place a piece" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
+				[alert show];
+				[self touchesCancelled:touches withEvent:event];
+			}
+			else {
+				point = [touch locationInView:(UIView*)_board.containerView];
+				point.x -= distanceFromOrigin.width;
+				point.y -= distanceFromOrigin.height;
+				[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
+				
+				[_board addTile:self];
+			}
 		}
 		else if ([_toolbar pointInside:[touch locationInView:_toolbar] withEvent:nil]) {
 			point = [touch locationInView:_toolbar];
