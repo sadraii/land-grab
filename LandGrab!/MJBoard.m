@@ -36,7 +36,7 @@
 {
 	_containerView = NULL;
 	_pieces = [[NSMutableArray alloc] init];
-	[self setBoardSize:CGSizeMake(100, 100)];
+	[self setBoardSize:CGSizeMake(12, 12)];
 }
 
 - (void) setBoardSize:(CGSize)size

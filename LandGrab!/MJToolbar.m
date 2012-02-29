@@ -69,7 +69,6 @@
 }
 
 - (void) loadPlayer:(MJPlayer *)player {
-	if ([player isEqual:_player]) abort();
 	[self removeAllPieces];
 	MJTile * tile = [[MJTile alloc] initWithCoordinate:CGPointZero];
 	[tile setViewController:_viewController];

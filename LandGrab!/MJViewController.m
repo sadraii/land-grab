@@ -76,6 +76,12 @@
 				break;
 		}
 		[_players addObject:player];
+		MJTile* capital = [[MJTile alloc] initWithCoordinate:player.capitalLocation];
+		[capital setBackgroundColor:player.color];
+		[capital setPlayer:player];
+//		[capital setViewController:self];
+//		[capital setBoard:_board];
+		[_board addPiece:capital];
 	}
 	[self nextPlayer];
 }
@@ -89,7 +95,8 @@
 	[_handle setText:_currentPlayer.handle];
 	[_territory setText:[NSString stringWithFormat:@"%i",_currentPlayer.territory]];
 	if (_currentPlayer.lastPlayedTile) {
-		[_board scrollRectToVisible:_currentPlayer.lastPlayedTile.frame animated:YES];
+		[self zoomToCapital:self];
+//		[_board scrollRectToVisible:_currentPlayer.lastPlayedTile.frame animated:YES];
 	}
 	else {
 		[self zoomToCapital:self];
