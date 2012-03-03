@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+// LOL
+
 #import <UIKit/UIKit.h>
 
 @interface MJAppDelegate : UIResponder <UIApplicationDelegate>
