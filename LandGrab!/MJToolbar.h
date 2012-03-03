@@ -10,7 +10,6 @@
 
 @class MJViewController;
 @class MJPlayer;
-@class MJPiece;
 @class MJTile;
 
 @interface MJToolbar : UIScrollView {
@@ -27,11 +26,9 @@
 @property (strong, nonatomic) NSMutableArray* pieces;
 
 - (void) newGame;
-- (void) insertPiece:(MJPiece*) piece AtIndex:(NSUInteger)index;
 - (void) loadPlayer:(MJPlayer*) player;
 - (void) removeAllPieces;
 
 - (void) addTile:(MJTile*)tile;
-- (void) addPiece:(MJPiece*)piece;
 
 @end

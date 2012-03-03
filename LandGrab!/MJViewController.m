@@ -7,18 +7,19 @@
 //
 
 #import "MJViewController.h"
-#import "MJPiece.h"
 #import "MJPlayer.h"
 #import "MJToolbar.h"
 #import "MJBoard.h"
 #import "MJTopBar.h"
 #import "MJTile.h"
+#import "MJResource.h"
 
 @implementation MJViewController
 
 @synthesize topbar = _topbar;
 @synthesize handle = _handle;
 @synthesize territory = _territory;
+@synthesize score = _score;
 @synthesize board = _board;
 @synthesize toolbar = _toolbar;
 
@@ -29,12 +30,22 @@
 
 - (IBAction)newGame:(id)sender {
 	[_board newGame];
-	[_board setBoardSize:CGSizeMake(30, 30)];
+	[_board setBoardSize:CGSizeMake(50, 50)];
 	[_toolbar newGame];
-	[self setPlayers:[[NSMutableArray alloc] init]];
 	currentPlayerIndex = -1;
 	turnCount = 0;
+	[self createPlayers];
+	[self createResources];
+	[self nextPlayer];
+//	[(UIView*)_board.containerView setNeedsDisplay]; 
+}
+
+- (void) createPlayers {
+	_players = NULL;
+	[self setPlayers:[[NSMutableArray alloc] init]];
+	
 	int numPlayers = 5;
+	
 	for (int i = 0; i < numPlayers; i++) {
 		MJPlayer* player = [[MJPlayer alloc] init];
 		[player setViewController:self];
@@ -52,26 +63,31 @@
 				[player setHandle:@"Andrew"];
 				[player setColor:[UIColor blueColor]];
 				[capital setCoordinate:CGPointMake(capitalOffset, capitalOffset)];
+				capital.tag = 1;
 				break;
 			case 1:
-				[player setHandle:@"Jason"];
+				[player setHandle:@"JSON"];
 				[player setColor:[UIColor redColor]];
 				[capital setCoordinate:CGPointMake(capitalOffset, _board.boardSize.height - 1 - capitalOffset)];
+				capital.tag = 1;
 				break;
 			case 2:
 				[player setHandle:@"Max"];
 				[player setColor:[UIColor greenColor]];
 				[capital setCoordinate:CGPointMake(_board.boardSize.width - 1 - capitalOffset, _board.boardSize.height - 1 - capitalOffset)];
+				capital.tag = 1;
 				break;
 			case 3:	
 				[player setHandle:@"Mostafa"];
-				[player setColor:[UIColor brownColor]];
+				[player setColor:[UIColor magentaColor]];
 				[capital setCoordinate:CGPointMake(_board.boardSize.width - 1 - capitalOffset, capitalOffset)];
+				capital.tag = 1;
 				break;
 			case 4:
 				[player setHandle:@"Kristi"];
 				[player setColor:[UIColor yellowColor]];
 				[capital setCoordinate:CGPointMake((int)((_board.boardSize.width - 1) / 2), (int)((_board.boardSize.height - 1)/2))];
+				capital.tag = 1;
 				break;
 		}
 		[_players addObject:player];
@@ -83,12 +99,38 @@
 		[capital setTag:1];
 		[capital setBackgroundColor:player.color];
 		[capital setPlayer:player];
-		
 		[_board.pieces addObject:capital];
 		[(UIView*)_board.containerView addSubview:capital];
-//		[_board addTile:capital];
 	}
-	[self nextPlayer];
+}
+
+- (void) createResources {
+	dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+	dispatch_async(concurrentQueue, ^{
+		int numResources = 10;
+		while (_board.resources.count < numResources) {
+			int randomX = arc4random() % (int)_board.boardSize.width;
+			int randomY = arc4random() % (int)_board.boardSize.height;
+			CGPoint point = CGPointMake(randomX, randomY);
+			if (![_board resourceAtCoordinate:point] && ![_board tileAtCoordinate:point]) {
+				__block MJResource* resource = [[MJResource alloc] initWithCoordinate:point];
+				int minValue = 50;
+				[resource setValue:(arc4random() % minValue) + minValue];
+				//		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
+				//			[resource setTilesWithCoordinateArray:coords];
+				dispatch_sync(dispatch_get_main_queue(), ^{
+					[_board addResource:resource];
+				});
+			}
+//			NSLog(@"Random Coordinate: (%i, %i)", randomX, randomY);
+//			NSMutableArray* coords = [[NSMutableArray alloc] init];
+//			for (int n = 0; n < arc4random() % 3; n++) {
+//				int x = arc4random() % 3;
+//				int y = arc4random() % 3;
+//				[coords addObject:[NSString stringWithFormat:@"%i,%i", x, y]];
+//			}
+		}
+	});
 }
 
 - (IBAction)zoomToCapital:(id)sender {
@@ -106,12 +148,15 @@
 - (void) nextPlayer {
 	currentPlayerIndex < _players.count - 1 ? ++currentPlayerIndex : (currentPlayerIndex = 0);
 	if (!(currentPlayerIndex % _players.count - 1)) turnCount++;
-	NSLog(@"Current Player: %i", currentPlayerIndex);
 	_currentPlayer = (MJPlayer*)[_players objectAtIndex:currentPlayerIndex];
 	[_currentPlayer updateTerritory];
 	[_toolbar loadPlayer:_currentPlayer];
 	[_handle setText:_currentPlayer.handle];
+	NSLog(@"Current Player: %@", _currentPlayer.handle);
 	[_territory setText:[NSString stringWithFormat:@"%i",_currentPlayer.territory]];
+	[_score setText:[NSString stringWithFormat:@"%i",_currentPlayer.score]];
+	
+//	[_board setZoomScale:_board.minimumZoomScale animated:YES];
 	if (_currentPlayer.lastPlayedTile) {
 		[self scrollToRect:_currentPlayer.lastPlayedTile.frame];
 	}
@@ -122,10 +167,6 @@
 
 - (void) addTile:(MJTile *)tile {
 	[self.view addSubview:tile];
-}
-
-- (void) addPiece:(MJPiece *)piece {
-	[piece addAsSubviewToView:self.view];
 }
 
 
@@ -183,6 +224,9 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
+	if (_board) {
+		[_board updateZoomScale];
+	}
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
 	    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 	} else {

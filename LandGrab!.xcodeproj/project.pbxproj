@@ -10,6 +10,7 @@
 		3FED6D4B14F98F67007155CA /* MJTopBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FED6D4A14F98F67007155CA /* MJTopBar.m */; };
 		3FED6D4E14F9A252007155CA /* Gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FED6D4D14F9A252007155CA /* Gradient.png */; };
 		3FED6D5514F9BE70007155CA /* Graphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FED6D5414F9BE70007155CA /* Graphics.m */; };
+		67099FF614FFF1CC001C4178 /* MJResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 67099FF514FFF1CC001C4178 /* MJResource.m */; };
 		675674E914F748F300A8E1B6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 675674E814F748F300A8E1B6 /* UIKit.framework */; };
 		675674EB14F748F300A8E1B6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 675674EA14F748F300A8E1B6 /* Foundation.framework */; };
 		675674ED14F748F300A8E1B6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 675674EC14F748F300A8E1B6 /* CoreGraphics.framework */; };
@@ -26,7 +27,6 @@
 		6756751714F748F400A8E1B6 /* LandGrab_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756751614F748F400A8E1B6 /* LandGrab_Tests.m */; };
 		6756752714F7551300A8E1B6 /* MJBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756752614F7551300A8E1B6 /* MJBoard.m */; };
 		6756752B14F7553200A8E1B6 /* MJToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756752A14F7553200A8E1B6 /* MJToolbar.m */; };
-		6756753114F756AA00A8E1B6 /* MJPiece.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756753014F756AA00A8E1B6 /* MJPiece.m */; };
 		6756753514F756DD00A8E1B6 /* MJTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756753414F756DD00A8E1B6 /* MJTile.m */; };
 		6756753914F7592200A8E1B6 /* MJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756753814F7592200A8E1B6 /* MJPlayer.m */; };
 		6756753D14F759D100A8E1B6 /* MJContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756753C14F759D100A8E1B6 /* MJContainerView.m */; };
@@ -48,6 +48,8 @@
 		3FED6D4D14F9A252007155CA /* Gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gradient.png; sourceTree = "<group>"; };
 		3FED6D5314F9BE70007155CA /* Graphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Graphics.h; sourceTree = "<group>"; };
 		3FED6D5414F9BE70007155CA /* Graphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Graphics.m; sourceTree = "<group>"; };
+		67099FF414FFF1CC001C4178 /* MJResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJResource.h; sourceTree = "<group>"; };
+		67099FF514FFF1CC001C4178 /* MJResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJResource.m; sourceTree = "<group>"; };
 		675674E414F748F300A8E1B6 /* LandGrab!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LandGrab!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		675674E814F748F300A8E1B6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		675674EA14F748F300A8E1B6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -61,7 +63,7 @@
 		675674FB14F748F300A8E1B6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		675674FE14F748F300A8E1B6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		6756750014F748F300A8E1B6 /* MJViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJViewController.h; sourceTree = "<group>"; };
-		6756750114F748F300A8E1B6 /* MJViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJViewController.m; sourceTree = "<group>"; };
+		6756750114F748F300A8E1B6 /* MJViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MJViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6756750814F748F300A8E1B6 /* LandGrab!Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LandGrab!Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6756750914F748F300A8E1B6 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		6756751114F748F400A8E1B6 /* LandGrab!Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LandGrab!Tests-Info.plist"; sourceTree = "<group>"; };
@@ -69,20 +71,17 @@
 		6756751514F748F400A8E1B6 /* LandGrab_Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LandGrab_Tests.h; sourceTree = "<group>"; };
 		6756751614F748F400A8E1B6 /* LandGrab_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LandGrab_Tests.m; sourceTree = "<group>"; };
 		6756752514F7551300A8E1B6 /* MJBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJBoard.h; sourceTree = "<group>"; };
-		6756752614F7551300A8E1B6 /* MJBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJBoard.m; sourceTree = "<group>"; };
+		6756752614F7551300A8E1B6 /* MJBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MJBoard.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6756752914F7553200A8E1B6 /* MJToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJToolbar.h; sourceTree = "<group>"; };
 		6756752A14F7553200A8E1B6 /* MJToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJToolbar.m; sourceTree = "<group>"; };
-		6756752F14F756AA00A8E1B6 /* MJPiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPiece.h; sourceTree = "<group>"; };
-		6756753014F756AA00A8E1B6 /* MJPiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPiece.m; sourceTree = "<group>"; };
 		6756753314F756DD00A8E1B6 /* MJTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJTile.h; sourceTree = "<group>"; };
-		6756753414F756DD00A8E1B6 /* MJTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJTile.m; sourceTree = "<group>"; };
+		6756753414F756DD00A8E1B6 /* MJTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MJTile.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6756753714F7592200A8E1B6 /* MJPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPlayer.h; sourceTree = "<group>"; };
 		6756753814F7592200A8E1B6 /* MJPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPlayer.m; sourceTree = "<group>"; };
 		6756753B14F759D100A8E1B6 /* MJContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJContainerView.h; sourceTree = "<group>"; };
 		6756753C14F759D100A8E1B6 /* MJContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJContainerView.m; sourceTree = "<group>"; };
 		6756753E14F765D700A8E1B6 /* MJTileDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJTileDelegate.h; sourceTree = "<group>"; };
 		678A661114F97D9B006F9E25 /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
-		678A661714F9A12B006F9E25 /* MJPieceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPieceDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +114,15 @@
 				3FED6D4D14F9A252007155CA /* Gradient.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		67099FF814FFF1D6001C4178 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				67099FF414FFF1CC001C4178 /* MJResource.h */,
+				67099FF514FFF1CC001C4178 /* MJResource.m */,
+			);
+			name = Resource;
 			sourceTree = "<group>";
 		};
 		675674D914F748F200A8E1B6 = {
@@ -156,8 +164,8 @@
 				6756752814F7551800A8E1B6 /* Board */,
 				6756752C14F7553800A8E1B6 /* Toolbar */,
 				6756753A14F7592600A8E1B6 /* Player */,
-				6756753214F756AF00A8E1B6 /* Piece */,
 				6756753614F756E600A8E1B6 /* Tile */,
+				67099FF814FFF1D6001C4178 /* Resource */,
 				675674EF14F748F300A8E1B6 /* Supporting Files */,
 			);
 			path = "LandGrab!";
@@ -244,16 +252,6 @@
 				675674F814F748F300A8E1B6 /* MJAppDelegate.m */,
 			);
 			name = AppDelegate;
-			sourceTree = "<group>";
-		};
-		6756753214F756AF00A8E1B6 /* Piece */ = {
-			isa = PBXGroup;
-			children = (
-				6756752F14F756AA00A8E1B6 /* MJPiece.h */,
-				6756753014F756AA00A8E1B6 /* MJPiece.m */,
-				678A661714F9A12B006F9E25 /* MJPieceDelegate.h */,
-			);
-			name = Piece;
 			sourceTree = "<group>";
 		};
 		6756753614F756E600A8E1B6 /* Tile */ = {
@@ -388,12 +386,12 @@
 				6756750214F748F300A8E1B6 /* MJViewController.m in Sources */,
 				6756752714F7551300A8E1B6 /* MJBoard.m in Sources */,
 				6756752B14F7553200A8E1B6 /* MJToolbar.m in Sources */,
-				6756753114F756AA00A8E1B6 /* MJPiece.m in Sources */,
 				6756753514F756DD00A8E1B6 /* MJTile.m in Sources */,
 				6756753914F7592200A8E1B6 /* MJPlayer.m in Sources */,
 				6756753D14F759D100A8E1B6 /* MJContainerView.m in Sources */,
 				3FED6D4B14F98F67007155CA /* MJTopBar.m in Sources */,
 				3FED6D5514F9BE70007155CA /* Graphics.m in Sources */,
+				67099FF614FFF1CC001C4178 /* MJResource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

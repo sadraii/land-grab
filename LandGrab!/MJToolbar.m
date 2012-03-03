@@ -7,7 +7,6 @@
 //
 
 #import "MJToolbar.h"
-#import "MJPiece.h"
 #import "MJBoard.h"
 #import "MJViewController.h"
 #import "MJPlayer.h"
@@ -35,36 +34,6 @@
 	}
 }
 
-- (void) insertPiece:(MJPiece*)piece AtIndex:(NSUInteger)index {
-	NSLog(@"Inserting Piece at index: %i", index);
-	NSArray* tmp = nil;
-	
-	if (index != 0) {
-		[_pieces insertObject:piece atIndex:index];
-		tmp = [NSArray arrayWithArray:[_pieces objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, _pieces.count - index)]]];
-		[_pieces removeObjectsInArray:tmp];
-		MJPiece* lastPiece = (MJPiece*)[_pieces lastObject];
-		maxX = lastPiece.origin.x + lastPiece.size.width;
-	}
-	else {
-		[_pieces addObject:piece];
-		tmp = [NSArray arrayWithArray:_pieces];
-		[self setPieces:nil];
-		_pieces = [[NSMutableArray alloc] init];
-		maxX = 0;
-	}
-	
-	for (int i = 0; i < tmp.count; i++) {
-		MJPiece* p = [tmp objectAtIndex:i];
-		[p setOrigin:CGPointMake(maxX + offset, offset)];
-		maxX = p.origin.x + p.size.width;
-		NSLog(@"Toolbar: (%f, %f)", p.origin.x, p.origin.y);
-		
-		[_pieces addObject:p];
-		[p addAsSubviewToView:self];
-	}
-}
-
 - (void) loadPlayer:(MJPlayer *)player {
 	[self removeAllPieces];
 	
@@ -89,13 +58,5 @@
 	[tile setFrame:CGRectMake(offset, offset, [MJBoard tileSize], [MJBoard tileSize])];
 	[tile setIsPlayed:NO];
 	[self addSubview:tile];
-}
-- (void) addPiece:(MJPiece*)piece {
-	int index = 0;
-	for (MJPiece* p in _pieces) {
-		if ((p.size.width / 2) < piece.lastTouch.x)	break;
-		index++;
-	}
-	[self insertPiece:(MJPiece*) piece AtIndex:index];
 }
 @end

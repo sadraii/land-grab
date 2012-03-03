@@ -12,7 +12,6 @@
 #import "MJBoard.h"
 #import "MJToolbar.h"
 #import "MJTile.h"
-#import "MJPiece.h"
 
 @implementation MJPlayer
 

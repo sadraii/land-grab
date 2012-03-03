@@ -10,7 +10,6 @@
 #import "MJTileDelegate.h"
 #import "Graphics.h"
 
-@class MJPiece;
 @class MJPlayer;
 @class MJBoard;
 @class MJToolbar;
@@ -31,7 +30,6 @@
 @property (weak, nonatomic) MJToolbar* toolbar;
 
 @property (weak, nonatomic) MJPlayer* player;
-@property (weak, nonatomic) MJPiece* piece;
 
 @property (readwrite, nonatomic) CGPoint coordinate;
 @property (readwrite, nonatomic) CGPoint currentPoint;

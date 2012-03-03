@@ -7,7 +7,6 @@
 //
 
 #import "MJTile.h"
-#import "MJPiece.h"
 #import "MJPlayer.h"
 #import "MJToolbar.h"
 #import "MJViewController.h"
@@ -21,7 +20,6 @@
 @synthesize board = _board;
 @synthesize toolbar = _toolbar;
 
-@synthesize piece = _piece;
 @synthesize player = _player;
 
 @synthesize coordinate = _coordinate;
@@ -36,6 +34,7 @@
     _coordinate = aCoordinate;
 	[self setFrame:CGRectMake(_coordinate.x * [MJBoard tileSize], _coordinate.y * [MJBoard tileSize], [MJBoard tileSize], [MJBoard tileSize])];
 	[self setBackgroundColor:[UIColor whiteColor]];
+	[self setAlpha:0.8];
     return self;
 }
 
@@ -46,7 +45,6 @@
 - (void) updateCoordinate {
 	CGPoint origin = self.frame.origin;
 	_coordinate = CGPointMake(origin.x / [MJBoard tileSize], origin.y / [MJBoard tileSize]);
-//	NSLog(@"Tile Coordinate: (%i, %i)", (int)_coordinate.x, (int)_coordinate.y);
 }
 
 - (void) snapToPoint
@@ -96,17 +94,12 @@
 	_currentPoint = point;
 	distanceTraveled = CGSizeMake(0, 0);
 	[_board setScrollEnabled:NO];
-	if(_piece){
-		[_piece setLastTouchedTile:self];
-		[_delegate touchesBegan:touch];
-	}
-	else {
-		distanceFromOrigin = [self distanceFromOrigin:[touch locationInView:self]];
-		point.x -= distanceFromOrigin.width;
-		point.y -= distanceFromOrigin.height;
-		[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
-		[_viewController addTile:self];
-	}
+	
+	distanceFromOrigin = [self distanceFromOrigin:[touch locationInView:self]];
+	point.x -= distanceFromOrigin.width;
+	point.y -= distanceFromOrigin.height;
+	[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
+	[_viewController addTile:self];
 }
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -114,12 +107,7 @@
 	CGPoint point = [touch locationInView:self.superview];
 	CGSize distance = CGSizeMake(point.x - _currentPoint.x, point.y - _currentPoint.y);
 	
-	if (_piece) {
-		[_delegate touchesMoved:distance];
-	}
-	else {
-		[self moveDistance:distance];
-	}
+	[self moveDistance:distance];
 	
 	distanceTraveled.width += distance.width;
 	distanceTraveled.height += distance.height;
@@ -128,53 +116,41 @@
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch* touch = [touches anyObject];
-	
-	if (_piece) {
-		[_delegate touchesEnded:touch];
-		return;
-	}
-	else {
-		CGPoint point = CGPointZero;
-		if ([_board pointInside:[touch locationInView:_board] withEvent:nil]) {
-			if (_board.zoomScale != 1) {
-				UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:@"Must zoom all the way in to place a piece" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
-				[alert show];
-				[self touchesCancelled:touches withEvent:event];
-			}
-			else {
-				point = [touch locationInView:(UIView*)_board.containerView];
-				point.x -= distanceFromOrigin.width;
-				point.y -= distanceFromOrigin.height;
-				[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
-				
-				[_board addTile:self];
-			}
-		}
-		else if ([_toolbar pointInside:[touch locationInView:_toolbar] withEvent:nil]) {
-			point = [touch locationInView:_toolbar];
-			[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
-			[_toolbar addTile:self];
-		}
-		else {
-			NSLog(@"Piece dropped in unsupported view");
+	CGPoint point = CGPointZero;
+	if ([_board pointInside:[touch locationInView:_board] withEvent:nil]) {
+		if (_board.zoomScale != 1) {
+			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:@"Must zoom all the way in to place a piece" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
+			[alert show];
 			[self touchesCancelled:touches withEvent:event];
 		}
-		[_board setScrollEnabled:YES];
+		else {
+			point = [touch locationInView:(UIView*)_board.containerView];
+			point.x -= distanceFromOrigin.width;
+			point.y -= distanceFromOrigin.height;
+			[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
+			[self snapToPoint];
+			[_board addTile:self];
+		}
 	}
+	else if ([_toolbar pointInside:[touch locationInView:_toolbar] withEvent:nil]) {
+		point = [touch locationInView:_toolbar];
+		[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
+		[_toolbar addTile:self];
+	}
+	else {
+		NSLog(@"Piece dropped in unsupported view");
+		[self touchesCancelled:touches withEvent:event];
+	}
+	[_board setScrollEnabled:YES];
 }
 
 - (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-	if (_piece) {
-		[_delegate touchesCanceled:distanceTraveled];
+	[self setFrame:CGRectMake(startingOrigin.x, startingOrigin.y, self.frame.size.width, self.frame.size.height)];
+	if ([startingView isEqual:_toolbar]) {
+		[_toolbar addTile:self];
 	}
 	else {
-		[self setFrame:CGRectMake(startingOrigin.x, startingOrigin.y, self.frame.size.width, self.frame.size.height)];
-		if ([startingView isEqual:_toolbar]) {
-			[_toolbar addTile:self];
-		}
-		else {
-			abort();
-		}
+		abort();
 	}
 }
 /*

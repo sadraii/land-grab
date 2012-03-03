@@ -12,7 +12,6 @@
 @class MJBoard;
 @class MJToolbar;
 @class MJTile;
-@class MJPiece;
 
 
 @interface MJPlayer : NSObject {

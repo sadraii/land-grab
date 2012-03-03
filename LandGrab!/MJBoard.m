@@ -10,19 +10,21 @@
 #import "MJViewController.h"
 #import "MJContainerView.h"
 #import "MJPlayer.h"
-#import "MJPiece.h"
 #import "MJTile.h"
+#import "MJResource.h"
 
 @implementation MJBoard
 
 @synthesize viewController = _viewController;
+
 @synthesize pieces = _pieces;
+@synthesize resources = _resources;
+
 @synthesize boardSize = _boardSize; 
 @synthesize containerView = _containerView;
 
 + (NSUInteger) tileSize {
 	NSString* deviceName = [UIDevice currentDevice].model;
-//	NSLog(@"Device: %@", deviceName);
 	if ([deviceName isEqualToString:@"iPhone Simulator"] || [deviceName isEqualToString:@"iPhone"]) {
 		return 32;
 	}
@@ -32,20 +34,26 @@
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        [self setPieces:NULL];
+        _pieces = NULL;
+		_resources = NULL;
         _boardSize = CGSizeZero;
         _containerView = NULL;
+		
         [self newGame];
+		
 		[super setDelegate:self];
-        
     }
     return self;
 }
 
 - (void) newGame
 {
+	if (_containerView) {
+		[_containerView removeFromSuperview];
+	}
 	_containerView = NULL;
 	_pieces = [[NSMutableArray alloc] init];
+	_resources = [[NSMutableArray alloc] init];
 }
 
 - (void) setBoardSize:(CGSize)size
@@ -58,9 +66,7 @@
 	}
 	[self setContentSize:frame.size];
 	_boardSize = size;
-	CGFloat scale = self.bounds.size.width / _containerView.bounds.size.width;
-	[self setMinimumZoomScale:scale];
-	[self setMaximumZoomScale:1];
+	[self updateZoomScale];
 }
 
 - (MJTile*) tileAtCoordinate:(CGPoint)coordinate {
@@ -70,43 +76,91 @@
 	return nil;
 }
 
+- (MJResource*) resourceAtCoordinate:(CGPoint)coordinate {
+	for (MJResource* r in _resources){
+		if (CGPointEqualToPoint(coordinate, r.coordinate)) {
+			
+			return r;
+		}
+	}
+	return nil;
+}
+
 - (BOOL) isCoordinateOnBoard:(CGPoint)coordinate {
 	if (coordinate.x < 0 || coordinate.x > _boardSize.width - 1) return NO;
 	if (coordinate.y < 0 || coordinate.y > _boardSize.height - 1) return NO;
 	return YES;
 }
 
+- (void) updateZoomScale {
+	CGFloat scale = self.bounds.size.width / _containerView.bounds.size.width;
+	if (self.zoomScale < scale || self.zoomScale > 1) {
+		[self setZoomScale:scale animated:YES];
+	}
+	[self setMinimumZoomScale:scale];
+	[self setMaximumZoomScale:1];
+	NSLog(@"MinimumZoomScale: %f", scale);
+}
+
+#pragma mark - Add Methods
 - (void) addTile:(MJTile*)tile {
-	[tile snapToPoint];
-	if ([self tileAtCoordinate:tile.coordinate]) {
-		NSLog(@"Cannot place a piece on top of another");
+	
+	//Check if tile is placed Off the Board
+	if(![self isCoordinateOnBoard:tile.coordinate]) {
+		NSLog(@"Cannot place a tile off the board;");
 		[tile touchesCancelled:nil withEvent:nil];
 		return;
 	}
-	else if(![self isCoordinateOnBoard:tile.coordinate]) {
-		NSLog(@"Cannot place a piece off the board;");
+	
+	// Check if tile is placed ontop of one of your own tiles
+	MJTile* tileCollision = [self tileAtCoordinate:tile.coordinate];
+	if (tile.player == tileCollision.player) {
+		NSLog(@"Cannot place a piece on top of your own piece");
 		[tile touchesCancelled:nil withEvent:nil];
 		return;
 	}
+	
+	// Check if tile is placed ontop of another player's tile
+	else if (tileCollision && tile.player != tileCollision.player) {
+		NSLog(@"Collision with %@'s tile", tileCollision.player.handle);
+	}
+	
+	BOOL isTileConnected = [self isTileConnectedTo:tile];
+	
+	MJResource* resourceCollision = [self resourceAtCoordinate:tile.coordinate];
+	if (resourceCollision) {
+		//tile.player.score += resourceCollision.value;
+		//NSLog(@"%@ found a resource worth %i bananas!", tile.player.handle, resourceCollision.value);
+		
+	}
+	//Set the appropriate tile flags
 	[tile setIsPlayed:YES];
 	[tile setUserInteractionEnabled:NO];
+	//Add it to the board (container view)
 	[_containerView addSubview:tile];
 	
+	//Add tile to the current player
 	MJPlayer* player = _viewController.currentPlayer;
 	[player setLastPlayedTile:tile];
-	[[player playedPieces] addObject:tile];
+	[tile setPlayer:player];
+	[player.playedPieces addObject:tile];
 	[_pieces addObject:tile];
 	[_viewController nextPlayer];
 }
-- (void) addPiece:(MJPiece*)piece {
-	CGPoint newOrigin = piece.origin;
-	newOrigin.x -= self.frame.origin.x;
-	newOrigin.y -= self.frame.origin.y;
-	[piece setOrigin:newOrigin];
-	[piece snapToPoint];
-	[piece setIsPlayed:YES];
-	[piece addAsSubviewToView:_containerView];
-	[_viewController nextPlayer];
+
+- (void) addResource:(MJResource*)resource {
+	NSLog(@"Resources: %i", _resources.count);
+	[_resources addObject:resource];
+	[_containerView addSubview:resource];
+}
+
+- (BOOL) isTileConnectedTo:(MJTile*)tile; {
+	CGPoint up = CGPointMake(tile.coordinate.x, tile.coordinate.y + 1);
+	CGPoint down = CGPointMake(tile.coordinate.x, tile.coordinate.y - 1);
+	CGPoint left = CGPointMake(tile.coordinate.x - 1, tile.coordinate.y);
+	CGPoint right = CGPointMake(tile.coordinate.x + 1, tile.coordinate.y);
+	
+	
 }
 
 #pragma mark - Scroll View Delegate Methods

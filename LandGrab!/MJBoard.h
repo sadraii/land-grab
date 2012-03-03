@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class MJViewController;
-@class MJPiece;
 @class MJContainerView;
 @class MJBoard;
 @class MJPlayer;
 @class MJTile;
+@class MJResource;
 
 @interface MJBoard : UIScrollView <UIScrollViewDelegate>
 {
@@ -21,18 +21,28 @@
 }
 
 @property (weak, nonatomic) IBOutlet MJViewController* viewController;
+
 @property (strong, nonatomic) NSMutableArray* pieces;
+@property (strong, nonatomic) NSMutableArray* resources;
+
 @property (readonly)CGSize boardSize;
 @property (strong, nonatomic) MJContainerView* containerView;
 
 + (NSUInteger) tileSize;
 
 - (void) newGame;
+- (void) clearBoard;
 - (void) setBoardSize:(CGSize)size;
+
 - (MJTile*) tileAtCoordinate:(CGPoint)coordinate;
+- (MJResource*) resourceAtCoordinate:(CGPoint)coordinate;
+
 - (BOOL) isCoordinateOnBoard:(CGPoint)coordinate;
+- (void) updateZoomScale;
 
 - (void) addTile:(MJTile*)tile;
-- (void) addPiece:(MJPiece*)piece;
+- (void) addResource:(MJResource*)resource;
+
+- (BOOL) isTileConnectedTo:(MJTile*)tile;
 
 @end
