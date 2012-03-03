@@ -29,6 +29,7 @@
 
 @property (strong, nonatomic) NSMutableArray* players;
 @property (weak, nonatomic) MJPlayer* currentPlayer;
+@property (readwrite, nonatomic) BOOL isInitalLaunch;
 
 - (IBAction)newGame:(id)sender;
 - (void) createPlayers;
@@ -38,5 +39,6 @@
 - (void) nextPlayer;
 
 - (void) addTile:(MJTile*)tile;
+- (void) zoomOut;
 
 @end

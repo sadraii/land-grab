@@ -1,4 +1,4 @@
-//
+
 //  MJViewController.m
 //  LandGrab!
 //
@@ -26,14 +26,20 @@
 @synthesize players = _players;
 @synthesize currentPlayer = _currentPlayer;
 
+@synthesize isInitalLaunch = _isInitalLaunch;
+
+
+
 #pragma mark - Object Methods
 
 - (IBAction)newGame:(id)sender {
 	[_board newGame];
 	[_board setBoardSize:CGSizeMake(50, 50)];
+	[_board setZoomScale:_board.minimumZoomScale];
 	[_toolbar newGame];
 	currentPlayerIndex = -1;
 	turnCount = 0;
+	_isInitalLaunch = YES;
 	[self createPlayers];
 	[self createResources];
 	[self nextPlayer];
@@ -141,27 +147,43 @@
 	CGRect boardRect = _board.bounds;
 	boardRect.origin.x = (rect.origin.x + (rect.size.width / 2)) - (boardRect.size.width / 2);
 	boardRect.origin.y = (rect.origin.y + (rect.size.height / 2)) - (boardRect.size.height / 2);
+	
 	[_board setZoomScale:1 animated:YES];
 	[_board scrollRectToVisible:boardRect animated:YES];
+	
+//	[UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionTransitionNone animations:^ {
+////		[_board scrollRectToVisible:boardRect animated:NO];
+////		[_board setZoomScale:1];
+//	}completion:^(BOOL finished) {
+//		NSLog(@"Yay scroll!");
+//	}];
+	
+	
+}
+-(void) zoomOut {
+	[UIView animateWithDuration:2.0f delay:1.0f options:UIViewAnimationOptionCurveEaseInOut animations:^ {
+		[_board setZoomScale:_board.minimumZoomScale animated:NO];	
+	}completion:^(BOOL finished) {
+		[(UIView*)_board.containerView setNeedsDisplay];
+		NSLog(@"Yay zoom out");
+	}];
 }
 
 - (void) nextPlayer {
 	currentPlayerIndex < _players.count - 1 ? ++currentPlayerIndex : (currentPlayerIndex = 0);
 	if (!(currentPlayerIndex % _players.count - 1)) turnCount++;
 	_currentPlayer = (MJPlayer*)[_players objectAtIndex:currentPlayerIndex];
-	[_currentPlayer updateTerritory];
+	//[_currentPlayer updateTerritory];
 	[_toolbar loadPlayer:_currentPlayer];
 	[_handle setText:_currentPlayer.handle];
 	NSLog(@"Current Player: %@", _currentPlayer.handle);
 	[_territory setText:[NSString stringWithFormat:@"%i",_currentPlayer.territory]];
 	[_score setText:[NSString stringWithFormat:@"%i",_currentPlayer.score]];
-	
-//	[_board setZoomScale:_board.minimumZoomScale animated:YES];
-	if (_currentPlayer.lastPlayedTile) {
-		[self scrollToRect:_currentPlayer.lastPlayedTile.frame];
+	if (_isInitalLaunch) {
+		_isInitalLaunch = NO;
 	}
 	else {
-		[self scrollToRect:_currentPlayer.capital.frame];
+		[self zoomOut];
 	}
 }
 

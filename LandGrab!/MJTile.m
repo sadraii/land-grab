@@ -94,12 +94,18 @@
 	_currentPoint = point;
 	distanceTraveled = CGSizeMake(0, 0);
 	[_board setScrollEnabled:NO];
-	
 	distanceFromOrigin = [self distanceFromOrigin:[touch locationInView:self]];
 	point.x -= distanceFromOrigin.width;
 	point.y -= distanceFromOrigin.height;
 	[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
 	[_viewController addTile:self];
+	if (_player.lastPlayedTile) {
+		[_viewController scrollToRect:_player.lastPlayedTile.frame];
+		
+	}
+	else {
+		[_viewController scrollToRect:_player.capital.frame];
+	}
 }
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -129,6 +135,7 @@
 			point.y -= distanceFromOrigin.height;
 			[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
 			[self snapToPoint];
+			
 			[_board addTile:self];
 		}
 	}
