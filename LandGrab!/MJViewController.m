@@ -161,7 +161,7 @@
 	
 }
 -(void) zoomOut {
-	[UIView animateWithDuration:2.0f delay:1.0f options:UIViewAnimationOptionCurveEaseInOut animations:^ {
+	[UIView animateWithDuration:1.5f delay:1.0f options:UIViewAnimationOptionCurveEaseInOut animations:^ {
 		[_board setZoomScale:_board.minimumZoomScale animated:NO];	
 	}completion:^(BOOL finished) {
 		[(UIView*)_board.containerView setNeedsDisplay];
