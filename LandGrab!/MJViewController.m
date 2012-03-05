@@ -21,7 +21,9 @@
 @synthesize territory = _territory;
 @synthesize score = _score;
 @synthesize board = _board;
+
 @synthesize toolbar = _toolbar;
+@synthesize zoomStepper	= _zoomStepper;
 
 @synthesize players = _players;
 @synthesize currentPlayer = _currentPlayer;
@@ -35,7 +37,7 @@
 - (IBAction)newGame:(id)sender {
 	[_board newGame];
 	[_board setBoardSize:CGSizeMake(50, 50)];
-	[_board setZoomScale:_board.minimumZoomScale];
+	[_board zoomOutAnimated:NO];
 	[_toolbar newGame];
 	currentPlayerIndex = -1;
 	turnCount = 0;
@@ -43,7 +45,6 @@
 	[self createPlayers];
 	[self createResources];
 	[self nextPlayer];
-//	[(UIView*)_board.containerView setNeedsDisplay]; 
 }
 
 - (void) createPlayers {
@@ -113,7 +114,8 @@
 - (void) createResources {
 	dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 	dispatch_async(concurrentQueue, ^{
-		int numResources = 10;
+		//2494 is equal to 50 squared minus the number of players (5)
+		int numResources = 50;
 		while (_board.resources.count < numResources) {
 			int randomX = arc4random() % (int)_board.boardSize.width;
 			int randomY = arc4random() % (int)_board.boardSize.height;
@@ -139,53 +141,36 @@
 	});
 }
 
-- (IBAction)zoomToCapital:(id)sender {
-	[self scrollToRect:_currentPlayer.capital.frame];
-}
-
-- (void) scrollToRect:(CGRect)rect {
-	CGRect boardRect = _board.bounds;
-	boardRect.origin.x = (rect.origin.x + (rect.size.width / 2)) - (boardRect.size.width / 2);
-	boardRect.origin.y = (rect.origin.y + (rect.size.height / 2)) - (boardRect.size.height / 2);
-	
-	[_board setZoomScale:1 animated:YES];
-	[_board scrollRectToVisible:boardRect animated:YES];
-	
-//	[UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionTransitionNone animations:^ {
-////		[_board scrollRectToVisible:boardRect animated:NO];
-////		[_board setZoomScale:1];
-//	}completion:^(BOOL finished) {
-//		NSLog(@"Yay scroll!");
-//	}];
-	
-	
-}
--(void) zoomOut {
-	[UIView animateWithDuration:2.0f delay:1.0f options:UIViewAnimationOptionCurveEaseInOut animations:^ {
-		[_board setZoomScale:_board.minimumZoomScale animated:NO];	
-	}completion:^(BOOL finished) {
-		[(UIView*)_board.containerView setNeedsDisplay];
-		NSLog(@"Yay zoom out");
-	}];
+- (IBAction)zoom:(id)sender {
+	switch ((int)_zoomStepper.value) {
+		case 0:
+			[_board zoomOutAnimated:YES];
+			break;
+		case 1:
+			[_board scrollRectToVisible:_currentPlayer.capital.frame animated:YES];
+			break;
+	}
 }
 
 - (void) nextPlayer {
+	if (_isInitalLaunch) _isInitalLaunch = NO;
+	else [_board zoomOutAnimated:YES];
+	
 	currentPlayerIndex < _players.count - 1 ? ++currentPlayerIndex : (currentPlayerIndex = 0);
 	if (!(currentPlayerIndex % _players.count - 1)) turnCount++;
 	_currentPlayer = (MJPlayer*)[_players objectAtIndex:currentPlayerIndex];
-	//[_currentPlayer updateTerritory];
-	[_toolbar loadPlayer:_currentPlayer];
+	
+	[_currentPlayer updateScore];
 	[_handle setText:_currentPlayer.handle];
 	NSLog(@"Current Player: %@", _currentPlayer.handle);
-	[_territory setText:[NSString stringWithFormat:@"%i",_currentPlayer.territory]];
-	[_score setText:[NSString stringWithFormat:@"%i",_currentPlayer.score]];
-	if (_isInitalLaunch) {
-		_isInitalLaunch = NO;
-	}
-	else {
-		[self zoomOut];
-	}
+	[_toolbar loadPlayer:_currentPlayer];
 }
+
+//- (void) updateScore {
+//	[_currentPlayer updateTerritory];
+//	[_territory setText:[NSString stringWithFormat:@"%i",_currentPlayer.territory]];
+//	[_score setText:[NSString stringWithFormat:@"%i",_currentPlayer.score]];
+//}
 
 - (void) addTile:(MJTile *)tile {
 	[self.view addSubview:tile];

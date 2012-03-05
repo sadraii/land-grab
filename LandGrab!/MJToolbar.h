@@ -12,7 +12,7 @@
 @class MJPlayer;
 @class MJTile;
 
-@interface MJToolbar : UIScrollView {
+@interface MJToolbar : UIView {
 @public
 	
 @private
