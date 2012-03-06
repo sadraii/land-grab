@@ -32,6 +32,7 @@
 @property (readwrite, nonatomic) NSUInteger territory;
 @property (readwrite, nonatomic) NSUInteger money;
 
+- (void) updateScore;
 - (void) updateTerritory;
 - (void) updateTerritoryStartingAtCoordinate:(CGPoint)point;
 - (BOOL) coordinate:(CGPoint)a TouchesCoordinate:(CGPoint)b;

@@ -29,9 +29,7 @@
 }
 
 - (void) newGame {
-	for (id p in self.subviews) {
-		[p removeFromSuperview];
-	}
+	[self removeAllPieces];
 }
 
 - (void) loadPlayer:(MJPlayer *)player {
@@ -49,8 +47,8 @@
 }
 
 - (void) removeAllPieces {
-	for (id p in _pieces) {
-		[p removeFromSuperview];
+	for (MJTile* t in _pieces) {
+		[t removeFromSuperview];
 	}
 }
 

@@ -44,6 +44,12 @@
     return self;
 }
 
+- (void) updateScore {
+	[self updateTerritory];
+	[_viewController.territory setText:[NSString stringWithFormat:@"%i",self.territory]];
+	[_viewController.score setText:[NSString stringWithFormat:@"%i",self.score]];
+}
+
 - (void) updateTerritory {
 	_territory = 0;
 	for (MJTile* t in _playedPieces) {

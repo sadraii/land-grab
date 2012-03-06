@@ -11,7 +11,6 @@
 @class MJTopBar;
 @class MJBoard;
 @class MJToolbar;
-
 @class MJPlayer;
 @class MJTile;
 
@@ -25,20 +24,20 @@
 @property (strong, nonatomic) IBOutlet UILabel *score;
 
 @property (strong, nonatomic) IBOutlet MJBoard* board;
+
 @property (strong, nonatomic) IBOutlet MJToolbar* toolbar;
+@property (strong, nonatomic) IBOutlet UIStepper* zoomStepper;
 
 @property (strong, nonatomic) NSMutableArray* players;
 @property (weak, nonatomic) MJPlayer* currentPlayer;
 @property (readwrite, nonatomic) BOOL isInitalLaunch;
 
 - (IBAction)newGame:(id)sender;
+- (IBAction)zoom:(id)sender;
 - (void) createPlayers;
 - (void) createResources;
-- (IBAction)zoomToCapital:(id)sender;
-- (void) scrollToRect:(CGRect)rect;
 - (void) nextPlayer;
-
 - (void) addTile:(MJTile*)tile;
-- (void) zoomOut;
+//- (void) updateScore;
 
 @end

@@ -31,7 +31,6 @@
 + (NSUInteger) tileSize;
 
 - (void) newGame;
-- (void) clearBoard;
 - (void) setBoardSize:(CGSize)size;
 
 - (MJTile*) tileAtCoordinate:(CGPoint)coordinate;
@@ -39,6 +38,7 @@
 
 - (BOOL) isCoordinateOnBoard:(CGPoint)coordinate;
 - (void) updateZoomScale;
+- (void) zoomOutAnimated:(BOOL)animated;
 
 - (void) addTile:(MJTile*)tile;
 - (void) addResource:(MJResource*)resource;

@@ -99,12 +99,13 @@
 	point.y -= distanceFromOrigin.height;
 	[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
 	[_viewController addTile:self];
-	if (_player.lastPlayedTile) {
-		[_viewController scrollToRect:_player.lastPlayedTile.frame];
-		
-	}
-	else {
-		[_viewController scrollToRect:_player.capital.frame];
+	if (_board.zoomScale != _board.maximumZoomScale) {
+		if (_player.lastPlayedTile) {
+			[_board scrollRectToVisible:_player.lastPlayedTile.frame animated:YES];
+		}
+		else {
+			[_board scrollRectToVisible:_player.capital.frame animated:YES];
+		}
 	}
 }
 

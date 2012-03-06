@@ -96,11 +96,30 @@
 - (void) updateZoomScale {
 	CGFloat scale = self.bounds.size.width / _containerView.bounds.size.width;
 	if (self.zoomScale < scale || self.zoomScale > 1) {
-		[self setZoomScale:scale animated:YES];
+//		[self setZoomScale:scale animated:YES];
+		[self zoomOutAnimated:YES];
 	}
 	[self setMinimumZoomScale:scale];
 	[self setMaximumZoomScale:1];
-	NSLog(@"MinimumZoomScale: %f", scale);
+	NSLog(@"Set MinimumZoomScale: %f", scale);
+}
+
+- (void) zoomOutAnimated:(BOOL)animated {
+	if (self.zooming == self.minimumZoomScale) {
+		NSLog(@"Already zoomed out");
+		return;
+	}
+	if (animated) {
+		[UIView animateWithDuration:0.8f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^ {
+			[self setZoomScale:self.minimumZoomScale animated:NO];	
+		}completion:^(BOOL finished) {
+	//		[containerView setNeedsDisplay];
+			NSLog(@"Yay zoom out");
+		}];
+	}
+	else {
+		[self setZoomScale:self.minimumZoomScale animated:NO];
+	}
 }
 
 #pragma mark - Add Methods
@@ -124,6 +143,7 @@
 	// Check if tile is placed ontop of another player's tile
 	else if (tileCollision && tile.player != tileCollision.player) {
 		NSLog(@"Collision with %@'s tile", tileCollision.player.handle);
+		return;
 	}
 	
 	BOOL isTileConnected = [self isTileConnectedTo:tile];
@@ -142,26 +162,23 @@
 		[tile setPlayer:player];
 		[player.playedPieces addObject:tile];
 		[_pieces addObject:tile];
-		[_viewController nextPlayer];
+		
+		MJResource* resourceCollision = [self resourceAtCoordinate:tile.coordinate];
+		if (resourceCollision) {
+			tile.player.score += resourceCollision.value;
+			NSLog(@"%@ found a resource worth %i bananas!", tile.player.handle, resourceCollision.value);
+		}
+		
+		[player updateScore];
+		[_viewController performSelector:@selector(nextPlayer) withObject:nil afterDelay:1.0];
 	}
 	else {
 		[tile touchesCancelled:nil withEvent:nil];
 	}
-
-
-	
-	/*MJResource* resourceCollision = [self resourceAtCoordinate:tile.coordinate];
-	if (resourceCollision) {
-		//tile.player.score += resourceCollision.value;
-		//NSLog(@"%@ found a resource worth %i bananas!", tile.player.handle, resourceCollision.value);
-		
-		
-	}*/
-
 }
 
 - (void) addResource:(MJResource*)resource {
-	NSLog(@"Resources: %i", _resources.count);
+//	NSLog(@"Resources: %i", _resources.count);
 	[_resources addObject:resource];
 	[_containerView addSubview:resource];
 }
@@ -210,6 +227,26 @@
 
 - (void) scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
 	
+}
+
+#pragma mark - Overridden Methods
+
+- (void) scrollRectToVisible:(CGRect)rect animated:(BOOL)animated {
+	__block CGRect boardRect = self.bounds;
+	boardRect.origin.x = (rect.origin.x + (rect.size.width / 2)) - (boardRect.size.width / 2);
+	boardRect.origin.y = (rect.origin.y + (rect.size.height / 2)) - (boardRect.size.height / 2);
+	if (animated) {
+		[UIView animateWithDuration:0.5f delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut animations:^ {
+			[self setZoomScale:1];
+			[super scrollRectToVisible:boardRect animated:NO];
+		}completion:^(BOOL finished) {
+			NSLog(@"Yay scroll!");
+		}];
+	}
+	else {
+		[self setZoomScale:1 animated:YES];
+		[super scrollRectToVisible:boardRect animated:YES];
+	}
 }
 
 @end
