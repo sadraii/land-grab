@@ -13,10 +13,12 @@
 @class MJToolbar;
 @class MJPlayer;
 @class MJTile;
+@class MainMenu;
 
 @interface MJViewController : UIViewController {
 	NSInteger currentPlayerIndex;
 	NSUInteger turnCount;
+    int numberOfPlayers;
 }
 @property (strong, nonatomic) IBOutlet MJTopBar* topbar;
 @property (strong, nonatomic) IBOutlet UILabel* handle;
@@ -31,6 +33,8 @@
 @property (strong, nonatomic) NSMutableArray* players;
 @property (weak, nonatomic) MJPlayer* currentPlayer;
 @property (readwrite, nonatomic) BOOL isInitalLaunch;
+
+@property (strong, nonatomic) IBOutlet MainMenu *mainMenuViewController;
 
 - (IBAction)newGame:(id)sender;
 - (IBAction)zoom:(id)sender;

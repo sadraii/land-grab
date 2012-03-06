@@ -13,6 +13,7 @@
 #import "MJTopBar.h"
 #import "MJTile.h"
 #import "MJResource.h"
+#import "MainMenu.h"
 
 @implementation MJViewController
 
@@ -29,6 +30,8 @@
 @synthesize currentPlayer = _currentPlayer;
 
 @synthesize isInitalLaunch = _isInitalLaunch;
+
+@synthesize mainMenuViewController = _mainMenuViewController;
 
 
 
@@ -51,7 +54,7 @@
 	_players = NULL;
 	[self setPlayers:[[NSMutableArray alloc] init]];
 	
-	int numPlayers = 5;
+	int numPlayers = numberOfPlayers;
 	
 	for (int i = 0; i < numPlayers; i++) {
 		MJPlayer* player = [[MJPlayer alloc] init];
@@ -142,7 +145,7 @@
 }
 
 - (IBAction)zoomToCapital:(id)sender {
-	[self scrollToRect:_currentPlayer.capital.frame];
+	//[self scrollToRect:_currentPlayer.capital.frame];
 }
 
 - (void) scrollToRect:(CGRect)rect {
@@ -208,8 +211,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addTwoPlayers) name:@"addTwoPlayers" object:nil];
 	[self newGame:self];
 	// Do any additional setup after loading the view, typically from a nib.
+}
+
+-(void)addTwoPlayers {
+    numberOfPlayers = 2;
 }
 
 - (void)viewDidUnload

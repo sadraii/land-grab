@@ -30,6 +30,7 @@
 		6756753514F756DD00A8E1B6 /* MJTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756753414F756DD00A8E1B6 /* MJTile.m */; };
 		6756753914F7592200A8E1B6 /* MJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756753814F7592200A8E1B6 /* MJPlayer.m */; };
 		6756753D14F759D100A8E1B6 /* MJContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756753C14F759D100A8E1B6 /* MJContainerView.m */; };
+		D58D78221506917F0079E0FA /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D58D78201506917F0079E0FA /* MainMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,8 @@
 		6756753C14F759D100A8E1B6 /* MJContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJContainerView.m; sourceTree = "<group>"; };
 		6756753E14F765D700A8E1B6 /* MJTileDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJTileDelegate.h; sourceTree = "<group>"; };
 		678A661114F97D9B006F9E25 /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
+		D58D781F1506917F0079E0FA /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenu.h; sourceTree = "<group>"; };
+		D58D78201506917F0079E0FA /* MainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenu.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +215,8 @@
 				6756750114F748F300A8E1B6 /* MJViewController.m */,
 				3FED6D4914F98F67007155CA /* MJTopBar.h */,
 				3FED6D4A14F98F67007155CA /* MJTopBar.m */,
+				D58D781F1506917F0079E0FA /* MainMenu.h */,
+				D58D78201506917F0079E0FA /* MainMenu.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -392,6 +397,7 @@
 				3FED6D4B14F98F67007155CA /* MJTopBar.m in Sources */,
 				3FED6D5514F9BE70007155CA /* Graphics.m in Sources */,
 				67099FF614FFF1CC001C4178 /* MJResource.m in Sources */,
+				D58D78221506917F0079E0FA /* MainMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
