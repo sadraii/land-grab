@@ -7,25 +7,37 @@
 //
 
 #import <UIKit/UIKit.h>
+@class GameSetUpData;
+@class MJViewController;
 
 @interface MainMenu : UIViewController
 
-@property (assign, nonatomic) int numberOfPlayers;
+@property (strong, nonatomic)       GameSetUpData       *gameSetUp;
+@property (strong, nonatomic)       MJViewController    *mjViewController;
+@property (readwrite, nonatomic)    BOOL                 isViewControllerSetUp;
+@property (readwrite, nonatomic)    int                  counter;
+@property (weak, nonatomic) IBOutlet UIButton *startNewGame;
 
+@property (weak, nonatomic) IBOutlet UIButton *twoPlayersButton;
+@property (weak, nonatomic) IBOutlet UIButton *threePlayersButton;
+@property (weak, nonatomic) IBOutlet UIButton *fourPlayersButton;
+@property (weak, nonatomic) IBOutlet UIButton *timeBasedButton;
+@property (weak, nonatomic) IBOutlet UIButton *turnBasedButton;
+@property (weak, nonatomic) IBOutlet UIButton *unlimtedBasedButton;
+@property (weak, nonatomic) IBOutlet UIButton *twoMinutesButton;
+@property (weak, nonatomic) IBOutlet UIButton *fiveMinutesButton;
+@property (weak, nonatomic) IBOutlet UIButton *tenMinutesButton;
+@property (weak, nonatomic) IBOutlet UIButton *twentyTurnsButton;
+@property (weak, nonatomic) IBOutlet UIButton *fiftyTurnsButton;
+@property (weak, nonatomic) IBOutlet UIButton *hundredTurnsButton;
+@property (weak, nonatomic) IBOutlet UILabel *label;
 
 -(IBAction)tappedNewGame:(id)sender;
--(IBAction)tappedTwoPlayers:(id)sender;
--(IBAction)tappedThreePlayers:(id)sender;
--(IBAction)tappedFourPlayers:(id)sender;
--(IBAction)tappedTimeBased:(id)sender;
--(IBAction)tappedTurnBased:(id)sender;
--(IBAction)tappedUnlimtedBased:(id)sender;
--(IBAction)tappedTwoMinutes:(id)sender;
--(IBAction)tappedFiveMinutes:(id)sender;
--(IBAction)tappedTenMinutes:(id)sender;
--(IBAction)tappedTwentyTurns:(id)sender;
--(IBAction)tappedFiftyTurns:(id)sender;
--(IBAction)tappedHundredTurns:(id)sender;
+-(IBAction)tappedHowManyPlayers:(UIButton *)button;
+-(IBAction)tappedTypeOfGame:(UIButton *)button;
 
+
+
+-(void)setBoolCorrectly;
 
 @end

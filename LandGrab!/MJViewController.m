@@ -14,6 +14,7 @@
 #import "MJTile.h"
 #import "MJResource.h"
 #import "MainMenu.h"
+#import "GameSetUpData.h"
 
 @implementation MJViewController
 
@@ -31,8 +32,11 @@
 
 @synthesize isInitalLaunch = _isInitalLaunch;
 
+@synthesize numberOfPlayers = _numberOfPlayers;
+
 @synthesize mainMenuViewController = _mainMenuViewController;
 
+@synthesize gameSetUpData = _gameSetUpData;
 
 
 #pragma mark - Object Methods
@@ -54,7 +58,7 @@
 	_players = NULL;
 	[self setPlayers:[[NSMutableArray alloc] init]];
 	
-	int numPlayers = numberOfPlayers;
+	int numPlayers = _gameSetUpData.numberOfPlayers;
 	
 	for (int i = 0; i < numPlayers; i++) {
 		MJPlayer* player = [[MJPlayer alloc] init];
@@ -166,7 +170,7 @@
 	
 }
 -(void) zoomOut {
-	[UIView animateWithDuration:1.5f delay:1.0f options:UIViewAnimationOptionCurveEaseInOut animations:^ {
+	[UIView animateWithDuration:1.0f delay:0.5f options:UIViewAnimationOptionCurveEaseInOut animations:^ {
 		[_board setZoomScale:_board.minimumZoomScale animated:NO];	
 	}completion:^(BOOL finished) {
 		[(UIView*)_board.containerView setNeedsDisplay];
@@ -208,17 +212,24 @@
 
 #pragma mark - View lifecycle
 
+-(id)initWithCoder:(NSCoder *)aDecoder {
+    
+    if (self = [super initWithCoder:aDecoder]) {
+    
+        GameSetUpData *tmp = [[GameSetUpData alloc] init];
+        _gameSetUpData = tmp;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addTwoPlayers) name:@"addTwoPlayers" object:nil];
+
 	[self newGame:self];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
--(void)addTwoPlayers {
-    numberOfPlayers = 2;
-}
 
 - (void)viewDidUnload
 {
