@@ -108,17 +108,17 @@
     
     _mjViewController = [segue destinationViewController]; 
     if ([segueIdentifer isEqualToString:@"from2MinToGame"]) {
-        _gameSetUp.numberOfMinutes = 2;
+        _gameSetUp.numberOfSeconds = 120;
         _mjViewController.gameSetUpData = _gameSetUp;
         [_gameSetUp printData];
     }
     if ([segueIdentifer isEqualToString:@"from5MinToGame"]) {
-        _gameSetUp.numberOfMinutes = 5;
+        _gameSetUp.numberOfSeconds = 300;
         _mjViewController.gameSetUpData = _gameSetUp;
         [_gameSetUp printData];
     }
     if ([segueIdentifer isEqualToString:@"from10MinToGame"]) {
-        _gameSetUp.numberOfMinutes = 10;
+        _gameSetUp.numberOfSeconds = 600;
         _mjViewController.gameSetUpData = _gameSetUp;
         [_gameSetUp printData];
     } 

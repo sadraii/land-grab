@@ -15,6 +15,8 @@
 #import "MJResource.h"
 #import "MainMenu.h"
 #import "GameSetUpData.h"
+#import "EndGameViewController.h"
+#import "EndGameData.h"
 
 @implementation MJViewController
 
@@ -37,7 +39,14 @@
 @synthesize mainMenuViewController = _mainMenuViewController;
 
 @synthesize gameSetUpData = _gameSetUpData;
+@synthesize gameTypeLabel = _gameTypeLabel;
+@synthesize gameTypeLabelCounter = _gameTypeLabelCounter;
 
+@synthesize secondsLeft = _secondsLeft;
+@synthesize clockForTimeBasedGame = _clockForTimeBasedGame;
+
+@synthesize endGameViewController = _endGameViewController;
+@synthesize endGameData = _endGameData;
 
 #pragma mark - Object Methods
 
@@ -46,12 +55,74 @@
 	[_board setBoardSize:CGSizeMake(50, 50)];
 	[_board zoomOutAnimated:NO];
 	[_toolbar newGame];
+    
+    if ([_gameSetUpData.gameType isEqualToString:@"timeBased"]) {
+        _gameTypeLabel.text = [NSString stringWithString:@"Time Left:"];
+        
+        if (_gameSetUpData.numberOfSeconds == 120) {
+            _gameTypeLabelCounter.text = [NSString stringWithString:@"2:00"];
+            _secondsLeft = 60;
+        }
+        if (_gameSetUpData.numberOfSeconds == 300) {
+            _gameTypeLabelCounter.text = [NSString stringWithString:@"5:00"];
+            _secondsLeft = 300;
+        }
+        if (_gameSetUpData.numberOfSeconds == 600) {
+            _gameTypeLabelCounter.text = [NSString stringWithString:@"10:00"];
+            _secondsLeft = 600;
+        }
+
+        [self createTimeBasedGameTimer];
+    }
+ 
+    
 	currentPlayerIndex = -1;
 	turnCount = 0;
-	_isInitalLaunch = YES;
+	_isInitalLaunch = YES;    
 	[self createPlayers];
 	[self createResources];
 	[self nextPlayer];
+}
+
+- (void)createTimeBasedGameTimer {
+    _clockForTimeBasedGame = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
+    [_clockForTimeBasedGame fire];
+}
+
+- (void)updateTimer {
+   
+    if (_secondsLeft > 0) {
+        _secondsLeft--;
+        NSUInteger minutes = (_secondsLeft % 3600) / 60;
+        NSUInteger seconds = (_secondsLeft % 3600) % 60;
+        _gameTypeLabelCounter.text = [NSString stringWithFormat:@"%2d:%02d", minutes, seconds];
+    }
+    
+    else {
+        [_clockForTimeBasedGame invalidate];
+        [self endSequence];
+    }
+}
+
+- (void)endSequence {
+   
+    for (MJPlayer* player in _players) {
+        player.combinedScore = player.territory + player.score;
+    }
+    
+    for (MJPlayer* player in _players) {
+        NSLog(@"Not in order: %d", player.combinedScore);
+    }
+   
+     [self performSegueWithIdentifier:@"toEndGame" sender:self];
+}
+                              
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    _endGameViewController = [segue destinationViewController];
+    _endGameViewController.endGameData = _endGameData;
+    _endGameViewController.numberOfPlayers = _gameSetUpData.numberOfPlayers;
+    _endGameViewController.players = _players;
 }
 
 - (void) createPlayers {
@@ -170,11 +241,11 @@
 	
 }
 -(void) zoomOut {
-	[UIView animateWithDuration:1.0f delay:0.5f options:UIViewAnimationOptionCurveEaseInOut animations:^ {
+	[UIView animateWithDuration:0.75f delay:0.1f options:UIViewAnimationOptionCurveEaseInOut animations:^ {
 		[_board setZoomScale:_board.minimumZoomScale animated:NO];	
 	}completion:^(BOOL finished) {
 		[(UIView*)_board.containerView setNeedsDisplay];
-		NSLog(@"Yay zoom out");
+		
 	}];
 }
 
@@ -225,15 +296,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    EndGameViewController *egVC = [[EndGameViewController alloc] init];
+    _endGameViewController = egVC;
+    
+    EndGameData *endGameTmp = [[EndGameData alloc] init];
+    _endGameData = endGameTmp;
+    
 	[self newGame:self];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
 
+
 - (void)viewDidUnload
 {
 	//IBOutlets
+    [self setGameTypeLabel:nil];
+    [self setGameTypeLabelCounter:nil];
     [super viewDidUnload];
 	[self setTopbar:nil];
 	[self setHandle:nil];

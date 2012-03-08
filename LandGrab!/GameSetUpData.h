@@ -13,7 +13,7 @@
 @property (readwrite, nonatomic)    NSUInteger      numberOfPlayers;
 @property (strong, nonatomic)       NSMutableArray  *playerNames;
 @property (strong, nonatomic)       NSString        *gameType;
-@property (readwrite, nonatomic)    NSUInteger      numberOfMinutes;
+@property (readwrite, nonatomic)    NSUInteger      numberOfSeconds;
 @property (readwrite, nonatomic)    NSUInteger      numberOfTurns;
 @property (readwrite, nonatomic)    CGSize          boardSize;
 

@@ -33,6 +33,8 @@
 		D58D78221506917F0079E0FA /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D58D78201506917F0079E0FA /* MainMenu.m */; };
 		D58D782C1507CBEE0079E0FA /* GameSetUpData.m in Sources */ = {isa = PBXBuildFile; fileRef = D58D782B1507CBEE0079E0FA /* GameSetUpData.m */; };
 		D58D7838150817C30079E0FA /* mainMenuBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D58D7837150817C30079E0FA /* mainMenuBackground.jpg */; };
+		D5A9DBA315085C9F004055F7 /* EndGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5A9DBA215085C9F004055F7 /* EndGameViewController.m */; };
+		D5A9DBA615085E57004055F7 /* EndGameData.m in Sources */ = {isa = PBXBuildFile; fileRef = D5A9DBA515085E57004055F7 /* EndGameData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +92,10 @@
 		D58D782A1507CBEE0079E0FA /* GameSetUpData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSetUpData.h; sourceTree = "<group>"; };
 		D58D782B1507CBEE0079E0FA /* GameSetUpData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSetUpData.m; sourceTree = "<group>"; };
 		D58D7837150817C30079E0FA /* mainMenuBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mainMenuBackground.jpg; sourceTree = "<group>"; };
+		D5A9DBA115085C9F004055F7 /* EndGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndGameViewController.h; sourceTree = "<group>"; };
+		D5A9DBA215085C9F004055F7 /* EndGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndGameViewController.m; sourceTree = "<group>"; };
+		D5A9DBA415085E57004055F7 /* EndGameData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndGameData.h; sourceTree = "<group>"; };
+		D5A9DBA515085E57004055F7 /* EndGameData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndGameData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +199,8 @@
 				675674F614F748F300A8E1B6 /* LandGrab!-Prefix.pch */,
 				D58D782A1507CBEE0079E0FA /* GameSetUpData.h */,
 				D58D782B1507CBEE0079E0FA /* GameSetUpData.m */,
+				D5A9DBA415085E57004055F7 /* EndGameData.h */,
+				D5A9DBA515085E57004055F7 /* EndGameData.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -225,6 +233,8 @@
 				3FED6D4A14F98F67007155CA /* MJTopBar.m */,
 				D58D781F1506917F0079E0FA /* MainMenu.h */,
 				D58D78201506917F0079E0FA /* MainMenu.m */,
+				D5A9DBA115085C9F004055F7 /* EndGameViewController.h */,
+				D5A9DBA215085C9F004055F7 /* EndGameViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -416,6 +426,8 @@
 				67099FF614FFF1CC001C4178 /* MJResource.m in Sources */,
 				D58D78221506917F0079E0FA /* MainMenu.m in Sources */,
 				D58D782C1507CBEE0079E0FA /* GameSetUpData.m in Sources */,
+				D5A9DBA315085C9F004055F7 /* EndGameViewController.m in Sources */,
+				D5A9DBA615085E57004055F7 /* EndGameData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

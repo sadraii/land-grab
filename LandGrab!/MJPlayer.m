@@ -28,6 +28,7 @@
 @synthesize score = _score;
 @synthesize territory = _territory;
 @synthesize money = _money;
+@synthesize combinedScore = _combinedScore;
 
 -(id) init {
     if ((self = [super init]) == nil) {
@@ -39,6 +40,7 @@
 	_money = 0;
 	_score = 0;
 	_territory = 0;
+    _combinedScore = 0;
 	_capital = nil;
 	_playedPieces = [[NSMutableArray alloc] init];
     return self;

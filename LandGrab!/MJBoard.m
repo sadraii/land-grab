@@ -240,7 +240,7 @@
 			[self setZoomScale:1];
 			[super scrollRectToVisible:boardRect animated:NO];
 		}completion:^(BOOL finished) {
-			NSLog(@"Yay scroll!");
+            
 		}];
 	}
 	else {

@@ -13,7 +13,7 @@
 @synthesize numberOfPlayers = _numberOfPlayers;
 @synthesize playerNames = _playerNames;
 @synthesize gameType = _gameType;
-@synthesize numberOfMinutes = _numberOfMinutes;
+@synthesize numberOfSeconds = _numberOfSeconds;
 @synthesize numberOfTurns = _numberOfTurns;
 @synthesize boardSize = _boardSize;
 
@@ -21,7 +21,7 @@
     NSLog(@"Number Of Players: %d.\n", _numberOfPlayers);
     NSLog(@"Game Type: %@.\n", _gameType);
     if ([_gameType isEqualToString:@"timeBased"]) {
-        NSLog(@"Number Of Minutes: %d.\n", _numberOfMinutes);
+        NSLog(@"Number Of Seconds: %d.\n", _numberOfSeconds);
     }
     if ([_gameType isEqualToString:@"turnBased"]) {
         NSLog(@"Number Of Turns: %d.\n", _numberOfTurns);

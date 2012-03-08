@@ -31,6 +31,7 @@
 @property (readwrite, nonatomic) NSUInteger score;
 @property (readwrite, nonatomic) NSUInteger territory;
 @property (readwrite, nonatomic) NSUInteger money;
+@property (readwrite, nonatomic) NSUInteger combinedScore;
 
 - (void) updateScore;
 - (void) updateTerritory;
