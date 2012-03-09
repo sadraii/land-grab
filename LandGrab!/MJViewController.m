@@ -56,73 +56,21 @@
 	[_board zoomOutAnimated:NO];
 	[_toolbar newGame];
     
+    
     if ([_gameSetUpData.gameType isEqualToString:@"timeBased"]) {
-        _gameTypeLabel.text = [NSString stringWithString:@"Time Left:"];
-        
-        if (_gameSetUpData.numberOfSeconds == 120) {
-            _gameTypeLabelCounter.text = [NSString stringWithString:@"2:00"];
-            _secondsLeft = 60;
-        }
-        if (_gameSetUpData.numberOfSeconds == 300) {
-            _gameTypeLabelCounter.text = [NSString stringWithString:@"5:00"];
-            _secondsLeft = 300;
-        }
-        if (_gameSetUpData.numberOfSeconds == 600) {
-            _gameTypeLabelCounter.text = [NSString stringWithString:@"10:00"];
-            _secondsLeft = 600;
-        }
-
-        [self createTimeBasedGameTimer];
+        [self setUpTimeBasedGame];
+    }
+    
+    if ([_gameSetUpData.gameType isEqualToString:@"turnBased"]) {
+        [self setUpTurnBasedGame];
     }
  
-    
 	currentPlayerIndex = -1;
-	turnCount = 0;
+	//turnCount = 0;
 	_isInitalLaunch = YES;    
 	[self createPlayers];
 	[self createResources];
 	[self nextPlayer];
-}
-
-- (void)createTimeBasedGameTimer {
-    _clockForTimeBasedGame = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
-    [_clockForTimeBasedGame fire];
-}
-
-- (void)updateTimer {
-   
-    if (_secondsLeft > 0) {
-        _secondsLeft--;
-        NSUInteger minutes = (_secondsLeft % 3600) / 60;
-        NSUInteger seconds = (_secondsLeft % 3600) % 60;
-        _gameTypeLabelCounter.text = [NSString stringWithFormat:@"%2d:%02d", minutes, seconds];
-    }
-    
-    else {
-        [_clockForTimeBasedGame invalidate];
-        [self endSequence];
-    }
-}
-
-- (void)endSequence {
-   
-    for (MJPlayer* player in _players) {
-        player.combinedScore = player.territory + player.score;
-    }
-    
-    for (MJPlayer* player in _players) {
-        NSLog(@"Not in order: %d", player.combinedScore);
-    }
-   
-     [self performSegueWithIdentifier:@"toEndGame" sender:self];
-}
-                              
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    _endGameViewController = [segue destinationViewController];
-    _endGameViewController.endGameData = _endGameData;
-    _endGameViewController.numberOfPlayers = _gameSetUpData.numberOfPlayers;
-    _endGameViewController.players = _players;
 }
 
 - (void) createPlayers {
@@ -219,6 +167,78 @@
 	});
 }
 
+#pragma mark - Set Up Game Types
+
+- (void)setUpTimeBasedGame {
+    _gameTypeLabel.text = [NSString stringWithString:@"Time Left:"];
+    
+    if (_gameSetUpData.numberOfSeconds == 120) {
+        _gameTypeLabelCounter.text = [NSString stringWithString:@"2:00"];
+        _secondsLeft = 60;
+    }
+    if (_gameSetUpData.numberOfSeconds == 300) {
+        _gameTypeLabelCounter.text = [NSString stringWithString:@"5:00"];
+        _secondsLeft = 300;
+    }
+    if (_gameSetUpData.numberOfSeconds == 600) {
+        _gameTypeLabelCounter.text = [NSString stringWithString:@"10:00"];
+        _secondsLeft = 600;
+    }
+    
+    [self createTimeBasedGameTimer]; 
+}
+
+- (void)createTimeBasedGameTimer {
+    _clockForTimeBasedGame = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
+    [_clockForTimeBasedGame fire];
+}
+
+- (void)updateTimer {
+    
+    if (_secondsLeft > 0) {
+        _secondsLeft--;
+        NSUInteger minutes = (_secondsLeft % 3600) / 60;
+        NSUInteger seconds = (_secondsLeft % 3600) % 60;
+        _gameTypeLabelCounter.text = [NSString stringWithFormat:@"%2d:%02d", minutes, seconds];
+        if (_secondsLeft < 31) {
+            _gameTypeLabelCounter.textColor = [UIColor redColor];
+        }
+    }
+    
+    else {
+        [_clockForTimeBasedGame invalidate];
+        [self endSequence];
+    }
+}
+
+- (void) setUpTurnBasedGame {
+    _gameTypeLabel.text = [NSString stringWithString:@"Turns Left:"];
+    
+    if (_gameSetUpData.numberOfTurns == 20) {
+        _gameTypeLabelCounter.text = [NSString stringWithString:@"20"];
+        turnCount = 10;
+    }
+    if (_gameSetUpData.numberOfTurns == 50) {
+        _gameTypeLabelCounter.text = [NSString stringWithString:@"50"];
+        turnCount = 50;
+    }
+    if (_gameSetUpData.numberOfTurns == 100) {
+        _gameTypeLabelCounter.text = [NSString stringWithString:@"100"];
+    }
+}
+
+- (void) updateTurnCount {
+    turnCount--;
+    
+    if (turnCount == 0) {
+        [self endSequence];
+    }
+    
+    _gameTypeLabelCounter.text = [NSString stringWithFormat:@"%d", turnCount];
+}
+
+#pragma mark - Zoom Methods
+
 - (IBAction)zoomToCapital:(id)sender {
 	//[self scrollToRect:_currentPlayer.capital.frame];
 }
@@ -254,7 +274,7 @@
 	else [_board zoomOutAnimated:YES];
 	
 	currentPlayerIndex < _players.count - 1 ? ++currentPlayerIndex : (currentPlayerIndex = 0);
-	if (!(currentPlayerIndex % _players.count - 1)) turnCount++;
+	if (!(currentPlayerIndex % _players.count - 1)) [self updateTurnCount];
 	_currentPlayer = (MJPlayer*)[_players objectAtIndex:currentPlayerIndex];
 	
 	[_currentPlayer updateScore];
@@ -273,6 +293,28 @@
 	[self.view addSubview:tile];
 }
 
+#pragma mark - End Sequence and Segue
+
+- (void)endSequence {
+    
+    for (MJPlayer* player in _players) {
+        player.combinedScore = player.territory + player.score;
+    }
+    
+    for (MJPlayer* player in _players) {
+        NSLog(@"Not in order: %d", player.combinedScore);
+    }
+    
+    [self performSegueWithIdentifier:@"toEndGame" sender:self];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    _endGameViewController = [segue destinationViewController];
+    _endGameViewController.endGameData = _endGameData;
+    _endGameViewController.numberOfPlayers = _gameSetUpData.numberOfPlayers;
+    _endGameViewController.players = _players;
+}
 
 #pragma mark - Memory Warning
 - (void)didReceiveMemoryWarning

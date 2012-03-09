@@ -53,8 +53,11 @@
 - (void) createResources;
 - (void) nextPlayer;
 - (void) addTile:(MJTile*)tile;
+- (void) setUpTimeBasedGame;
 - (void) createTimeBasedGameTimer;
 - (void) createTurnBasedGameCounter;
+- (void) setUpTurnBasedGame;
+- (void) updateTurnCount;
 - (void) endSequence;
 //- (void) updateScore;
 

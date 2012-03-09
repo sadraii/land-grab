@@ -66,13 +66,16 @@
     
     _PlayerWinLabel.transform = CGAffineTransformMakeScale(5.0, 5.0);
     if (_numberOfPlayers == 2) {
+        
         [UIView animateWithDuration:0.75 animations:^ {
             _PlayerWinLabel.transform = CGAffineTransformMakeScale(1.0, 1.0);
             _PlayerWinLabel.alpha = 1.0;
         }completion:^(BOOL finished) {
+            
             [UIView animateWithDuration:0.75 animations:^ {
                 _Player1Score.alpha = 1.0; 
             }completion:^(BOOL finished) {
+                
                 [UIView animateWithDuration:0.75 animations:^ {
                     _Player2Score.alpha = 1.0; 
                 }];
@@ -81,13 +84,16 @@
     }
     
     if (_numberOfPlayers == 3) {
+        
         [UIView animateWithDuration:0.75 animations:^ {
             _PlayerWinLabel.transform = CGAffineTransformMakeScale(1.0, 1.0);
             _PlayerWinLabel.alpha = 1.0;
         }completion:^(BOOL finished) {
+            
             [UIView animateWithDuration:0.75 animations:^ {
                 _Player1Score.alpha = 1.0; 
             }completion:^(BOOL finished) {
+                
                 [UIView animateWithDuration:0.75 animations:^ {
                     _Player2Score.alpha = 1.0; 
                 }completion:^(BOOL finished) {
@@ -98,17 +104,17 @@
                 }];
             }];
         }];
-                  
     }
-    
     if (_numberOfPlayers == 4) {
         [UIView animateWithDuration:0.75 animations:^ {
             _PlayerWinLabel.transform = CGAffineTransformMakeScale(1.0, 1.0);
             _PlayerWinLabel.alpha = 1.0;
         }completion:^(BOOL finished) {
+            
             [UIView animateWithDuration:0.75 animations:^ {
                 _Player1Score.alpha = 1.0; 
             }completion:^(BOOL finished) {
+                
                 [UIView animateWithDuration:0.75 animations:^ {
                     _Player2Score.alpha = 1.0; 
                 }completion:^(BOOL finished) {
@@ -117,16 +123,14 @@
                         _Player3Score.alpha = 1.0;  
                     }completion:^(BOOL finished) {
                        
-                            [UIView animateWithDuration:0.75 animations:^ {
-                                _Player4Score.alpha = 1.0; 
-                            }];
+                        [UIView animateWithDuration:0.75 animations:^ {
+                            _Player4Score.alpha = 1.0; 
+                        }];
                     }];
                 }];
             }];
         }];
     }
-    
-    
 }
 
 -(void) calculateEndGame {
@@ -135,11 +139,8 @@
     sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"combinedScore"
                                                   ascending:NO];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    NSArray *sortedArray;
-    sortedArray = [_players sortedArrayUsingDescriptors:sortDescriptors];
-    
-    
-    
+    NSArray *sortedArray  = [_players sortedArrayUsingDescriptors:sortDescriptors];
+        
     if (_numberOfPlayers == 2) {
         MJPlayer *firstPlace = [sortedArray objectAtIndex:0];
         MJPlayer *secondPlace = [sortedArray objectAtIndex:1];
@@ -170,10 +171,6 @@
         _Player3Score.text = [NSString stringWithFormat:@"%@ with %d territory and %d resources for a combined score of %d", thirdPlace.handle ,thirdPlace.territory, thirdPlace.score, thirdPlace.combinedScore];
         _Player4Score.text = [NSString stringWithFormat:@"%@ with %d territory and %d resources for a combined score of %d", forthPlace.handle ,forthPlace.territory, forthPlace.score, forthPlace.combinedScore];
     }
-    
-        
-    
-    
 }
 
 - (void)viewDidUnload
