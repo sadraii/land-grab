@@ -147,33 +147,43 @@
 	dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 	dispatch_async(concurrentQueue, ^{
 		//2494 is equal to 50 squared minus the number of players (5)
-		int numResources = 50;
-		while (_board.resources.count < numResources) {
-			int randomX = arc4random() % (int)_board.boardSize.width;
-			int randomY = arc4random() % (int)_board.boardSize.height;
-			CGPoint point = CGPointMake(randomX, randomY);
-			if (![_board resourceAtCoordinate:point] && ![_board tileAtCoordinate:point]) {
-				__block MJResource* resource = [[MJResource alloc] initWithCoordinate:point];
-				int minValue = 50;
-				[resource setValue:(arc4random() % minValue) + minValue];
-				//		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
-				//			[resource setTilesWithCoordinateArray:coords];
-                UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green"]]];
-                [imageView setFrame:resource.bounds];
-                [imageView setContentMode:UIViewContentModeScaleAspectFill];
-				dispatch_sync(dispatch_get_main_queue(), ^{
-                    [resource addSubview:imageView];
-					[_board addResource:resource];
-				});
-			}
-//			NSLog(@"Random Coordinate: (%i, %i)", randomX, randomY);
-//			NSMutableArray* coords = [[NSMutableArray alloc] init];
-//			for (int n = 0; n < arc4random() % 3; n++) {
-//				int x = arc4random() % 3;
-//				int y = arc4random() % 3;
-//				[coords addObject:[NSString stringWithFormat:@"%i,%i", x, y]];
-//			}
-		}
+		int numResourcesInSection = 5; // number of resources per section
+        int numSplits = 4;
+        int section = 0;
+        for (int i=0; i<numSplits; i++) {
+            for (int j=0; j<numSplits; j++) {
+                while (_board.resources.count < numResourcesInSection*(section+1) && section < numSplits*numSplits) {
+                    int randomX = arc4random() % (int)_board.boardSize.width/numSplits;
+                    int randomY = arc4random() % (int)_board.boardSize.height/numSplits;
+                    randomX = randomX + (i*(int)_board.boardSize.width/numSplits);
+                    randomY = randomY + (j*(int)_board.boardSize.height/numSplits);
+                    CGPoint point = CGPointMake(randomX, randomY);
+                    
+                    if (![_board resourceAtCoordinate:point] && ![_board tileAtCoordinate:point]) {
+                        __block MJResource* resource = [[MJResource alloc] initWithCoordinate:point];
+                        int minValue = 50;
+                        [resource setValue:(arc4random() % minValue) + minValue];
+                        //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
+                        //			[resource setTilesWithCoordinateArray:coords];
+                        UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green"]]];
+                        [imageView setFrame:resource.bounds];
+                        [imageView setContentMode:UIViewContentModeScaleAspectFill];
+                        dispatch_sync(dispatch_get_main_queue(), ^{
+                            [resource addSubview:imageView];
+                            [_board addResource:resource];
+                        });
+                    }
+                    //			NSLog(@"Random Coordinate: (%i, %i)", randomX, randomY);
+                    //			NSMutableArray* coords = [[NSMutableArray alloc] init];
+                    //			for (int n = 0; n < arc4random() % 3; n++) {
+                    //				int x = arc4random() % 3;
+                    //				int y = arc4random() % 3;
+                    //				[coords addObject:[NSString stringWithFormat:@"%i,%i", x, y]];
+                    //			}
+                }
+                section++;
+            }
+        }
 	});
 }
 
