@@ -260,7 +260,6 @@
         [self endSequence];
     }
     
-    
 }
 
 #pragma mark - Zoom Methods
