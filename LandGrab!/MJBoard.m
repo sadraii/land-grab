@@ -105,12 +105,12 @@
 }
 
 - (void) zoomOutAnimated:(BOOL)animated {
-	if (self.zooming == self.minimumZoomScale) {
+	if (self.zoomScale == self.minimumZoomScale) {
 		NSLog(@"Already zoomed out");
 		return;
 	}
 	if (animated) {
-		[UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^ {
+		[UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState animations:^ {
 			[self setZoomScale:self.minimumZoomScale animated:NO];	
 		}completion:^(BOOL finished) {
 	//		[containerView setNeedsDisplay];

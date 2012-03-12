@@ -31,7 +31,11 @@
 	// Drawing code
 	[super drawRect:rect];
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
-	CGContextSetRGBStrokeColor(ctx, 0, 20, 150, 1);
+//	CGContextSetRGBStrokeColor(ctx, 0, 20, 150, 1);
+	
+//	CGContextSetStrokeColorWithColor(ctx, [UIColor darkGrayColor].CGColor);
+	CGContextSetRGBStrokeColor(ctx, 0, 10, 10, 10);
+	
 	CGContextSetLineWidth(ctx, 2);
 	CGContextBeginPath(ctx);
 	// Draw verticle lines

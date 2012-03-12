@@ -38,6 +38,7 @@
 
 @synthesize mainMenuViewController = _mainMenuViewController;
 
+
 @synthesize gameSetUpData = _gameSetUpData;
 @synthesize gameTypeLabel = _gameTypeLabel;
 @synthesize gameTypeLabelCounter = _gameTypeLabelCounter;
@@ -60,7 +61,6 @@
     if ([_gameSetUpData.gameType isEqualToString:@"timeBased"]) {
         [self setUpTimeBasedGame];
     }
-    
     if ([_gameSetUpData.gameType isEqualToString:@"turnBased"]) {
         [self setUpTurnBasedGame];
     }
@@ -102,7 +102,7 @@
 				capital.tag = 1;
 				break;
 			case 1:
-				[player setHandle:@"JSON"];
+				[player setHandle:@"J-Monkey"];
 				[player setColor:[UIColor redColor]];
                 [player setImageColor:@"Red"];
 				[capital setCoordinate:CGPointMake(capitalOffset, _board.boardSize.height - 1 - capitalOffset)];
@@ -147,11 +147,11 @@
 	dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 	dispatch_async(concurrentQueue, ^{
 		//2494 is equal to 50 squared minus the number of players (5)
-		int numResourcesInSection = 5; // number of resources per section
-        int numSplits = 4;
+		int numResourcesInSection = 1; // number of resources per section
+        int numSplits = 12;
         int section = 0;
-        for (int i=0; i<numSplits; i++) {
-            for (int j=0; j<numSplits; j++) {
+        for (int i=0; i < numSplits; i++) {
+            for (int j=0; j < numSplits; j++) {
                 while (_board.resources.count < numResourcesInSection*(section+1) && section < numSplits*numSplits) {
                     int randomX = arc4random() % (int)_board.boardSize.width/numSplits;
                     int randomY = arc4random() % (int)_board.boardSize.height/numSplits;
@@ -173,13 +173,6 @@
                             [_board addResource:resource];
                         });
                     }
-                    //			NSLog(@"Random Coordinate: (%i, %i)", randomX, randomY);
-                    //			NSMutableArray* coords = [[NSMutableArray alloc] init];
-                    //			for (int n = 0; n < arc4random() % 3; n++) {
-                    //				int x = arc4random() % 3;
-                    //				int y = arc4random() % 3;
-                    //				[coords addObject:[NSString stringWithFormat:@"%i,%i", x, y]];
-                    //			}
                 }
                 section++;
             }
@@ -194,7 +187,7 @@
     
     if (_gameSetUpData.numberOfSeconds == 120) {
         _gameTypeLabelCounter.text = [NSString stringWithString:@"2:00"];
-        _secondsLeft = 60;
+        _secondsLeft = 120;
     }
     if (_gameSetUpData.numberOfSeconds == 300) {
         _gameTypeLabelCounter.text = [NSString stringWithString:@"5:00"];
@@ -219,12 +212,11 @@
         _secondsLeft--;
         NSUInteger minutes = (_secondsLeft % 3600) / 60;
         NSUInteger seconds = (_secondsLeft % 3600) % 60;
-        _gameTypeLabelCounter.text = [NSString stringWithFormat:@"%2d:%02d", minutes, seconds];
-        if (_secondsLeft < 31) {
+        _gameTypeLabelCounter.text = [NSString stringWithFormat:@"%2u:%02u", minutes, seconds];
+        if (_secondsLeft <= 30) {
             _gameTypeLabelCounter.textColor = [UIColor redColor];
         }
     }
-    
     else {
         [_clockForTimeBasedGame invalidate];
         [self endSequence];
@@ -295,13 +287,18 @@
         [_board scrollRectToVisible:_currentPlayer.capital.frame animated:YES];
     }
 }
+
+#pragma mark - Game Play Methods
+
 - (void) nextPlayer {
 	if (_isInitalLaunch) {
         _isInitalLaunch = NO;
     }
 	else {
         [_board zoomOutAnimated:YES];
-        [self updateTurnCount];
+		if ([_gameSetUpData.gameType isEqualToString:@"turnBased"]) {
+			[self updateTurnCount];
+		}
     }
 	
 	currentPlayerIndex < _players.count - 1 ? ++currentPlayerIndex : (currentPlayerIndex = 0);
@@ -319,6 +316,8 @@
 //	[_territory setText:[NSString stringWithFormat:@"%i",_currentPlayer.territory]];
 //	[_score setText:[NSString stringWithFormat:@"%i",_currentPlayer.score]];
 //}
+
+#pragma mark - Add Methods
 
 - (void) addTile:(MJTile *)tile {
 	[self.view addSubview:tile];
