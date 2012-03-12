@@ -110,11 +110,11 @@
 		return;
 	}
 	if (animated) {
-		[UIView animateWithDuration:0.8f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^ {
+		[UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^ {
 			[self setZoomScale:self.minimumZoomScale animated:NO];	
 		}completion:^(BOOL finished) {
 	//		[containerView setNeedsDisplay];
-			NSLog(@"Yay zoom out");
+			
 		}];
 	}
 	else {
