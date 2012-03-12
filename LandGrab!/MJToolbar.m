@@ -43,6 +43,14 @@
 	[tile setPlayer:player];
 	[tile setTag:0];
 	[tile setBackgroundColor:player.color];
+    
+    
+    UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize", player.imageColor]];
+    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
+    [imageView setFrame:tile.bounds];
+    [tile addSubview:imageView];
+    
+    
 	[self addTile:tile];
 }
 

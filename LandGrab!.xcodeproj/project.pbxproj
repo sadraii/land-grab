@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F42F3E5150D6CEF00B704B1 /* Blue_Capitol.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3DB150D6CEF00B704B1 /* Blue_Capitol.png */; };
+		3F42F3E6150D6CEF00B704B1 /* Blue_Tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3DC150D6CEF00B704B1 /* Blue_Tile.png */; };
+		3F42F3E7150D6CEF00B704B1 /* Blue_Tile_Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3DD150D6CEF00B704B1 /* Blue_Tile_Highlighted.png */; };
+		3F42F3E8150D6CEF00B704B1 /* Red_Tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3DE150D6CEF00B704B1 /* Red_Tile.png */; };
+		3F42F3E9150D6CEF00B704B1 /* Red_Tile_Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3DF150D6CEF00B704B1 /* Red_Tile_Highlighted.png */; };
+		3F42F3EA150D6CEF00B704B1 /* Green_Tile_TileSize.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3E0150D6CEF00B704B1 /* Green_Tile_TileSize.png */; };
+		3F42F3EB150D6CEF00B704B1 /* Blue_Tile_TileSize.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3E1150D6CEF00B704B1 /* Blue_Tile_TileSize.png */; };
+		3F42F3EC150D6CEF00B704B1 /* Red_Tile_TileSize.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3E2150D6CEF00B704B1 /* Red_Tile_TileSize.png */; };
+		3F42F3ED150D6CEF00B704B1 /* Yellow_Tile_TileSize.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3E3150D6CEF00B704B1 /* Yellow_Tile_TileSize.png */; };
+		3F42F3EE150D6CEF00B704B1 /* Resource_Black.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3E4150D6CEF00B704B1 /* Resource_Black.png */; };
 		3FED6D4B14F98F67007155CA /* MJTopBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FED6D4A14F98F67007155CA /* MJTopBar.m */; };
 		3FED6D4E14F9A252007155CA /* Gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FED6D4D14F9A252007155CA /* Gradient.png */; };
 		3FED6D5514F9BE70007155CA /* Graphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FED6D5414F9BE70007155CA /* Graphics.m */; };
@@ -48,6 +58,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F42F3DB150D6CEF00B704B1 /* Blue_Capitol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blue_Capitol.png; sourceTree = "<group>"; };
+		3F42F3DC150D6CEF00B704B1 /* Blue_Tile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blue_Tile.png; sourceTree = "<group>"; };
+		3F42F3DD150D6CEF00B704B1 /* Blue_Tile_Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blue_Tile_Highlighted.png; sourceTree = "<group>"; };
+		3F42F3DE150D6CEF00B704B1 /* Red_Tile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Red_Tile.png; sourceTree = "<group>"; };
+		3F42F3DF150D6CEF00B704B1 /* Red_Tile_Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Red_Tile_Highlighted.png; sourceTree = "<group>"; };
+		3F42F3E0150D6CEF00B704B1 /* Green_Tile_TileSize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Green_Tile_TileSize.png; sourceTree = "<group>"; };
+		3F42F3E1150D6CEF00B704B1 /* Blue_Tile_TileSize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blue_Tile_TileSize.png; sourceTree = "<group>"; };
+		3F42F3E2150D6CEF00B704B1 /* Red_Tile_TileSize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Red_Tile_TileSize.png; sourceTree = "<group>"; };
+		3F42F3E3150D6CEF00B704B1 /* Yellow_Tile_TileSize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Yellow_Tile_TileSize.png; sourceTree = "<group>"; };
+		3F42F3E4150D6CEF00B704B1 /* Resource_Black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Resource_Black.png; sourceTree = "<group>"; };
 		3FED6D4914F98F67007155CA /* MJTopBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJTopBar.h; sourceTree = "<group>"; };
 		3FED6D4A14F98F67007155CA /* MJTopBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJTopBar.m; sourceTree = "<group>"; };
 		3FED6D4D14F9A252007155CA /* Gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gradient.png; sourceTree = "<group>"; };
@@ -122,9 +142,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F42F3DA150D6CEF00B704B1 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				3F42F3DB150D6CEF00B704B1 /* Blue_Capitol.png */,
+				3F42F3DC150D6CEF00B704B1 /* Blue_Tile.png */,
+				3F42F3DD150D6CEF00B704B1 /* Blue_Tile_Highlighted.png */,
+				3F42F3DE150D6CEF00B704B1 /* Red_Tile.png */,
+				3F42F3DF150D6CEF00B704B1 /* Red_Tile_Highlighted.png */,
+				3F42F3E0150D6CEF00B704B1 /* Green_Tile_TileSize.png */,
+				3F42F3E1150D6CEF00B704B1 /* Blue_Tile_TileSize.png */,
+				3F42F3E2150D6CEF00B704B1 /* Red_Tile_TileSize.png */,
+				3F42F3E3150D6CEF00B704B1 /* Yellow_Tile_TileSize.png */,
+				3F42F3E4150D6CEF00B704B1 /* Resource_Black.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		3FED6D4F14F9A261007155CA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3F42F3DA150D6CEF00B704B1 /* Images */,
 				3FED6D4D14F9A252007155CA /* Gradient.png */,
 			);
 			name = Images;
@@ -379,6 +417,16 @@
 				675674FF14F748F300A8E1B6 /* MainStoryboard_iPad.storyboard in Resources */,
 				3FED6D4E14F9A252007155CA /* Gradient.png in Resources */,
 				D58D7838150817C30079E0FA /* mainMenuBackground.jpg in Resources */,
+				3F42F3E5150D6CEF00B704B1 /* Blue_Capitol.png in Resources */,
+				3F42F3E6150D6CEF00B704B1 /* Blue_Tile.png in Resources */,
+				3F42F3E7150D6CEF00B704B1 /* Blue_Tile_Highlighted.png in Resources */,
+				3F42F3E8150D6CEF00B704B1 /* Red_Tile.png in Resources */,
+				3F42F3E9150D6CEF00B704B1 /* Red_Tile_Highlighted.png in Resources */,
+				3F42F3EA150D6CEF00B704B1 /* Green_Tile_TileSize.png in Resources */,
+				3F42F3EB150D6CEF00B704B1 /* Blue_Tile_TileSize.png in Resources */,
+				3F42F3EC150D6CEF00B704B1 /* Red_Tile_TileSize.png in Resources */,
+				3F42F3ED150D6CEF00B704B1 /* Yellow_Tile_TileSize.png in Resources */,
+				3F42F3EE150D6CEF00B704B1 /* Resource_Black.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

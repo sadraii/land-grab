@@ -24,6 +24,7 @@
 @synthesize lastPlayedTile = _lastPlayedTile;
 @synthesize handle = _handle;
 @synthesize color = _color;
+@synthesize imageColor = _imageColor;
 @synthesize capital = _capital;
 @synthesize score = _score;
 @synthesize territory = _territory;

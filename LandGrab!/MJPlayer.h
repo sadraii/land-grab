@@ -27,6 +27,7 @@
 
 @property (strong, nonatomic) NSString* handle;
 @property (strong, nonatomic) UIColor* color;
+@property (strong, nonatomic) NSString* imageColor;
 @property (strong, nonatomic) MJTile* capital;
 @property (readwrite, nonatomic) NSUInteger score;
 @property (readwrite, nonatomic) NSUInteger territory;

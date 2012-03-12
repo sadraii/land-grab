@@ -73,6 +73,7 @@
 	[self nextPlayer];
 }
 
+
 - (void) createPlayers {
 	_players = NULL;
 	[self setPlayers:[[NSMutableArray alloc] init]];
@@ -95,18 +96,21 @@
 			case 0:
 				[player setHandle:@"Andrew"];
 				[player setColor:[UIColor blueColor]];
+                [player setImageColor:@"Blue"];
 				[capital setCoordinate:CGPointMake(capitalOffset, capitalOffset)];
 				capital.tag = 1;
 				break;
 			case 1:
 				[player setHandle:@"JSON"];
 				[player setColor:[UIColor redColor]];
+                [player setImageColor:@"Red"];
 				[capital setCoordinate:CGPointMake(capitalOffset, _board.boardSize.height - 1 - capitalOffset)];
 				capital.tag = 1;
 				break;
 			case 2:
 				[player setHandle:@"Max"];
 				[player setColor:[UIColor greenColor]];
+                [player setImageColor:@"Green"];
 				[capital setCoordinate:CGPointMake(_board.boardSize.width - 1 - capitalOffset, _board.boardSize.height - 1 - capitalOffset)];
 				capital.tag = 1;
 				break;
@@ -119,6 +123,7 @@
 			case 4:
 				[player setHandle:@"Kristi"];
 				[player setColor:[UIColor yellowColor]];
+                [player setImageColor:@"Yellow"];
 				[capital setCoordinate:CGPointMake((int)((_board.boardSize.width - 1) / 2), (int)((_board.boardSize.height - 1)/2))];
 				capital.tag = 1;
 				break;
@@ -260,14 +265,24 @@
 	
 	
 }
--(void) zoomOut {
-	[UIView animateWithDuration:0.75f delay:0.1f options:UIViewAnimationOptionCurveEaseInOut animations:^ {
-		[_board setZoomScale:_board.minimumZoomScale animated:NO];	
-	}completion:^(BOOL finished) {
-		[(UIView*)_board.containerView setNeedsDisplay];
-		
-	}];
+
+-(IBAction)zoom:(id)sender {
+    if(_zoomStepper.value == 0){
+        [_board zoomOutAnimated:YES];
+    }
+    else{
+        [_board scrollRectToVisible:_currentPlayer.capital.frame animated:YES];
+    }
 }
+
+//-(void) zoomOut {
+//	[UIView animateWithDuration:0.75f delay:0.1f options:UIViewAnimationOptionCurveEaseInOut animations:^ {
+//		[_board setZoomScale:_board.minimumZoomScale animated:NO];	
+//	}completion:^(BOOL finished) {
+//		[(UIView*)_board.containerView setNeedsDisplay];
+//		
+//	}];
+//}
 
 - (void) nextPlayer {
 	if (_isInitalLaunch) _isInitalLaunch = NO;
