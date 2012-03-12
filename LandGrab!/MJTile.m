@@ -33,7 +33,7 @@
     }
     _coordinate = aCoordinate;
 	[self setFrame:CGRectMake(_coordinate.x * [MJBoard tileSize], _coordinate.y * [MJBoard tileSize], [MJBoard tileSize], [MJBoard tileSize])];
-	[self setBackgroundColor:[UIColor whiteColor]];
+	//[self setBackgroundColor:[UIColor whiteColor]];
 	[self setAlpha:0.8];
     return self;
 }

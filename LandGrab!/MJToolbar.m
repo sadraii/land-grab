@@ -27,6 +27,14 @@
 		pieceHeight = self.frame.size.height - (2 * offset);
 		maxX = 0;
        
+        // Set up the background image
+        
+        UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"TopBar_Gray"]];
+        UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
+        [imageView setFrame:self.bounds];
+        [self addSubview:imageView];
+        [self sendSubviewToBack:imageView];
+        
     }
     return self;
 }
@@ -46,11 +54,11 @@
 	[tile setToolbar:_viewController.toolbar];
 	[tile setPlayer:player];
 	[tile setTag:0];
-	[tile setBackgroundColor:player.color];
+	//[tile setBackgroundColor:player.color];
 
     
     
-    UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize", player.imageColor]];
+    UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", player.imageColor]];
     UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
     [imageView setFrame:tile.bounds];
     [tile addSubview:imageView];
