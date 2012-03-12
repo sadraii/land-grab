@@ -26,14 +26,6 @@
         offset = 20;
 		pieceHeight = self.frame.size.height - (2 * offset);
 		maxX = 0;
-       
-        // Set up the background image
-        
-        UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"TopBar_Gray"]];
-        UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
-        [imageView setFrame:self.bounds];
-        [self addSubview:imageView];
-        [self sendSubviewToBack:imageView];
         
     }
     return self;

@@ -98,6 +98,10 @@
                                             <action selector="zoom:" destination="2" eventType="touchUpInside" id="VqF-HB-OC8"/>
                                         </connections>
                                     </stepper>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="TopBar_Gray.png" id="l1u-bc-87z">
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="122"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <connections>

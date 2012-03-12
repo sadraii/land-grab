@@ -16,12 +16,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        
-        UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"TopBar_Gray"]];
-        UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
-        [imageView setFrame:self.bounds];
-        [self addSubview:imageView];
-        [self sendSubviewToBack:imageView];
          
     }
     return self;
