@@ -10,4 +10,8 @@
 
 @interface MJInventoryCount : UIView
 
+@property (strong, nonatomic) UILabel *counter;
+
+
+-(void)updateCounterWith:(NSUInteger)number;
 @end

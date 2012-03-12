@@ -10,22 +10,41 @@
 
 @implementation MJInventoryCount
 
+@synthesize counter = _counter;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        [self setBackgroundColor:[UIColor clearColor]];
+        UILabel *tmpCounter = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        _counter = tmpCounter;
+        _counter.textColor = [UIColor whiteColor];
+        _counter.text = @"1";
+        [_counter setFont:[UIFont systemFontOfSize:20]];
+        [_counter setCenter:self.center];
+        [_counter setTextAlignment:UITextAlignmentCenter];
+        [_counter setBackgroundColor:[UIColor clearColor]];
+        [self addSubview:_counter];
     }
     return self;
 }
 
-/*
+-(void)updateCounterWith:(NSUInteger)number {
+    _counter.text = [NSString stringWithFormat:@"%@", number];
+}
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect {
     // Drawing code
+
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextAddEllipseInRect(ctx, rect);
+    CGContextSetFillColor(ctx, CGColorGetComponents([[UIColor redColor] CGColor]));
+    CGContextFillPath(ctx);
+    
 }
-*/
+
 
 @end
