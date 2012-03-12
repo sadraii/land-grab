@@ -41,6 +41,7 @@
 		6756753514F756DD00A8E1B6 /* MJTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756753414F756DD00A8E1B6 /* MJTile.m */; };
 		6756753914F7592200A8E1B6 /* MJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756753814F7592200A8E1B6 /* MJPlayer.m */; };
 		6756753D14F759D100A8E1B6 /* MJContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6756753C14F759D100A8E1B6 /* MJContainerView.m */; };
+		D569DFB8150D77B9000C91BE /* MJInventoryCount.m in Sources */ = {isa = PBXBuildFile; fileRef = D569DFB7150D77B9000C91BE /* MJInventoryCount.m */; };
 		D58D78221506917F0079E0FA /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D58D78201506917F0079E0FA /* MainMenu.m */; };
 		D58D782C1507CBEE0079E0FA /* GameSetUpData.m in Sources */ = {isa = PBXBuildFile; fileRef = D58D782B1507CBEE0079E0FA /* GameSetUpData.m */; };
 		D58D7838150817C30079E0FA /* mainMenuBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D58D7837150817C30079E0FA /* mainMenuBackground.jpg */; };
@@ -109,6 +110,8 @@
 		6756753C14F759D100A8E1B6 /* MJContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJContainerView.m; sourceTree = "<group>"; };
 		6756753E14F765D700A8E1B6 /* MJTileDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJTileDelegate.h; sourceTree = "<group>"; };
 		678A661114F97D9B006F9E25 /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
+		D569DFB6150D77B9000C91BE /* MJInventoryCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJInventoryCount.h; sourceTree = "<group>"; };
+		D569DFB7150D77B9000C91BE /* MJInventoryCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJInventoryCount.m; sourceTree = "<group>"; };
 		D58D781F1506917F0079E0FA /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenu.h; sourceTree = "<group>"; };
 		D58D78201506917F0079E0FA /* MainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenu.m; sourceTree = "<group>"; };
 		D58D782A1507CBEE0079E0FA /* GameSetUpData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSetUpData.h; sourceTree = "<group>"; };
@@ -212,6 +215,7 @@
 		675674EE14F748F300A8E1B6 /* LandGrab! */ = {
 			isa = PBXGroup;
 			children = (
+				D569DFB4150D76CA000C91BE /* Custom UI Views */,
 				D58D78301508159F0079E0FA /* Assests */,
 				6756752E14F7555700A8E1B6 /* AppDelegate */,
 				6756752D14F7554900A8E1B6 /* Storyboards */,
@@ -335,6 +339,15 @@
 				6756753814F7592200A8E1B6 /* MJPlayer.m */,
 			);
 			name = Player;
+			sourceTree = "<group>";
+		};
+		D569DFB4150D76CA000C91BE /* Custom UI Views */ = {
+			isa = PBXGroup;
+			children = (
+				D569DFB6150D77B9000C91BE /* MJInventoryCount.h */,
+				D569DFB7150D77B9000C91BE /* MJInventoryCount.m */,
+			);
+			name = "Custom UI Views";
 			sourceTree = "<group>";
 		};
 		D58D78301508159F0079E0FA /* Assests */ = {
@@ -480,6 +493,7 @@
 				D58D782C1507CBEE0079E0FA /* GameSetUpData.m in Sources */,
 				D5A9DBA315085C9F004055F7 /* EndGameViewController.m in Sources */,
 				D5A9DBA615085E57004055F7 /* EndGameData.m in Sources */,
+				D569DFB8150D77B9000C91BE /* MJInventoryCount.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

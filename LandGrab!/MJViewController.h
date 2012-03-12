@@ -46,6 +46,7 @@
 
 @property (strong, nonatomic)               EndGameViewController   *endGameViewController;
 @property (strong, nonatomic)               EndGameData             *endGameData;
+@property (readwrite, nonatomic)            NSUInteger               roundCount;
 
 - (IBAction)newGame:(id)sender;
 - (IBAction)zoom:(id)sender;

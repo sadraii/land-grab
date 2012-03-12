@@ -11,6 +11,7 @@
 @class MJViewController;
 @class MJPlayer;
 @class MJTile;
+@class MJInventoryCount;
 
 @interface MJToolbar : UIView {
 @public
@@ -21,9 +22,10 @@
 	NSUInteger maxX;
 }
 
-@property (weak, nonatomic) IBOutlet MJViewController* viewController;
-@property (weak, nonatomic) MJPlayer* player;
-@property (strong, nonatomic) NSMutableArray* pieces;
+@property (weak, nonatomic) IBOutlet    MJViewController*   viewController;
+@property (weak, nonatomic)             MJPlayer*           player;
+@property (strong, nonatomic)           NSMutableArray*     pieces;
+@property (strong, nonatomic)           MJInventoryCount* inventoryCounter;
 
 - (void) newGame;
 - (void) loadPlayer:(MJPlayer*) player;

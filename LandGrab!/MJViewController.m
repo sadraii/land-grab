@@ -47,7 +47,7 @@
 
 @synthesize endGameViewController = _endGameViewController;
 @synthesize endGameData = _endGameData;
-
+@synthesize roundCount = _roundCount;
 #pragma mark - Object Methods
 
 - (IBAction)newGame:(id)sender {
@@ -66,9 +66,10 @@
     }
  
 	currentPlayerIndex = -1;
-	//turnCount = 0;
+	//_roundCount = 0;
 	_isInitalLaunch = YES;    
 	[self createPlayers];
+    
 	[self createResources];
 	[self nextPlayer];
 }
@@ -225,11 +226,12 @@
     
     if (_gameSetUpData.numberOfTurns == 20) {
         _gameTypeLabelCounter.text = [NSString stringWithString:@"20"];
-        turnCount = 10;
+        _roundCount = 20;
+        turnCount = _roundCount * _gameSetUpData.numberOfPlayers;
     }
     if (_gameSetUpData.numberOfTurns == 50) {
         _gameTypeLabelCounter.text = [NSString stringWithString:@"50"];
-        turnCount = 50;
+        _roundCount = 50;
     }
     if (_gameSetUpData.numberOfTurns == 100) {
         _gameTypeLabelCounter.text = [NSString stringWithString:@"100"];
@@ -237,13 +239,18 @@
 }
 
 - (void) updateTurnCount {
+    
     turnCount--;
     
-    if (turnCount == 0) {
+    if ((turnCount % _players.count ) == 0) _gameTypeLabelCounter.text = [NSString stringWithFormat:@"%d", --_roundCount];
+    
+    
+    
+    if (_roundCount == 0) {
         [self endSequence];
     }
     
-    _gameTypeLabelCounter.text = [NSString stringWithFormat:@"%d", turnCount];
+    
 }
 
 #pragma mark - Zoom Methods
@@ -270,6 +277,7 @@
 	
 }
 
+
 -(IBAction)zoom:(id)sender {
     if(_zoomStepper.value == 0){
         [_board zoomOutAnimated:YES];
@@ -278,24 +286,19 @@
         [_board scrollRectToVisible:_currentPlayer.capital.frame animated:YES];
     }
 }
-
-//-(void) zoomOut {
-//	[UIView animateWithDuration:0.75f delay:0.1f options:UIViewAnimationOptionCurveEaseInOut animations:^ {
-//		[_board setZoomScale:_board.minimumZoomScale animated:NO];	
-//	}completion:^(BOOL finished) {
-//		[(UIView*)_board.containerView setNeedsDisplay];
-//		
-//	}];
-//}
-
 - (void) nextPlayer {
-	if (_isInitalLaunch) _isInitalLaunch = NO;
-	else [_board zoomOutAnimated:YES];
+	if (_isInitalLaunch) {
+        _isInitalLaunch = NO;
+    }
+	else {
+        [_board zoomOutAnimated:YES];
+        [self updateTurnCount];
+    }
 	
 	currentPlayerIndex < _players.count - 1 ? ++currentPlayerIndex : (currentPlayerIndex = 0);
-	if (!(currentPlayerIndex % _players.count - 1)) [self updateTurnCount];
-	_currentPlayer = (MJPlayer*)[_players objectAtIndex:currentPlayerIndex];
 	
+	_currentPlayer = (MJPlayer*)[_players objectAtIndex:currentPlayerIndex];
+    
 	[_currentPlayer updateScore];
 	[_handle setText:_currentPlayer.handle];
 	NSLog(@"Current Player: %@", _currentPlayer.handle);
