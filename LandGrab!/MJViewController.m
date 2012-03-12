@@ -157,7 +157,11 @@
 				[resource setValue:(arc4random() % minValue) + minValue];
 				//		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
 				//			[resource setTilesWithCoordinateArray:coords];
+                UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green"]]];
+                [imageView setFrame:resource.bounds];
+                [imageView setContentMode:UIViewContentModeScaleAspectFill];
 				dispatch_sync(dispatch_get_main_queue(), ^{
+                    [resource addSubview:imageView];
 					[_board addResource:resource];
 				});
 			}

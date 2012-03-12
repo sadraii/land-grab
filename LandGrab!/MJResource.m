@@ -40,9 +40,10 @@
 	for (NSString* s in coordinates) {
 		CGPoint p = CGPointFromString([NSString stringWithFormat:@"{%@}",s]);
 		
-		if ((p.x * [MJBoard tileSize]) > size.width) size.width = p.x * [MJBoard tileSize];
-		if ((p.y * [MJBoard tileSize]) > size.height) size.height = p.y * [MJBoard tileSize];
+		if (((p.x+1) * [MJBoard tileSize]) > size.width) size.width = (p.x+1) * [MJBoard tileSize];
+		if (((p.y+1) * [MJBoard tileSize]) > size.height) size.height = (p.y+1) * [MJBoard tileSize];
 		
+        [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, size.width, size.height)];
 		
 		MJTile* t = [[MJTile alloc] initWithCoordinate:p];
 		[t setUserInteractionEnabled:NO];
