@@ -162,7 +162,8 @@
                     if (![_board resourceAtCoordinate:point] && ![_board resourcesAroundCoordinate:point] && ![_board tileAtCoordinate:point]) {
                         __block MJResource* resource = [[MJResource alloc] initWithCoordinate:point];
                         int minValue = 50;
-                        [resource setValue:(arc4random() % minValue) + minValue];
+                        [resource setValue:(arc4random_uniform(minValue)) + minValue];
+                        NSLog(@"%d", resource.value);
                         //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
                         //			[resource setTilesWithCoordinateArray:coords];
                         UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green"]]];
