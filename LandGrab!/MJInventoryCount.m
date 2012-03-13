@@ -25,20 +25,19 @@
         [_counter setCenter:self.center];
         [_counter setTextAlignment:UITextAlignmentCenter];
         [_counter setBackgroundColor:[UIColor clearColor]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCounterWith:) name:@"updateCounterWith:" object:nil];
         [self addSubview:_counter];
     }
     return self;
 }
 
--(void)updateCounterWith:(NSUInteger)number {
-    _counter.text = [NSString stringWithFormat:@"%@", number];
-}
+
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     // Drawing code
-
+    
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextAddEllipseInRect(ctx, rect);
     CGContextSetFillColor(ctx, CGColorGetComponents([[UIColor redColor] CGColor]));

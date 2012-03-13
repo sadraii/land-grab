@@ -87,8 +87,8 @@
 		_territory++;
 		[self updateTerritoryStartingAtCoordinate:right];
 	}
-//	tmp = [_board tileAtCoordinate:point];
-//	tmp.tag = 0;
+    //	tmp = [_board tileAtCoordinate:point];
+    //	tmp.tag = 0;
 }
 
 - (BOOL) coordinate:(CGPoint)a TouchesCoordinate:(CGPoint)b {

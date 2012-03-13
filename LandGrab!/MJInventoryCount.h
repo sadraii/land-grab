@@ -13,5 +13,5 @@
 @property (strong, nonatomic) UILabel *counter;
 
 
--(void)updateCounterWith:(NSUInteger)number;
+//-(void)updateCounterWith:(NSUInteger)number;
 @end
