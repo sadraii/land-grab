@@ -49,9 +49,8 @@
                                         <rect key="frame" x="164" y="3" width="213" height="71"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="48"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
-                                        <color key="shadowColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <size key="shadowOffset" width="5" height="6"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Player:" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="cUh-Sy-Mp7">
@@ -82,12 +81,11 @@
                                         <rect key="frame" x="379" y="3" width="213" height="71"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="48"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.40000003579999999" green="0.80000007149999997" blue="1" alpha="1" colorSpace="deviceRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="kUq-3y-reL" customClass="MJToolbar">
                                 <rect key="frame" x="0.0" y="905" width="768" height="101"/>
@@ -104,8 +102,12 @@
                                             <action selector="zoom:" destination="2" eventType="touchUpInside" id="VqF-HB-OC8"/>
                                         </connections>
                                     </stepper>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="TopBar_Gray.png" id="l1u-bc-87z">
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="122"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <connections>
                                     <outlet property="viewController" destination="2" id="Ayf-4F-we5"/>
                                 </connections>
