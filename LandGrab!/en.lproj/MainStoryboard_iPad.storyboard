@@ -49,9 +49,8 @@
                                         <rect key="frame" x="164" y="3" width="213" height="71"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="48"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
-                                        <color key="shadowColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <size key="shadowOffset" width="5" height="6"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Player:" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="cUh-Sy-Mp7">
@@ -82,7 +81,7 @@
                                         <rect key="frame" x="379" y="3" width="213" height="71"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="48"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
@@ -440,75 +439,6 @@
         <image name="TopBar_Gray.png" width="2000" height="512"/>
         <image name="mainMenuBackground.jpg" width="768" height="1024"/>
     </resources>
-    <classes>
-        <class className="EndGameViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EndGameViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="Player1Score" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="Player2Score" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="Player3Score" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="Player4Score" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="PlayerWinLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="MJBoard" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJBoard.h"/>
-            <relationships>
-                <relationship kind="outlet" name="viewController" candidateClass="MJViewController"/>
-            </relationships>
-        </class>
-        <class className="MJClockWidget" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJClockWidget.h"/>
-        </class>
-        <class className="MJToolbar" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJToolbar.h"/>
-            <relationships>
-                <relationship kind="outlet" name="viewController" candidateClass="MJViewController"/>
-            </relationships>
-        </class>
-        <class className="MJTopBar" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJTopBar.h"/>
-        </class>
-        <class className="MJViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="newGame:"/>
-                <relationship kind="action" name="zoom:"/>
-                <relationship kind="outlet" name="board" candidateClass="MJBoard"/>
-                <relationship kind="outlet" name="gameTypeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="gameTypeLabelCounter" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="handle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mainMenuViewController" candidateClass="MainMenu"/>
-                <relationship kind="outlet" name="score" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="territory" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="MJToolbar"/>
-                <relationship kind="outlet" name="topbar" candidateClass="MJTopBar"/>
-                <relationship kind="outlet" name="zoomStepper" candidateClass="UIStepper"/>
-            </relationships>
-        </class>
-        <class className="MainMenu" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainMenu.h"/>
-            <relationships>
-                <relationship kind="action" name="tappedHowManyPlayers:" candidateClass="UIButton"/>
-                <relationship kind="action" name="tappedNewGame:"/>
-                <relationship kind="action" name="tappedTypeOfGame:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="fiftyTurnsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="fiveMinutesButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="fourPlayersButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="hundredTurnsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="label" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="startNewGame" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="tenMinutesButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="threePlayersButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="timeBasedButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="turnBasedButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="twentyTurnsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="twoMinutesButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="twoPlayersButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="unlimtedBasedButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
