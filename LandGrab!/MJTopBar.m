@@ -16,7 +16,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-         
     }
     return self;
 }
@@ -29,16 +28,6 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
-    
-    NSInteger offset = 300;
-    
-    rect = CGRectMake(self.frame.size.width-offset, self.frame.size.height-offset, 300, 300);     
-    CGContextRef contextRef = UIGraphicsGetCurrentContext();            
-    CGContextSetLineWidth(contextRef, 0.5);                  
-    CGContextSetRGBFillColor(contextRef, 255, 255, 255, 1);             
-    CGContextSetRGBStrokeColor(contextRef, 255, 255, 255, 1);            
-    CGContextFillEllipseInRect(contextRef, rect);                 
-    CGContextStrokeEllipseInRect(contextRef, rect);                 
     
     /*
     [super drawRect:rect];

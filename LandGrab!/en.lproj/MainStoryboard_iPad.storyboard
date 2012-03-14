@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11C74" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="aLU-nh-xDf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="aLU-nh-xDf">
     <dependencies>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
@@ -86,6 +86,11 @@
                                         <nil key="highlightedColor"/>
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
+                                    <view contentMode="scaleToFill" id="CGg-Cl-mDG" customClass="MJClockWidget">
+                                        <rect key="frame" x="572" y="25" width="82" height="82"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                             </view>
                             <view contentMode="scaleToFill" id="kUq-3y-reL" customClass="MJToolbar">
@@ -451,6 +456,9 @@
             <relationships>
                 <relationship kind="outlet" name="viewController" candidateClass="MJViewController"/>
             </relationships>
+        </class>
+        <class className="MJClockWidget" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJClockWidget.h"/>
         </class>
         <class className="MJToolbar" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MJToolbar.h"/>
