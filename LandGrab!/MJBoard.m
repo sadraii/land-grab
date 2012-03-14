@@ -12,16 +12,19 @@
 #import "MJPlayer.h"
 #import "MJTile.h"
 #import "MJResource.h"
+#import "MJToolbar.h"
+#import "MJInventoryCount.h"
+
 
 @implementation MJBoard
 
-@synthesize viewController = _viewController;
+@synthesize viewController  = _viewController;
 
-@synthesize pieces = _pieces;
-@synthesize resources = _resources;
+@synthesize pieces          = _pieces;
+@synthesize resources       = _resources;
 
-@synthesize boardSize = _boardSize; 
-@synthesize containerView = _containerView;
+@synthesize boardSize       = _boardSize; 
+@synthesize containerView   = _containerView;
 
 + (NSUInteger) tileSize {
 	NSString* deviceName = [UIDevice currentDevice].model;
@@ -87,6 +90,26 @@
 	return nil;
 }
 
+- (BOOL) resourcesAroundCoordinate:(CGPoint)coordinate {
+    CGPoint up = CGPointMake(coordinate.x, coordinate.y + 1);
+	CGPoint down = CGPointMake(coordinate.x, coordinate.y - 1);
+	CGPoint left = CGPointMake(coordinate.x - 1, coordinate.y);
+	CGPoint right = CGPointMake(coordinate.x + 1, coordinate.y);
+    CGPoint upLeft = CGPointMake(coordinate.x - 1, coordinate.y + 1);
+    CGPoint upRight = CGPointMake(coordinate.x + 1, coordinate.y + 1);
+    CGPoint downLeft = CGPointMake(coordinate.x - 1, coordinate.y - 1);
+    CGPoint downRight = CGPointMake(coordinate.x + 1, coordinate.y - 1);
+	
+	MJResource *tmp = nil;
+	
+	if ( (tmp = [self resourceAtCoordinate:up]) || (tmp = [self resourceAtCoordinate:down]) || (tmp = [self resourceAtCoordinate:left]) || (tmp = [self resourceAtCoordinate:right])
+        || (tmp = [self resourceAtCoordinate:upLeft]) || (tmp = [self resourceAtCoordinate:upRight]) || (tmp = [self resourceAtCoordinate:downLeft]) || (tmp = [self resourceAtCoordinate:downRight]) ){
+		return YES;
+	}
+	
+    return NO;
+}
+
 - (BOOL) isCoordinateOnBoard:(CGPoint)coordinate {
 	if (coordinate.x < 0 || coordinate.x > _boardSize.width - 1) return NO;
 	if (coordinate.y < 0 || coordinate.y > _boardSize.height - 1) return NO;
@@ -96,7 +119,7 @@
 - (void) updateZoomScale {
 	CGFloat scale = self.bounds.size.width / _containerView.bounds.size.width;
 	if (self.zoomScale < scale || self.zoomScale > 1) {
-//		[self setZoomScale:scale animated:YES];
+        //		[self setZoomScale:scale animated:YES];
 		[self zoomOutAnimated:YES];
 	}
 	[self setMinimumZoomScale:scale];
@@ -113,7 +136,7 @@
 		[UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState animations:^ {
 			[self setZoomScale:self.minimumZoomScale animated:NO];	
 		}completion:^(BOOL finished) {
-	//		[containerView setNeedsDisplay];
+            //		[containerView setNeedsDisplay];
 			
 		}];
 	}
@@ -129,6 +152,10 @@
 	if(![self isCoordinateOnBoard:tile.coordinate]) {
 		NSLog(@"Cannot place a tile off the board;");
 		[tile touchesCancelled:nil withEvent:nil];
+        
+        [self bringSubviewToFront:[_viewController.toolbar.inventoryCounter superview]];
+        [[_viewController.toolbar.inventoryCounter superview] bringSubviewToFront:_viewController.toolbar.inventoryCounter];
+        
 		return;
 	}
 	
@@ -137,12 +164,21 @@
 	if (tile.player == tileCollision.player) {
 		NSLog(@"Cannot place a piece on top of your own piece");
 		[tile touchesCancelled:nil withEvent:nil];
+        
+        // IMPORTANT NOTE! this is the proper way to keep the invetoryCounter ontop of ANY view of the tile, or any other subsequent tiles we may add to the tool bar, PLEASE DUPLICATE THESE TWO LINES OF CODE WHEN NECESSARY (whenever touchesCanceled is called)!
+        
+        [self bringSubviewToFront:[_viewController.toolbar.inventoryCounter superview]];
+        [[_viewController.toolbar.inventoryCounter superview] bringSubviewToFront:_viewController.toolbar.inventoryCounter];
+        
 		return;
 	}
 	
 	// Check if tile is placed ontop of another player's tile
 	else if (tileCollision && tile.player != tileCollision.player) {
 		NSLog(@"Collision with %@'s tile", tileCollision.player.handle);
+        [tile touchesCancelled:nil withEvent:nil];
+        [self bringSubviewToFront:[_viewController.toolbar.inventoryCounter superview]];
+        [[_viewController.toolbar.inventoryCounter superview] bringSubviewToFront:_viewController.toolbar.inventoryCounter];
 		return;
 	}
 	
@@ -174,11 +210,13 @@
 	}
 	else {
 		[tile touchesCancelled:nil withEvent:nil];
+        [self bringSubviewToFront:[_viewController.toolbar.inventoryCounter superview]];
+        [[_viewController.toolbar.inventoryCounter superview] bringSubviewToFront:_viewController.toolbar.inventoryCounter];
 	}
 }
 
 - (void) addResource:(MJResource*)resource {
-//	NSLog(@"Resources: %i", _resources.count);
+    //	NSLog(@"Resources: %i", _resources.count);
 	[_resources addObject:resource];
 	[_containerView addSubview:resource];
 }
@@ -216,8 +254,9 @@
 	}
 	
 	return tmpBool;
-
+    
 }
+
 
 #pragma mark - Scroll View Delegate Methods
 

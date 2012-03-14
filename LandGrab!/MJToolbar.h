@@ -25,12 +25,11 @@
 @property (weak, nonatomic) IBOutlet    MJViewController*   viewController;
 @property (weak, nonatomic)             MJPlayer*           player;
 @property (strong, nonatomic)           NSMutableArray*     pieces;
-@property (strong, nonatomic)           MJInventoryCount* inventoryCounter;
+@property (strong, nonatomic)           MJInventoryCount*   inventoryCounter;
 
 - (void) newGame;
 - (void) loadPlayer:(MJPlayer*) player;
 - (void) removeAllPieces;
-
 - (void) addTile:(MJTile*)tile;
-
+-(void)updateCounterWith:(NSUInteger)number;
 @end

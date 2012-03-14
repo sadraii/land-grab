@@ -31,14 +31,16 @@
 	// Drawing code
 	[super drawRect:rect];
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
-//	CGContextSetRGBStrokeColor(ctx, 0, 20, 150, 1);
+    //	CGContextSetRGBStrokeColor(ctx, 0, 20, 150, 1);
 	
-//	CGContextSetStrokeColorWithColor(ctx, [UIColor darkGrayColor].CGColor);
-	CGContextSetRGBStrokeColor(ctx, 0, 10, 10, 10);
+    //	CGContextSetStrokeColorWithColor(ctx, [UIColor darkGrayColor].CGColor);
+    
+    //Values are between 0.0 and 1.0 (originally 0,10,10,10)
+	CGContextSetRGBStrokeColor(ctx, 1, 1, 1, 0.2);
 	
 	CGContextSetLineWidth(ctx, 2);
 	CGContextBeginPath(ctx);
-	// Draw verticle lines
+	// Draw horizontal lines
 	for (int i=0; i<self.bounds.size.width;i+=[MJBoard tileSize]) {
 		CGContextMoveToPoint(ctx, 0+i, 0);
 		CGContextAddLineToPoint(ctx, 0+i, self.bounds.size.height);

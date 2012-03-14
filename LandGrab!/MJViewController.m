@@ -64,7 +64,7 @@
     if ([_gameSetUpData.gameType isEqualToString:@"turnBased"]) {
         [self setUpTurnBasedGame];
     }
- 
+    
 	currentPlayerIndex = -1;
 	//_roundCount = 0;
 	_isInitalLaunch = YES;    
@@ -159,10 +159,11 @@
                     randomY = randomY + (j*(int)_board.boardSize.height/numSplits);
                     CGPoint point = CGPointMake(randomX, randomY);
                     
-                    if (![_board resourceAtCoordinate:point] && ![_board tileAtCoordinate:point]) {
+                    if (![_board resourceAtCoordinate:point] && ![_board resourcesAroundCoordinate:point] && ![_board tileAtCoordinate:point]) {
                         __block MJResource* resource = [[MJResource alloc] initWithCoordinate:point];
                         int minValue = 50;
-                        [resource setValue:(arc4random() % minValue) + minValue];
+                        [resource setValue:(arc4random_uniform(minValue)) + minValue];
+                        NSLog(@"%d", resource.value);
                         //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
                         //			[resource setTilesWithCoordinateArray:coords];
                         UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green"]]];
@@ -268,12 +269,12 @@
 	[_board setZoomScale:1 animated:YES];
 	[_board scrollRectToVisible:boardRect animated:YES];
 	
-//	[UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionTransitionNone animations:^ {
-////		[_board scrollRectToVisible:boardRect animated:NO];
-////		[_board setZoomScale:1];
-//	}completion:^(BOOL finished) {
-//		NSLog(@"Yay scroll!");
-//	}];
+    //	[UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionTransitionNone animations:^ {
+    ////		[_board scrollRectToVisible:boardRect animated:NO];
+    ////		[_board setZoomScale:1];
+    //	}completion:^(BOOL finished) {
+    //		NSLog(@"Yay scroll!");
+    //	}];
 	
 	
 }
@@ -358,7 +359,7 @@
 -(id)initWithCoder:(NSCoder *)aDecoder {
     
     if (self = [super initWithCoder:aDecoder]) {
-    
+        
         GameSetUpData *tmp = [[GameSetUpData alloc] init];
         _gameSetUpData = tmp;
     }

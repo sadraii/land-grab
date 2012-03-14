@@ -35,6 +35,7 @@
 
 - (MJTile*) tileAtCoordinate:(CGPoint)coordinate;
 - (MJResource*) resourceAtCoordinate:(CGPoint)coordinate;
+- (BOOL) resourcesAroundCoordinate:(CGPoint)coordinate;
 
 - (BOOL) isCoordinateOnBoard:(CGPoint)coordinate;
 - (void) updateZoomScale;

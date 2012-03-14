@@ -36,7 +36,7 @@
 }
 
 - (void) loadPlayer:(MJPlayer *)player {
- 
+    
     [self removeAllPieces];
 	
 	//Add a single tile to the first index of the board
@@ -47,7 +47,7 @@
 	[tile setPlayer:player];
 	[tile setTag:0];
 	//[tile setBackgroundColor:player.color];
-
+    
     
     
     UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", player.imageColor]];
@@ -61,6 +61,11 @@
     _inventoryCounter = tmpInventoryCounter;
     [_inventoryCounter setCenter:CGPointMake(tile.frame.origin.x + tile.frame.size.width, tile.frame.origin.y)];
     [self addSubview:_inventoryCounter];
+}
+
+-(void)updateCounterWith:(NSUInteger)number {
+    _inventoryCounter.counter.text = [NSString stringWithFormat:@"%d", number];
+    NSLog(@"updateCounterWith");
 }
 
 - (void) removeAllPieces {
