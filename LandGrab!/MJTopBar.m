@@ -23,12 +23,24 @@
 
 
 
-/*
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
+    
+    NSInteger offset = 300;
+    
+    rect = CGRectMake(self.frame.size.width-offset, self.frame.size.height-offset, 300, 300);     
+    CGContextRef contextRef = UIGraphicsGetCurrentContext();            
+    CGContextSetLineWidth(contextRef, 0.5);                  
+    CGContextSetRGBFillColor(contextRef, 255, 255, 255, 1);             
+    CGContextSetRGBStrokeColor(contextRef, 255, 255, 255, 1);            
+    CGContextFillEllipseInRect(contextRef, rect);                 
+    CGContextStrokeEllipseInRect(contextRef, rect);                 
+    
+    /*
     [super drawRect:rect];
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     // Colors
@@ -71,7 +83,8 @@
     CGContextSetStrokeColorWithColor(ctx, blackColor);
     CGContextSetLineWidth(ctx, 1.0);
     CGContextStrokeRect(ctx, strokeRect);
+     */
 }
-*/
+
 
 @end
