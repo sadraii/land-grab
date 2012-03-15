@@ -10,4 +10,11 @@
 
 @interface MJClockWidget : UIView
 
+@property (strong, nonatomic)NSTimer* clockTimer;
+@property (readwrite, nonatomic)NSInteger secondsLeft; 
+
+- (void) createTimer;
+- (void) updateTimer;
+- (void) endSequence;
+
 @end

@@ -17,6 +17,7 @@
 @class GameSetUpData;
 @class EndGameData;
 @class EndGameViewController;
+@class MJClockWidget;
 
 @interface MJViewController : UIViewController {
 	NSInteger currentPlayerIndex;
@@ -44,9 +45,11 @@
 @property (readwrite, nonatomic)            NSUInteger               secondsLeft;
 @property (strong, nonatomic)               NSTimer                 *clockForTimeBasedGame;
 
-@property (strong, nonatomic)               EndGameViewController   *endGameViewController;
+@property (weak, nonatomic)               EndGameViewController   *endGameViewController;
 @property (strong, nonatomic)               EndGameData             *endGameData;
 @property (readwrite, nonatomic)            NSUInteger               roundCount;
+
+//@property (strong, nonatomic)               MJClockWidget           *clock;
 
 - (IBAction)newGame:(id)sender;
 - (IBAction)zoom:(id)sender;

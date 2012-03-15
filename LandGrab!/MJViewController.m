@@ -17,6 +17,7 @@
 #import "GameSetUpData.h"
 #import "EndGameViewController.h"
 #import "EndGameData.h"
+#import "MJClockWidget.h"
 
 @implementation MJViewController
 
@@ -49,6 +50,8 @@
 @synthesize endGameViewController = _endGameViewController;
 @synthesize endGameData = _endGameData;
 @synthesize roundCount = _roundCount;
+//@synthesize clock = _clock;
+
 #pragma mark - Object Methods
 
 - (IBAction)newGame:(id)sender {
@@ -200,6 +203,8 @@
     }
     
     [self createTimeBasedGameTimer]; 
+    MJClockWidget* clockWidget = [[MJClockWidget alloc] initWithCoder:nil];
+    [clockWidget createTimer];
 }
 
 - (void)createTimeBasedGameTimer {
