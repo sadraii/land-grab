@@ -203,8 +203,8 @@
     }
     
     [self createTimeBasedGameTimer]; 
-    MJClockWidget* clockWidget = [[MJClockWidget alloc] initWithCoder:nil];
-    [clockWidget createTimer];
+//    MJClockWidget* clockWidget = [[MJClockWidget alloc] initWithCoder:nil];
+//    [clockWidget createTimer];
 }
 
 - (void)createTimeBasedGameTimer {

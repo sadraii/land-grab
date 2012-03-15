@@ -14,27 +14,18 @@
 @synthesize clockTimer = _clockTimer;
 @synthesize secondsLeft = _secondsLeft;
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-        
-    }
-    return self;
-}
-
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
         [self setBackgroundColor:[UIColor clearColor]];
         _secondsLeft = 300;
     }
+    [self createTimer];
     return self;
 }
 
 - (void)createTimer {
-    _clockTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
+    _clockTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
     [_clockTimer fire];
 }
 
@@ -43,9 +34,10 @@
     if (_secondsLeft > 0) {
         NSLog(@"Seconds Left: %i", _secondsLeft);
         _secondsLeft--;
-        NSUInteger minutes = (_secondsLeft % 3600) / 60;
         NSUInteger seconds = (_secondsLeft % 3600) % 60;
+        
         [self setNeedsDisplay];
+        
         NSLog(@"Number of clockSeconds: %i", seconds);
         
         //Time is running out
@@ -94,13 +86,14 @@
     // Draw lines
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextTranslateCTM(context, (self.frame.size.width/2), (self.frame.size.height/2)); 
-    for (int x=0; x<25; x++) {  
+    NSUInteger seconds = (_secondsLeft % 3600) % 60;
+
+    for (int x = _secondsLeft; x>0; x--) {  
         CGContextSetLineWidth(context, 0.5);
         CGContextSetRGBStrokeColor(context, 0.0, 0.0, 0.0, 1);
-        //CGContextMoveToPoint(context, (self.frame.size.width/2), (self.frame.size.height/2));   
+        //CGContextMoveToPoint(context, (self.frame.size.width/2), (self.frame.size.height/2));
         CGContextMoveToPoint(context, 0, 0);
-        NSUInteger seconds = (_secondsLeft % 3600) % 60;
-        CGContextAddLineToPoint(context, ((self.frame.size.width/2)*(cos((x*_secondsLeft)*(M_PI/180)))), ((self.frame.size.height/2)*(sin((x*_secondsLeft)*(M_PI/180)))));                   
+        CGContextAddLineToPoint(context, ((self.frame.size.width/2)*(cos((x*1)*(M_PI/180)))), ((self.frame.size.height/2)*(sin((x*1)*(M_PI/180)))));                   
         CGContextStrokePath(context);                           
         CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);       
         CGContextFillPath(context);
