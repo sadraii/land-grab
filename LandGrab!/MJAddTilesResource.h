@@ -13,6 +13,6 @@
 
 @property (readwrite, nonatomic) NSUInteger tilesGenerated;
 
--(void)generateTiles;
+-(NSUInteger)generateTiles;
 
 @end

@@ -14,6 +14,7 @@
 #import "MJResource.h"
 #import "MJToolbar.h"
 #import "MJInventoryCount.h"
+#import "MJAddTilesResource.h"
 
 
 @implementation MJBoard
@@ -200,7 +201,7 @@
 		[_pieces addObject:tile];
 		
 		MJResource* resourceCollision = [self resourceAtCoordinate:tile.coordinate];
-		if (resourceCollision) {
+		if ([resourceCollision isKindOfClass:[MJResource class]]) {
 			tile.player.score += resourceCollision.value;
 			NSLog(@"%@ found a resource worth %i bananas!", tile.player.handle, resourceCollision.value);
 		}
