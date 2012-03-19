@@ -93,6 +93,10 @@
     //	tmp.tag = 0;
 }
 
+-(void)updateNumberOfTilesToPlayWithNumber:(NSUInteger)number {
+    _numberOfTilesToPlay = number;
+}
+
 - (BOOL) coordinate:(CGPoint)a TouchesCoordinate:(CGPoint)b {
 	if (b.x == a.x && (b.y == a.y+1 || b.y == a.y-1)) {
 		return YES;

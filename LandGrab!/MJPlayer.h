@@ -39,4 +39,5 @@
 - (void) updateTerritory;
 - (void) updateTerritoryStartingAtCoordinate:(CGPoint)point;
 - (BOOL) coordinate:(CGPoint)a TouchesCoordinate:(CGPoint)b;
+- (void) updateNumberOfTilesToPlayWithNumber:(NSUInteger)number;
 @end
