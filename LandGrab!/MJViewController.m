@@ -18,6 +18,7 @@
 #import "EndGameViewController.h"
 #import "EndGameData.h"
 #import "MJClockWidget.h"
+#import "MJAddTilesResource.h"
 
 @implementation MJViewController
 

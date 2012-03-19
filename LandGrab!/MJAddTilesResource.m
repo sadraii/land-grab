@@ -10,4 +10,12 @@
 
 @implementation MJAddTilesResource
 
+@synthesize tilesGenerated = _tilesGenerated;
+
+-(void)generateTiles {
+    
+    _tilesGenerated = arc4random_uniform(5);
+    
+}
+
 @end

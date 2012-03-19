@@ -11,6 +11,8 @@
 
 @interface MJAddTilesResource : MJResource
 
--(NSInteger)addTilesToPlayer:(MJPlayer*)player;
+@property (readwrite, nonatomic) NSUInteger tilesGenerated;
+
+-(void)generateTiles;
 
 @end
