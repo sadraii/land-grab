@@ -32,13 +32,13 @@
 - (void)updateTimer {
     
     if (_secondsLeft > 0) {
-        NSLog(@"Seconds Left: %i", _secondsLeft);
+        //NSLog(@"Seconds Left: %i", _secondsLeft);
         _secondsLeft--;
         NSUInteger seconds = (_secondsLeft % 3600) % 60;
         
         [self setNeedsDisplay];
         
-        NSLog(@"Number of clockSeconds: %i", seconds);
+        //NSLog(@"Number of clockSeconds: %i", seconds);
         
         //Time is running out
         /*if (_secondsLeft <= 30) {
@@ -61,7 +61,7 @@
 - (void)drawRect:(CGRect)rect
 {
     
-    NSLog(@"DrawRect is called.");
+    //NSLog(@"DrawRect is called.");
     // Drawing code
  
     // Draw outter circle

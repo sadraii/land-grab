@@ -80,7 +80,9 @@
 		if (CGPointEqualToPoint(coordinate, t.coordinate)) return t;
 	return nil;
 }
-
+// I think we need to make this id to deal with the different subclassed resources
+// I'm keeping a copy commented so that we can use it back if everything breaks.
+/*
 - (MJResource*) resourceAtCoordinate:(CGPoint)coordinate {
 	for (MJResource* r in _resources){
 		if (CGPointEqualToPoint(coordinate, r.coordinate)) {
@@ -90,7 +92,28 @@
 	}
 	return nil;
 }
+*/
 
+- (id) resourceAtCoordinate:(CGPoint)coordinate {
+	NSUInteger index = 0;
+    for (id r in _resources) {
+        
+		if ([r isMemberOfClass:[MJResource class]]) {
+            MJResource *tmpR = [_resources objectAtIndex:index];
+            if (CGPointEqualToPoint(coordinate, tmpR.coordinate)) {
+                return tmpR;
+            }
+        }
+        if ([r isMemberOfClass:[MJAddTilesResource class]]) {
+            MJAddTilesResource *tmpR = [_resources objectAtIndex:index];
+            if (CGPointEqualToPoint(coordinate, tmpR.coordinate)) {
+                return tmpR;
+            }
+        }
+        index++;  
+	}
+	return nil;
+}
 - (BOOL) resourcesAroundCoordinate:(CGPoint)coordinate {
     CGPoint up = CGPointMake(coordinate.x, coordinate.y + 1);
 	CGPoint down = CGPointMake(coordinate.x, coordinate.y - 1);
@@ -149,6 +172,10 @@
 #pragma mark - Add Methods
 - (void) addTile:(MJTile*)tile {
 	
+    if (tile.player.numberOfTilesToPlay >= 1) {
+        [tile.player updateNumberOfTilesToPlayWithNumber:--tile.player.numberOfTilesToPlay];
+    }
+    
 	//Check if tile is placed Off the Board
 	if(![self isCoordinateOnBoard:tile.coordinate]) {
 		NSLog(@"Cannot place a tile off the board;");
@@ -200,14 +227,29 @@
 		[player.playedPieces addObject:tile];
 		[_pieces addObject:tile];
 		
-		MJResource* resourceCollision = [self resourceAtCoordinate:tile.coordinate];
-		if ([resourceCollision isKindOfClass:[MJResource class]]) {
-			tile.player.score += resourceCollision.value;
-			NSLog(@"%@ found a resource worth %i bananas!", tile.player.handle, resourceCollision.value);
+		id resourceCollision = [self resourceAtCoordinate:tile.coordinate];
+        
+		if ([resourceCollision isMemberOfClass:[MJResource class]]) {
+			MJResource *tmpResource = [self resourceAtCoordinate:tile.coordinate];
+            tile.player.score += tmpResource.value;
+			NSLog(@"%@ found a resource worth %i bananas!", tile.player.handle, tmpResource.value);
+            [player updateScore];
 		}
+        
+        if ([resourceCollision isMemberOfClass:[MJAddTilesResource class]]) {
+            MJAddTilesResource *tmpResource = [self resourceAtCoordinate:tile.coordinate];
+            NSLog(@"%@ found an AddTile resource worth %i tiles!", tile.player.handle, tmpResource.tilesGenerated);
+            [tile.player updateNumberOfTilesToPlayWithNumber:tmpResource.tilesGenerated];
+        
+        }
 		
-		[player updateScore];
-		[_viewController performSelector:@selector(nextPlayer) withObject:nil afterDelay:1.0];
+		if (tile.player.numberOfTilesToPlay < 1) {
+            [_viewController performSelector:@selector(nextPlayer) withObject:nil afterDelay:0.25];
+        }
+        else {
+            [tile.toolbar placeAnotherTile:tile.player];
+        }
+		
 	}
 	else {
 		[tile touchesCancelled:nil withEvent:nil];

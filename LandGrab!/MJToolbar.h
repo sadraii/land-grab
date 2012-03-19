@@ -31,5 +31,6 @@
 - (void) loadPlayer:(MJPlayer*) player;
 - (void) removeAllPieces;
 - (void) addTile:(MJTile*)tile;
--(void)updateCounterWith:(NSUInteger)number;
+- (void) updateCounterWith:(NSUInteger)number;
+- (void) placeAnotherTile:(MJPlayer*) player;
 @end

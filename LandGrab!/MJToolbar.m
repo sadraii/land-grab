@@ -64,6 +64,24 @@
     [self addSubview:_inventoryCounter];
 }
 
+- (void) placeAnotherTile:(MJPlayer *)player {
+    MJTile * tile = [[MJTile alloc] initWithCoordinate:CGPointZero];
+	[tile setViewController:_viewController];
+	[tile setBoard:_viewController.board];
+	[tile setToolbar:_viewController.toolbar];
+	[tile setPlayer:player];
+	[tile setTag:0];
+    
+    UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", player.imageColor]];
+    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
+    [imageView setFrame:tile.bounds];
+    [tile addSubview:imageView];
+    
+    
+	[self addTile:tile];
+
+}
+
 -(void)updateCounterWith:(NSUInteger)number {
     _inventoryCounter.counter.text = [NSString stringWithFormat:@"%d", number];
     NSLog(@"updateCounterWith");

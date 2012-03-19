@@ -25,7 +25,6 @@
         [_counter setCenter:self.center];
         [_counter setTextAlignment:UITextAlignmentCenter];
         [_counter setBackgroundColor:[UIColor clearColor]];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCounterWith:) name:@"updateCounterWith:" object:nil];
         [self addSubview:_counter];
     }
     return self;

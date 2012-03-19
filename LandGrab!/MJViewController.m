@@ -90,6 +90,7 @@
 		[player setViewController:self];
 		[player setBoard:_board];
 		[player setToolbar:_toolbar];
+        [player updateNumberOfTilesToPlayWithNumber:1];
 		
 		
 		MJTile* capital = [[MJTile alloc] initWithCoordinate:CGPointZero];
@@ -164,19 +165,39 @@
                     CGPoint point = CGPointMake(randomX, randomY);
                     
                     if (![_board resourceAtCoordinate:point] && ![_board resourcesAroundCoordinate:point] && ![_board tileAtCoordinate:point]) {
-                        __block MJResource* resource = [[MJResource alloc] initWithCoordinate:point];
-                        int minValue = 50;
-                        [resource setValue:(arc4random_uniform(minValue)) + minValue];
-                        NSLog(@"%d", resource.value);
-                        //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
-                        //			[resource setTilesWithCoordinateArray:coords];
-                        UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green"]]];
-                        [imageView setFrame:resource.bounds];
-                        [imageView setContentMode:UIViewContentModeScaleAspectFill];
-                        dispatch_sync(dispatch_get_main_queue(), ^{
-                            [resource addSubview:imageView];
-                            [_board addResource:resource];
-                        });
+                        NSUInteger randomInt = (arc4random() % 2) + 1;
+                        NSLog(@"Random Int: %d", randomInt);
+                        if (randomInt == 1) {
+                            //do
+                            __block MJAddTilesResource *resource = [[MJAddTilesResource alloc] initWithCoordinate:point];
+                            [resource generateTiles];
+                            NSLog(@"Resource at corrdinate:%@ has %i tiles", NSStringFromCGPoint(resource.coordinate),resource.tilesGenerated);
+                            UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green"]]];
+                            [imageView setFrame:resource.bounds];
+                            [imageView setContentMode:UIViewContentModeScaleAspectFill];
+                            dispatch_sync(dispatch_get_main_queue(), ^{
+                                [resource addSubview:imageView];
+                                [_board addResource:resource];
+                            });
+                        }
+                        
+                        if (randomInt == 2) {
+                            //do
+                        
+                            __block MJResource* resource = [[MJResource alloc] initWithCoordinate:point];
+                            int minValue = 50;
+                            [resource setValue:(arc4random_uniform(minValue)) + minValue];
+                            NSLog(@"Resource at coordinate:%@ has %i value", NSStringFromCGPoint(resource.coordinate) ,resource.value);
+                            //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
+                            //			[resource setTilesWithCoordinateArray:coords];
+                            UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green"]]];
+                            [imageView setFrame:resource.bounds];
+                            [imageView setContentMode:UIViewContentModeScaleAspectFill];
+                            dispatch_sync(dispatch_get_main_queue(), ^{
+                                [resource addSubview:imageView];
+                                [_board addResource:resource];
+                            });
+                        }
                     }
                 }
                 section++;

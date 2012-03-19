@@ -121,6 +121,10 @@
 	CGPoint point = [touch locationInView:self.superview];
 	CGSize distance = CGSizeMake(point.x - _currentPoint.x, point.y - _currentPoint.y);
 	
+    [UIView animateWithDuration:0.10 animations:^ {
+        _toolbar.inventoryCounter.alpha = 0.0; 
+    }];
+    
 	[self moveDistance:distance];
 	
 	distanceTraveled.width += distance.width;
@@ -135,7 +139,11 @@
 		if (_board.zoomScale != 1) {
 			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:@"Must zoom all the way in to place a piece" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
 			[alert show];
-			[self touchesCancelled:touches withEvent:event];
+			[UIView animateWithDuration:0.10 animations:^ {
+                _toolbar.inventoryCounter.alpha = 1.0;  
+            }];
+            [self touchesCancelled:touches withEvent:event];
+            
 		}
 		else {
 			point = [touch locationInView:(UIView*)_board.containerView];
@@ -143,7 +151,9 @@
 			point.y -= distanceFromOrigin.height;
 			[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
 			[self snapToPoint];
-            
+            [UIView animateWithDuration:0.10 animations:^ {
+                _toolbar.inventoryCounter.alpha = 1.0;  
+            }];
 			
 			[_board addTile:self];
 		}
@@ -152,10 +162,17 @@
 	else if ([_toolbar pointInside:[touch locationInView:_toolbar] withEvent:nil]) {
 		point = [touch locationInView:_toolbar];
 		[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
-		[_toolbar addTile:self];
+        [UIView animateWithDuration:0.10 animations:^ {
+            _toolbar.inventoryCounter.alpha = 1.0;  
+        }];
+        [_toolbar addTile:self];
+       
 	}
 	else {
 		NSLog(@"Piece dropped in unsupported view");
+        [UIView animateWithDuration:0.10 animations:^ {
+            _toolbar.inventoryCounter.alpha = 1.0;  
+        }];
 		[self touchesCancelled:touches withEvent:event];
 	}
 	[_board setScrollEnabled:YES];
@@ -167,14 +184,18 @@
 - (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self setFrame:CGRectMake(startingOrigin.x, startingOrigin.y, self.frame.size.width, self.frame.size.height)];
 	if ([startingView isEqual:_toolbar]) {
-		[_toolbar addTile:self];
+        [UIView animateWithDuration:0.10 animations:^ {
+            _toolbar.inventoryCounter.alpha = 1.0; 
+        }];
+        [_toolbar addTile:self];
 	}
 	else {
+        [UIView animateWithDuration:0.10 animations:^ {
+            _toolbar.inventoryCounter.alpha = 1.0; 
+        }];
 		abort();
 	}
-    [UIView animateWithDuration:0.10 animations:^ {
-        _toolbar.inventoryCounter.alpha = 1.0; 
-    }];
+   
 }
 /*
  - (void)drawRect:(CGRect)rect{

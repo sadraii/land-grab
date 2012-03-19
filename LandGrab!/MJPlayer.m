@@ -95,6 +95,7 @@
 
 -(void)updateNumberOfTilesToPlayWithNumber:(NSUInteger)number {
     _numberOfTilesToPlay = number;
+    [_toolbar updateCounterWith:_numberOfTilesToPlay];
 }
 
 - (BOOL) coordinate:(CGPoint)a TouchesCoordinate:(CGPoint)b {

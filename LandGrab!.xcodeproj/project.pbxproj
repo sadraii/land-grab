@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		335412FA1516ACC100879938 /* MJAddTilesResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 335412F91516ACC100879938 /* MJAddTilesResource.m */; };
-		3F3C256915112C37004C5876 /* MJClockWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3C256815112C37004C5876 /* MJClockWidget.m */; };
+		33EB78FF1517D2DC0005C19E /* MJClockWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EB78FE1517D2DC0005C19E /* MJClockWidget.m */; };
 		3F42F3E5150D6CEF00B704B1 /* Blue_Capitol.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3DB150D6CEF00B704B1 /* Blue_Capitol.png */; };
 		3F42F3E6150D6CEF00B704B1 /* Blue_Tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3DC150D6CEF00B704B1 /* Blue_Tile.png */; };
 		3F42F3E7150D6CEF00B704B1 /* Blue_Tile_Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3DD150D6CEF00B704B1 /* Blue_Tile_Highlighted.png */; };
@@ -70,8 +70,8 @@
 /* Begin PBXFileReference section */
 		335412F81516ACC100879938 /* MJAddTilesResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJAddTilesResource.h; sourceTree = "<group>"; };
 		335412F91516ACC100879938 /* MJAddTilesResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJAddTilesResource.m; sourceTree = "<group>"; };
-		3F3C256715112C37004C5876 /* MJClockWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJClockWidget.h; path = ../MJClockWidget.h; sourceTree = "<group>"; };
-		3F3C256815112C37004C5876 /* MJClockWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJClockWidget.m; path = ../MJClockWidget.m; sourceTree = "<group>"; };
+		33EB78FD1517D2DC0005C19E /* MJClockWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJClockWidget.h; path = "LandGrab!/MJClockWidget.h"; sourceTree = SOURCE_ROOT; };
+		33EB78FE1517D2DC0005C19E /* MJClockWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJClockWidget.m; path = "LandGrab!/MJClockWidget.m"; sourceTree = SOURCE_ROOT; };
 		3F42F3DB150D6CEF00B704B1 /* Blue_Capitol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blue_Capitol.png; sourceTree = "<group>"; };
 		3F42F3DC150D6CEF00B704B1 /* Blue_Tile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blue_Tile.png; sourceTree = "<group>"; };
 		3F42F3DD150D6CEF00B704B1 /* Blue_Tile_Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blue_Tile_Highlighted.png; sourceTree = "<group>"; };
@@ -168,8 +168,8 @@
 		3F3C256B15112C66004C5876 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
-				3F3C256715112C37004C5876 /* MJClockWidget.h */,
-				3F3C256815112C37004C5876 /* MJClockWidget.m */,
+				33EB78FD1517D2DC0005C19E /* MJClockWidget.h */,
+				33EB78FE1517D2DC0005C19E /* MJClockWidget.m */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -536,8 +536,8 @@
 				D5A9DBA315085C9F004055F7 /* EndGameViewController.m in Sources */,
 				D5A9DBA615085E57004055F7 /* EndGameData.m in Sources */,
 				D569DFB8150D77B9000C91BE /* MJInventoryCount.m in Sources */,
-				3F3C256915112C37004C5876 /* MJClockWidget.m in Sources */,
 				335412FA1516ACC100879938 /* MJAddTilesResource.m in Sources */,
+				33EB78FF1517D2DC0005C19E /* MJClockWidget.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

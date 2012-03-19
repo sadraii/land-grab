@@ -18,6 +18,7 @@
 @property (readwrite, nonatomic) NSUInteger value;
 
 
+
 - (id) initWithCoordinate:(CGPoint)aCoordinate;
 - (void) setTilesWithCoordinateArray:(NSArray*)coordinates;
 - (void) addTile:(MJTile*)tile;
