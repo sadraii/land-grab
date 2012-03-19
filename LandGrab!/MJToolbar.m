@@ -60,6 +60,7 @@
     MJInventoryCount *tmpInventoryCounter = [[MJInventoryCount alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     _inventoryCounter = tmpInventoryCounter;
     [_inventoryCounter setCenter:CGPointMake(tile.frame.origin.x + tile.frame.size.width, tile.frame.origin.y)];
+    
     [self addSubview:_inventoryCounter];
 }
 

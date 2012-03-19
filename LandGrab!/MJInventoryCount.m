@@ -31,6 +31,9 @@
     return self;
 }
 
+-(void)updateCounterWithNumber:(NSUInteger)number {
+    _counter.text = [NSString stringWithFormat:@"%d", number];
+}
 
 
 // Only override drawRect: if you perform custom drawing.

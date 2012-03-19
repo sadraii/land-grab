@@ -33,6 +33,7 @@
 @property (readwrite, nonatomic) NSUInteger territory;
 @property (readwrite, nonatomic) NSUInteger money;
 @property (readwrite, nonatomic) NSUInteger combinedScore;
+@property (readwrite, nonatomic) NSUInteger numberOfTilesToPlay;
 
 - (void) updateScore;
 - (void) updateTerritory;

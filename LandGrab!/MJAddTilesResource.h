@@ -7,7 +7,10 @@
 //
 
 #import "MJResource.h"
+#import "MJPlayer.h"
 
 @interface MJAddTilesResource : MJResource
+
+-(NSInteger)addTilesToPlayer:(MJPlayer*)player;
 
 @end

@@ -210,9 +210,9 @@
 			isa = PBXGroup;
 			children = (
 				67099FF414FFF1CC001C4178 /* MJResource.h */,
+				67099FF514FFF1CC001C4178 /* MJResource.m */,
 				335412F81516ACC100879938 /* MJAddTilesResource.h */,
 				335412F91516ACC100879938 /* MJAddTilesResource.m */,
-				67099FF514FFF1CC001C4178 /* MJResource.m */,
 			);
 			name = Resource;
 			sourceTree = "<group>";
