@@ -186,7 +186,7 @@
                         
                             __block MJResource* resource = [[MJResource alloc] initWithCoordinate:point];
                             int minValue = 50;
-                            [resource setValue:(arc4random_uniform(minValue)) + minValue];
+                            [resource setValue:[resource setRandomResourceValueWithValue:minValue]];
                             NSLog(@"Resource at coordinate:%@ has %i value", NSStringFromCGPoint(resource.coordinate) ,resource.value);
                             //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
                             //			[resource setTilesWithCoordinateArray:coords];
