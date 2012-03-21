@@ -19,7 +19,7 @@
     self = [super initWithCoder:coder];
     if (self) {
         [self setBackgroundColor:[UIColor clearColor]];
-        _secondsLeft = 100; 
+        _secondsLeft = 120; 
         _increment = 360;
     }
     [self createTimer];
