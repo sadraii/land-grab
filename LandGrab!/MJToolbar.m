@@ -48,6 +48,7 @@
 	[tile setToolbar:_viewController.toolbar];
 	[tile setPlayer:player];
 	[tile setTag:0];
+    [player updateNumberOfTilesToPlayWithNumber:1];
 	//[tile setBackgroundColor:player.color];
     
     UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", player.imageColor]];
@@ -78,8 +79,11 @@
 }
 
 - (void) animateInventoryCounter {
-    [UIView animateWithDuration:0.5 animations:^ {
+    [UIView animateWithDuration:0.1 animations:^ {
         _inventoryCounter.alpha = 1.0; 
+    }completion:^(BOOL finished) {
+        [self bringSubviewToFront:[_viewController.toolbar.inventoryCounter superview]];
+        [[_viewController.toolbar.inventoryCounter superview] bringSubviewToFront:_viewController.toolbar.inventoryCounter]; 
     }];
 }
 

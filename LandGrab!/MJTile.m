@@ -172,8 +172,10 @@
 	if ([startingView isEqual:_toolbar]) {
 
         [_toolbar addTile:self];
+        [_toolbar animateInventoryCounter];
 	}
 	else {
+        [_toolbar animateInventoryCounter];
 		abort();
 	}
  

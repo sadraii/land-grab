@@ -172,17 +172,11 @@
 #pragma mark - Add Methods
 - (void) addTile:(MJTile*)tile {
 	
-    if (tile.player.numberOfTilesToPlay >= 1) {
-        [tile.player subtractTile];
-    }
-    
 	//Check if tile is placed Off the Board
 	if(![self isCoordinateOnBoard:tile.coordinate]) {
 		NSLog(@"Cannot place a tile off the board;");
 		[tile touchesCancelled:nil withEvent:nil];
-        
-        [self bringSubviewToFront:[_viewController.toolbar.inventoryCounter superview]];
-        [[_viewController.toolbar.inventoryCounter superview] bringSubviewToFront:_viewController.toolbar.inventoryCounter];
+        [tile.toolbar animateInventoryCounter];
         
 		return;
 	}
@@ -195,8 +189,7 @@
         
         // IMPORTANT NOTE! this is the proper way to keep the invetoryCounter ontop of ANY view of the tile, or any other subsequent tiles we may add to the tool bar, PLEASE DUPLICATE THESE TWO LINES OF CODE WHEN NECESSARY (whenever touchesCanceled is called)!
         
-        [self bringSubviewToFront:[_viewController.toolbar.inventoryCounter superview]];
-        [[_viewController.toolbar.inventoryCounter superview] bringSubviewToFront:_viewController.toolbar.inventoryCounter];
+        [tile.toolbar animateInventoryCounter];
         
 		return;
 	}
@@ -205,15 +198,22 @@
 	else if (tileCollision && tile.player != tileCollision.player) {
 		NSLog(@"Collision with %@'s tile", tileCollision.player.handle);
         [tile touchesCancelled:nil withEvent:nil];
-        [self bringSubviewToFront:[_viewController.toolbar.inventoryCounter superview]];
-        [[_viewController.toolbar.inventoryCounter superview] bringSubviewToFront:_viewController.toolbar.inventoryCounter];
+        [tile.toolbar animateInventoryCounter];
 		return;
 	}
 	
 	BOOL isTileConnected = [self isTileConnectedTo:tile];
 	
-	if (isTileConnected) {
-		//Set the appropriate tile flags
+ 
+	if (!isTileConnected) {
+        [tile touchesCancelled:nil withEvent:nil];
+        [tile.toolbar animateInventoryCounter];
+	}
+	else {
+        if (tile.player.numberOfTilesToPlay >= 1) {
+            [tile.player subtractTile];
+        }
+        //Set the appropriate tile flags
 		[tile setIsPlayed:YES];
 		[tile setUserInteractionEnabled:NO];
 		tile.tag=1;
@@ -241,26 +241,16 @@
             NSLog(@"%@ found an AddTile resource worth %i tiles!", tile.player.handle, tmpResource.tilesGenerated);
             [tile.player updateNumberOfTilesToPlayWithNumber:tmpResource.tilesGenerated];
             [tile.toolbar animateInventoryCounter];
-            [self bringSubviewToFront:[_viewController.toolbar.inventoryCounter superview]];
-            [[_viewController.toolbar.inventoryCounter superview] bringSubviewToFront:_viewController.toolbar.inventoryCounter];
-        
         }
 		
 		if (tile.player.numberOfTilesToPlay < 1) {
             [_viewController performSelector:@selector(nextPlayer) withObject:nil afterDelay:0.25];
         }
         else {
-            
-   
             [tile.toolbar placeAnotherTile:tile.player];
         }
-		
 	}
-	else {
-		[tile touchesCancelled:nil withEvent:nil];
-        [self bringSubviewToFront:[_viewController.toolbar.inventoryCounter superview]];
-        [[_viewController.toolbar.inventoryCounter superview] bringSubviewToFront:_viewController.toolbar.inventoryCounter];
-	}
+    
 }
 
 - (void) addResource:(MJResource*)resource {
