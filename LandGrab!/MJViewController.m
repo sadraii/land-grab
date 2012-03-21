@@ -90,8 +90,6 @@
 		[player setViewController:self];
 		[player setBoard:_board];
 		[player setToolbar:_toolbar];
-        [player updateNumberOfTilesToPlayWithNumber:1];
-		
 		
 		MJTile* capital = [[MJTile alloc] initWithCoordinate:CGPointZero];
 		
@@ -329,11 +327,13 @@
 			[self updateTurnCount];
 		}
     }
-	[_toolbar animateInventoryCounter];
+    
+	
 	currentPlayerIndex < _players.count - 1 ? ++currentPlayerIndex : (currentPlayerIndex = 0);
 	
 	_currentPlayer = (MJPlayer*)[_players objectAtIndex:currentPlayerIndex];
-    
+    //[_currentPlayer updateNumberOfTilesToPlayWithNumber:0];
+    [_toolbar animateInventoryCounter];
 	[_currentPlayer updateScore];
 	[_handle setText:_currentPlayer.handle];
 	NSLog(@"Current Player: %@", _currentPlayer.handle);
