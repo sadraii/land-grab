@@ -18,14 +18,14 @@
     self = [super initWithCoder:coder];
     if (self) {
         [self setBackgroundColor:[UIColor clearColor]];
-        _secondsLeft = 300;
+        _secondsLeft = 360;
     }
     [self createTimer];
     return self;
 }
 
 - (void)createTimer {
-    _clockTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
+    _clockTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
     [_clockTimer fire];
 }
 
@@ -88,12 +88,11 @@
     CGContextTranslateCTM(context, (self.frame.size.width/2), (self.frame.size.height/2)); 
     NSUInteger seconds = (_secondsLeft % 3600) % 60;
 
-    for (int x = _secondsLeft; x>0; x--) {  
+    for (int x = (_secondsLeft*-1); x<0; x++) {  
         CGContextSetLineWidth(context, 0.5);
         CGContextSetRGBStrokeColor(context, 0.0, 0.0, 0.0, 1);
-        //CGContextMoveToPoint(context, (self.frame.size.width/2), (self.frame.size.height/2));
         CGContextMoveToPoint(context, 0, 0);
-        CGContextAddLineToPoint(context, ((self.frame.size.width/2)*(cos((x*1)*(M_PI/180)))), ((self.frame.size.height/2)*(sin((x*1)*(M_PI/180)))));                   
+        CGContextAddLineToPoint(context, ((self.frame.size.width/2)*(cos((x-90)*(M_PI/180)))), ((self.frame.size.height/2)*(sin((x-90)*(M_PI/180)))));                   
         CGContextStrokePath(context);                           
         CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);       
         CGContextFillPath(context);
