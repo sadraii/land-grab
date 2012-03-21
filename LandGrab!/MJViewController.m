@@ -324,11 +324,12 @@
     }
 	else {
         [_board zoomOutAnimated:YES];
+        
 		if ([_gameSetUpData.gameType isEqualToString:@"turnBased"]) {
 			[self updateTurnCount];
 		}
     }
-	
+	[_toolbar animateInventoryCounter];
 	currentPlayerIndex < _players.count - 1 ? ++currentPlayerIndex : (currentPlayerIndex = 0);
 	
 	_currentPlayer = (MJPlayer*)[_players objectAtIndex:currentPlayerIndex];

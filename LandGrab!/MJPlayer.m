@@ -94,7 +94,12 @@
 }
 
 -(void)updateNumberOfTilesToPlayWithNumber:(NSUInteger)number {
-    _numberOfTilesToPlay = number;
+    _numberOfTilesToPlay += number;
+    [_toolbar updateCounterWith:_numberOfTilesToPlay];
+}
+
+-(void) subtractTile {
+    _numberOfTilesToPlay--;
     [_toolbar updateCounterWith:_numberOfTilesToPlay];
 }
 

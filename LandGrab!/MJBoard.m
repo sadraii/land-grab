@@ -173,7 +173,7 @@
 - (void) addTile:(MJTile*)tile {
 	
     if (tile.player.numberOfTilesToPlay >= 1) {
-        [tile.player updateNumberOfTilesToPlayWithNumber:--tile.player.numberOfTilesToPlay];
+        [tile.player subtractTile];
     }
     
 	//Check if tile is placed Off the Board
@@ -240,6 +240,9 @@
             MJAddTilesResource *tmpResource = [self resourceAtCoordinate:tile.coordinate];
             NSLog(@"%@ found an AddTile resource worth %i tiles!", tile.player.handle, tmpResource.tilesGenerated);
             [tile.player updateNumberOfTilesToPlayWithNumber:tmpResource.tilesGenerated];
+            [tile.toolbar animateInventoryCounter];
+            [self bringSubviewToFront:[_viewController.toolbar.inventoryCounter superview]];
+            [[_viewController.toolbar.inventoryCounter superview] bringSubviewToFront:_viewController.toolbar.inventoryCounter];
         
         }
 		
@@ -247,6 +250,8 @@
             [_viewController performSelector:@selector(nextPlayer) withObject:nil afterDelay:0.25];
         }
         else {
+            
+   
             [tile.toolbar placeAnotherTile:tile.player];
         }
 		

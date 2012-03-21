@@ -26,6 +26,8 @@
         offset = 20;
 		pieceHeight = self.frame.size.height - (2 * offset);
 		maxX = 0;
+        MJInventoryCount *tmpInventoryCounter = [[MJInventoryCount alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        _inventoryCounter = tmpInventoryCounter;
         
     }
     return self;
@@ -48,20 +50,12 @@
 	[tile setTag:0];
 	//[tile setBackgroundColor:player.color];
     
-    
-    
     UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", player.imageColor]];
     UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
     [imageView setFrame:tile.bounds];
     [tile addSubview:imageView];
     
-    
 	[self addTile:tile];
-    MJInventoryCount *tmpInventoryCounter = [[MJInventoryCount alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-    _inventoryCounter = tmpInventoryCounter;
-    [_inventoryCounter setCenter:CGPointMake(tile.frame.origin.x + tile.frame.size.width, tile.frame.origin.y)];
-    
-    [self addSubview:_inventoryCounter];
 }
 
 - (void) placeAnotherTile:(MJPlayer *)player {
@@ -71,6 +65,7 @@
 	[tile setToolbar:_viewController.toolbar];
 	[tile setPlayer:player];
 	[tile setTag:0];
+    [tile.toolbar animateInventoryCounter];
     
     UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", player.imageColor]];
     UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
@@ -82,9 +77,21 @@
 
 }
 
+- (void) animateInventoryCounter {
+    [UIView animateWithDuration:0.5 animations:^ {
+        _inventoryCounter.alpha = 1.0; 
+    }];
+}
+
+- (void) fadeInventoryCounter {
+    [UIView animateWithDuration:0.5 animations:^ {
+        _inventoryCounter.alpha = 0.0; 
+    }];
+}
+
 -(void)updateCounterWith:(NSUInteger)number {
     _inventoryCounter.counter.text = [NSString stringWithFormat:@"%d", number];
-    NSLog(@"updateCounterWith");
+    NSLog(@"updateCounterWith %d tiles", number);
 }
 
 - (void) removeAllPieces {
@@ -96,6 +103,8 @@
 - (void) addTile:(MJTile*)tile {
 	[tile setFrame:CGRectMake(offset, offset, [MJBoard tileSize], [MJBoard tileSize])];
 	[tile setIsPlayed:NO];
+    [_inventoryCounter setCenter:CGPointMake(tile.frame.origin.x + tile.frame.size.width, tile.frame.origin.y)];
+    [self addSubview:_inventoryCounter];
 	[self addSubview:tile];
 }
 @end

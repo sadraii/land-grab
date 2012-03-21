@@ -33,4 +33,6 @@
 - (void) addTile:(MJTile*)tile;
 - (void) updateCounterWith:(NSUInteger)number;
 - (void) placeAnotherTile:(MJPlayer*) player;
+- (void) animateInventoryCounter;
+- (void) fadeInventoryCounter;
 @end
