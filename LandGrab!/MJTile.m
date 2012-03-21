@@ -103,6 +103,7 @@
 	point.y -= distanceFromOrigin.height;
 	[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
 	[_toolbar fadeInventoryCounter];
+	
     [_viewController addTile:self];
 	if (_board.zoomScale != _board.maximumZoomScale) {
 		if (_player.lastPlayedTile) {
@@ -153,9 +154,15 @@
         
 	}
 	else if ([_toolbar pointInside:[touch locationInView:_toolbar] withEvent:nil]) {
+		//
+		// Since we do not need the ability to place tiles back on the toolbar as of yet, we can just call touches cancelled right here instead.
+		//
+		/*
 		point = [touch locationInView:_toolbar];
 		[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
         [_toolbar addTile:self];
+		 */
+		[self touchesCancelled:touches withEvent:event];
        
 	}
 	else {
