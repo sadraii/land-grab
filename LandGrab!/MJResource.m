@@ -59,4 +59,16 @@
 	[self addSubview:tile];
 }
 
+//returns positive (value + 0-to-value) OR negative (0-to-value)
+- (int) setRandomResourceValueWithValue:(int) value {
+    NSUInteger randomInt = (arc4random() % 2) + 1;
+    if (randomInt == 1) { //returns positive (value + 0-to-value)
+        return (arc4random_uniform(value)) + value;
+    }
+    else { //negative (0-to-value)
+        return -(arc4random_uniform(value));
+    }
+    
+}
+
 @end

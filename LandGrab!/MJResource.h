@@ -22,5 +22,6 @@
 - (id) initWithCoordinate:(CGPoint)aCoordinate;
 - (void) setTilesWithCoordinateArray:(NSArray*)coordinates;
 - (void) addTile:(MJTile*)tile;
+- (int) setRandomResourceValueWithValue:(int)value;
 
 @end
