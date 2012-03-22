@@ -26,6 +26,7 @@
 @property (weak, nonatomic)             MJPlayer*           player;
 @property (strong, nonatomic)           NSMutableArray*     pieces;
 @property (strong, nonatomic)           MJInventoryCount*   inventoryCounter;
+@property (strong, nonatomic)           MJInventoryCount*   bombCounter;
 
 - (void) newGame;
 - (void) loadPlayer:(MJPlayer*) player;
@@ -35,4 +36,9 @@
 - (void) placeAnotherTile:(MJPlayer*) player;
 - (void) animateInventoryCounter;
 - (void) fadeInventoryCounter;
+- (void) addBombToToolBar:(MJPlayer*) player;
+- (void) updateBombCounterWithNumber:(NSUInteger)number;
+- (void) animateBombCounter;
+- (void) fadeBombCounter;
+
 @end

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		335412FA1516ACC100879938 /* MJAddTilesResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 335412F91516ACC100879938 /* MJAddTilesResource.m */; };
+		33A43347151A957800FDCBE4 /* MJBombResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A43346151A957800FDCBE4 /* MJBombResource.m */; };
 		33EB78FF1517D2DC0005C19E /* MJClockWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EB78FE1517D2DC0005C19E /* MJClockWidget.m */; };
 		3F42F3E5150D6CEF00B704B1 /* Blue_Capitol.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3DB150D6CEF00B704B1 /* Blue_Capitol.png */; };
 		3F42F3E6150D6CEF00B704B1 /* Blue_Tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3DC150D6CEF00B704B1 /* Blue_Tile.png */; };
@@ -70,6 +71,8 @@
 /* Begin PBXFileReference section */
 		335412F81516ACC100879938 /* MJAddTilesResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJAddTilesResource.h; sourceTree = "<group>"; };
 		335412F91516ACC100879938 /* MJAddTilesResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJAddTilesResource.m; sourceTree = "<group>"; };
+		33A43345151A957800FDCBE4 /* MJBombResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJBombResource.h; sourceTree = "<group>"; };
+		33A43346151A957800FDCBE4 /* MJBombResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJBombResource.m; sourceTree = "<group>"; };
 		33EB78FD1517D2DC0005C19E /* MJClockWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJClockWidget.h; path = "LandGrab!/MJClockWidget.h"; sourceTree = SOURCE_ROOT; };
 		33EB78FE1517D2DC0005C19E /* MJClockWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJClockWidget.m; path = "LandGrab!/MJClockWidget.m"; sourceTree = SOURCE_ROOT; };
 		3F42F3DB150D6CEF00B704B1 /* Blue_Capitol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blue_Capitol.png; sourceTree = "<group>"; };
@@ -213,6 +216,8 @@
 				67099FF514FFF1CC001C4178 /* MJResource.m */,
 				335412F81516ACC100879938 /* MJAddTilesResource.h */,
 				335412F91516ACC100879938 /* MJAddTilesResource.m */,
+				33A43345151A957800FDCBE4 /* MJBombResource.h */,
+				33A43346151A957800FDCBE4 /* MJBombResource.m */,
 			);
 			name = Resource;
 			sourceTree = "<group>";
@@ -538,6 +543,7 @@
 				D569DFB8150D77B9000C91BE /* MJInventoryCount.m in Sources */,
 				335412FA1516ACC100879938 /* MJAddTilesResource.m in Sources */,
 				33EB78FF1517D2DC0005C19E /* MJClockWidget.m in Sources */,
+				33A43347151A957800FDCBE4 /* MJBombResource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

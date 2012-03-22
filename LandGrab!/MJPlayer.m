@@ -31,6 +31,7 @@
 @synthesize money = _money;
 @synthesize combinedScore = _combinedScore;
 @synthesize numberOfTilesToPlay = _numberOfTilesToPlay;
+@synthesize numberOfBombsToPlay = _numberOfBombsToPlay;
 
 -(id) init {
     if ((self = [super init]) == nil) {
@@ -44,6 +45,7 @@
 	_territory = 0;
     _combinedScore = 0;
     _numberOfTilesToPlay = 0;
+    _numberOfBombsToPlay = 0;
 	_capital = nil;
 	_playedPieces = [[NSMutableArray alloc] init];
     return self;
@@ -101,6 +103,11 @@
 -(void) subtractTile {
     _numberOfTilesToPlay--;
     [_toolbar updateCounterWith:_numberOfTilesToPlay];
+}
+
+- (void) updateNumberOfBombsToPlayWithNumber:(NSUInteger)number {
+    _numberOfBombsToPlay += number;
+    [_toolbar updateBombCounterWithNumber:_numberOfBombsToPlay];
 }
 
 - (BOOL) coordinate:(CGPoint)a TouchesCoordinate:(CGPoint)b {

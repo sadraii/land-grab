@@ -15,6 +15,7 @@
 #import "MJToolbar.h"
 #import "MJInventoryCount.h"
 #import "MJAddTilesResource.h"
+#import "MJBombResource.h"
 
 
 @implementation MJBoard
@@ -110,6 +111,13 @@
                 return tmpR;
             }
         }
+        
+        if ([r isMemberOfClass:[MJBombResource class]]) {
+            MJBombResource *tmpR = [_resources objectAtIndex:index];
+            if (CGPointEqualToPoint(coordinate, tmpR.coordinate)) {
+                return tmpR;
+            }
+        }
         index++;  
 	}
 	return nil;
@@ -196,7 +204,10 @@
 	
 	// Check if tile is placed ontop of another player's tile
 	else if (tileCollision && tile.player != tileCollision.player) {
-		NSLog(@"Collision with %@'s tile", tileCollision.player.handle);
+//		if (<#condition#>) {
+//            <#statements#>
+//        }
+        NSLog(@"Collision with %@'s tile", tileCollision.player.handle);
         [tile touchesCancelled:nil withEvent:nil];
         [tile.toolbar animateInventoryCounter];
 		return;
@@ -241,6 +252,14 @@
             NSLog(@"%@ found an AddTile resource worth %i tiles!", tile.player.handle, tmpResource.tilesGenerated);
             [tile.player updateNumberOfTilesToPlayWithNumber:tmpResource.tilesGenerated];
             [tile.toolbar animateInventoryCounter];
+        }
+        
+        if ([resourceCollision isMemberOfClass:[MJBombResource class]]) {
+            MJBombResource *tmpResource = [self resourceAtCoordinate:tile.coordinate];
+            NSLog(@"%@ found an Bomb resource worth %i bombs!", tile.player.handle, tmpResource.bombs);
+            [tile.player updateNumberOfBombsToPlayWithNumber:tmpResource.bombs];
+            [tile.toolbar addBombToToolBar:tile.player];
+            
         }
 		
 		if (tile.player.numberOfTilesToPlay < 1) {
