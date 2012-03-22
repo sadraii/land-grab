@@ -11,7 +11,8 @@
 @interface MJClockWidget : UIView
 
 @property (strong, nonatomic)NSTimer* clockTimer;
-@property (nonatomic)NSInteger secondsLeft; 
+@property (nonatomic)NSInteger secondsLeft; // provided by time settings
+@property (nonatomic)NSInteger increment; // used for degree incrementing
 
 - (void) createTimer;
 - (void) updateTimer;

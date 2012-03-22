@@ -46,22 +46,23 @@
     
     [self removeAllPieces];
 	
-	//Add a single tile to the first index of the board
-	MJTile * tile = [[MJTile alloc] initWithCoordinate:CGPointZero];
-	[tile setViewController:_viewController];
-	[tile setBoard:_viewController.board];
-	[tile setToolbar:_viewController.toolbar];
-	[tile setPlayer:player];
-	[tile setTag:0];
+//	//Add a single tile to the first index of the board
+//	MJTile * tile = [[MJTile alloc] initWithCoordinate:CGPointZero];
+//	[tile setViewController:_viewController];
+//	[tile setBoard:_viewController.board];
+//	[tile setToolbar:_viewController.toolbar];
+//	[tile setPlayer:player];
+//	[tile setTag:0];
     [player updateNumberOfTilesToPlayWithNumber:1];
+	[self placeAnotherTile:player];
 	//[tile setBackgroundColor:player.color];
     
-    UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", player.imageColor]];
-    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
-    [imageView setFrame:tile.bounds];
-    [tile addSubview:imageView];
-    
-	[self addTile:tile];
+//    UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", player.imageColor]];
+//    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
+//    [imageView setFrame:tile.bounds];
+//    [tile addSubview:imageView];
+//    
+//	[self addTile:tile];
 }
 
 - (void) addBombToToolBar:(MJPlayer *)player {
@@ -88,7 +89,7 @@
 	[tile setToolbar:_viewController.toolbar];
 	[tile setPlayer:player];
 	[tile setTag:0];
-    [tile.toolbar animateInventoryCounter];
+    [self animateInventoryCounter];
     
     UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", player.imageColor]];
     UIImageView* imageView = [[UIImageView alloc] initWithImage:image];

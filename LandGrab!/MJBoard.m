@@ -248,9 +248,9 @@
 		}
         
         if ([resourceCollision isMemberOfClass:[MJAddTilesResource class]]) {
-            MJAddTilesResource *tmpResource = [self resourceAtCoordinate:tile.coordinate];
-            NSLog(@"%@ found an AddTile resource worth %i tiles!", tile.player.handle, tmpResource.tilesGenerated);
-            [tile.player updateNumberOfTilesToPlayWithNumber:tmpResource.tilesGenerated];
+            MJResource *tmpResource = [self resourceAtCoordinate:tile.coordinate];
+            NSLog(@"%@ found an AddTile resource worth %i tiles!", tile.player.handle, [(MJAddTilesResource*)tmpResource tilesGenerated]);
+            [tile.player updateNumberOfTilesToPlayWithNumber:[(MJAddTilesResource*)tmpResource tilesGenerated]];
             [tile.toolbar animateInventoryCounter];
         }
         
