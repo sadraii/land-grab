@@ -267,9 +267,12 @@
     if (_gameSetUpData.numberOfTurns == 50) {
         _gameTypeLabelCounter.text = [NSString stringWithString:@"50"];
         _roundCount = 50;
+        turnCount = _roundCount * _gameSetUpData.numberOfPlayers;
     }
     if (_gameSetUpData.numberOfTurns == 100) {
         _gameTypeLabelCounter.text = [NSString stringWithString:@"100"];
+        _roundCount = 100;
+        turnCount = _roundCount * _gameSetUpData.numberOfPlayers;
     }
 }
 
