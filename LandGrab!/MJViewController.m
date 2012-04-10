@@ -163,7 +163,7 @@
                     CGPoint point = CGPointMake(randomX, randomY);
                     
                     if (![_board resourceAtCoordinate:point] && ![_board resourcesAroundCoordinate:point] && ![_board tileAtCoordinate:point]) {
-                        NSUInteger randomInt = 1;//(arc4random() % 2) + 1;
+                        NSUInteger randomInt = (arc4random() % 2) + 1;
                         
                         NSLog(@"Random Int: %d", randomInt);
                         
@@ -267,9 +267,12 @@
     if (_gameSetUpData.numberOfTurns == 50) {
         _gameTypeLabelCounter.text = [NSString stringWithString:@"50"];
         _roundCount = 50;
+        turnCount = _roundCount * _gameSetUpData.numberOfPlayers;
     }
     if (_gameSetUpData.numberOfTurns == 100) {
         _gameTypeLabelCounter.text = [NSString stringWithString:@"100"];
+        _roundCount = 100;
+        turnCount = _roundCount * _gameSetUpData.numberOfPlayers;
     }
 }
 
