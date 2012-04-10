@@ -51,6 +51,8 @@
 @synthesize endGameViewController = _endGameViewController;
 @synthesize endGameData = _endGameData;
 @synthesize roundCount = _roundCount;
+@synthesize resourcePoints = _resourcePoints;
+
 //@synthesize clock = _clock;
 
 #pragma mark - Object Methods
@@ -71,7 +73,8 @@
     
 	currentPlayerIndex = -1;
 	//_roundCount = 0;
-	_isInitalLaunch = YES;    
+	_isInitalLaunch = YES;
+    _resourcePoints = 50;
 	[self createPlayers];
     
 	[self createResources];
@@ -153,6 +156,7 @@
 		int numResourcesInSection = 1; // number of resources per section
         int numSplits = _board.boardSize.width/4;
         int section = 0;
+        
         for (int i=0; i < numSplits; i++) {
             for (int j=0; j < numSplits; j++) {
                 while (_board.resources.count < numResourcesInSection*(section+1) && section < numSplits*numSplits) {
@@ -168,30 +172,57 @@
                         NSLog(@"Random Int: %d", randomInt);
                         
                         if (randomInt == 1) {
-                            //do
-                            __block MJAddTilesResource *resource = [[MJAddTilesResource alloc] initWithCoordinate:point];
-                            [resource generateTiles];
-                            NSLog(@"Resource at corrdinate:%@ has %i tiles", NSStringFromCGPoint(resource.coordinate),resource.tilesGenerated);
+                            NSUInteger randomResourceInt = (arc4random() % 4) + 1;
                             
-//                            __block MJBombResource *resource = [[MJBombResource alloc] initWithCoordinate:point];
-//                            [resource generateBombs];
-//                            NSLog(@"Resource at corrdinate:%@ has %i bomb", NSStringFromCGPoint(resource.coordinate), resource.bombs);
+                            if (randomResourceInt == 1) { //add tile resource
+                                __block MJAddTilesResource *resource = [[MJAddTilesResource alloc] initWithCoordinate:point];
+                                [resource generateTiles];
+                                NSLog(@"Resource at corrdinate:%@ has %i tiles", NSStringFromCGPoint(resource.coordinate),resource.tilesGenerated);
+                                
+                                //                            __block MJBombResource *resource = [[MJBombResource alloc] initWithCoordinate:point];
+                                //                            [resource generateBombs];
+                                //                            NSLog(@"Resource at corrdinate:%@ has %i bomb", NSStringFromCGPoint(resource.coordinate), resource.bombs);
+                                
+                                UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green"]]];
+                                [imageView setFrame:resource.bounds];
+                                [imageView setContentMode:UIViewContentModeScaleAspectFill];
+                                dispatch_sync(dispatch_get_main_queue(), ^{
+                                    [resource addSubview:imageView];
+                                    [_board addResource:resource];
+                                });
+                            }
                             
-                            UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green"]]];
-                            [imageView setFrame:resource.bounds];
-                            [imageView setContentMode:UIViewContentModeScaleAspectFill];
-                            dispatch_sync(dispatch_get_main_queue(), ^{
-                                [resource addSubview:imageView];
-                                [_board addResource:resource];
-                            });
+                            if (randomResourceInt == 2) { //bomb resource
+                                ;
+                            }
+                            
+                            if (randomResourceInt == 3) { //territory cluster resource
+                                ;
+                            }
+                            
+                            if (randomResourceInt == 4) { //negative point resource
+                                __block MJResource* resource = [[MJResource alloc] initWithCoordinate:point];
+                                //int minValue = 50;
+                                //[resource setValue:[resource setRandomResourceValueWithValue:minValue]];
+                                [resource setValue: (_resourcePoints)*-1];
+                                NSLog(@"Resource at coordinate:%@ has %i value", NSStringFromCGPoint(resource.coordinate) ,resource.value);
+                                //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
+                                //			[resource setTilesWithCoordinateArray:coords];
+                                UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green"]]];
+                                [imageView setFrame:resource.bounds];
+                                [imageView setContentMode:UIViewContentModeScaleAspectFill];
+                                dispatch_sync(dispatch_get_main_queue(), ^{
+                                    [resource addSubview:imageView];
+                                    [_board addResource:resource];
+                                });
+                            }
                         }
                         
-                        if (randomInt == 2) {
-                            //do
-                        
+                        if (randomInt == 2) { //positive point resource                        
                             __block MJResource* resource = [[MJResource alloc] initWithCoordinate:point];
-                            int minValue = 50;
-                            [resource setValue:[resource setRandomResourceValueWithValue:minValue]];
+                            //int minValue = 50;
+                            //[resource setValue:[resource setRandomResourceValueWithValue:minValue]];
+                            [resource setValue: _resourcePoints];
                             NSLog(@"Resource at coordinate:%@ has %i value", NSStringFromCGPoint(resource.coordinate) ,resource.value);
                             //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
                             //			[resource setTilesWithCoordinateArray:coords];
