@@ -57,7 +57,7 @@
 
 - (IBAction)newGame:(id)sender {
 	[_board newGame];
-	[_board setBoardSize:CGSizeMake(50, 50)];
+	[_board setBoardSize:CGSizeMake(20, 20)];
 	[_board zoomOutAnimated:NO];
 	[_toolbar newGame];
     
@@ -151,7 +151,7 @@
 	dispatch_async(concurrentQueue, ^{
 		//2494 is equal to 50 squared minus the number of players (5)
 		int numResourcesInSection = 1; // number of resources per section
-        int numSplits = 12;
+        int numSplits = _board.boardSize.width/4;
         int section = 0;
         for (int i=0; i < numSplits; i++) {
             for (int j=0; j < numSplits; j++) {
@@ -163,7 +163,7 @@
                     CGPoint point = CGPointMake(randomX, randomY);
                     
                     if (![_board resourceAtCoordinate:point] && ![_board resourcesAroundCoordinate:point] && ![_board tileAtCoordinate:point]) {
-                        NSUInteger randomInt = 1;//(arc4random() % 2) + 1;
+                        NSUInteger randomInt = (arc4random() % 2) + 1;
                         
                         NSLog(@"Random Int: %d", randomInt);
                         
