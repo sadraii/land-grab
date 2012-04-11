@@ -163,19 +163,19 @@
                     CGPoint point = CGPointMake(randomX, randomY);
                     
                     if (![_board resourceAtCoordinate:point] && ![_board resourcesAroundCoordinate:point] && ![_board tileAtCoordinate:point]) {
-                        NSUInteger randomInt = (arc4random() % 2) + 1;
+                        NSUInteger randomInt = 2; //(arc4random() % 2) + 1;
                         
                         NSLog(@"Random Int: %d", randomInt);
                         
                         if (randomInt == 1) {
                             //do
-                            __block MJAddTilesResource *resource = [[MJAddTilesResource alloc] initWithCoordinate:point];
-                            [resource generateTiles];
-                            NSLog(@"Resource at corrdinate:%@ has %i tiles", NSStringFromCGPoint(resource.coordinate),resource.tilesGenerated);
+//                            __block MJAddTilesResource *resource = [[MJAddTilesResource alloc] initWithCoordinate:point];
+//                            [resource generateTiles];
+//                            NSLog(@"Resource at corrdinate:%@ has %i tiles", NSStringFromCGPoint(resource.coordinate),resource.tilesGenerated);
                             
-//                            __block MJBombResource *resource = [[MJBombResource alloc] initWithCoordinate:point];
-//                            [resource generateBombs];
-//                            NSLog(@"Resource at corrdinate:%@ has %i bomb", NSStringFromCGPoint(resource.coordinate), resource.bombs);
+                            __block MJBombResource *resource = [[MJBombResource alloc] initWithCoordinate:point];
+                            [resource generateBombs];
+                            NSLog(@"Resource at corrdinate:%@ has %i bomb", NSStringFromCGPoint(resource.coordinate), resource.bombs);
                             
                             UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green"]]];
                             [imageView setFrame:resource.bounds];

@@ -18,6 +18,7 @@
 @interface MJBoard : UIScrollView <UIScrollViewDelegate>
 {
     CGSize boardSize;//Size relative to tilesize
+    BOOL didRecieveResource;
 }
 
 @property (weak, nonatomic) IBOutlet MJViewController* viewController;
@@ -45,5 +46,9 @@
 - (void) addResource:(MJResource*)resource;
 
 - (BOOL) isTileConnectedTo:(MJTile*)tile;
+
+
+
+- (void) animatePointResources:(NSUInteger)withValue:(CGPoint)tileCoordinates;
 
 @end

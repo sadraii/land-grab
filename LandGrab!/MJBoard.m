@@ -179,7 +179,7 @@
 
 #pragma mark - Add Methods
 - (void) addTile:(MJTile*)tile {
-	
+
 	//Check if tile is placed Off the Board
 	if(![self isCoordinateOnBoard:tile.coordinate]) {
 		NSLog(@"Cannot place a tile off the board;");
@@ -237,6 +237,7 @@
 		[tile setPlayer:player];
 		[player.playedPieces addObject:tile];
 		[_pieces addObject:tile];
+        didRecieveResource = NO;
 		
 		id resourceCollision = [self resourceAtCoordinate:tile.coordinate];
         
@@ -244,6 +245,8 @@
 			MJResource *tmpResource = [self resourceAtCoordinate:tile.coordinate];
             tile.player.score += tmpResource.value;
 			NSLog(@"%@ found a resource worth %i bananas!", tile.player.handle, tmpResource.value);
+            [self animatePointResources:tmpResource.value:tile.coordinate];
+            didRecieveResource = YES;
             [player updateScore];
 		}
         
@@ -255,14 +258,15 @@
         }
         
         if ([resourceCollision isMemberOfClass:[MJBombResource class]]) {
-            MJBombResource *tmpResource = [self resourceAtCoordinate:tile.coordinate];
+            MJBombResource *tmpResource = (MJBombResource*)[self resourceAtCoordinate:tile.coordinate];
             NSLog(@"%@ found an Bomb resource worth %i bombs!", tile.player.handle, tmpResource.bombs);
             [tile.player updateNumberOfBombsToPlayWithNumber:tmpResource.bombs];
-            [tile.toolbar addBombToToolBar:tile.player];
-            
         }
 		
-		if (tile.player.numberOfTilesToPlay < 1) {
+		if (tile.player.numberOfTilesToPlay < 1 && didRecieveResource) {
+            [_viewController performSelector:@selector(nextPlayer) withObject:nil afterDelay:0.75];
+        }
+        else if(tile.player.numberOfTilesToPlay < 1 && !didRecieveResource) {
             [_viewController performSelector:@selector(nextPlayer) withObject:nil afterDelay:0.25];
         }
         else {
@@ -343,6 +347,31 @@
 		[self setZoomScale:1 animated:YES];
 		[super scrollRectToVisible:boardRect animated:YES];
 	}
+}
+
+#pragma mark - animate Methods
+
+- (void) animatePointResources:(NSUInteger)withValue:(CGPoint)tileCoordinates {
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tileCoordinates.x*64, tileCoordinates.y*64, 400, 200)];
+    
+    label.text =[NSString stringWithFormat:@"+%i", withValue];
+    label.textColor = [UIColor whiteColor];
+    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:100.0];
+    label.alpha = 1.0;
+    label.backgroundColor = [UIColor clearColor];
+    
+    [self addSubview:label];
+    
+    
+    [UIView animateWithDuration:0.75 animations:^ {
+        label.alpha = 0.0; 
+        label.transform = CGAffineTransformTranslate(label.transform, 0, -200);
+    }completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.0 animations:^ {
+            [label removeFromSuperview]; 
+        }];
+    }];
 }
 
 @end

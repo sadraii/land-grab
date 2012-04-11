@@ -55,8 +55,11 @@
 //	[tile setTag:0];
     [player updateNumberOfTilesToPlayWithNumber:1];
 	[self placeAnotherTile:player];
-	//[tile setBackgroundColor:player.color];
     
+	//[tile setBackgroundColor:player.color];
+    for (int i = 0; i < player.numberOfBombsToPlay; i++) {
+        [self addBombToToolBar:player];
+    }
 //    UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", player.imageColor]];
 //    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
 //    [imageView setFrame:tile.bounds];
@@ -145,6 +148,9 @@
 	for (MJTile* t in _pieces) {
 		[t removeFromSuperview];
 	}
+    for (MJBombResource *b in _pieces) {
+        [b removeFromSuperview];
+    }
 }
 
 - (void) addTile:(MJTile*)tile {
