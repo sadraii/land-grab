@@ -48,6 +48,7 @@
 @property (weak, nonatomic)               EndGameViewController   *endGameViewController;
 @property (strong, nonatomic)               EndGameData             *endGameData;
 @property (readwrite, nonatomic)            NSUInteger               roundCount;
+@property (readwrite, nonatomic)            NSInteger               resourcePoints;
 
 //@property (strong, nonatomic)               MJClockWidget           *clock;
 
