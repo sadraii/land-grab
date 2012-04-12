@@ -171,12 +171,12 @@
                     
                     if (![_board resourceAtCoordinate:point] && ![_board resourcesAroundCoordinate:point] && ![_board tileAtCoordinate:point]) {
                         
-                        NSUInteger randomInt = 1;//(arc4random() % 2) + 1;
+                        NSUInteger randomInt = (arc4random() % 2) + 1;
                         
                         NSLog(@"Random Int: %d", randomInt);
                         
                         if (randomInt == 1) {
-                            NSUInteger randomResourceInt = 2;//(arc4random() % 4) + 1;
+                            NSUInteger randomResourceInt = (arc4random_uniform(3)) + 1;
                             
                             if (randomResourceInt == 1) { //add tile resource
                                 
@@ -208,11 +208,11 @@
                                 });
                             }
                             
-                            if (randomResourceInt == 3) { //territory cluster resource
+                            /*if (randomResourceInt == 3) { //territory cluster resource
                                 ;
-                            }
+                            }*/
                             
-                            if (randomResourceInt == 4) { //negative point resource
+                            if (randomResourceInt == 3) { //negative point resource
                                 
                                 __block MJNegativeResource* resource = [[MJNegativeResource alloc] initWithCoordinate:point];
                                 //int minValue = 50;
@@ -236,11 +236,11 @@
                             __block MJResource* resource = [[MJResource alloc] initWithCoordinate:point];
                             //int minValue = 50;
                             //[resource setValue:[resource setRandomResourceValueWithValue:minValue]];
-                            [resource setValue: _resourcePoints];
+                            [resource setValue: 50];
                             NSLog(@"Resource at coordinate:%@ has %i value", NSStringFromCGPoint(resource.coordinate) ,resource.value);
                             //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
                             //			[resource setTilesWithCoordinateArray:coords];
-                            UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green"]]];
+                            UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"mysteryBox.png"]]];
                             [imageView setFrame:resource.bounds];
                             [imageView setContentMode:UIViewContentModeScaleAspectFill];
                             dispatch_sync(dispatch_get_main_queue(), ^{

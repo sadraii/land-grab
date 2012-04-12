@@ -221,13 +221,11 @@
 	}
     
     else if (tileCollision && tile.player != tileCollision.player) {
-        //		if (<#condition#>) {
-        //            <#statements#>
-        //        }
+
         NSLog(@"Collision with %@'s tile", tileCollision.player.handle);
-        [tile touchesCancelled:nil withEvent:nil];
-        [tile.toolbar animateInventoryCounter];
-		return;
+        //[tile touchesCancelled:nil withEvent:nil];
+        //[tile.toolbar animateInventoryCounter];
+		//return;
 	}
 }
 
@@ -308,6 +306,7 @@
             NSLog(@"%@ found an AddTile resource worth %i tiles!", tile.player.handle, [(MJAddTilesResource*)tmpResource tilesGenerated]);
             [tile.player updateNumberOfTilesToPlayWithNumber:[(MJAddTilesResource*)tmpResource tilesGenerated]];
             [tile.toolbar animateInventoryCounter];
+            [self animateAddTileResources:[(MJAddTilesResource*)tmpResource tilesGenerated]:tile.coordinate];
         }
         
         if ([resourceCollision isMemberOfClass:[MJBombResource class]]) {
@@ -461,13 +460,37 @@
     }];
 }
 
+- (void) animateAddTileResources:(NSUInteger)withValue :(CGPoint)tileCoordinates {
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tileCoordinates.x*64, tileCoordinates.y*64, 500, 200)];
+    
+    label.text =[NSString stringWithFormat:@"+%i Tiles!", withValue];
+    label.textColor = [UIColor greenColor];
+    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:80.0];
+    label.alpha = 1.0;
+    label.backgroundColor = [UIColor clearColor];
+    
+    [self addSubview:label];
+    
+    
+    [UIView animateWithDuration:0.75 animations:^ {
+        label.alpha = 0.0; 
+        label.transform = CGAffineTransformTranslate(label.transform, 0, -200);
+    }completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.0 animations:^ {
+            [label removeFromSuperview]; 
+        }];
+    }];
+    
+}
+
 - (void) animateBombResources:(NSUInteger)withValue :(CGPoint)tileCoordinates {
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tileCoordinates.x*64, tileCoordinates.y*64, 400, 200)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tileCoordinates.x*64, tileCoordinates.y*64, 500, 200)];
     
     label.text =[NSString stringWithFormat:@"Bomb Added!"];
     label.textColor = [UIColor blueColor];
-    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:100.0];
+    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:80.0];
     label.alpha = 1.0;
     label.backgroundColor = [UIColor clearColor];
     
