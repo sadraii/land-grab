@@ -275,6 +275,8 @@
             MJBombResource *tmpResource = (MJBombResource*)[self resourceAtCoordinate:tile.coordinate];
             NSLog(@"%@ found an Bomb resource worth %i bombs!", tile.player.handle, tmpResource.bombs);
             [tile.player updateNumberOfBombsToPlayWithNumber:tmpResource.bombs];
+            didRecieveResource = YES;
+            [self animateBombResources:1 :tile.coordinate];
         }
         
         if ([resourceCollision isMemberOfClass:[MJNegativeResource class]]) {
@@ -402,6 +404,29 @@
     
     label.text =[NSString stringWithFormat:@"%i", withValue];
     label.textColor = [UIColor redColor];
+    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:100.0];
+    label.alpha = 1.0;
+    label.backgroundColor = [UIColor clearColor];
+    
+    [self addSubview:label];
+    
+    
+    [UIView animateWithDuration:0.75 animations:^ {
+        label.alpha = 0.0; 
+        label.transform = CGAffineTransformTranslate(label.transform, 0, -200);
+    }completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.0 animations:^ {
+            [label removeFromSuperview]; 
+        }];
+    }];
+}
+
+- (void) animateBombResources:(NSUInteger)withValue :(CGPoint)tileCoordinates {
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tileCoordinates.x*64, tileCoordinates.y*64, 400, 200)];
+    
+    label.text =[NSString stringWithFormat:@"Bomb Added!"];
+    label.textColor = [UIColor blueColor];
     label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:100.0];
     label.alpha = 1.0;
     label.backgroundColor = [UIColor clearColor];

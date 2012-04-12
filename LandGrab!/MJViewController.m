@@ -171,12 +171,12 @@
                     
                     if (![_board resourceAtCoordinate:point] && ![_board resourcesAroundCoordinate:point] && ![_board tileAtCoordinate:point]) {
                         
-                        NSUInteger randomInt = (arc4random() % 2) + 1;
+                        NSUInteger randomInt = 1;//(arc4random() % 2) + 1;
                         
                         NSLog(@"Random Int: %d", randomInt);
                         
                         if (randomInt == 1) {
-                            NSUInteger randomResourceInt = 4;//(arc4random() % 4) + 1;
+                            NSUInteger randomResourceInt = 2;//(arc4random() % 4) + 1;
                             
                             if (randomResourceInt == 1) { //add tile resource
                                 
