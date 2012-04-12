@@ -13,6 +13,7 @@
 #import "MJTile.h"
 #import "MJInventoryCount.h"
 #import "MJBombResource.h"
+#import "MJBombTile.h"
 
 @implementation MJToolbar
 
@@ -57,9 +58,12 @@
 	[self placeAnotherTile:player];
     
 	//[tile setBackgroundColor:player.color];
-    for (int i = 0; i < player.numberOfBombsToPlay; i++) {
-        [self addBombToToolBar:player];
-    }
+//    for (int i = 0; i < player.numberOfBombsToPlay; i++) {
+//        [self addBombToToolBar:player];
+//    }
+    [player updateNumberOfBombsToPlayWithNumber:0];
+    //[self updateBombCounterWithNumber:player.numberOfBombsToPlay];
+    [self addBombToToolBar:player];
 //    UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", player.imageColor]];
 //    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
 //    [imageView setFrame:tile.bounds];
@@ -69,7 +73,7 @@
 }
 
 - (void) addBombToToolBar:(MJPlayer *)player {
-    MJTile *tile = [[MJTile alloc] initWithCoordinate:CGPointZero];
+    MJBombTile *tile = [[MJBombTile alloc] initWithCoordinate:CGPointZero];
     [tile setViewController:_viewController];
 	[tile setBoard:_viewController.board];
 	[tile setToolbar:_viewController.toolbar];

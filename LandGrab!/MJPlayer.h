@@ -43,4 +43,5 @@
 - (void) updateNumberOfTilesToPlayWithNumber:(NSUInteger)number;
 - (void) subtractTile;
 - (void) updateNumberOfBombsToPlayWithNumber:(NSUInteger)number;
+- (void) subtractBomb;
 @end

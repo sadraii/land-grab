@@ -16,7 +16,7 @@
 @class MJViewController;
 
 @interface MJTile : UIView {
-@private
+
 	CGSize distanceFromOrigin;
 	CGSize distanceTraveled;
 	UIView* startingView;
