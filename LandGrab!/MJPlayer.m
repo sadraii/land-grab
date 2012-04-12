@@ -110,6 +110,11 @@
     [_toolbar updateBombCounterWithNumber:_numberOfBombsToPlay];
 }
 
+- (void) subtractBomb {
+    _numberOfBombsToPlay--;
+    [_toolbar updateBombCounterWithNumber:_numberOfBombsToPlay];
+}
+
 - (BOOL) coordinate:(CGPoint)a TouchesCoordinate:(CGPoint)b {
 	if (b.x == a.x && (b.y == a.y+1 || b.y == a.y-1)) {
 		return YES;

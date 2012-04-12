@@ -14,6 +14,7 @@
 @class MJPlayer;
 @class MJTile;
 @class MJResource;
+@class MJBombTile;
 
 @interface MJBoard : UIScrollView <UIScrollViewDelegate>
 {
@@ -46,6 +47,8 @@
 - (void) addResource:(MJResource*)resource;
 
 - (BOOL) isTileConnectedTo:(MJTile*)tile;
+
+- (void)addBombTile:(MJBombTile*)tile;
 
 
 

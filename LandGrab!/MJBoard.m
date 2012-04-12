@@ -18,7 +18,7 @@
 #import "MJBombResource.h"
 #import "MJClusterResource.h"
 #import "MJNegativeResource.h"
-
+#import "MJBombTile.h"
 
 @implementation MJBoard
 
@@ -130,7 +130,9 @@
         
         if ([r isMemberOfClass:[MJClusterResource class]]) {
             MJClusterResource *tmpR = [_resources objectAtIndex:index];
-            
+            if (CGPointEqualToPoint(coordinate, tmpR.coordinate)) {
+                return tmpR;
+            }
         }
         index++;  
 	}
@@ -192,6 +194,43 @@
 }
 
 #pragma mark - Add Methods
+
+- (void) addBombTile:(MJBombTile *)tile {
+    
+    NSLog(@"THIS SHIT WORKED YAY!");
+    
+    if(![self isCoordinateOnBoard:tile.coordinate]) {
+		NSLog(@"Cannot place a tile off the board;");
+		[tile touchesCancelled:nil withEvent:nil];
+        [tile.toolbar animateInventoryCounter];
+        
+		return;
+	}
+	
+	// Check if tile is placed ontop of one of your own tiles
+	MJTile* tileCollision = [self tileAtCoordinate:tile.coordinate];
+	if (tile.player == tileCollision.player) {
+		NSLog(@"Cannot place a piece on top of your own piece");
+		[tile touchesCancelled:nil withEvent:nil];
+        
+        // IMPORTANT NOTE! this is the proper way to keep the invetoryCounter ontop of ANY view of the tile, or any other subsequent tiles we may add to the tool bar, PLEASE DUPLICATE THESE TWO LINES OF CODE WHEN NECESSARY (whenever touchesCanceled is called)!
+        
+        [tile.toolbar animateInventoryCounter];
+        
+		return;
+	}
+    
+    else if (tileCollision && tile.player != tileCollision.player) {
+        //		if (<#condition#>) {
+        //            <#statements#>
+        //        }
+        NSLog(@"Collision with %@'s tile", tileCollision.player.handle);
+        [tile touchesCancelled:nil withEvent:nil];
+        [tile.toolbar animateInventoryCounter];
+		return;
+	}
+}
+
 - (void) addTile:(MJTile*)tile {
 
 	//Check if tile is placed Off the Board

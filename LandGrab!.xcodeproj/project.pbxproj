@@ -32,6 +32,7 @@
 		3FED6D4B14F98F67007155CA /* MJTopBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FED6D4A14F98F67007155CA /* MJTopBar.m */; };
 		3FED6D4E14F9A252007155CA /* Gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FED6D4D14F9A252007155CA /* Gradient.png */; };
 		3FED6D5514F9BE70007155CA /* Graphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FED6D5414F9BE70007155CA /* Graphics.m */; };
+		3FF3129C15366817009F1756 /* MJBombTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3129B15366817009F1756 /* MJBombTile.m */; };
 		67099FF614FFF1CC001C4178 /* MJResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 67099FF514FFF1CC001C4178 /* MJResource.m */; };
 		675674E914F748F300A8E1B6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 675674E814F748F300A8E1B6 /* UIKit.framework */; };
 		675674EB14F748F300A8E1B6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 675674EA14F748F300A8E1B6 /* Foundation.framework */; };
@@ -103,6 +104,8 @@
 		3FED6D4D14F9A252007155CA /* Gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gradient.png; sourceTree = "<group>"; };
 		3FED6D5314F9BE70007155CA /* Graphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Graphics.h; sourceTree = "<group>"; };
 		3FED6D5414F9BE70007155CA /* Graphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Graphics.m; sourceTree = "<group>"; };
+		3FF3129A15366817009F1756 /* MJBombTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJBombTile.h; sourceTree = "<group>"; };
+		3FF3129B15366817009F1756 /* MJBombTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJBombTile.m; sourceTree = "<group>"; };
 		67099FF414FFF1CC001C4178 /* MJResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJResource.h; sourceTree = "<group>"; };
 		67099FF514FFF1CC001C4178 /* MJResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJResource.m; sourceTree = "<group>"; };
 		675674E414F748F300A8E1B6 /* LandGrab!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LandGrab!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -379,6 +382,8 @@
 				6756753314F756DD00A8E1B6 /* MJTile.h */,
 				6756753414F756DD00A8E1B6 /* MJTile.m */,
 				6756753E14F765D700A8E1B6 /* MJTileDelegate.h */,
+				3FF3129A15366817009F1756 /* MJBombTile.h */,
+				3FF3129B15366817009F1756 /* MJBombTile.m */,
 			);
 			name = Tile;
 			sourceTree = "<group>";
@@ -556,6 +561,7 @@
 				33A43347151A957800FDCBE4 /* MJBombResource.m in Sources */,
 				3F6EEA281533C51B0031D57C /* MJClusterResource.m in Sources */,
 				33583AD9153607E300304F57 /* MJNegativeResource.m in Sources */,
+				3FF3129C15366817009F1756 /* MJBombTile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
