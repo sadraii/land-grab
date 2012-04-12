@@ -49,6 +49,10 @@
 
 
 
-- (void) animatePointResources:(NSUInteger)withValue:(CGPoint)tileCoordinates;
+- (void) animatePositivePointResources:(NSUInteger)withValue:(CGPoint)tileCoordinates;
+- (void) animateNegativePointResources:(NSUInteger)withValue:(CGPoint)tileCoordinates;
+- (void) animateAddTileResources:(NSUInteger)withValue:(CGPoint)tileCoordinates;
+- (void) animateBombResources:(NSUInteger)withValue:(CGPoint)tileCoordinates;
+- (void) animateClusterResources:(NSUInteger)withValue:(CGPoint)tileCoordinates;
 
 @end
