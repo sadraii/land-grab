@@ -12,6 +12,7 @@
 @class MJPlayer;
 @class MJTile;
 @class MJInventoryCount;
+@class MJBombTile;
 
 @interface MJToolbar : UIView {
 @public
@@ -27,6 +28,7 @@
 @property (strong, nonatomic)           NSMutableArray*     pieces;
 @property (strong, nonatomic)           MJInventoryCount*   inventoryCounter;
 @property (strong, nonatomic)           MJInventoryCount*   bombCounter;
+@property (strong, nonatomic)           MJBombTile*         realBombTile;
 
 - (void) newGame;
 - (void) loadPlayer:(MJPlayer*) player;
@@ -40,5 +42,6 @@
 - (void) updateBombCounterWithNumber:(NSUInteger)number;
 - (void) animateBombCounter;
 - (void) fadeBombCounter;
+- (void) addBombTile:(MJBombTile*)tile;
 
 @end

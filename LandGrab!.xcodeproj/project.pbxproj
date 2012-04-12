@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		335412FA1516ACC100879938 /* MJAddTilesResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 335412F91516ACC100879938 /* MJAddTilesResource.m */; };
 		33583AD9153607E300304F57 /* MJNegativeResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 33583AD8153607E300304F57 /* MJNegativeResource.m */; };
+		33583AE11536A44300304F57 /* mysteryBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 33583AE01536A44300304F57 /* mysteryBox.png */; };
+		33583AE31536A44800304F57 /* bomb.png in Resources */ = {isa = PBXBuildFile; fileRef = 33583AE21536A44800304F57 /* bomb.png */; };
 		33A43347151A957800FDCBE4 /* MJBombResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A43346151A957800FDCBE4 /* MJBombResource.m */; };
 		33EB78FF1517D2DC0005C19E /* MJClockWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EB78FE1517D2DC0005C19E /* MJClockWidget.m */; };
 		3F42F3E5150D6CEF00B704B1 /* Blue_Capitol.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3DB150D6CEF00B704B1 /* Blue_Capitol.png */; };
@@ -76,6 +78,8 @@
 		335412F91516ACC100879938 /* MJAddTilesResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJAddTilesResource.m; sourceTree = "<group>"; };
 		33583AD7153607E300304F57 /* MJNegativeResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJNegativeResource.h; sourceTree = "<group>"; };
 		33583AD8153607E300304F57 /* MJNegativeResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJNegativeResource.m; sourceTree = "<group>"; };
+		33583AE01536A44300304F57 /* mysteryBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mysteryBox.png; sourceTree = "<group>"; };
+		33583AE21536A44800304F57 /* bomb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bomb.png; sourceTree = "<group>"; };
 		33A43345151A957800FDCBE4 /* MJBombResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJBombResource.h; sourceTree = "<group>"; };
 		33A43346151A957800FDCBE4 /* MJBombResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJBombResource.m; sourceTree = "<group>"; };
 		33EB78FD1517D2DC0005C19E /* MJClockWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJClockWidget.h; path = "LandGrab!/MJClockWidget.h"; sourceTree = SOURCE_ROOT; };
@@ -189,6 +193,8 @@
 		3F42F3DA150D6CEF00B704B1 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				33583AE21536A44800304F57 /* bomb.png */,
+				33583AE01536A44300304F57 /* mysteryBox.png */,
 				3FBD8988150EA1D9001BBE97 /* Green_Tile_TileSize_NoBorder.png */,
 				3FBD8989150EA1DA001BBE97 /* Red_Tile_TileSize_NoBorder.png */,
 				3FBD898A150EA1DA001BBE97 /* Blue_Tile_TileSize_NoBorder.png */,
@@ -506,6 +512,8 @@
 				3FBD8991150EA1DA001BBE97 /* TopBar_Gray_Inverted.png in Resources */,
 				3FBD8992150EA1DA001BBE97 /* TopBar_Gray.png in Resources */,
 				3FBD8993150EA1DA001BBE97 /* Yellow_Tile_TileSize_NoBorder.png in Resources */,
+				33583AE11536A44300304F57 /* mysteryBox.png in Resources */,
+				33583AE31536A44800304F57 /* bomb.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

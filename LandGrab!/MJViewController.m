@@ -184,7 +184,7 @@
                                 [resource generateTiles];
                                 NSLog(@"Resource at corrdinate:%@ has %i tiles", NSStringFromCGPoint(resource.coordinate),resource.tilesGenerated);
                                 
-                                UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green"]]];
+                                UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"mysteryBox.png"]]];
                                 [imageView setFrame:resource.bounds];
                                 [imageView setContentMode:UIViewContentModeScaleAspectFill];
                                 dispatch_sync(dispatch_get_main_queue(), ^{
@@ -199,7 +199,7 @@
                                 [resource generateBombs];
                                 NSLog(@"Resource at corrdinate:%@ has %i bomb", NSStringFromCGPoint(resource.coordinate), resource.bombs);
                                 
-                                UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green"]]];
+                                UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"mysteryBox.png"]]];
                                 [imageView setFrame:resource.bounds];
                                 [imageView setContentMode:UIViewContentModeScaleAspectFill];
                                 dispatch_sync(dispatch_get_main_queue(), ^{

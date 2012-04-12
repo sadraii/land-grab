@@ -316,6 +316,7 @@
             [tile.player updateNumberOfBombsToPlayWithNumber:tmpResource.bombs];
             didRecieveResource = YES;
             [self animateBombResources:1 :tile.coordinate];
+            [tile.toolbar.pieces addObject:tmpResource];
         }
         
         if ([resourceCollision isMemberOfClass:[MJNegativeResource class]]) {

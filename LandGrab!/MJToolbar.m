@@ -22,6 +22,7 @@
 @synthesize pieces = _pieces;
 @synthesize inventoryCounter = _inventoryCounter;
 @synthesize bombCounter = _bombCounter;
+@synthesize realBombTile = _realBombTile;
 
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
@@ -46,30 +47,25 @@
 - (void) loadPlayer:(MJPlayer *)player {
     
     [self removeAllPieces];
-	
-//	//Add a single tile to the first index of the board
-//	MJTile * tile = [[MJTile alloc] initWithCoordinate:CGPointZero];
-//	[tile setViewController:_viewController];
-//	[tile setBoard:_viewController.board];
-//	[tile setToolbar:_viewController.toolbar];
-//	[tile setPlayer:player];
-//	[tile setTag:0];
+
     [player updateNumberOfTilesToPlayWithNumber:1];
 	[self placeAnotherTile:player];
     
-	//[tile setBackgroundColor:player.color];
-//    for (int i = 0; i < player.numberOfBombsToPlay; i++) {
-//        [self addBombToToolBar:player];
-//    }
-    [player updateNumberOfBombsToPlayWithNumber:0];
+    NSLog(@"Player %@ has %i bombs", player.handle, player.numberOfBombsToPlay);
+    //[player updateNumberOfBombsToPlayWithNumber:0];
     //[self updateBombCounterWithNumber:player.numberOfBombsToPlay];
-    [self addBombToToolBar:player];
-//    UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", player.imageColor]];
-//    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
-//    [imageView setFrame:tile.bounds];
-//    [tile addSubview:imageView];
-//    
-//	[self addTile:tile];
+    if (player.numberOfBombsToPlay >= 1) {
+        [self addBombToToolBar:player];
+        [self updateBombCounterWithNumber:player.numberOfBombsToPlay];
+        [self animateBombCounter];
+    }
+    
+    else {
+        [_realBombTile removeFromSuperview];
+        [self fadeBombCounter];
+    }
+    
+
 }
 
 - (void) addBombToToolBar:(MJPlayer *)player {
@@ -81,12 +77,12 @@
 	// Let's use the tag to differentiate the bomb vs. a normal tile
     [tile setTag:1];
     
-    UIImage *image = [UIImage imageNamed:@"Resource_Green.png"];
+    UIImage *image = [UIImage imageNamed:@"bomb.png"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     [imageView setFrame:tile.bounds];
     [tile addSubview:imageView];
     
-    [self addTile:tile];
+    [self addBombTile:tile];
 }
 
 - (void) placeAnotherTile:(MJPlayer *)player {
@@ -167,8 +163,13 @@
         [self addSubview:tile];
     }
     
+ 
+}
+
+- (void) addBombTile:(MJBombTile *)tile {
     if (tile.tag == 1) {
-        [tile setFrame:CGRectMake(offset*6, offset, [MJBoard tileSize], [MJBoard tileSize])];
+        _realBombTile = tile;
+        [_realBombTile setFrame:CGRectMake(offset*6, offset, [MJBoard tileSize], [MJBoard tileSize])];
         [tile setIsPlayed:NO];
         [_bombCounter setCenter:CGPointMake(tile.frame.origin.x + tile.frame.size.width, tile.frame.origin.y)];
         [self fadeBombCounter];
