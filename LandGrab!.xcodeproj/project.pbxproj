@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		335412FA1516ACC100879938 /* MJAddTilesResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 335412F91516ACC100879938 /* MJAddTilesResource.m */; };
+		33583AD9153607E300304F57 /* MJNegativeResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 33583AD8153607E300304F57 /* MJNegativeResource.m */; };
 		33A43347151A957800FDCBE4 /* MJBombResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A43346151A957800FDCBE4 /* MJBombResource.m */; };
 		33EB78FF1517D2DC0005C19E /* MJClockWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EB78FE1517D2DC0005C19E /* MJClockWidget.m */; };
 		3F42F3E5150D6CEF00B704B1 /* Blue_Capitol.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3DB150D6CEF00B704B1 /* Blue_Capitol.png */; };
@@ -72,6 +73,8 @@
 /* Begin PBXFileReference section */
 		335412F81516ACC100879938 /* MJAddTilesResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJAddTilesResource.h; sourceTree = "<group>"; };
 		335412F91516ACC100879938 /* MJAddTilesResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJAddTilesResource.m; sourceTree = "<group>"; };
+		33583AD7153607E300304F57 /* MJNegativeResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJNegativeResource.h; sourceTree = "<group>"; };
+		33583AD8153607E300304F57 /* MJNegativeResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJNegativeResource.m; sourceTree = "<group>"; };
 		33A43345151A957800FDCBE4 /* MJBombResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJBombResource.h; sourceTree = "<group>"; };
 		33A43346151A957800FDCBE4 /* MJBombResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJBombResource.m; sourceTree = "<group>"; };
 		33EB78FD1517D2DC0005C19E /* MJClockWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJClockWidget.h; path = "LandGrab!/MJClockWidget.h"; sourceTree = SOURCE_ROOT; };
@@ -217,6 +220,8 @@
 			children = (
 				67099FF414FFF1CC001C4178 /* MJResource.h */,
 				67099FF514FFF1CC001C4178 /* MJResource.m */,
+				33583AD7153607E300304F57 /* MJNegativeResource.h */,
+				33583AD8153607E300304F57 /* MJNegativeResource.m */,
 				335412F81516ACC100879938 /* MJAddTilesResource.h */,
 				335412F91516ACC100879938 /* MJAddTilesResource.m */,
 				33A43345151A957800FDCBE4 /* MJBombResource.h */,
@@ -550,6 +555,7 @@
 				33EB78FF1517D2DC0005C19E /* MJClockWidget.m in Sources */,
 				33A43347151A957800FDCBE4 /* MJBombResource.m in Sources */,
 				3F6EEA281533C51B0031D57C /* MJClusterResource.m in Sources */,
+				33583AD9153607E300304F57 /* MJNegativeResource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

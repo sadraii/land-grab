@@ -20,6 +20,9 @@
 #import "MJClockWidget.h"
 #import "MJAddTilesResource.h"
 #import "MJBombResource.h"
+#import "MJClusterResource.h"
+#import "MJNegativeResource.h"
+
 @implementation MJViewController
 
 @synthesize topbar = _topbar;
@@ -175,13 +178,10 @@
                             NSUInteger randomResourceInt = //(arc4random() % 4) + 1;
                             
                             if (randomResourceInt == 1) { //add tile resource
+                                
                                 __block MJAddTilesResource *resource = [[MJAddTilesResource alloc] initWithCoordinate:point];
                                 [resource generateTiles];
                                 NSLog(@"Resource at corrdinate:%@ has %i tiles", NSStringFromCGPoint(resource.coordinate),resource.tilesGenerated);
-                                
-                                //                            __block MJBombResource *resource = [[MJBombResource alloc] initWithCoordinate:point];
-                                //                            [resource generateBombs];
-                                //                            NSLog(@"Resource at corrdinate:%@ has %i bomb", NSStringFromCGPoint(resource.coordinate), resource.bombs);
                                 
                                 UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green"]]];
                                 [imageView setFrame:resource.bounds];
@@ -193,7 +193,18 @@
                             }
                             
                             if (randomResourceInt == 2) { //bomb resource
-                                ;
+                                
+                                __block MJBombResource *resource = [[MJBombResource alloc] initWithCoordinate:point];
+                                [resource generateBombs];
+                                NSLog(@"Resource at corrdinate:%@ has %i bomb", NSStringFromCGPoint(resource.coordinate), resource.bombs);
+                                
+                                UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green"]]];
+                                [imageView setFrame:resource.bounds];
+                                [imageView setContentMode:UIViewContentModeScaleAspectFill];
+                                dispatch_sync(dispatch_get_main_queue(), ^{
+                                    [resource addSubview:imageView];
+                                    [_board addResource:resource];
+                                });
                             }
                             
                             if (randomResourceInt == 3) { //territory cluster resource
@@ -201,10 +212,11 @@
                             }
                             
                             if (randomResourceInt == 4) { //negative point resource
-                                __block MJResource* resource = [[MJResource alloc] initWithCoordinate:point];
+                                
+                                __block MJNegativeResource* resource = [[MJNegativeResource alloc] initWithCoordinate:point];
                                 //int minValue = 50;
                                 //[resource setValue:[resource setRandomResourceValueWithValue:minValue]];
-                                [resource setValue: (_resourcePoints)*-1];
+                                [resource setValue: (_resourcePoints)*-4];
                                 NSLog(@"Resource at coordinate:%@ has %i value", NSStringFromCGPoint(resource.coordinate) ,resource.value);
                                 //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
                                 //			[resource setTilesWithCoordinateArray:coords];
@@ -219,6 +231,7 @@
                         }
                         
                         if (randomInt == 2) { //positive point resource                        
+                            
                             __block MJResource* resource = [[MJResource alloc] initWithCoordinate:point];
                             //int minValue = 50;
                             //[resource setValue:[resource setRandomResourceValueWithValue:minValue]];
