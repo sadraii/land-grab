@@ -22,13 +22,15 @@
     BOOL didRecieveResource;
 }
 
-@property (weak, nonatomic) IBOutlet MJViewController* viewController;
+@property (weak, nonatomic) IBOutlet    MJViewController*   viewController;
 
-@property (strong, nonatomic) NSMutableArray* pieces;
-@property (strong, nonatomic) NSMutableArray* resources;
+@property (strong, nonatomic)           NSMutableArray*     pieces;
+@property (strong, nonatomic)           NSMutableArray*     resources;
 
-@property (readonly)CGSize boardSize;
-@property (strong, nonatomic) MJContainerView* containerView;
+@property (readonly)                    CGSize              boardSize;
+@property (strong, nonatomic)           MJContainerView*    containerView;
+
+@property (strong, nonatomic)           MJTile*             tileToRemove;
 
 + (NSUInteger) tileSize;
 
@@ -36,6 +38,7 @@
 - (void) setBoardSize:(CGSize)size;
 
 - (MJTile*) tileAtCoordinate:(CGPoint)coordinate;
+- (void) removeTileAtCoordinate:(CGPoint)coordinate;
 - (MJBombTile*) bombAtCoordinate:(CGPoint)coordinate;
 - (MJResource*) resourceAtCoordinate:(CGPoint)coordinate;
 - (BOOL) resourcesAroundCoordinate:(CGPoint)coordinate;

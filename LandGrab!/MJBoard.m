@@ -20,6 +20,7 @@
 #import "MJNegativeResource.h"
 #import "MJBombTile.h"
 
+
 @implementation MJBoard
 
 @synthesize viewController  = _viewController;
@@ -29,6 +30,7 @@
 
 @synthesize boardSize       = _boardSize; 
 @synthesize containerView   = _containerView;
+@synthesize tileToRemove    = _tileToRemove;
 
 + (NSUInteger) tileSize {
 	NSString* deviceName = [UIDevice currentDevice].model;
@@ -82,6 +84,15 @@
 	for (MJTile* t in _pieces)
 		if (CGPointEqualToPoint(coordinate, t.coordinate)) return t;
 	return nil;
+}
+
+- (void) removeTileAtCoordinate:(CGPoint)coordinate {
+    for (MJTile* t in _pieces) {
+        if (CGPointEqualToPoint(coordinate, t.coordinate)) {
+            _tileToRemove = t;
+        }
+    }
+    [_pieces removeObjectIdenticalTo:_tileToRemove];
 }
 
 - (MJBombTile*) bombAtCoordinate:(CGPoint)coordinate {
@@ -241,11 +252,20 @@
     
     else if (tileCollision && tile.player != tileCollision.player) {
 
-        NSLog(@"Collision with %@'s tile", tileCollision.player.handle);
+        NSLog(@"Bombed %@'s tile!", tileCollision.player.handle);
+        MJTile* tileToRemove = [self tileAtCoordinate:tile.coordinate];
+        [tileToRemove removeFromSuperview];
+        [self removeTileAtCoordinate:tileToRemove.coordinate];
+        tile.player.numberOfBombsToPlay--;
+        [tile.toolbar updateBombCounterWithNumber:tile.player.numberOfBombsToPlay];
+        [tile removeFromSuperview];
         //[tile touchesCancelled:nil withEvent:nil];
         //[tile.toolbar animateInventoryCounter];
 		//return;
 	}
+    else {
+        NSLog(@"Lulz, empty else clause");
+    }
 }
 
 - (void) addTile:(MJTile*)tile {
