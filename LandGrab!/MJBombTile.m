@@ -20,6 +20,7 @@
 @synthesize currentPoint = _currentPoint;
 
 #pragma mark - Touches
+
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
     
@@ -35,7 +36,7 @@
 	point.x -= distanceFromOrigin.width;
 	point.y -= distanceFromOrigin.height;
 	[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
-	[_toolbar fadeInventoryCounter];
+	[_toolbar fadeBombCounter];
 	
     [_viewController addTile:self];
 	if (_board.zoomScale != _board.maximumZoomScale) {
@@ -111,11 +112,11 @@
 	[self setFrame:CGRectMake(startingOrigin.x, startingOrigin.y, self.frame.size.width, self.frame.size.height)];
 	if ([startingView isEqual:_toolbar]) {
         
-        [_toolbar addTile:self];
-        [_toolbar animateInventoryCounter];
+        [_toolbar addBombTile:self];
+        [_toolbar animateBombCounter];
 	}
 	else {
-        [_toolbar animateInventoryCounter];
+        [_toolbar animateBombCounter];
 		abort();
 	}
     

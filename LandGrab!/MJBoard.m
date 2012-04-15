@@ -83,6 +83,14 @@
 		if (CGPointEqualToPoint(coordinate, t.coordinate)) return t;
 	return nil;
 }
+
+- (MJBombTile*) bombAtCoordinate:(CGPoint)coordinate {
+    for (MJBombTile* t in _pieces)
+		if (CGPointEqualToPoint(coordinate, t.coordinate)) return t;
+	return nil;
+}
+
+
 // I think we need to make this id to deal with the different subclassed resources
 // I'm keeping a copy commented so that we can use it back if everything breaks.
 /*
@@ -202,7 +210,7 @@
     if(![self isCoordinateOnBoard:tile.coordinate]) {
 		NSLog(@"Cannot place a tile off the board;");
 		[tile touchesCancelled:nil withEvent:nil];
-        [tile.toolbar animateInventoryCounter];
+        [tile.toolbar animateBombCounter];
         
 		return;
 	}
@@ -210,15 +218,26 @@
 	// Check if tile is placed ontop of one of your own tiles
 	MJTile* tileCollision = [self tileAtCoordinate:tile.coordinate];
 	if (tile.player == tileCollision.player) {
-		NSLog(@"Cannot place a piece on top of your own piece");
+		NSLog(@"Cannot place a bomb on top of your own piece");
 		[tile touchesCancelled:nil withEvent:nil];
         
         // IMPORTANT NOTE! this is the proper way to keep the invetoryCounter ontop of ANY view of the tile, or any other subsequent tiles we may add to the tool bar, PLEASE DUPLICATE THESE TWO LINES OF CODE WHEN NECESSARY (whenever touchesCanceled is called)!
         
-        [tile.toolbar animateInventoryCounter];
+        [tile.toolbar animateBombCounter];
         
 		return;
 	}
+    
+    else if (tileCollision == nil) {
+        NSLog(@"Cannot place a bomb on empty space");
+		[tile touchesCancelled:nil withEvent:nil];
+        
+        // IMPORTANT NOTE! this is the proper way to keep the invetoryCounter ontop of ANY view of the tile, or any other subsequent tiles we may add to the tool bar, PLEASE DUPLICATE THESE TWO LINES OF CODE WHEN NECESSARY (whenever touchesCanceled is called)!
+        
+        [tile.toolbar animateBombCounter];
+        
+		return;
+    }
     
     else if (tileCollision && tile.player != tileCollision.player) {
 

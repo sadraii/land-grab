@@ -157,7 +157,7 @@
 	dispatch_async(concurrentQueue, ^{
 		//2494 is equal to 50 squared minus the number of players (5)
 		int numResourcesInSection = 1; // number of resources per section
-        int numSplits = _board.boardSize.width/4;
+        int numSplits = _board.boardSize.width/3;
         int section = 0;
         
         for (int i=0; i < numSplits; i++) {
@@ -221,7 +221,7 @@
                                 NSLog(@"Resource at coordinate:%@ has %i value", NSStringFromCGPoint(resource.coordinate) ,resource.value);
                                 //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
                                 //			[resource setTilesWithCoordinateArray:coords];
-                                UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green"]]];
+                                UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"mysteryBox"]]];
                                 [imageView setFrame:resource.bounds];
                                 [imageView setContentMode:UIViewContentModeScaleAspectFill];
                                 dispatch_sync(dispatch_get_main_queue(), ^{
@@ -240,7 +240,7 @@
                             NSLog(@"Resource at coordinate:%@ has %i value", NSStringFromCGPoint(resource.coordinate) ,resource.value);
                             //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
                             //			[resource setTilesWithCoordinateArray:coords];
-                            UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"mysteryBox.png"]]];
+                            UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green.png"]]];
                             [imageView setFrame:resource.bounds];
                             [imageView setContentMode:UIViewContentModeScaleAspectFill];
                             dispatch_sync(dispatch_get_main_queue(), ^{

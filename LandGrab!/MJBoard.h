@@ -36,6 +36,7 @@
 - (void) setBoardSize:(CGSize)size;
 
 - (MJTile*) tileAtCoordinate:(CGPoint)coordinate;
+- (MJBombTile*) bombAtCoordinate:(CGPoint)coordinate;
 - (MJResource*) resourceAtCoordinate:(CGPoint)coordinate;
 - (BOOL) resourcesAroundCoordinate:(CGPoint)coordinate;
 
