@@ -72,6 +72,7 @@
 	if (!_containerView) {
 		_containerView = [[MJContainerView alloc] initWithFrame:frame];
 		_containerView.board = self;
+		
 		[self addSubview:_containerView];
 	}
 	[self setContentSize:frame.size];
@@ -264,7 +265,7 @@
 		//return;
 	}
     else {
-        NSLog(@"Lulz, empty else clause");
+        [tile touchesCancelled:nil withEvent:nil];
     }
 }
 

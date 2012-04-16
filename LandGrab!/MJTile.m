@@ -12,6 +12,7 @@
 #import "MJViewController.h"
 #import "MJBoard.h"
 #import "MJInventoryCount.h"
+#import "MJBombTile.h"
 
 @implementation MJTile
 
@@ -105,7 +106,7 @@
 	[_toolbar fadeInventoryCounter];
 	
     [_viewController addTile:self];
-	if (_board.zoomScale != _board.maximumZoomScale) {
+	if (_board.zoomScale != _board.maximumZoomScale && ![self isKindOfClass:[MJBombTile class]]) {
 		if (_player.lastPlayedTile) {
 			[_board scrollRectToVisible:_player.lastPlayedTile.frame animated:YES];
             
