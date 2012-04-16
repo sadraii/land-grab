@@ -20,8 +20,7 @@
 @synthesize threePlayersButton = _threePlayersButton;
 @synthesize fourPlayersButton = _fourPlayersButton;
 @synthesize timeBasedButton = _timeBasedButton;
-@synthesize turnBasedButton = _turnBasedButton;
-@synthesize unlimtedBasedButton = _unlimtedBasedButton;
+@synthesize turnBasedButton = _turnBasedButton;     
 @synthesize twoMinutesButton = _twoMinutesButton;
 @synthesize fiveMinutesButton = _fiveMinutesButton;
 @synthesize tenMinutesButton = _tenMinutesButton;
@@ -29,6 +28,9 @@
 @synthesize fiftyTurnsButton = _fiftyTurnsButton;
 @synthesize hundredTurnsButton = _hundredTurnsButton;
 @synthesize label = _label;
+@synthesize boardsize20x20 = _boardsize20x20;
+@synthesize boardsize30x30 = _boardsize30x30;
+@synthesize boardsize50x50 = _boardsize50x50;
 
 - (void)didReceiveMemoryWarning
 {
@@ -50,18 +52,10 @@
     GameSetUpData *tmp = [[GameSetUpData alloc] init];
     _gameSetUp = tmp;
  
-    _twoPlayersButton.alpha = 0.0;
-    _twoPlayersButton.userInteractionEnabled = NO;
-    _threePlayersButton.alpha = 0.0;
-    _threePlayersButton.userInteractionEnabled = NO;
-    _fourPlayersButton.alpha = 0.0;
-    _fourPlayersButton.userInteractionEnabled = NO;
     _timeBasedButton.alpha = 0.0;
     _timeBasedButton.userInteractionEnabled = NO;
     _turnBasedButton.alpha = 0.0;
     _turnBasedButton.userInteractionEnabled = NO;
-    _unlimtedBasedButton.alpha = 0.0;
-    _unlimtedBasedButton.userInteractionEnabled = NO;
     _twoMinutesButton.alpha = 0.0;
     _twoMinutesButton.userInteractionEnabled = NO;
     _fiveMinutesButton.alpha = 0.0;
@@ -74,7 +68,12 @@
     _fiftyTurnsButton.userInteractionEnabled = NO;
     _hundredTurnsButton.alpha = 0.0;
     _hundredTurnsButton.userInteractionEnabled = NO;
-    
+    _boardsize20x20.alpha = 0.0;
+    _boardsize20x20.userInteractionEnabled =NO;
+    _boardsize30x30.alpha = 0.0;
+    _boardsize30x30.userInteractionEnabled =NO;
+    _boardsize50x50.alpha = 0.0;
+    _boardsize50x50.userInteractionEnabled =NO;
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -87,7 +86,6 @@
     [self setFourPlayersButton:nil];
     [self setTimeBasedButton:nil];
     [self setTurnBasedButton:nil];
-    [self setUnlimtedBasedButton:nil];
     [self setTwoMinutesButton:nil];
     [self setFiveMinutesButton:nil];
     [self setTenMinutesButton:nil];
@@ -96,6 +94,9 @@
     [self setHundredTurnsButton:nil];
     [self setStartNewGame:nil];
     [self setLabel:nil];
+    [self setBoardsize20x20:nil];
+    [self setBoardsize30x30:nil];
+    [self setBoardsize50x50:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -141,29 +142,6 @@
 
 #pragma mark - Tap Methods
 
-
--(IBAction)tappedNewGame:(id)sender {
-    NSLog(@"Hi Friend, welcome to the new game!");
-
-    [UIView animateWithDuration:0.25 animations:^ {
-        _startNewGame.alpha = 0.0;
-        _label.alpha = 0.0;
-    }completion:^(BOOL finished) {
-        _startNewGame.userInteractionEnabled = NO;
-        _label.text = @"How many Players?";
-        [UIView animateWithDuration:0.25 animations:^ {
-            _twoPlayersButton.alpha = 1.0;
-            _threePlayersButton.alpha = 1.0;
-            _fourPlayersButton.alpha = 1.0;
-            _label.alpha = 1.0;
-        }completion:^(BOOL finished) {
-            _twoPlayersButton.userInteractionEnabled = YES;
-            _threePlayersButton.userInteractionEnabled = YES;
-            _fourPlayersButton.userInteractionEnabled = YES;
-        }];
-    }];
-}
-
 -(IBAction)tappedHowManyPlayers:(UIButton *)button {
     if (button.tag == 2) {
         _gameSetUp.numberOfPlayers = 2;
@@ -184,16 +162,47 @@
         _twoPlayersButton.userInteractionEnabled = NO;
         _threePlayersButton.userInteractionEnabled = NO;
         _fourPlayersButton.userInteractionEnabled = NO;
-        _label.text = @"What Kind of Game Play would you like?";
+        _label.text = @"What board size do you want?";
+        [UIView animateWithDuration:0.25 animations:^ {
+            _boardsize20x20.alpha = 1.0;
+            _boardsize30x30.alpha = 1.0;
+            _boardsize50x50.alpha = 1.0;
+            _label.alpha = 1.0;
+        }completion:^(BOOL finished) {
+            _boardsize20x20.userInteractionEnabled = YES;
+            _boardsize30x30.userInteractionEnabled = YES;
+            _boardsize50x50.userInteractionEnabled = YES;
+        }];
+    }];
+}
+
+-(IBAction)tappedboardsize:(UIButton *)button {
+    if (button.tag == 20) {
+        _gameSetUp.boardSize = CGSizeMake(20, 20);
+    }
+    if (button.tag == 30) {
+        _gameSetUp.boardSize = CGSizeMake(30, 30);
+    }
+    if (button.tag == 50) {
+        _gameSetUp.boardSize = CGSizeMake(50, 50);
+    }
+    [UIView animateWithDuration:0.25 animations:^ {
+        _boardsize20x20.alpha = 0.0;
+        _boardsize30x30.alpha = 0.0;
+        _boardsize50x50.alpha = 0.0;
+        _label.alpha = 0.0;
+    }completion:^(BOOL finished) {
+        _boardsize20x20.userInteractionEnabled = NO;
+        _boardsize30x30.userInteractionEnabled = NO;
+        _boardsize50x50.userInteractionEnabled = NO;
+        _label.text = @"What type of game do you want?";
         [UIView animateWithDuration:0.25 animations:^ {
             _timeBasedButton.alpha = 1.0;
             _turnBasedButton.alpha = 1.0;
-            _unlimtedBasedButton.alpha = 1.0;
             _label.alpha = 1.0;
         }completion:^(BOOL finished) {
             _timeBasedButton.userInteractionEnabled = YES;
             _turnBasedButton.userInteractionEnabled = YES;
-            _unlimtedBasedButton.userInteractionEnabled = YES;
         }];
     }];
 }
@@ -205,19 +214,14 @@
     if (button.tag == 2) {
         _gameSetUp.gameType = [NSString stringWithString:@"turnBased"];
     }
-    if (button.tag == 3) {
-        _gameSetUp.gameType = [NSString stringWithString:@"unlimitedBased"];
-    }
 
     [UIView animateWithDuration:0.25 animations:^ {
         _timeBasedButton.alpha = 0.0;
         _turnBasedButton.alpha = 0.0;
-        _unlimtedBasedButton.alpha = 0.0;
         _label.alpha = 0.0;
     }completion:^(BOOL finished) {
         _timeBasedButton.userInteractionEnabled = NO;
         _turnBasedButton.userInteractionEnabled = NO;
-        _unlimtedBasedButton.userInteractionEnabled = NO;
         if (button.tag == 1) {
             _label.text = @"How many minutes would you like to play for?";
             [UIView animateWithDuration:0.25 animations:^ {

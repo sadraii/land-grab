@@ -62,7 +62,8 @@
 
 - (IBAction)newGame:(id)sender {
 	[_board newGame];
-	[_board setBoardSize:CGSizeMake(20, 20)];
+	[_board setBoardSize:_gameSetUpData.boardSize];
+    NSLog(@"boardsize= %d %d", _gameSetUpData.boardSize.width, _gameSetUpData.boardSize.height);
 	[_board zoomOutAnimated:YES];
 	[_toolbar newGame];
 	
