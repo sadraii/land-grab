@@ -251,14 +251,14 @@
 		return;
     }
     
-    else if (tileCollision && tile.player != tileCollision.player) {
-        
+    else if (tileCollision && tile.player != tileCollision.player && tileCollision != tileCollision.player.capital) {
+
         NSLog(@"Bombed %@'s tile!", tileCollision.player.handle);
         MJTile* tileToRemove = [self tileAtCoordinate:tile.coordinate];
         [tileToRemove removeFromSuperview];
         [self removeTileAtCoordinate:tileToRemove.coordinate];
-        tile.player.numberOfBombsToPlay--;
-        [tile.toolbar updateBombCounterWithNumber:tile.player.numberOfBombsToPlay];
+        [tile.player updateNumberOfBombsToPlayWithNumber:tile.player.numberOfBombsToPlay--];
+        
         [tile removeFromSuperview];
         //[tile touchesCancelled:nil withEvent:nil];
         //[tile.toolbar animateInventoryCounter];
@@ -356,6 +356,12 @@
             didRecieveResource = YES;
             [self animateBombResources:1 :tile.coordinate];
             [tile.toolbar.pieces addObject:tmpResource];
+        }
+        
+        if ([resourceCollision isMemberOfClass:[MJClusterResource class]]) {
+            MJClusterResource *tmpResource = (MJClusterResource*)[self resourceAtCoordinate:tile.coordinate];
+            NSLog(@"%@ found a cluster resource worth %i tiles!", tile.player.handle, [(MJClusterResource*)tmpResource generateTiles]);
+            
         }
         
         if ([resourceCollision isMemberOfClass:[MJNegativeResource class]]) {

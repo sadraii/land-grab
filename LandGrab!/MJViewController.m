@@ -128,6 +128,7 @@
 			case 3:	
 				[player setHandle:@"Mostafa"];
 				[player setColor:[UIColor magentaColor]];
+                [player setImageColor:@"Magenta"];
 				[capital setCoordinate:CGPointMake(_board.boardSize.width - 1 - capitalOffset, capitalOffset)];
 				capital.tag = 1;
 				break;
@@ -177,7 +178,7 @@
                         NSLog(@"Random Int: %d", randomInt);
                         
                         if (randomInt == 1) {
-                            NSUInteger randomResourceInt = (arc4random_uniform(3)) + 1;
+                            NSUInteger randomResourceInt = 2;//(arc4random_uniform(3)) + 1;
                             
                             if (randomResourceInt == 1) { //add tile resource
                                 

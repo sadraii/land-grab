@@ -10,4 +10,8 @@
 
 @interface MJClusterResource : MJResource
 
+@property (readwrite, nonatomic) NSUInteger tilesGenerated;
+
+-(NSUInteger)generateTiles;
+
 @end

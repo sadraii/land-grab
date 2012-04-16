@@ -10,4 +10,12 @@
 
 @implementation MJClusterResource
 
+@synthesize tilesGenerated = _tilesGenerated;
+
+-(NSUInteger)generateTiles {
+    
+    return _tilesGenerated = arc4random_uniform(10) + 2;
+    
+}
+
 @end
