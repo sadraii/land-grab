@@ -63,9 +63,10 @@
 - (IBAction)newGame:(id)sender {
 	[_board newGame];
 	[_board setBoardSize:CGSizeMake(20, 20)];
-	[_board zoomOutAnimated:NO];
+	[_board zoomOutAnimated:YES];
 	[_toolbar newGame];
-    
+	
+	
     
     if ([_gameSetUpData.gameType isEqualToString:@"timeBased"]) {
         [self setUpTimeBasedGame];

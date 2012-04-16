@@ -72,6 +72,7 @@
 	if (!_containerView) {
 		_containerView = [[MJContainerView alloc] initWithFrame:frame];
 		_containerView.board = self;
+		
 		[self addSubview:_containerView];
 	}
 	[self setContentSize:frame.size];
@@ -250,7 +251,7 @@
 		return;
     }
     
-    else if (tileCollision && tile.player != tileCollision.player) {
+    else if (tileCollision && tile.player != tileCollision.player && tileCollision != tileCollision.player.capital) {
 
         NSLog(@"Bombed %@'s tile!", tileCollision.player.handle);
         MJTile* tileToRemove = [self tileAtCoordinate:tile.coordinate];
@@ -264,7 +265,7 @@
 		//return;
 	}
     else {
-        NSLog(@"Lulz, empty else clause");
+        [tile touchesCancelled:nil withEvent:nil];
     }
 }
 
