@@ -251,7 +251,7 @@
     }
     
     else if (tileCollision && tile.player != tileCollision.player) {
-
+        
         NSLog(@"Bombed %@'s tile!", tileCollision.player.handle);
         MJTile* tileToRemove = [self tileAtCoordinate:tile.coordinate];
         [tileToRemove removeFromSuperview];
