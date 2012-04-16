@@ -21,6 +21,7 @@
 
 @synthesize pieces = _pieces;
 @synthesize playedPieces = _playedPieces;
+@synthesize toolBarPieces = _toolBarPieces;
 @synthesize lastPlayedTile = _lastPlayedTile;
 @synthesize handle = _handle;
 @synthesize color = _color;
@@ -48,6 +49,7 @@
     _numberOfBombsToPlay = 0;
 	_capital = nil;
 	_playedPieces = [[NSMutableArray alloc] init];
+    _toolBarPieces = [[NSMutableArray alloc] init];
     return self;
 }
 
@@ -107,12 +109,12 @@
 
 - (void) updateNumberOfBombsToPlayWithNumber:(NSUInteger)number {
     _numberOfBombsToPlay += number;
-    [_toolbar updateBombCounterWithNumber:_numberOfBombsToPlay];
+    [_toolbar updateBombCounterForPlayer:self];
 }
 
 - (void) subtractBomb {
     _numberOfBombsToPlay--;
-    [_toolbar updateBombCounterWithNumber:_numberOfBombsToPlay];
+    [_toolbar updateBombCounterForPlayer:self];
 }
 
 - (BOOL) coordinate:(CGPoint)a TouchesCoordinate:(CGPoint)b {

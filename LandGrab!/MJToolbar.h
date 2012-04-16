@@ -32,14 +32,14 @@
 
 - (void) newGame;
 - (void) loadPlayer:(MJPlayer*) player;
-- (void) removeAllPieces;
+- (void) removeAllPiecesFor:(MJPlayer*)player;
 - (void) addTile:(MJTile*)tile;
 - (void) updateCounterWith:(NSUInteger)number;
 - (void) placeAnotherTile:(MJPlayer*) player;
 - (void) animateInventoryCounter;
 - (void) fadeInventoryCounter;
 - (void) addBombToToolBar:(MJPlayer*) player;
-- (void) updateBombCounterWithNumber:(NSUInteger)number;
+- (void) updateBombCounterForPlayer:(MJPlayer*)player;
 - (void) animateBombCounter;
 - (void) fadeBombCounter;
 - (void) addBombTile:(MJBombTile*)tile;

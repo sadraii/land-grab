@@ -252,20 +252,27 @@
     }
     
     else if (tileCollision && tile.player != tileCollision.player && tileCollision != tileCollision.player.capital) {
-
+        
+        [tile.player subtractBomb];
+        
         NSLog(@"Bombed %@'s tile!", tileCollision.player.handle);
         MJTile* tileToRemove = [self tileAtCoordinate:tile.coordinate];
         [tileToRemove removeFromSuperview];
         [self removeTileAtCoordinate:tileToRemove.coordinate];
-        [tile.player updateNumberOfBombsToPlayWithNumber:tile.player.numberOfBombsToPlay--];
         
         [tile removeFromSuperview];
+        [tile.toolbar animateBombCounter];
         //[tile touchesCancelled:nil withEvent:nil];
         //[tile.toolbar animateInventoryCounter];
 		//return;
 	}
     else {
         [tile touchesCancelled:nil withEvent:nil];
+    }
+    
+    if (tile.player.numberOfBombsToPlay < 1) {
+        [tile.toolbar fadeBombCounter];
+        [tile.toolbar.realBombTile removeFromSuperview];
     }
 }
 
@@ -355,7 +362,10 @@
             [tile.player updateNumberOfBombsToPlayWithNumber:tmpResource.bombs];
             didRecieveResource = YES;
             [self animateBombResources:1 :tile.coordinate];
-            [tile.toolbar.pieces addObject:tmpResource];
+            //MJBombTile *tmpBombTile = [[MJBombTile alloc] init];
+            //[tile.player.toolBarPieces addObject:tmpBombTile];
+            //[tile.toolbar addBombToToolBar:tile.player];
+            //[tile.toolbar animateBombCounter];
         }
         
         if ([resourceCollision isMemberOfClass:[MJClusterResource class]]) {

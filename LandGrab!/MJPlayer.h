@@ -23,6 +23,7 @@
 
 @property (strong, nonatomic)       NSMutableArray*     pieces;
 @property (strong, nonatomic)       NSMutableArray*     playedPieces;
+@property (strong, nonatomic)       NSMutableArray*     toolBarPieces;
 @property (weak, nonatomic)         MJTile*             lastPlayedTile;
 
 @property (strong, nonatomic)       NSString*           handle;
@@ -35,6 +36,7 @@
 @property (readwrite, nonatomic)    NSUInteger          combinedScore;
 @property (readwrite, nonatomic)    NSUInteger          numberOfTilesToPlay;
 @property (readwrite, nonatomic)    NSUInteger          numberOfBombsToPlay;
+
 
 - (void) updateScore;
 - (void) updateTerritory;

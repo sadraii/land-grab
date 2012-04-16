@@ -32,7 +32,7 @@
 		maxX = 0;
         MJInventoryCount *tmpInventoryCounter = [[MJInventoryCount alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         _inventoryCounter = tmpInventoryCounter;
-        
+        _pieces = [[NSMutableArray alloc] init];
         _bombCounter = [[MJInventoryCount alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         
         
@@ -41,12 +41,13 @@
 }
 
 - (void) newGame {
-	[self removeAllPieces];
+	//[self removeAllPieces];
 }
 
 - (void) loadPlayer:(MJPlayer *)player {
     
-    [self removeAllPieces];
+   
+    [self removeAllPiecesFor:player];
 
     [player updateNumberOfTilesToPlayWithNumber:1];
 	[self placeAnotherTile:player];
@@ -55,13 +56,17 @@
     //[player updateNumberOfBombsToPlayWithNumber:0];
     //[self updateBombCounterWithNumber:player.numberOfBombsToPlay];
     if (player.numberOfBombsToPlay >= 1) {
-        [self addBombToToolBar:player];
-        [self updateBombCounterWithNumber:player.numberOfBombsToPlay];
+        for (int i =0; i<player.numberOfBombsToPlay; i++) {
+            [self addBombToToolBar:player];
+        }
+        
+        [self updateBombCounterForPlayer:player];
         [self animateBombCounter];
     }
     
     else {
         [_realBombTile removeFromSuperview];
+        _realBombTile.alpha = 0.0;
         [self fadeBombCounter];
     }
     
@@ -82,7 +87,10 @@
     [imageView setFrame:tile.bounds];
     [tile addSubview:imageView];
     
-    [self addBombTile:tile];
+
+        [self addBombTile:tile];
+
+    
 }
 
 - (void) placeAnotherTile:(MJPlayer *)player {
@@ -139,16 +147,16 @@
     NSLog(@"updateCounterWith %d tiles", number);
 }
 
-- (void)updateBombCounterWithNumber:(NSUInteger)number {
-    _bombCounter.counter.text = [NSString stringWithFormat:@"%d", number];
-    NSLog(@"updateBombCounterWith %d bombs", number);
+- (void)updateBombCounterForPlayer:(MJPlayer *)player {
+    _bombCounter.counter.text = [NSString stringWithFormat:@"%d", player.numberOfBombsToPlay];
+    NSLog(@"updateBombCounterWith %d bombs", player.numberOfBombsToPlay);
 }
 
-- (void) removeAllPieces {
+- (void) removeAllPiecesFor:(MJPlayer *)player {
 	for (MJTile* t in _pieces) {
 		[t removeFromSuperview];
 	}
-    for (MJBombResource *b in _pieces) {
+    for (MJBombTile *b in _pieces) {
         [b removeFromSuperview];
     }
 }
@@ -169,12 +177,13 @@
 - (void) addBombTile:(MJBombTile *)tile {
     if (tile.tag == 1) {
         _realBombTile = tile;
-        [_realBombTile setFrame:CGRectMake(offset*6, offset, [MJBoard tileSize], [MJBoard tileSize])];
+        [tile setFrame:CGRectMake(offset*6, offset, [MJBoard tileSize], [MJBoard tileSize])];
         [tile setIsPlayed:NO];
         [_bombCounter setCenter:CGPointMake(tile.frame.origin.x + tile.frame.size.width, tile.frame.origin.y)];
         [self fadeBombCounter];
         [self addSubview:_bombCounter];
         [self animateBombCounter];
+        [_pieces addObject:tile];
         [self addSubview:tile];
     }
 }

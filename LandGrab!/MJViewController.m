@@ -63,7 +63,7 @@
 - (IBAction)newGame:(id)sender {
 	[_board newGame];
 	[_board setBoardSize:_gameSetUpData.boardSize];
-    NSLog(@"boardsize= %d %d", _gameSetUpData.boardSize.width, _gameSetUpData.boardSize.height);
+    NSLog(@"boardsize= %f %f", _gameSetUpData.boardSize.width, _gameSetUpData.boardSize.height);
 	[_board zoomOutAnimated:YES];
 	[_toolbar newGame];
 	
@@ -129,7 +129,7 @@
 			case 3:	
 				[player setHandle:@"Mostafa"];
 				[player setColor:[UIColor magentaColor]];
-                [player setImageColor:@"Magenta"];
+                [player setImageColor:@"Yellow"];
 				[capital setCoordinate:CGPointMake(_board.boardSize.width - 1 - capitalOffset, capitalOffset)];
 				capital.tag = 1;
 				break;
