@@ -23,7 +23,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *fourPlayersButton;
 @property (weak, nonatomic) IBOutlet UIButton *timeBasedButton;
 @property (weak, nonatomic) IBOutlet UIButton *turnBasedButton;
-@property (weak, nonatomic) IBOutlet UIButton *unlimtedBasedButton;
 @property (weak, nonatomic) IBOutlet UIButton *twoMinutesButton;
 @property (weak, nonatomic) IBOutlet UIButton *fiveMinutesButton;
 @property (weak, nonatomic) IBOutlet UIButton *tenMinutesButton;
@@ -31,10 +30,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *fiftyTurnsButton;
 @property (weak, nonatomic) IBOutlet UIButton *hundredTurnsButton;
 @property (weak, nonatomic) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UIButton *boardsize20x20;
+@property (weak, nonatomic) IBOutlet UIButton *boardsize30x30;
+@property (weak, nonatomic) IBOutlet UIButton *boardsize50x50;
 
--(IBAction)tappedNewGame:(id)sender;
+//-(IBAction)tappedNewGame:(id)sender;
 -(IBAction)tappedHowManyPlayers:(UIButton *)button;
 -(IBAction)tappedTypeOfGame:(UIButton *)button;
+-(IBAction)tappedboardsize:(UIButton *)button;
 
 
 
