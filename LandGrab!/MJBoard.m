@@ -259,7 +259,12 @@
         [self removeTileAtCoordinate:tileToRemove.coordinate];
         tile.player.numberOfBombsToPlay--;
         [tile.toolbar updateBombCounterWithNumber:tile.player.numberOfBombsToPlay];
-        [tile removeFromSuperview];
+		if (tile.player.numberOfBombsToPlay < 1) {
+			[tile removeFromSuperview];
+		}
+		else {
+			[tile.toolbar animateBombCounter];
+		}
         //[tile touchesCancelled:nil withEvent:nil];
         //[tile.toolbar animateInventoryCounter];
 		//return;
