@@ -364,8 +364,8 @@
             [self animateBombResources:1 :tile.coordinate];
             //MJBombTile *tmpBombTile = [[MJBombTile alloc] init];
             //[tile.player.toolBarPieces addObject:tmpBombTile];
-            //[tile.toolbar addBombToToolBar:tile.player];
-            //[tile.toolbar animateBombCounter];
+            [tile.toolbar addBombToToolBar:tile.player];
+            [tile.toolbar animateBombCounter];
         }
         
         if ([resourceCollision isMemberOfClass:[MJClusterResource class]]) {
