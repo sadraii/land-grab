@@ -19,6 +19,7 @@
 #import "MJClusterResource.h"
 #import "MJNegativeResource.h"
 #import "MJBombTile.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @implementation MJBoard
@@ -582,21 +583,34 @@
 //    tileLR.alpha = 0.0;
     
 
+    
+    CGAffineTransform newTransform;
+    newTransform = CGAffineTransformMakeScale(.01f, .01f);
+    
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+    [animation setDuration:0.4];
+    [animation setRepeatCount:25];
+    [animation setAutoreverses:YES];
+    [animation setFromValue:[NSValue valueWithCGPoint:
+                             CGPointMake([tile center].x - 20.0f, [tile center].y)]];
+    [animation setToValue:[NSValue valueWithCGPoint:
+                           CGPointMake([tile center].x + 20.0f, [tile center].y)]];
+    [animation setSpeed:50];
+    [[tile layer] addAnimation:animation forKey:@"position"];
+    
+    
     [self addSubview:tileUL];
     [self addSubview:tileLL];
     [self addSubview:tileUR];
     [self addSubview:tileLR];
     
-    tileUL.transform = CGAffineTransformMakeScale(2, 2);
-    tileLL.transform = CGAffineTransformMakeScale(2, 2);
-    tileUR.transform = CGAffineTransformMakeScale(2, 2);
-    tileLR.transform = CGAffineTransformMakeScale(2, 2);
-    
-    CGAffineTransform newTransform;
-    newTransform = CGAffineTransformMakeScale(.01f, .01f);
+    tileUL.transform = CGAffineTransformMakeScale(1, 1);
+    tileLL.transform = CGAffineTransformMakeScale(1, 1);
+    tileUR.transform = CGAffineTransformMakeScale(1, 1);
+    tileLR.transform = CGAffineTransformMakeScale(1, 1);
 
     
-    [UIView animateWithDuration:3.0 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^ {
+    [UIView animateWithDuration:1.0 delay:0.3 options:UIViewAnimationOptionCurveEaseIn animations:^ {
         tile.alpha = 0.0;
 //        tileUL.alpha = 1.0;
 //        tileLL.alpha = 1.0;
