@@ -62,4 +62,6 @@
 - (void) animateBombResources:(NSUInteger)withValue:(CGPoint)tileCoordinates;
 - (void) animateClusterResources:(NSUInteger)withValue:(CGPoint)tileCoordinates;
 
+- (void) bombAnimationWith:(MJTile*)tile;
+
 @end
