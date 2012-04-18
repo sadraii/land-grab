@@ -258,9 +258,11 @@
         
         NSLog(@"Bombed %@'s tile!", tileCollision.player.handle);
         MJTile* tileToRemove = [self tileAtCoordinate:tile.coordinate];
-        [self bombAnimationWith:tileToRemove];
+        //[self bombAnimationWith:tileToRemove];
+        [self shakeTile:tileToRemove];
+        [self performSelector:@selector(bombAnimationWith:) withObject:tileToRemove afterDelay:0.4];
         //[tileToRemove removeFromSuperview];
-        //[self removeTileAtCoordinate:tileToRemove.coordinate];
+        [self removeTileAtCoordinate:tileToRemove.coordinate];
         
         //[tile removeFromSuperview];
         //[tile.toolbar animateBombCounter];
@@ -563,29 +565,8 @@
     }];
 }
 
-- (void) bombAnimationWith:(MJTile *)tile {
-//    UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", player.imageColor]];
-//    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
-//    [imageView setFrame:tile.bounds];
-//    [tile addSubview:imageView];
-    UIImageView *tileUL = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]]];
-    UIImageView *tileLL = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]]];
-    UIImageView *tileUR = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]]];
-    UIImageView *tileLR = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]]];
-    [tileUL setFrame:CGRectMake((tile.coordinate.x*64) - 64, (tile.coordinate.y*64) - 64, tile.frame.size.width, tile.frame.size.height)];
-    [tileLL setFrame:CGRectMake((tile.coordinate.x*64) - 64, (tile.coordinate.y*64) + 64, tile.frame.size.width, tile.frame.size.height)];
-    [tileUR setFrame:CGRectMake((tile.coordinate.x*64) + 64, (tile.coordinate.y*64) - 64, tile.frame.size.width, tile.frame.size.height)];
-    [tileLR setFrame:CGRectMake((tile.coordinate.x*64) + 64, (tile.coordinate.y*64) + 64, tile.frame.size.width, tile.frame.size.height)];
+- (void) shakeTile:(MJTile *)tile {
     
-//    tileUL.alpha = 0.0;
-//    tileLL.alpha = 0.0;
-//    tileUR.alpha = 0.0;
-//    tileLR.alpha = 0.0;
-    
-
-    
-    CGAffineTransform newTransform;
-    newTransform = CGAffineTransformMakeScale(.01f, .01f);
     
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
     [animation setDuration:0.4];
@@ -599,18 +580,76 @@
     [[tile layer] addAnimation:animation forKey:@"position"];
     
     
+}
+
+- (void) bombAnimationWith:(MJTile *)tile {
+
+    
+//    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+//    [animation setDuration:0.4];
+//    [animation setRepeatCount:25];
+//    [animation setAutoreverses:YES];
+//    [animation setFromValue:[NSValue valueWithCGPoint:
+//                             CGPointMake([tile center].x - 20.0f, [tile center].y)]];
+//    [animation setToValue:[NSValue valueWithCGPoint:
+//                           CGPointMake([tile center].x + 20.0f, [tile center].y)]];
+//    [animation setSpeed:50];
+//    [[tile layer] addAnimation:animation forKey:@"position"];
+    
+    UIImageView *tileUL = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]]];
+    UIImageView *tileUC = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]]];
+    UIImageView *tileUR = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]]];
+    UIImageView *tileLL = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]]];
+    UIImageView *tileLC = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]]];
+    UIImageView *tileLR = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]]];
+    UIImageView *tileL = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]]];
+    UIImageView *tileR = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]]];
+//    [tileUL setFrame:CGRectMake((tile.coordinate.x*64) - 64, (tile.coordinate.y*64) - 64, tile.frame.size.width, tile.frame.size.height)];
+//    [tileUC setFrame:CGRectMake((tile.coordinate.x*64), (tile.coordinate.y*64) - 64, tile.frame.size.width, tile.frame.size.height)];
+//    [tileLL setFrame:CGRectMake((tile.coordinate.x*64) - 64, (tile.coordinate.y*64) + 64, tile.frame.size.width, tile.frame.size.height)];
+//    [tileUR setFrame:CGRectMake((tile.coordinate.x*64) + 64, (tile.coordinate.y*64) - 64, tile.frame.size.width, tile.frame.size.height)];
+//    [tileLR setFrame:CGRectMake((tile.coordinate.x*64) + 64, (tile.coordinate.y*64) + 64, tile.frame.size.width, tile.frame.size.height)];
+//    [tileLC setFrame:CGRectMake((tile.coordinate.x*64), (tile.coordinate.y*64) + 64, tile.frame.size.width, tile.frame.size.height)];
+//    [tileL setFrame:CGRectMake((tile.coordinate.x*64) - 64, (tile.coordinate.y*64), tile.frame.size.width, tile.frame.size.height)];
+//    [tileR setFrame:CGRectMake((tile.coordinate.x*64) + 64, (tile.coordinate.y*64), tile.frame.size.width, tile.frame.size.height)];
+    [tileUL setFrame:CGRectMake((tile.coordinate.x*64), (tile.coordinate.y*64), tile.frame.size.width, tile.frame.size.height)];
+    [tileUC setFrame:CGRectMake((tile.coordinate.x*64), (tile.coordinate.y*64), tile.frame.size.width, tile.frame.size.height)];
+    [tileLL setFrame:CGRectMake((tile.coordinate.x*64), (tile.coordinate.y*64), tile.frame.size.width, tile.frame.size.height)];
+    [tileUR setFrame:CGRectMake((tile.coordinate.x*64), (tile.coordinate.y*64), tile.frame.size.width, tile.frame.size.height)];
+    [tileLR setFrame:CGRectMake((tile.coordinate.x*64), (tile.coordinate.y*64), tile.frame.size.width, tile.frame.size.height)];
+    [tileLC setFrame:CGRectMake((tile.coordinate.x*64), (tile.coordinate.y*64), tile.frame.size.width, tile.frame.size.height)];
+    [tileL setFrame:CGRectMake((tile.coordinate.x*64), (tile.coordinate.y*64), tile.frame.size.width, tile.frame.size.height)];
+    [tileR setFrame:CGRectMake((tile.coordinate.x*64), (tile.coordinate.y*64), tile.frame.size.width, tile.frame.size.height)];
+    
+//    tileUL.alpha = 0.0
+//    tileLL.alpha = 0.0;
+//    tileUR.alpha = 0.0;
+//    tileLR.alpha = 0.0;
+    
+    tileUL.transform = CGAffineTransformMakeScale(1, 1);
+    tileUC.transform = CGAffineTransformMakeScale(1, 1);
+    tileUR.transform = CGAffineTransformMakeScale(1, 1);
+    tileLL.transform = CGAffineTransformMakeScale(1, 1);
+    tileLC.transform = CGAffineTransformMakeScale(1, 1);
+    tileLR.transform = CGAffineTransformMakeScale(1, 1);
+    tileL.transform = CGAffineTransformMakeScale(1, 1);
+    tileR.transform = CGAffineTransformMakeScale(1, 1);
+    
+    
+    
+    CGAffineTransform newTransform;
+    newTransform = CGAffineTransformMakeScale(.01f, .01f);
+
     [self addSubview:tileUL];
+    [self addSubview:tileUC];
     [self addSubview:tileLL];
     [self addSubview:tileUR];
     [self addSubview:tileLR];
+    [self addSubview:tileLC];
+    [self addSubview:tileL];
+    [self addSubview:tileR];
     
-    tileUL.transform = CGAffineTransformMakeScale(1, 1);
-    tileLL.transform = CGAffineTransformMakeScale(1, 1);
-    tileUR.transform = CGAffineTransformMakeScale(1, 1);
-    tileLR.transform = CGAffineTransformMakeScale(1, 1);
-
-    
-    [UIView animateWithDuration:1.0 delay:0.3 options:UIViewAnimationOptionCurveEaseIn animations:^ {
+    [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^ {
         tile.alpha = 0.0;
 //        tileUL.alpha = 1.0;
 //        tileLL.alpha = 1.0;
@@ -621,6 +660,11 @@
         tileLL.transform = CGAffineTransformTranslate(newTransform, -768*30, 1024*30);
         tileUR.transform = CGAffineTransformTranslate(newTransform, 768*30, -1024*30);
         tileLR.transform = CGAffineTransformTranslate(newTransform, 768*30, 1024*30);
+        tileUC.transform = CGAffineTransformTranslate(newTransform, 0, (1024)*(-30));
+        tileLC.transform = CGAffineTransformTranslate(newTransform, 0, (1024)*(30));
+        tileL.transform = CGAffineTransformTranslate(newTransform, (768)*(-30), 0);
+        tileR.transform = CGAffineTransformTranslate(newTransform, (768)*(30), 0);
+        
         
 //        tileUL.transform = CGAffineTransformMakeTranslation(-768, -1024);
 //        tileLL.transform = CGAffineTransformMakeTranslation(-768, 1024);
@@ -633,6 +677,10 @@
         [tileLL removeFromSuperview];
         [tileUR removeFromSuperview];
         [tileLR removeFromSuperview];
+        [tileUC removeFromSuperview];
+        [tileLC removeFromSuperview];
+        [tileL removeFromSuperview];
+        [tileR removeFromSuperview];
     }];
     
     

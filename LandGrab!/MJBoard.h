@@ -64,4 +64,6 @@
 
 - (void) bombAnimationWith:(MJTile*)tile;
 
+- (void) shakeTile:(MJTile*)tile;
+
 @end
