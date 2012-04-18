@@ -147,6 +147,7 @@
 			point.x -= distanceFromOrigin.width;
 			point.y -= distanceFromOrigin.height;
 			[self setFrame:CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height)];
+
 			[self snapToPoint];
          
 		

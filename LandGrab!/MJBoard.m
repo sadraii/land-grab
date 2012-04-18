@@ -373,6 +373,7 @@
         if ([resourceCollision isMemberOfClass:[MJClusterResource class]]) {
             MJClusterResource *tmpResource = (MJClusterResource*)[self resourceAtCoordinate:tile.coordinate];
             NSLog(@"%@ found a cluster resource worth %i tiles!", tile.player.handle, [(MJClusterResource*)tmpResource generateTiles]);
+            [self addClusterTilesFor:tile.player];
             
         }
         
@@ -620,12 +621,7 @@
     [tileLC setFrame:CGRectMake((tile.coordinate.x*64), (tile.coordinate.y*64), tile.frame.size.width, tile.frame.size.height)];
     [tileL setFrame:CGRectMake((tile.coordinate.x*64), (tile.coordinate.y*64), tile.frame.size.width, tile.frame.size.height)];
     [tileR setFrame:CGRectMake((tile.coordinate.x*64), (tile.coordinate.y*64), tile.frame.size.width, tile.frame.size.height)];
-    
-//    tileUL.alpha = 0.0
-//    tileLL.alpha = 0.0;
-//    tileUR.alpha = 0.0;
-//    tileLR.alpha = 0.0;
-    
+        
     tileUL.transform = CGAffineTransformMakeScale(1, 1);
     tileUC.transform = CGAffineTransformMakeScale(1, 1);
     tileUR.transform = CGAffineTransformMakeScale(1, 1);
@@ -651,10 +647,6 @@
     
     [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^ {
         tile.alpha = 0.0;
-//        tileUL.alpha = 1.0;
-//        tileLL.alpha = 1.0;
-//        tileUR.alpha = 1.0;
-//        tileLR.alpha = 1.0;
         
         tileUL.transform = CGAffineTransformTranslate(newTransform, -768*30, -1024*30);
         tileLL.transform = CGAffineTransformTranslate(newTransform, -768*30, 1024*30);
@@ -664,12 +656,6 @@
         tileLC.transform = CGAffineTransformTranslate(newTransform, 0, (1024)*(30));
         tileL.transform = CGAffineTransformTranslate(newTransform, (768)*(-30), 0);
         tileR.transform = CGAffineTransformTranslate(newTransform, (768)*(30), 0);
-        
-        
-//        tileUL.transform = CGAffineTransformMakeTranslation(-768, -1024);
-//        tileLL.transform = CGAffineTransformMakeTranslation(-768, 1024);
-//        tileUR.transform = CGAffineTransformMakeTranslation(768, -1024);
-//        tileLR.transform = CGAffineTransformMakeTranslation(768, 1024);
         
     }completion:^(BOOL finished) {
         [tile removeFromSuperview]; 
@@ -682,69 +668,124 @@
         [tileL removeFromSuperview];
         [tileR removeFromSuperview];
     }];
-    
-    
-    
-    /*
-    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^ {
-        tileLL.alpha = 1.0;
-        tileLR.alpha = 1.0;
-        tileUL.alpha = 1.0;
-        tileUR.alpha = 1.0;
-        tile.alpha = 0.0;
-    }completion:^(BOOL finished) {
-        [tileUL setFrame:CGRectMake((tile.coordinate.x*64) - 64, (tile.coordinate.y*64) - 64, tile.frame.size.width/2, tile.frame.size.height/2)];
-        [tileLL setFrame:CGRectMake((tile.coordinate.x*64) - 64, (tile.coordinate.y*64) + 64, tile.frame.size.width/2, tile.frame.size.height/2)];
-        [tileUR setFrame:CGRectMake((tile.coordinate.x*64) + 64, (tile.coordinate.y*64) - 64, tile.frame.size.width/2, tile.frame.size.height/2)];
-        [tileLR setFrame:CGRectMake((tile.coordinate.x*64) + 64, (tile.coordinate.y*64) + 64, tile.frame.size.width/2, tile.frame.size.height/2)];
-        [UIView animateWithDuration:0.25 animations:^ {
-            tileUL.alpha = 0.0;
-            tileLL.alpha = 0.0;
-            tileUR.alpha = 0.0;
-            tileLR.alpha = 0.0;
 
-        }completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.25 animations:^ {
-                tileLL.alpha = 1.0;
-                tileLR.alpha = 1.0;
-                tileUL.alpha = 1.0;
-                tileUR.alpha = 1.0;
-            }completion:^(BOOL finished) {
-                [tileUL setFrame:CGRectMake((tile.coordinate.x*64) - 64, (tile.coordinate.y*64) - 64, tile.frame.size.width/4, tile.frame.size.height/4)];
-                [tileLL setFrame:CGRectMake((tile.coordinate.x*64) - 64, (tile.coordinate.y*64) + 64, tile.frame.size.width/4, tile.frame.size.height/4)];
-                [tileUR setFrame:CGRectMake((tile.coordinate.x*64) + 64, (tile.coordinate.y*64) - 64, tile.frame.size.width/4, tile.frame.size.height/4)];
-                [tileLR setFrame:CGRectMake((tile.coordinate.x*64) + 64, (tile.coordinate.y*64) + 64, tile.frame.size.width/4, tile.frame.size.height/4)];
-                [UIView animateWithDuration:0.25 animations:^ {
-                tileUL.alpha = 0.0;
-                tileLL.alpha = 0.0;
-                tileUR.alpha = 0.0;
-                tileLR.alpha = 0.0;
-                }completion:^(BOOL finished) {
-                    [UIView animateWithDuration:0.25 animations:^ {
-                        tileLL.alpha = 1.0;
-                        tileLR.alpha = 1.0;
-                        tileUL.alpha = 1.0;
-                        tileUR.alpha = 1.0;
-                    }completion:^(BOOL finished) {
-                        [tileUL setFrame:CGRectMake((tile.coordinate.x*64) - 64, (tile.coordinate.y*64) - 64, tile.frame.size.width/8, tile.frame.size.height/8)];
-                        [tileLL setFrame:CGRectMake((tile.coordinate.x*64) - 64, (tile.coordinate.y*64) + 64, tile.frame.size.width/8, tile.frame.size.height/8)];
-                        [tileUR setFrame:CGRectMake((tile.coordinate.x*64) + 64, (tile.coordinate.y*64) - 64, tile.frame.size.width/8, tile.frame.size.height/8)];
-                        [tileLR setFrame:CGRectMake((tile.coordinate.x*64) + 64, (tile.coordinate.y*64) + 64, tile.frame.size.width/8, tile.frame.size.height/8)];
-                        [UIView animateWithDuration:0.25 animations:^ {
-                            tileUL.alpha = 0.0;
-                            tileLL.alpha = 0.0;
-                            tileUR.alpha = 0.0;
-                            tileLR.alpha = 0.0;
-                        }];
-                    }];
-                }];
-            }];
-        }];
-    }];
-    */
+}
+
+- (void) addClusterTilesFor:(MJPlayer *)player {
     
-    
-                         
+    for (MJTile* tile in player.playedPieces) {
+        if (tile.player == player) {
+            //do
+            MJTile* tmpTile = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x+1, tile.coordinate.y+1)];
+            [_viewController addTile:tmpTile];
+            NSLog(@"Frame from tile: %@", NSStringFromCGRect(tile.frame));
+            NSLog(@"Frame from tmptTile: %@", NSStringFromCGRect(tmpTile.frame));
+            
+            NSLog(@"Frame from tmpTile after snapToPoint: %@", NSStringFromCGRect(tmpTile.frame));
+            
+            [self addClusterTilesToTerritoryWith:tmpTile];
+            return;
+            
+        }
+    }
+}
+
+- (void) addClusterTilesToTerritoryWith:(MJTile *)tile {
+	
+//	// Check if tile is placed ontop of one of your own tiles
+//	MJTile* tileCollision = [self tileAtCoordinate:tile.coordinate];
+//	if (tile.player == tileCollision.player) {
+//		NSLog(@"Cluster Tile generated ontop of own piece, need new coordinate");
+//        
+//		return;
+//	}
+//	
+//	// Check if tile is placed ontop of another player's tile
+//	else if (tileCollision && tile.player != tileCollision.player) {
+//
+//        NSLog(@"Collision with %@'s tile", tileCollision.player.handle);
+//
+//		return;
+//	}
+//	
+//	BOOL isTileConnected = [self isTileConnectedTo:tile];
+//	
+//    
+//	if (!isTileConnected) {
+//        [tile touchesCancelled:nil withEvent:nil];
+//        [tile.toolbar animateInventoryCounter];
+//	}
+//	else {
+
+        //Set the appropriate tile flags
+		[tile setIsPlayed:YES];
+		[tile setUserInteractionEnabled:NO];
+		tile.tag=1;
+        UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
+        UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
+        [imageView setFrame:tile.bounds];
+        [tile addSubview:imageView];
+        
+		//Add it to the board (container view)
+        [self addSubview:tile];
+		[_containerView addSubview:tile];
+		
+		//Add tile to the current player
+		MJPlayer* player = _viewController.currentPlayer;
+		[player setLastPlayedTile:tile];
+		[tile setPlayer:player];
+		[player.playedPieces addObject:tile];
+        NSLog(@"Print of player.playedPieces array: %@", player.playedPieces);
+		[_pieces addObject:tile];
+        NSLog(@"Print of _pieces array:%@", _pieces);
+        didRecieveResource = NO;
+		
+//		id resourceCollision = [self resourceAtCoordinate:tile.coordinate];
+//        
+//		if ([resourceCollision isMemberOfClass:[MJResource class]]) {
+//			MJResource *tmpResource = [self resourceAtCoordinate:tile.coordinate];
+//            tile.player.score += tmpResource.value;
+//			NSLog(@"%@ found a resource worth %i bananas!", tile.player.handle, tmpResource.value);
+//            [self animatePositivePointResources:tmpResource.value:tile.coordinate];
+//            didRecieveResource = YES;
+//            [player updateScore];
+//		}
+//        
+//        if ([resourceCollision isMemberOfClass:[MJAddTilesResource class]]) {
+//            MJResource *tmpResource = [self resourceAtCoordinate:tile.coordinate];
+//            NSLog(@"%@ found an AddTile resource worth %i tiles!", tile.player.handle, [(MJAddTilesResource*)tmpResource tilesGenerated]);
+//            [tile.player updateNumberOfTilesToPlayWithNumber:[(MJAddTilesResource*)tmpResource tilesGenerated]];
+//            [tile.toolbar animateInventoryCounter];
+//            [self animateAddTileResources:[(MJAddTilesResource*)tmpResource tilesGenerated]:tile.coordinate];
+//        }
+//        
+//        if ([resourceCollision isMemberOfClass:[MJBombResource class]]) {
+//            MJBombResource *tmpResource = (MJBombResource*)[self resourceAtCoordinate:tile.coordinate];
+//            NSLog(@"%@ found an Bomb resource worth %i bombs!", tile.player.handle, tmpResource.bombs);
+//            [tile.player updateNumberOfBombsToPlayWithNumber:tmpResource.bombs];
+//            didRecieveResource = YES;
+//            [self animateBombResources:1 :tile.coordinate];
+//            //MJBombTile *tmpBombTile = [[MJBombTile alloc] init];
+//            //[tile.player.toolBarPieces addObject:tmpBombTile];
+//            [tile.toolbar addBombToToolBar:tile.player];
+//            [tile.toolbar animateBombCounter];
+//        }
+//        
+//        if ([resourceCollision isMemberOfClass:[MJClusterResource class]]) {
+//            MJClusterResource *tmpResource = (MJClusterResource*)[self resourceAtCoordinate:tile.coordinate];
+//            NSLog(@"%@ found a cluster resource worth %i tiles!", tile.player.handle, [(MJClusterResource*)tmpResource generateTiles]);
+//            [self addClusterTilesFor:tile.player];
+//            
+//        }
+//        
+//        if ([resourceCollision isMemberOfClass:[MJNegativeResource class]]) {
+//            MJNegativeResource *tmpResource = (MJNegativeResource*)[self resourceAtCoordinate:tile.coordinate];
+//            NSLog(@"%@ aww found a negative resource worth %i points", tile.player.handle, tmpResource.value);
+//            [self animateNegativePointResources:tmpResource.value :tile.coordinate];
+//            didRecieveResource = YES;
+//            [player updateScore];
+//        }
+	//}
 }
 
 @end
