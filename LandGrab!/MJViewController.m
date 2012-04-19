@@ -106,29 +106,29 @@
 		
 		switch (i) {
 			case 0:
-				[player setHandle:@"Andrew"];
+				[player setHandle:@"Blue"];
 				[player setColor:[UIColor blueColor]];
                 [player setImageColor:@"Blue"];
 				[capital setCoordinate:CGPointMake(capitalOffset, capitalOffset)];
 				capital.tag = 1;
 				break;
 			case 1:
-				[player setHandle:@"J-Monkey"];
+				[player setHandle:@"Red"];
 				[player setColor:[UIColor redColor]];
                 [player setImageColor:@"Red"];
 				[capital setCoordinate:CGPointMake(capitalOffset, _board.boardSize.height - 1 - capitalOffset)];
 				capital.tag = 1;
 				break;
 			case 2:
-				[player setHandle:@"Max"];
+				[player setHandle:@"Green"];
 				[player setColor:[UIColor greenColor]];
                 [player setImageColor:@"Green"];
 				[capital setCoordinate:CGPointMake(_board.boardSize.width - 1 - capitalOffset, _board.boardSize.height - 1 - capitalOffset)];
 				capital.tag = 1;
 				break;
 			case 3:	
-				[player setHandle:@"Mostafa"];
-				[player setColor:[UIColor magentaColor]];
+				[player setHandle:@"Yellow"];
+				[player setColor:[UIColor yellowColor]];
                 [player setImageColor:@"Yellow"];
 				[capital setCoordinate:CGPointMake(_board.boardSize.width - 1 - capitalOffset, capitalOffset)];
 				capital.tag = 1;
@@ -163,6 +163,20 @@
         int numSplits = _board.boardSize.width/3;
         int section = 0;
         
+        // special tile in the middle worth a lot of points
+        __block MJResource* resource = [[MJResource alloc] initWithCoordinate:CGPointMake(_board.boardSize.width/2,_board.boardSize.height/2)];
+        [resource setValue: (arc4random_uniform(250) + 250)];
+        NSLog(@"Resource at coordinate:%@ has %i value", NSStringFromCGPoint(resource.coordinate) ,resource.value);
+        //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
+        //			[resource setTilesWithCoordinateArray:coords];
+        UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Black.png"]]];
+        [imageView setFrame:resource.bounds];
+        [imageView setContentMode:UIViewContentModeScaleAspectFill];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [resource addSubview:imageView];
+            [_board addResource:resource];
+        });
+        
         for (int i=0; i < numSplits; i++) {
             for (int j=0; j < numSplits; j++) {
                 while (_board.resources.count < numResourcesInSection*(section+1) && section < numSplits*numSplits) {
@@ -174,7 +188,7 @@
                     
                     if (![_board resourceAtCoordinate:point] && ![_board resourcesAroundCoordinate:point] && ![_board tileAtCoordinate:point]) {
                         
-                        NSUInteger randomInt = 1;//(arc4random() % 2) + 1;
+                        NSUInteger randomInt = (arc4random() % 2) + 1;
                         
                         NSLog(@"Random Int: %d", randomInt);
                         
@@ -228,8 +242,6 @@
                             if (randomResourceInt == 4) { //negative point resource
                                 
                                 __block MJNegativeResource* resource = [[MJNegativeResource alloc] initWithCoordinate:point];
-                                //int minValue = 50;
-                                //[resource setValue:[resource setRandomResourceValueWithValue:minValue]];
                                 [resource setValue: (_resourcePoints)*-4];
                                 NSLog(@"Resource at coordinate:%@ has %i value", NSStringFromCGPoint(resource.coordinate) ,resource.value);
                                 //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
@@ -247,8 +259,6 @@
                         if (randomInt == 2) { //positive point resource                        
                             
                             __block MJResource* resource = [[MJResource alloc] initWithCoordinate:point];
-                            //int minValue = 50;
-                            //[resource setValue:[resource setRandomResourceValueWithValue:minValue]];
                             [resource setValue: 50];
                             NSLog(@"Resource at coordinate:%@ has %i value", NSStringFromCGPoint(resource.coordinate) ,resource.value);
                             //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];

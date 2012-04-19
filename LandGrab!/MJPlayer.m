@@ -56,7 +56,17 @@
 - (void) updateScore {
 	[self updateTerritory];
 	[_viewController.territory setText:[NSString stringWithFormat:@"%i",self.territory]];
-	[_viewController.score setText:[NSString stringWithFormat:@"%i",self.score]];
+    int score = 0;
+    if (self.score == 0) {
+        score = self.territory;
+    }
+    else if (self.score < 0) {
+        score = self.score + self.territory;
+    }
+    else {
+        score = self.score * self.territory;
+    }
+	[_viewController.score setText:[NSString stringWithFormat:@"%i",score]];
 }
 
 - (void) updateTerritory {
