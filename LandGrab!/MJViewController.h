@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @class MJTopBar;
 @class MJBoard;
@@ -19,9 +20,12 @@
 @class EndGameViewController;
 @class MJClockWidget;
 
-@interface MJViewController : UIViewController {
+@interface MJViewController : UIViewController <AVAudioPlayerDelegate> {
 	NSInteger currentPlayerIndex;
 	NSUInteger turnCount;
+    BOOL _backgroundMusicPlaying;
+	BOOL _backgroundMusicInterrupted;
+	UInt32 _otherMusicIsPlaying;
 }
 @property (strong, nonatomic)   IBOutlet    MJTopBar                *topbar;
 @property (strong, nonatomic)   IBOutlet    UILabel                 *handle;
@@ -50,6 +54,8 @@
 @property (readwrite, nonatomic)            NSUInteger               roundCount;
 @property (readwrite, nonatomic)            NSInteger               resourcePoints;
 
+@property (strong, nonatomic)               AVAudioPlayer           *backgroundMusicPlayer;
+
 //@property (strong, nonatomic)               MJClockWidget           *clock;
 
 - (IBAction)newGame:(id)sender;
@@ -64,6 +70,7 @@
 - (void) setUpTurnBasedGame;
 - (void) updateTurnCount;
 - (void) endSequence;
+- (void) tryPlayMusic;
 //- (void) updateScore;
 
 @end

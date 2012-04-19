@@ -20,6 +20,8 @@
 #import "MJNegativeResource.h"
 #import "MJBombTile.h"
 #import <QuartzCore/QuartzCore.h>
+#include <sys/time.h>
+
 
 
 @implementation MJBoard
@@ -64,6 +66,26 @@
 	_containerView = NULL;
 	_pieces = [[NSMutableArray alloc] init];
 	_resources = [[NSMutableArray alloc] init];
+    
+    NSString *posResourcePath = [[NSBundle mainBundle] pathForResource:@"posResource" ofType:@"aif"];
+	NSURL *posResourceURL = [NSURL fileURLWithPath:posResourcePath];
+	AudioServicesCreateSystemSoundID((__bridge CFURLRef)posResourceURL, &_posResourceSound);
+    
+    NSString *negResourcePath = [[NSBundle mainBundle] pathForResource:@"negResource" ofType:@"aif"];
+	NSURL *negResourceURL = [NSURL fileURLWithPath:negResourcePath];
+	AudioServicesCreateSystemSoundID((__bridge CFURLRef)negResourceURL, &_negResourceSound);
+    
+    NSString *addTileSoundPath = [[NSBundle mainBundle] pathForResource:@"addTileSound" ofType:@"aif"];
+	NSURL *addTileSoundURL = [NSURL fileURLWithPath:addTileSoundPath];
+	AudioServicesCreateSystemSoundID((__bridge CFURLRef)addTileSoundURL, &_addTileSound);
+    
+    NSString *bombSoundPath = [[NSBundle mainBundle] pathForResource:@"bombSound" ofType:@"aif"];
+	NSURL *bombSoundURL = [NSURL fileURLWithPath:bombSoundPath];
+	AudioServicesCreateSystemSoundID((__bridge CFURLRef)bombSoundURL, &_bombSound);
+    
+    NSString *getBombSoundPath = [[NSBundle mainBundle] pathForResource:@"getBombSound" ofType:@"aif"];
+	NSURL *getBombSoundURL = [NSURL fileURLWithPath:getBombSoundPath];
+	AudioServicesCreateSystemSoundID((__bridge CFURLRef)getBombSoundURL, &_getBombSound);
 	
 }
 
@@ -492,7 +514,7 @@
     
     [self addSubview:label];
     
-    
+    AudioServicesPlaySystemSound(_posResourceSound);
     [UIView animateWithDuration:0.85 delay:0.0 options:UIViewAnimationCurveEaseIn animations:^ {
         label.alpha = 0.0; 
         label.transform = CGAffineTransformTranslate(label.transform, 0, -300);
@@ -516,7 +538,7 @@
     
     [self addSubview:label];
     
-    
+    AudioServicesPlaySystemSound(_negResourceSound);
     [UIView animateWithDuration:0.85 delay:0.0 options:UIViewAnimationCurveEaseIn animations:^ {
         label.alpha = 0.0; 
         label.transform = CGAffineTransformTranslate(label.transform, 0, -300);
@@ -539,7 +561,7 @@
     
     [self addSubview:label];
     
-    
+    AudioServicesPlaySystemSound(_addTileSound);
     [UIView animateWithDuration:0.85 delay:0.0 options:UIViewAnimationCurveEaseIn animations:^ {
         label.alpha = 0.0; 
         label.transform = CGAffineTransformTranslate(label.transform, 0, -300);
@@ -556,14 +578,14 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tile.player.lastPlayedTile.coordinate.x*64 - 100, tile.player.lastPlayedTile.coordinate.y*64, 500, 200)];
     
     label.text =[NSString stringWithFormat:@"Bomb Added!"];
-    label.textColor = [UIColor blueColor];
-    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:90.0];
+    label.textColor = [UIColor colorWithRed:0 green:0 blue:255 alpha:1.0];
+    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:75.0];
     label.alpha = 1.0;
     label.backgroundColor = [UIColor clearColor];
     
     [self addSubview:label];
     
-    
+    AudioServicesPlaySystemSound(_getBombSound);
     [UIView animateWithDuration:0.85 delay:0.0 options:UIViewAnimationCurveEaseIn animations:^ {
         label.alpha = 0.0; 
         label.transform = CGAffineTransformTranslate(label.transform, 0, -300);
@@ -576,7 +598,7 @@
 
 - (void) shakeTile:(MJTile *)tile {
     
-    
+    AudioServicesPlaySystemSound(_bombSound);
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
     [animation setDuration:0.4];
     [animation setRepeatCount:25];

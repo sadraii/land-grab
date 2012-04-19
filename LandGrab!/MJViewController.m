@@ -55,6 +55,7 @@
 @synthesize endGameData = _endGameData;
 @synthesize roundCount = _roundCount;
 @synthesize resourcePoints = _resourcePoints;
+@synthesize backgroundMusicPlayer = _backgroundMusicPlayer;
 
 //@synthesize clock = _clock;
 
@@ -66,7 +67,19 @@
     NSLog(@"boardsize= %f %f", _gameSetUpData.boardSize.width, _gameSetUpData.boardSize.height);
 	[_board zoomOutAnimated:YES];
 	[_toolbar newGame];
+    
+    NSError *setCategoryError = nil;
+	[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:&setCategoryError];
 	
+	// Create audio player with background music
+	NSString *backgroundMusicPath = [[NSBundle mainBundle] pathForResource:@"music" ofType:@"mp3"];
+	NSURL *backgroundMusicURL = [NSURL fileURLWithPath:backgroundMusicPath];
+	NSError *error;
+	_backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:&error];
+	[_backgroundMusicPlayer setDelegate:self];  // We need this so we can restart after interruptions
+	[_backgroundMusicPlayer setNumberOfLoops:-1];	// Negative number means loop forever
+	
+    [self tryPlayMusic];
 	
     
     if ([_gameSetUpData.gameType isEqualToString:@"timeBased"]) {
@@ -169,7 +182,7 @@
         NSLog(@"Resource at coordinate:%@ has %i value", NSStringFromCGPoint(resource.coordinate) ,resource.value);
         //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
         //			[resource setTilesWithCoordinateArray:coords];
-        UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Black.png"]]];
+        UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"bigResource.jpg"]]];
         [imageView setFrame:resource.bounds];
         [imageView setContentMode:UIViewContentModeScaleAspectFill];
         dispatch_sync(dispatch_get_main_queue(), ^{
@@ -535,6 +548,33 @@
 	} else {
 	    return YES;
 	}
+}
+
+- (void) audioPlayerBeginInterruption: (AVAudioPlayer *) player {
+	_backgroundMusicInterrupted = YES;
+	_backgroundMusicPlaying = NO;
+}
+
+- (void) audioPlayerEndInterruption: (AVAudioPlayer *) player {
+	if (_backgroundMusicInterrupted) {
+		[self tryPlayMusic];
+		_backgroundMusicInterrupted = NO;
+	}
+}
+
+- (void)tryPlayMusic {
+	
+	// Check to see if iPod music is already playing
+	//UInt32 propertySize = sizeof(_otherMusicIsPlaying);
+	//AudioSessionGetProperty(kAudioSessionProperty_OtherAudioIsPlaying, &propertySize, &_otherMusicIsPlaying);
+	
+	// Play the music if no other music is playing and we aren't playing already
+	if (!_backgroundMusicPlaying) {
+		[_backgroundMusicPlayer prepareToPlay];
+        _backgroundMusicPlayer.volume = 0.3;
+		[_backgroundMusicPlayer play];
+		_backgroundMusicPlaying = YES;
+	}	
 }
 
 @end

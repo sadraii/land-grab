@@ -51,7 +51,7 @@
     
     GameSetUpData *tmp = [[GameSetUpData alloc] init];
     _gameSetUp = tmp;
- 
+    
     _timeBasedButton.alpha = 0.0;
     _timeBasedButton.userInteractionEnabled = NO;
     _turnBasedButton.alpha = 0.0;
@@ -108,36 +108,42 @@
     NSString *segueIdentifer = [segue identifier];
     
     _mjViewController = [segue destinationViewController]; 
-    if ([segueIdentifer isEqualToString:@"from2MinToGame"]) {
-        _gameSetUp.numberOfSeconds = 120;
-        _mjViewController.gameSetUpData = _gameSetUp;
-        [_gameSetUp printData];
-    }
-    if ([segueIdentifer isEqualToString:@"from5MinToGame"]) {
-        _gameSetUp.numberOfSeconds = 300;
-        _mjViewController.gameSetUpData = _gameSetUp;
-        [_gameSetUp printData];
-    }
-    if ([segueIdentifer isEqualToString:@"from10MinToGame"]) {
-        _gameSetUp.numberOfSeconds = 600;
-        _mjViewController.gameSetUpData = _gameSetUp;
-        [_gameSetUp printData];
-    } 
-    if ([segueIdentifer isEqualToString:@"from20TurnsToGame"]) {
-        _gameSetUp.numberOfTurns = 20;
-        _mjViewController.gameSetUpData = _gameSetUp;
-        [_gameSetUp printData];
-    }
-    if ([segueIdentifer isEqualToString:@"from50TurnsToGame"]) {
-        _gameSetUp.numberOfTurns = 50;
-        _mjViewController.gameSetUpData = _gameSetUp;
-        [_gameSetUp printData];
-    }
-    if ([segueIdentifer isEqualToString:@"from100TurnsToGame"]) {
-        _gameSetUp.numberOfTurns = 100;
-        _mjViewController.gameSetUpData = _gameSetUp;
-        [_gameSetUp printData];
-    }
+    
+//    [UIView animateWithDuration:1.5 delay:0.0 options:UIViewAnimationCurveEaseIn animations:^ {
+//        self.view.alpha = 0.0;
+//    }completion:^(BOOL finished) {
+        if ([segueIdentifer isEqualToString:@"from2MinToGame"]) {
+            _gameSetUp.numberOfSeconds = 120;
+            _mjViewController.gameSetUpData = _gameSetUp;
+            [_gameSetUp printData];
+        }
+        if ([segueIdentifer isEqualToString:@"from5MinToGame"]) {
+            _gameSetUp.numberOfSeconds = 300;
+            _mjViewController.gameSetUpData = _gameSetUp;
+            [_gameSetUp printData];
+        }
+        if ([segueIdentifer isEqualToString:@"from10MinToGame"]) {
+            _gameSetUp.numberOfSeconds = 600;
+            _mjViewController.gameSetUpData = _gameSetUp;
+            [_gameSetUp printData];
+        } 
+        if ([segueIdentifer isEqualToString:@"from20TurnsToGame"]) {
+            _gameSetUp.numberOfTurns = 20;
+            _mjViewController.gameSetUpData = _gameSetUp;
+            [_gameSetUp printData];
+        }
+        if ([segueIdentifer isEqualToString:@"from50TurnsToGame"]) {
+            _gameSetUp.numberOfTurns = 50;
+            _mjViewController.gameSetUpData = _gameSetUp;
+            [_gameSetUp printData];
+        }
+        if ([segueIdentifer isEqualToString:@"from100TurnsToGame"]) {
+            _gameSetUp.numberOfTurns = 100;
+            _mjViewController.gameSetUpData = _gameSetUp;
+            [_gameSetUp printData];
+        } 
+//    }];
+    
 }
 
 #pragma mark - Tap Methods

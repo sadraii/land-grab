@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @class MJViewController;
 @class MJContainerView;
@@ -20,6 +21,11 @@
 {
     CGSize boardSize;//Size relative to tilesize
     BOOL didRecieveResource;
+    SystemSoundID _posResourceSound;
+    SystemSoundID _negResourceSound;
+    SystemSoundID _bombSound;
+    SystemSoundID _addTileSound;
+    SystemSoundID _getBombSound;
 }
 
 @property (weak, nonatomic) IBOutlet    MJViewController*   viewController;

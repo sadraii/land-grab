@@ -17,6 +17,15 @@
 		33D057BA153FE3CC004DB44C /* board_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D057B6153FE3CC004DB44C /* board_background.png */; };
 		33D057BB153FE3CC004DB44C /* bomb_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D057B7153FE3CC004DB44C /* bomb_yellow.png */; };
 		33D057BC153FE3CC004DB44C /* Resource.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D057B8153FE3CC004DB44C /* Resource.png */; };
+		33D057C3154035E9004DB44C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D057C2154035E9004DB44C /* AVFoundation.framework */; };
+		33D057C815403785004DB44C /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33D057C715403785004DB44C /* music.mp3 */; };
+		33D057CA15403853004DB44C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D057C915403853004DB44C /* AudioToolbox.framework */; };
+		33D057CC15403DC1004DB44C /* posResource.aif in Resources */ = {isa = PBXBuildFile; fileRef = 33D057CB15403DC1004DB44C /* posResource.aif */; };
+		33D057CE15404175004DB44C /* negResource.aif in Resources */ = {isa = PBXBuildFile; fileRef = 33D057CD15404175004DB44C /* negResource.aif */; };
+		33D057D0154044A0004DB44C /* bombSound.aif in Resources */ = {isa = PBXBuildFile; fileRef = 33D057CF154044A0004DB44C /* bombSound.aif */; };
+		33D057D21540465D004DB44C /* addTileSound.aif in Resources */ = {isa = PBXBuildFile; fileRef = 33D057D11540465D004DB44C /* addTileSound.aif */; };
+		33D057D415404956004DB44C /* getBombSound.aif in Resources */ = {isa = PBXBuildFile; fileRef = 33D057D315404956004DB44C /* getBombSound.aif */; };
+		33D057D815404C51004DB44C /* bigResource.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33D057D715404C50004DB44C /* bigResource.jpg */; };
 		33EB78FF1517D2DC0005C19E /* MJClockWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EB78FE1517D2DC0005C19E /* MJClockWidget.m */; };
 		3F42F3E5150D6CEF00B704B1 /* Blue_Capitol.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3DB150D6CEF00B704B1 /* Blue_Capitol.png */; };
 		3F42F3E6150D6CEF00B704B1 /* Blue_Tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3DC150D6CEF00B704B1 /* Blue_Tile.png */; };
@@ -92,6 +101,15 @@
 		33D057B6153FE3CC004DB44C /* board_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = board_background.png; sourceTree = "<group>"; };
 		33D057B7153FE3CC004DB44C /* bomb_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bomb_yellow.png; sourceTree = "<group>"; };
 		33D057B8153FE3CC004DB44C /* Resource.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Resource.png; sourceTree = "<group>"; };
+		33D057C2154035E9004DB44C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		33D057C715403785004DB44C /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
+		33D057C915403853004DB44C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		33D057CB15403DC1004DB44C /* posResource.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = posResource.aif; sourceTree = "<group>"; };
+		33D057CD15404175004DB44C /* negResource.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = negResource.aif; sourceTree = "<group>"; };
+		33D057CF154044A0004DB44C /* bombSound.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = bombSound.aif; sourceTree = "<group>"; };
+		33D057D11540465D004DB44C /* addTileSound.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = addTileSound.aif; sourceTree = "<group>"; };
+		33D057D315404956004DB44C /* getBombSound.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = getBombSound.aif; sourceTree = "<group>"; };
+		33D057D715404C50004DB44C /* bigResource.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bigResource.jpg; sourceTree = "<group>"; };
 		33EB78FD1517D2DC0005C19E /* MJClockWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJClockWidget.h; path = "LandGrab!/MJClockWidget.h"; sourceTree = SOURCE_ROOT; };
 		33EB78FE1517D2DC0005C19E /* MJClockWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJClockWidget.m; path = "LandGrab!/MJClockWidget.m"; sourceTree = SOURCE_ROOT; };
 		3F42F3DB150D6CEF00B704B1 /* Blue_Capitol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blue_Capitol.png; sourceTree = "<group>"; };
@@ -172,6 +190,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33D057CA15403853004DB44C /* AudioToolbox.framework in Frameworks */,
+				33D057C3154035E9004DB44C /* AVFoundation.framework in Frameworks */,
 				3315CE9F153DF9C40060D9D0 /* QuartzCore.framework in Frameworks */,
 				675674E914F748F300A8E1B6 /* UIKit.framework in Frameworks */,
 				675674EB14F748F300A8E1B6 /* Foundation.framework in Frameworks */,
@@ -192,6 +212,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		33D057C4154036E0004DB44C /* Music and Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				33D057D315404956004DB44C /* getBombSound.aif */,
+				33D057D11540465D004DB44C /* addTileSound.aif */,
+				33D057CF154044A0004DB44C /* bombSound.aif */,
+				33D057CB15403DC1004DB44C /* posResource.aif */,
+				33D057CD15404175004DB44C /* negResource.aif */,
+				33D057C715403785004DB44C /* music.mp3 */,
+			);
+			name = "Music and Sounds";
+			sourceTree = "<group>";
+		};
 		3F3C256B15112C66004C5876 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +237,7 @@
 		3F42F3DA150D6CEF00B704B1 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				33D057D715404C50004DB44C /* bigResource.jpg */,
 				33D057B5153FE3CC004DB44C /* board_background_dotted.png */,
 				33D057B6153FE3CC004DB44C /* board_background.png */,
 				33D057B7153FE3CC004DB44C /* bomb_yellow.png */,
@@ -278,6 +312,8 @@
 		675674E714F748F300A8E1B6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				33D057C915403853004DB44C /* AudioToolbox.framework */,
+				33D057C2154035E9004DB44C /* AVFoundation.framework */,
 				3315CE9E153DF9C40060D9D0 /* QuartzCore.framework */,
 				675674E814F748F300A8E1B6 /* UIKit.framework */,
 				675674EA14F748F300A8E1B6 /* Foundation.framework */,
@@ -290,6 +326,7 @@
 		675674EE14F748F300A8E1B6 /* LandGrab! */ = {
 			isa = PBXGroup;
 			children = (
+				33D057C4154036E0004DB44C /* Music and Sounds */,
 				3F3C256B15112C66004C5876 /* Widget */,
 				D569DFB4150D76CA000C91BE /* Custom UI Views */,
 				D58D78301508159F0079E0FA /* Assests */,
@@ -534,6 +571,13 @@
 				33D057BA153FE3CC004DB44C /* board_background.png in Resources */,
 				33D057BB153FE3CC004DB44C /* bomb_yellow.png in Resources */,
 				33D057BC153FE3CC004DB44C /* Resource.png in Resources */,
+				33D057C815403785004DB44C /* music.mp3 in Resources */,
+				33D057CC15403DC1004DB44C /* posResource.aif in Resources */,
+				33D057CE15404175004DB44C /* negResource.aif in Resources */,
+				33D057D0154044A0004DB44C /* bombSound.aif in Resources */,
+				33D057D21540465D004DB44C /* addTileSound.aif in Resources */,
+				33D057D415404956004DB44C /* getBombSound.aif in Resources */,
+				33D057D815404C51004DB44C /* bigResource.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
