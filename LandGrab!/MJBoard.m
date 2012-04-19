@@ -373,7 +373,7 @@
         if ([resourceCollision isMemberOfClass:[MJClusterResource class]]) {
             MJClusterResource *tmpResource = (MJClusterResource*)[self resourceAtCoordinate:tile.coordinate];
             NSLog(@"%@ found a cluster resource worth %i tiles!", tile.player.handle, [(MJClusterResource*)tmpResource generateTiles]);
-            [self addClusterTilesFor:tile.player];
+            [self addClusterTilesWith:tile];
             
         }
         
@@ -546,6 +546,7 @@
 - (void) animateBombResources:(NSUInteger)withValue :(CGPoint)tileCoordinates {
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tileCoordinates.x*64, tileCoordinates.y*64, 500, 200)];
+    //UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.containerView.frame, tileCoordinates.y*64, 500, 200)];
     
     label.text =[NSString stringWithFormat:@"Bomb Added!"];
     label.textColor = [UIColor blueColor];
@@ -671,13 +672,13 @@
 
 }
 
-- (void) addClusterTilesFor:(MJPlayer *)player {
+- (void) addClusterTilesWith:(MJTile *)tile {
     
-    for (MJTile* tile in player.playedPieces) {
+    /*for (MJTile* tile in tile.player.playedPieces) {
         if (tile.player == player) {
             //do
             MJTile* tmpTile = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x+1, tile.coordinate.y+1)];
-            [_viewController addTile:tmpTile];
+            //[_viewController addTile:tmpTile];
             NSLog(@"Frame from tile: %@", NSStringFromCGRect(tile.frame));
             NSLog(@"Frame from tmptTile: %@", NSStringFromCGRect(tmpTile.frame));
             
@@ -687,7 +688,36 @@
             return;
             
         }
-    }
+    }*/
+
+    MJTile* tmpTile1 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x+1, tile.coordinate.y)];
+    UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
+    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
+    [imageView setFrame:tmpTile1.bounds];
+    [tmpTile1 addSubview:imageView];
+    [self addClusterTilesToTerritoryWith:tmpTile1];
+    
+    MJTile* tmpTile2 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x, tile.coordinate.y+1)];
+    UIImage* image2 = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
+    UIImageView* imageView2 = [[UIImageView alloc] initWithImage:image2];
+    [imageView2 setFrame:tmpTile2.bounds];
+    [tmpTile2 addSubview:imageView2];
+    [self addClusterTilesToTerritoryWith:tmpTile2];
+    
+    MJTile* tmpTile3 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x-1, tile.coordinate.y)];
+    UIImage* image3 = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
+    UIImageView* imageView3 = [[UIImageView alloc] initWithImage:image3];
+    [imageView3 setFrame:tmpTile3.bounds];
+    [tmpTile3 addSubview:imageView3];
+    [self addClusterTilesToTerritoryWith:tmpTile3];
+    
+    MJTile* tmpTile4 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x, tile.coordinate.y-1)];
+    UIImage* image4 = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
+    UIImageView* imageView4 = [[UIImageView alloc] initWithImage:image4];
+    [imageView4 setFrame:tmpTile4.bounds];
+    [tmpTile4 addSubview:imageView4];
+    [self addClusterTilesToTerritoryWith:tmpTile4];
+    
 }
 
 - (void) addClusterTilesToTerritoryWith:(MJTile *)tile {
@@ -721,13 +751,10 @@
 		[tile setIsPlayed:YES];
 		[tile setUserInteractionEnabled:NO];
 		tile.tag=1;
-        UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
-        UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
-        [imageView setFrame:tile.bounds];
-        [tile addSubview:imageView];
+
         
 		//Add it to the board (container view)
-        [self addSubview:tile];
+        //[self addSubview:tile];
 		[_containerView addSubview:tile];
 		
 		//Add tile to the current player

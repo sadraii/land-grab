@@ -179,7 +179,7 @@
                         NSLog(@"Random Int: %d", randomInt);
                         
                         if (randomInt == 1) {
-                            NSUInteger randomResourceInt = 3;//(arc4random_uniform(2)) + 1;
+                            NSUInteger randomResourceInt = 4;//(arc4random_uniform(2)) + 1;
                             
                             if (randomResourceInt == 1) { //add tile resource
                                 

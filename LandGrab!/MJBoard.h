@@ -66,7 +66,7 @@
 
 - (void) shakeTile:(MJTile*)tile;
 
-- (void) addClusterTilesFor:(MJPlayer*)player;
+- (void) addClusterTilesWith:(MJTile*)tile;
 - (void) addClusterTilesToTerritoryWith:(MJTile*)tile;
 
 
