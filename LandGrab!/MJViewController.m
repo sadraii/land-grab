@@ -106,29 +106,29 @@
 		
 		switch (i) {
 			case 0:
-				[player setHandle:@"Andrew"];
+				[player setHandle:@"Blue"];
 				[player setColor:[UIColor blueColor]];
                 [player setImageColor:@"Blue"];
 				[capital setCoordinate:CGPointMake(capitalOffset, capitalOffset)];
 				capital.tag = 1;
 				break;
 			case 1:
-				[player setHandle:@"J-Monkey"];
+				[player setHandle:@"Red"];
 				[player setColor:[UIColor redColor]];
                 [player setImageColor:@"Red"];
 				[capital setCoordinate:CGPointMake(capitalOffset, _board.boardSize.height - 1 - capitalOffset)];
 				capital.tag = 1;
 				break;
 			case 2:
-				[player setHandle:@"Max"];
+				[player setHandle:@"Green"];
 				[player setColor:[UIColor greenColor]];
                 [player setImageColor:@"Green"];
 				[capital setCoordinate:CGPointMake(_board.boardSize.width - 1 - capitalOffset, _board.boardSize.height - 1 - capitalOffset)];
 				capital.tag = 1;
 				break;
 			case 3:	
-				[player setHandle:@"Mostafa"];
-				[player setColor:[UIColor magentaColor]];
+				[player setHandle:@"Yellow"];
+				[player setColor:[UIColor yellowColor]];
                 [player setImageColor:@"Yellow"];
 				[capital setCoordinate:CGPointMake(_board.boardSize.width - 1 - capitalOffset, capitalOffset)];
 				capital.tag = 1;
@@ -174,12 +174,12 @@
                     
                     if (![_board resourceAtCoordinate:point] && ![_board resourcesAroundCoordinate:point] && ![_board tileAtCoordinate:point]) {
                         
-                        NSUInteger randomInt = 1;//(arc4random() % 2) + 1;
+                        NSUInteger randomInt = (arc4random() % 2) + 1;
                         
                         NSLog(@"Random Int: %d", randomInt);
                         
                         if (randomInt == 1) {
-                            NSUInteger randomResourceInt = 3;//(arc4random_uniform(2)) + 1;
+                            NSUInteger randomResourceInt = (arc4random_uniform(2)) + 1;
                             
                             if (randomResourceInt == 1) { //add tile resource
                                 

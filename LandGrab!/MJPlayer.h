@@ -30,7 +30,7 @@
 @property (strong, nonatomic)       UIColor*            color;
 @property (strong, nonatomic)       NSString*           imageColor;
 @property (strong, nonatomic)       MJTile*             capital;
-@property (readwrite, nonatomic)    NSUInteger          score;
+@property (readwrite, nonatomic)    NSInteger          score;
 @property (readwrite, nonatomic)    NSUInteger          territory;
 @property (readwrite, nonatomic)    NSUInteger          money;
 @property (readwrite, nonatomic)    NSUInteger          combinedScore;

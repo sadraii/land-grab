@@ -381,6 +381,7 @@
             MJNegativeResource *tmpResource = (MJNegativeResource*)[self resourceAtCoordinate:tile.coordinate];
             NSLog(@"%@ aww found a negative resource worth %i points", tile.player.handle, tmpResource.value);
             [self animateNegativePointResources:tmpResource.value :tile.coordinate];
+            tile.player.score += tmpResource.value;
             didRecieveResource = YES;
             [player updateScore];
         }
