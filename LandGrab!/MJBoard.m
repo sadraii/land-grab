@@ -345,7 +345,7 @@
 			MJResource *tmpResource = [self resourceAtCoordinate:tile.coordinate];
             tile.player.score += tmpResource.value;
 			NSLog(@"%@ found a resource worth %i bananas!", tile.player.handle, tmpResource.value);
-            [self animatePositivePointResources:tmpResource.value:tile.coordinate];
+            [self animatePositivePointResources:tmpResource.value:tile];
             didRecieveResource = YES;
             [player updateScore];
 		}
@@ -355,7 +355,7 @@
             NSLog(@"%@ found an AddTile resource worth %i tiles!", tile.player.handle, [(MJAddTilesResource*)tmpResource tilesGenerated]);
             [tile.player updateNumberOfTilesToPlayWithNumber:[(MJAddTilesResource*)tmpResource tilesGenerated]];
             [tile.toolbar animateInventoryCounter];
-            [self animateAddTileResources:[(MJAddTilesResource*)tmpResource tilesGenerated]:tile.coordinate];
+            [self animateAddTileResources:[(MJAddTilesResource*)tmpResource tilesGenerated]:tile];
         }
         
         if ([resourceCollision isMemberOfClass:[MJBombResource class]]) {
@@ -363,7 +363,7 @@
             NSLog(@"%@ found an Bomb resource worth %i bombs!", tile.player.handle, tmpResource.bombs);
             [tile.player updateNumberOfBombsToPlayWithNumber:tmpResource.bombs];
             didRecieveResource = YES;
-            [self animateBombResources:1 :tile.coordinate];
+            [self animateBombResources:1 :tile];
             //MJBombTile *tmpBombTile = [[MJBombTile alloc] init];
             //[tile.player.toolBarPieces addObject:tmpBombTile];
             [tile.toolbar addBombToToolBar:tile.player];
@@ -380,7 +380,7 @@
         if ([resourceCollision isMemberOfClass:[MJNegativeResource class]]) {
             MJNegativeResource *tmpResource = (MJNegativeResource*)[self resourceAtCoordinate:tile.coordinate];
             NSLog(@"%@ aww found a negative resource worth %i points", tile.player.handle, tmpResource.value);
-            [self animateNegativePointResources:tmpResource.value :tile.coordinate];
+            [self animateNegativePointResources:tmpResource.value :tile];
             tile.player.score += tmpResource.value;
             didRecieveResource = YES;
             [player updateScore];
@@ -474,13 +474,13 @@
 
 #pragma mark - animate Methods
 
-- (void) animatePositivePointResources:(NSUInteger)withValue:(CGPoint)tileCoordinates {
+- (void) animatePositivePointResources:(NSUInteger)withValue:(MJTile*)tile {
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tileCoordinates.x*64, tileCoordinates.y*64, 400, 200)];
-    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tile.player.lastPlayedTile.coordinate.x*64 - 25, tile.player.lastPlayedTile.coordinate.y*64, 400, 200)];
+          
     label.text =[NSString stringWithFormat:@"+%i", withValue];
     label.textColor = [UIColor whiteColor];
-    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:100.0];
+    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:50.0];
     label.alpha = 1.0;
     label.backgroundColor = [UIColor clearColor];
     
@@ -497,13 +497,13 @@
     }];
 }
 
-- (void) animateNegativePointResources:(NSUInteger)withValue:(CGPoint)tileCoordinates {
+- (void) animateNegativePointResources:(NSUInteger)withValue:(MJTile*)tile {
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tileCoordinates.x*64, tileCoordinates.y*64, 400, 200)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tile.player.lastPlayedTile.coordinate.x*64 - 25, tile.player.lastPlayedTile.coordinate.y*64, 400, 200)];
     
     label.text =[NSString stringWithFormat:@"%i", withValue];
     label.textColor = [UIColor redColor];
-    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:100.0];
+    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:50.0];
     label.alpha = 1.0;
     label.backgroundColor = [UIColor clearColor];
     
@@ -520,13 +520,13 @@
     }];
 }
 
-- (void) animateAddTileResources:(NSUInteger)withValue :(CGPoint)tileCoordinates {
+- (void) animateAddTileResources:(NSUInteger)withValue :(MJTile*)tile {
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tileCoordinates.x*64, tileCoordinates.y*64, 500, 200)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tile.player.lastPlayedTile.coordinate.x*64 - 75, tile.player.lastPlayedTile.coordinate.y*64, 500, 200)];
     
     label.text =[NSString stringWithFormat:@"+%i Tiles!", withValue];
     label.textColor = [UIColor greenColor];
-    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:80.0];
+    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:50.0];
     label.alpha = 1.0;
     label.backgroundColor = [UIColor clearColor];
     
@@ -544,13 +544,13 @@
     
 }
 
-- (void) animateBombResources:(NSUInteger)withValue :(CGPoint)tileCoordinates {
+- (void) animateBombResources:(NSUInteger)withValue :(MJTile*)tile {
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tileCoordinates.x*64, tileCoordinates.y*64, 500, 200)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tile.player.lastPlayedTile.coordinate.x*64 - 100, tile.player.lastPlayedTile.coordinate.y*64, 500, 200)];
     
     label.text =[NSString stringWithFormat:@"Bomb Added!"];
     label.textColor = [UIColor blueColor];
-    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:80.0];
+    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:50.0];
     label.alpha = 1.0;
     label.backgroundColor = [UIColor clearColor];
     
