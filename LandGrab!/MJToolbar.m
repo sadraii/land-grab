@@ -82,7 +82,7 @@
 	// Let's use the tag to differentiate the bomb vs. a normal tile
     [tile setTag:1];
     
-    UIImage *image = [UIImage imageNamed:@"bomb.png"];
+    UIImage *image = [UIImage imageNamed:@"bomb_yellow.png"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     [imageView setFrame:tile.bounds];
     [tile addSubview:imageView];

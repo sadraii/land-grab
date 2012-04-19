@@ -264,8 +264,8 @@
         //[tileToRemove removeFromSuperview];
         [self removeTileAtCoordinate:tileToRemove.coordinate];
         
-        //[tile removeFromSuperview];
-        //[tile.toolbar animateBombCounter];
+        [tile removeFromSuperview];
+        [tile.toolbar animateBombCounter];
     
 	}
     else {
@@ -340,6 +340,8 @@
         didRecieveResource = NO;
 		
 		id resourceCollision = [self resourceAtCoordinate:tile.coordinate];
+        
+        NSLog(@"%@",tile.tileConnected);
         
 		if ([resourceCollision isMemberOfClass:[MJResource class]]) {
 			MJResource *tmpResource = [self resourceAtCoordinate:tile.coordinate];
@@ -418,18 +420,22 @@
 	
 	if ((tmp = [self tileAtCoordinate:up]) && [tmp.player isEqual:selfTerritory.player] && tmp.tag == 1) {
 		tmpBool = YES;
+        selfTerritory.tileConnected = [NSString stringWithString:@"up"];
 		NSLog(@"Tile is connected on the Top!");
 	}
 	if ((tmp = [self tileAtCoordinate:down]) && [tmp.player isEqual:selfTerritory.player] && tmp.tag == 1) {
 		tmpBool = YES;
+        selfTerritory.tileConnected = [NSString stringWithString:@"down"];
 		NSLog(@"Tile is connected on the Bottom!");
 	}
 	if ((tmp = [self tileAtCoordinate:left]) && [tmp.player isEqual:selfTerritory.player] && tmp.tag == 1) {
 		tmpBool = YES;
+        selfTerritory.tileConnected = [NSString stringWithString:@"right"];
 		NSLog(@"Tile is connected on the Right!");
 	}
 	if ((tmp = [self tileAtCoordinate:right]) && [tmp.player isEqual:selfTerritory.player] && tmp.tag == 1) {
 		tmpBool = YES;
+        selfTerritory.tileConnected = [NSString stringWithString:@"left"];
 		NSLog(@"Tile is connected on the Left!");
 	}
 	
@@ -480,20 +486,20 @@
           
     label.text =[NSString stringWithFormat:@"+%i", withValue];
     label.textColor = [UIColor whiteColor];
-    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:50.0];
+    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:90.0];
     label.alpha = 1.0;
     label.backgroundColor = [UIColor clearColor];
     
     [self addSubview:label];
     
     
-    [UIView animateWithDuration:0.75 animations:^ {
+    [UIView animateWithDuration:0.85 delay:0.0 options:UIViewAnimationCurveEaseIn animations:^ {
         label.alpha = 0.0; 
-        label.transform = CGAffineTransformTranslate(label.transform, 0, -200);
+        label.transform = CGAffineTransformTranslate(label.transform, 0, -300);
     }completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.0 animations:^ {
-            [label removeFromSuperview]; 
-        }];
+        
+        [label removeFromSuperview]; 
+        
     }];
 }
 
@@ -503,20 +509,21 @@
     
     label.text =[NSString stringWithFormat:@"%i", withValue];
     label.textColor = [UIColor redColor];
-    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:50.0];
+    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:95.0];
     label.alpha = 1.0;
     label.backgroundColor = [UIColor clearColor];
+    
     
     [self addSubview:label];
     
     
-    [UIView animateWithDuration:0.75 animations:^ {
+    [UIView animateWithDuration:0.85 delay:0.0 options:UIViewAnimationCurveEaseIn animations:^ {
         label.alpha = 0.0; 
-        label.transform = CGAffineTransformTranslate(label.transform, 0, -200);
+        label.transform = CGAffineTransformTranslate(label.transform, 0, -300);
     }completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.0 animations:^ {
+       
             [label removeFromSuperview]; 
-        }];
+      
     }];
 }
 
@@ -526,20 +533,20 @@
     
     label.text =[NSString stringWithFormat:@"+%i Tiles!", withValue];
     label.textColor = [UIColor greenColor];
-    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:50.0];
+    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:90.0];
     label.alpha = 1.0;
     label.backgroundColor = [UIColor clearColor];
     
     [self addSubview:label];
     
     
-    [UIView animateWithDuration:0.75 animations:^ {
+    [UIView animateWithDuration:0.85 delay:0.0 options:UIViewAnimationCurveEaseIn animations:^ {
         label.alpha = 0.0; 
-        label.transform = CGAffineTransformTranslate(label.transform, 0, -200);
+        label.transform = CGAffineTransformTranslate(label.transform, 0, -300);
     }completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.0 animations:^ {
-            [label removeFromSuperview]; 
-        }];
+        
+        [label removeFromSuperview]; 
+        
     }];
     
 }
@@ -550,20 +557,20 @@
     
     label.text =[NSString stringWithFormat:@"Bomb Added!"];
     label.textColor = [UIColor blueColor];
-    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:50.0];
+    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:90.0];
     label.alpha = 1.0;
     label.backgroundColor = [UIColor clearColor];
     
     [self addSubview:label];
     
     
-    [UIView animateWithDuration:0.75 animations:^ {
+    [UIView animateWithDuration:0.85 delay:0.0 options:UIViewAnimationCurveEaseIn animations:^ {
         label.alpha = 0.0; 
-        label.transform = CGAffineTransformTranslate(label.transform, 0, -200);
+        label.transform = CGAffineTransformTranslate(label.transform, 0, -300);
     }completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.0 animations:^ {
-            [label removeFromSuperview]; 
-        }];
+        
+        [label removeFromSuperview]; 
+        
     }];
 }
 
@@ -674,6 +681,8 @@
 
 - (void) addClusterTilesWith:(MJTile *)tile {
     
+    
+    
     /*for (MJTile* tile in tile.player.playedPieces) {
         if (tile.player == player) {
             //do
@@ -690,33 +699,33 @@
         }
     }*/
 
-    MJTile* tmpTile1 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x+1, tile.coordinate.y)];
-    UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
-    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
-    [imageView setFrame:tmpTile1.bounds];
-    [tmpTile1 addSubview:imageView];
-    [self addClusterTilesToTerritoryWith:tmpTile1];
-    
-    MJTile* tmpTile2 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x, tile.coordinate.y+1)];
-    UIImage* image2 = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
-    UIImageView* imageView2 = [[UIImageView alloc] initWithImage:image2];
-    [imageView2 setFrame:tmpTile2.bounds];
-    [tmpTile2 addSubview:imageView2];
-    [self addClusterTilesToTerritoryWith:tmpTile2];
-    
-    MJTile* tmpTile3 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x-1, tile.coordinate.y)];
-    UIImage* image3 = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
-    UIImageView* imageView3 = [[UIImageView alloc] initWithImage:image3];
-    [imageView3 setFrame:tmpTile3.bounds];
-    [tmpTile3 addSubview:imageView3];
-    [self addClusterTilesToTerritoryWith:tmpTile3];
-    
-    MJTile* tmpTile4 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x, tile.coordinate.y-1)];
-    UIImage* image4 = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
-    UIImageView* imageView4 = [[UIImageView alloc] initWithImage:image4];
-    [imageView4 setFrame:tmpTile4.bounds];
-    [tmpTile4 addSubview:imageView4];
-    [self addClusterTilesToTerritoryWith:tmpTile4];
+//    MJTile* tmpTile1 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x+1, tile.coordinate.y)];
+//    UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
+//    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
+//    [imageView setFrame:tmpTile1.bounds];
+//    [tmpTile1 addSubview:imageView];
+//    [self addClusterTilesToTerritoryWith:tmpTile1];
+//    
+//    MJTile* tmpTile2 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x, tile.coordinate.y+1)];
+//    UIImage* image2 = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
+//    UIImageView* imageView2 = [[UIImageView alloc] initWithImage:image2];
+//    [imageView2 setFrame:tmpTile2.bounds];
+//    [tmpTile2 addSubview:imageView2];
+//    [self addClusterTilesToTerritoryWith:tmpTile2];
+//    
+//    MJTile* tmpTile3 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x-1, tile.coordinate.y)];
+//    UIImage* image3 = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
+//    UIImageView* imageView3 = [[UIImageView alloc] initWithImage:image3];
+//    [imageView3 setFrame:tmpTile3.bounds];
+//    [tmpTile3 addSubview:imageView3];
+//    [self addClusterTilesToTerritoryWith:tmpTile3];
+//    
+//    MJTile* tmpTile4 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x, tile.coordinate.y-1)];
+//    UIImage* image4 = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
+//    UIImageView* imageView4 = [[UIImageView alloc] initWithImage:image4];
+//    [imageView4 setFrame:tmpTile4.bounds];
+//    [tmpTile4 addSubview:imageView4];
+//    [self addClusterTilesToTerritoryWith:tmpTile4];
     
 }
 

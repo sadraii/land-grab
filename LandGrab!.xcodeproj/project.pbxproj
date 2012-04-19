@@ -13,6 +13,10 @@
 		33583AE11536A44300304F57 /* mysteryBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 33583AE01536A44300304F57 /* mysteryBox.png */; };
 		33583AE31536A44800304F57 /* bomb.png in Resources */ = {isa = PBXBuildFile; fileRef = 33583AE21536A44800304F57 /* bomb.png */; };
 		33A43347151A957800FDCBE4 /* MJBombResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A43346151A957800FDCBE4 /* MJBombResource.m */; };
+		33D057B9153FE3CC004DB44C /* board_background_dotted.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D057B5153FE3CC004DB44C /* board_background_dotted.png */; };
+		33D057BA153FE3CC004DB44C /* board_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D057B6153FE3CC004DB44C /* board_background.png */; };
+		33D057BB153FE3CC004DB44C /* bomb_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D057B7153FE3CC004DB44C /* bomb_yellow.png */; };
+		33D057BC153FE3CC004DB44C /* Resource.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D057B8153FE3CC004DB44C /* Resource.png */; };
 		33EB78FF1517D2DC0005C19E /* MJClockWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EB78FE1517D2DC0005C19E /* MJClockWidget.m */; };
 		3F42F3E5150D6CEF00B704B1 /* Blue_Capitol.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3DB150D6CEF00B704B1 /* Blue_Capitol.png */; };
 		3F42F3E6150D6CEF00B704B1 /* Blue_Tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F42F3DC150D6CEF00B704B1 /* Blue_Tile.png */; };
@@ -84,6 +88,10 @@
 		33583AE21536A44800304F57 /* bomb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bomb.png; sourceTree = "<group>"; };
 		33A43345151A957800FDCBE4 /* MJBombResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJBombResource.h; sourceTree = "<group>"; };
 		33A43346151A957800FDCBE4 /* MJBombResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJBombResource.m; sourceTree = "<group>"; };
+		33D057B5153FE3CC004DB44C /* board_background_dotted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = board_background_dotted.png; sourceTree = "<group>"; };
+		33D057B6153FE3CC004DB44C /* board_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = board_background.png; sourceTree = "<group>"; };
+		33D057B7153FE3CC004DB44C /* bomb_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bomb_yellow.png; sourceTree = "<group>"; };
+		33D057B8153FE3CC004DB44C /* Resource.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Resource.png; sourceTree = "<group>"; };
 		33EB78FD1517D2DC0005C19E /* MJClockWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJClockWidget.h; path = "LandGrab!/MJClockWidget.h"; sourceTree = SOURCE_ROOT; };
 		33EB78FE1517D2DC0005C19E /* MJClockWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJClockWidget.m; path = "LandGrab!/MJClockWidget.m"; sourceTree = SOURCE_ROOT; };
 		3F42F3DB150D6CEF00B704B1 /* Blue_Capitol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blue_Capitol.png; sourceTree = "<group>"; };
@@ -196,6 +204,10 @@
 		3F42F3DA150D6CEF00B704B1 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				33D057B5153FE3CC004DB44C /* board_background_dotted.png */,
+				33D057B6153FE3CC004DB44C /* board_background.png */,
+				33D057B7153FE3CC004DB44C /* bomb_yellow.png */,
+				33D057B8153FE3CC004DB44C /* Resource.png */,
 				33583AE21536A44800304F57 /* bomb.png */,
 				33583AE01536A44300304F57 /* mysteryBox.png */,
 				3FBD8988150EA1D9001BBE97 /* Green_Tile_TileSize_NoBorder.png */,
@@ -518,6 +530,10 @@
 				3FBD8993150EA1DA001BBE97 /* Yellow_Tile_TileSize_NoBorder.png in Resources */,
 				33583AE11536A44300304F57 /* mysteryBox.png in Resources */,
 				33583AE31536A44800304F57 /* bomb.png in Resources */,
+				33D057B9153FE3CC004DB44C /* board_background_dotted.png in Resources */,
+				33D057BA153FE3CC004DB44C /* board_background.png in Resources */,
+				33D057BB153FE3CC004DB44C /* bomb_yellow.png in Resources */,
+				33D057BC153FE3CC004DB44C /* Resource.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

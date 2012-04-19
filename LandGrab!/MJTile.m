@@ -27,6 +27,7 @@
 @synthesize coordinate = _coordinate;
 @synthesize currentPoint = _currentPoint;
 @synthesize isPlayed = _isPlayed;
+@synthesize tileConnected = _tileConnected;
 
 #pragma mark - Class Methods
 -(id) initWithCoordinate:(CGPoint)aCoordinate; {

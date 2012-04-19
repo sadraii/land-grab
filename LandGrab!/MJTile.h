@@ -35,6 +35,8 @@
 @property (readwrite, nonatomic) CGPoint currentPoint;
 @property (readwrite, nonatomic) BOOL isPlayed;
 
+@property (strong, nonatomic) NSString *tileConnected;
+
 - (id) initWithCoordinate:(CGPoint)aCoordinate;
 - (CGSize) distanceFromOrigin:(CGPoint)point;
 - (void) moveDistance:(CGSize) distance;

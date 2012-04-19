@@ -193,7 +193,7 @@
                         NSLog(@"Random Int: %d", randomInt);
                         
                         if (randomInt == 1) {
-                            NSUInteger randomResourceInt = (arc4random_uniform(2)) + 1;
+                            NSUInteger randomResourceInt = (arc4random_uniform(4)) + 1;
                             
                             if (randomResourceInt == 1) { //add tile resource
                                 
@@ -263,7 +263,7 @@
                             NSLog(@"Resource at coordinate:%@ has %i value", NSStringFromCGPoint(resource.coordinate) ,resource.value);
                             //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
                             //			[resource setTilesWithCoordinateArray:coords];
-                            UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource_Green.png"]]];
+                            UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Resource.png"]]];
                             [imageView setFrame:resource.bounds];
                             [imageView setContentMode:UIViewContentModeScaleAspectFill];
                             dispatch_sync(dispatch_get_main_queue(), ^{
