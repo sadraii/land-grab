@@ -136,7 +136,7 @@
 -(void) calculateEndGame {
     
     NSSortDescriptor *sortDescriptor;
-    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"combinedScore"
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"score"
                                                   ascending:NO];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     NSArray *sortedArray  = [_players sortedArrayUsingDescriptors:sortDescriptors];
@@ -145,8 +145,8 @@
         MJPlayer *firstPlace = [sortedArray objectAtIndex:0];
         MJPlayer *secondPlace = [sortedArray objectAtIndex:1];
         _PlayerWinLabel.text = [NSString stringWithFormat:@"%@ won the Game! YEA!", firstPlace.handle];
-        _Player1Score.text = [NSString stringWithFormat:@"%@ with %d territory and %d resources for a combined score of %d", firstPlace.handle ,firstPlace.territory, firstPlace.score, firstPlace.combinedScore];
-        _Player2Score.text = [NSString stringWithFormat:@"%@ with %d territory and %d resources for a combined score of %d", secondPlace.handle ,secondPlace.territory, secondPlace.score, secondPlace.combinedScore];
+        _Player1Score.text = [NSString stringWithFormat:@"%@: %d", firstPlace.handle, firstPlace.score];
+        _Player2Score.text = [NSString stringWithFormat:@"%@: %d", secondPlace.handle, secondPlace.score];
         _Player3Score.alpha = 0.0;
         _Player4Score.alpha = 0.0;
     }
@@ -155,9 +155,9 @@
         MJPlayer *secondPlace = [sortedArray objectAtIndex:1];
         MJPlayer *thirdPlace = [sortedArray objectAtIndex:2];
         _PlayerWinLabel.text = [NSString stringWithFormat:@"%@ won the Game! YEA!", firstPlace.handle];
-        _Player1Score.text = [NSString stringWithFormat:@"%@ with %d territory and %d resources for a combined score of %d", firstPlace.handle ,firstPlace.territory, firstPlace.score, firstPlace.combinedScore];
-        _Player2Score.text = [NSString stringWithFormat:@"%@ with %d territory and %d resources for a combined score of %d", secondPlace.handle ,secondPlace.territory, secondPlace.score, secondPlace.combinedScore];
-        _Player3Score.text = [NSString stringWithFormat:@"%@ with %d territory and %d resources for a combined score of %d", thirdPlace.handle ,thirdPlace.territory, thirdPlace.score, thirdPlace.combinedScore];
+        _Player1Score.text = [NSString stringWithFormat:@"%@: %d", firstPlace.handle, firstPlace.score];
+        _Player2Score.text = [NSString stringWithFormat:@"%@: %d", secondPlace.handle,secondPlace.score];
+        _Player3Score.text = [NSString stringWithFormat:@"%@: %d", thirdPlace.handle, thirdPlace.score];
         _Player4Score.alpha = 0.0;
     }
     if (_numberOfPlayers == 4) {
@@ -166,10 +166,10 @@
         MJPlayer *thirdPlace = [sortedArray objectAtIndex:2];
         MJPlayer *forthPlace = [sortedArray objectAtIndex:3];
         _PlayerWinLabel.text = [NSString stringWithFormat:@"%@ won the Game! YEA!", firstPlace.handle];
-        _Player1Score.text = [NSString stringWithFormat:@"%@ with %d territory and %d resources for a combined score of %d", firstPlace.handle ,firstPlace.territory, firstPlace.score, firstPlace.combinedScore];
-        _Player2Score.text = [NSString stringWithFormat:@"%@ with %d territory and %d resources for a combined score of %d", secondPlace.handle ,secondPlace.territory, secondPlace.score, secondPlace.combinedScore];
-        _Player3Score.text = [NSString stringWithFormat:@"%@ with %d territory and %d resources for a combined score of %d", thirdPlace.handle ,thirdPlace.territory, thirdPlace.score, thirdPlace.combinedScore];
-        _Player4Score.text = [NSString stringWithFormat:@"%@ with %d territory and %d resources for a combined score of %d", forthPlace.handle ,forthPlace.territory, forthPlace.score, forthPlace.combinedScore];
+        _Player1Score.text = [NSString stringWithFormat:@"%@: %d", firstPlace.handle, firstPlace.score];
+        _Player2Score.text = [NSString stringWithFormat:@"%@: %d", secondPlace.handle, secondPlace.score];
+        _Player3Score.text = [NSString stringWithFormat:@"%@: %d", thirdPlace.handle, thirdPlace.score];
+        _Player4Score.text = [NSString stringWithFormat:@"%@: %d", forthPlace.handle, forthPlace.score];
     }
 }
 

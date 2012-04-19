@@ -575,7 +575,7 @@
 
 - (void) animateBombResources:(NSUInteger)withValue :(MJTile*)tile {
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tile.player.lastPlayedTile.coordinate.x*64 - 100, tile.player.lastPlayedTile.coordinate.y*64, 500, 200)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tile.player.lastPlayedTile.coordinate.x*64 - 125, tile.player.lastPlayedTile.coordinate.y*64, 500, 200)];
     
     label.text =[NSString stringWithFormat:@"Bomb Added!"];
     label.textColor = [UIColor colorWithRed:0 green:0 blue:255 alpha:1.0];

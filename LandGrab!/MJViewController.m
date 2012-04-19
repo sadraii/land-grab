@@ -206,7 +206,7 @@
                         NSLog(@"Random Int: %d", randomInt);
                         
                         if (randomInt == 1) {
-                            NSUInteger randomResourceInt = (arc4random_uniform(4)) + 1;
+                            NSUInteger randomResourceInt = (arc4random_uniform(3)) + 1;
                             
                             if (randomResourceInt == 1) { //add tile resource
                                 
@@ -238,21 +238,21 @@
                                 });
                             }
                             
-                            if (randomResourceInt == 3) { //territory cluster resource
-                                __block MJClusterResource *resource = [[MJClusterResource alloc] initWithCoordinate:point];
-                                [resource generateTiles];
-                                NSLog(@"Cluster Resource at corrdinate:%@ has %i tiles!", NSStringFromCGPoint(resource.coordinate), resource.tilesGenerated);
-                                
-                                UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"mysteryBox.png"]]];
-                                [imageView setFrame:resource.bounds];
-                                [imageView setContentMode:UIViewContentModeScaleAspectFill];
-                                dispatch_sync(dispatch_get_main_queue(), ^{
-                                    [resource addSubview:imageView];
-                                    [_board addResource:resource];
-                                });
-                            }
+//                            if (randomResourceInt == 3) { //territory cluster resource
+//                                __block MJClusterResource *resource = [[MJClusterResource alloc] initWithCoordinate:point];
+//                                [resource generateTiles];
+//                                NSLog(@"Cluster Resource at corrdinate:%@ has %i tiles!", NSStringFromCGPoint(resource.coordinate), resource.tilesGenerated);
+//                                
+//                                UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"mysteryBox.png"]]];
+//                                [imageView setFrame:resource.bounds];
+//                                [imageView setContentMode:UIViewContentModeScaleAspectFill];
+//                                dispatch_sync(dispatch_get_main_queue(), ^{
+//                                    [resource addSubview:imageView];
+//                                    [_board addResource:resource];
+//                                });
+//                            }
                             
-                            if (randomResourceInt == 4) { //negative point resource
+                            if (randomResourceInt == 3) { //negative point resource
                                 
                                 __block MJNegativeResource* resource = [[MJNegativeResource alloc] initWithCoordinate:point];
                                 [resource setValue: (_resourcePoints)*-4];
