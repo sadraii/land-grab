@@ -36,6 +36,7 @@
 @property (readwrite, nonatomic)    NSUInteger          combinedScore;
 @property (readwrite, nonatomic)    NSUInteger          numberOfTilesToPlay;
 @property (readwrite, nonatomic)    NSUInteger          numberOfBombsToPlay;
+@property (nonatomic)				BOOL          playedBomb;
 
 
 - (void) updateScore;

@@ -33,6 +33,7 @@
 @synthesize combinedScore = _combinedScore;
 @synthesize numberOfTilesToPlay = _numberOfTilesToPlay;
 @synthesize numberOfBombsToPlay = _numberOfBombsToPlay;
+@synthesize playedBomb = _playedBomb;
 
 -(id) init {
     if ((self = [super init]) == nil) {
@@ -50,6 +51,7 @@
 	_capital = nil;
 	_playedPieces = [[NSMutableArray alloc] init];
     _toolBarPieces = [[NSMutableArray alloc] init];
+	
     return self;
 }
 

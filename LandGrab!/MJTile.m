@@ -108,13 +108,17 @@
 	
     [_viewController addTile:self];
 	if (_board.zoomScale != _board.maximumZoomScale && ![self isKindOfClass:[MJBombTile class]]) {
+		
 		if (_player.lastPlayedTile) {
 			[_board scrollRectToVisible:_player.lastPlayedTile.frame animated:YES];
-            
 		}
 		else {
 			[_board scrollRectToVisible:_player.capital.frame animated:YES];
 		}
+	}
+	else if(_player.playedBomb == TRUE) {
+		[_board scrollRectToVisible:_player.capital.frame animated:YES];
+		[_player setPlayedBomb:false];
 	}
 }
 

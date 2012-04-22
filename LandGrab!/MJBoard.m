@@ -240,8 +240,6 @@
 
 - (void) addBombTile:(MJBombTile *)tile {
     
-    NSLog(@"THIS SHIT WORKED YAY!");
-    
     if(![self isCoordinateOnBoard:tile.coordinate]) {
 		NSLog(@"Cannot place a tile off the board;");
 		[tile touchesCancelled:nil withEvent:nil];
@@ -288,6 +286,7 @@
         
         [tile removeFromSuperview];
         [tile.toolbar animateBombCounter];
+		[tile.player setPlayedBomb:TRUE];
     
 	}
     else {

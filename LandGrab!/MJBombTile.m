@@ -41,11 +41,9 @@
     [_viewController addTile:self];
 	if (_board.zoomScale != _board.maximumZoomScale) {
 		if (_player.lastPlayedTile) {
-			[_board scrollRectToVisible:_player.lastPlayedTile.frame animated:YES];
             
 		}
 		else {
-			[_board scrollRectToVisible:_player.capital.frame animated:YES];
 		}
 	}
 }
@@ -69,7 +67,7 @@
 	CGPoint point = CGPointZero;
 	if ([_board pointInside:[touch locationInView:_board] withEvent:nil]) {
 		if (_board.zoomScale != 1) {
-			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:@"Must zoom all the way in to place a piece" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
+			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:@"Must zoom all the way in to place a bomb" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
 			[alert show];
 			
             [self touchesCancelled:touches withEvent:event];

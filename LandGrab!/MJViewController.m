@@ -255,7 +255,7 @@
                             if (randomResourceInt == 3) { //negative point resource
                                 
                                 __block MJNegativeResource* resource = [[MJNegativeResource alloc] initWithCoordinate:point];
-                                [resource setValue: (_resourcePoints)*-4];
+                                [resource setValue: (_resourcePoints)*-1];
                                 NSLog(@"Resource at coordinate:%@ has %i value", NSStringFromCGPoint(resource.coordinate) ,resource.value);
                                 //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
                                 //			[resource setTilesWithCoordinateArray:coords];

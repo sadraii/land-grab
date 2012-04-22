@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="aLU-nh-xDf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="aLU-nh-xDf">
     <dependencies>
-        <deployment defaultVersion="1280" identifier="iOS"/>
+        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
+        <!--View Controller-->
         <scene sceneID="4">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
@@ -142,6 +143,7 @@
             </objects>
             <point key="canvasLocation" x="-874" y="-89"/>
         </scene>
+        <!--End Game View Controller-->
         <scene sceneID="F3Q-L9-LzF">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mbM-xl-VVQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -206,6 +208,7 @@
             </objects>
             <point key="canvasLocation" x="28" y="-99"/>
         </scene>
+        <!--Main Menu-->
         <scene sceneID="J6F-kW-AKv">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Amo-yL-TRi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -407,7 +410,7 @@
                             </button>
                             <button opaque="NO" tag="30" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="sE3-oz-Tzd">
                                 <rect key="frame" x="276" y="298" width="226" height="131"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="30 x 30">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -422,7 +425,7 @@
                             </button>
                             <button opaque="NO" tag="50" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ccz-Yf-ZK4">
                                 <rect key="frame" x="276" y="456" width="226" height="131"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="50 x 50">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -465,6 +468,77 @@
         <image name="TopBar_Gray.png" width="2000" height="512"/>
         <image name="mainMenuBackground.jpg" width="768" height="1024"/>
     </resources>
+    <classes>
+        <class className="EndGameViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EndGameViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="Player1Score" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="Player2Score" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="Player3Score" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="Player4Score" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="PlayerWinLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MJBoard" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJBoard.h"/>
+            <relationships>
+                <relationship kind="outlet" name="viewController" candidateClass="MJViewController"/>
+            </relationships>
+        </class>
+        <class className="MJClockWidget" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJClockWidget.h"/>
+        </class>
+        <class className="MJToolbar" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJToolbar.h"/>
+            <relationships>
+                <relationship kind="outlet" name="viewController" candidateClass="MJViewController"/>
+            </relationships>
+        </class>
+        <class className="MJTopBar" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJTopBar.h"/>
+        </class>
+        <class className="MJViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="newGame:"/>
+                <relationship kind="action" name="zoom:"/>
+                <relationship kind="outlet" name="board" candidateClass="MJBoard"/>
+                <relationship kind="outlet" name="gameTypeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="gameTypeLabelCounter" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="handle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mainMenuViewController" candidateClass="MainMenu"/>
+                <relationship kind="outlet" name="score" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="territory" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="MJToolbar"/>
+                <relationship kind="outlet" name="topbar" candidateClass="MJTopBar"/>
+                <relationship kind="outlet" name="zoomStepper" candidateClass="UIStepper"/>
+            </relationships>
+        </class>
+        <class className="MainMenu" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainMenu.h"/>
+            <relationships>
+                <relationship kind="action" name="tappedHowManyPlayers:" candidateClass="UIButton"/>
+                <relationship kind="action" name="tappedTypeOfGame:" candidateClass="UIButton"/>
+                <relationship kind="action" name="tappedboardsize:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="boardsize20x20" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="boardsize30x30" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="boardsize50x50" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="fiftyTurnsButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="fiveMinutesButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="fourPlayersButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="hundredTurnsButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="label" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="startNewGame" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="tenMinutesButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="threePlayersButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="timeBasedButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="turnBasedButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="twentyTurnsButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="twoMinutesButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="twoPlayersButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
