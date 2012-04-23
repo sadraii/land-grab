@@ -13,6 +13,7 @@
 @implementation MJContainerView
 
 @synthesize board = _board;
+@synthesize iv = _iv;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -20,6 +21,11 @@
     if (self) {
 		[self setUserInteractionEnabled:YES];
     }
+//	UIImage* image = [UIImage imageNamed:@"board_background.png"];
+//	_iv = [[UIImageView alloc] initWithFrame:self.frame];
+//	[_iv setImage:image];
+//	[_iv setContentMode:UIViewContentModeScaleAspectFit];
+//	[self addSubview:_iv];
     return self;
 }
 

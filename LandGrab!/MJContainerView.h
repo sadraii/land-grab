@@ -12,6 +12,7 @@
 
 @interface MJContainerView : UIView
 
+@property (strong, nonatomic) UIImageView* iv;
 @property (weak, nonatomic) MJBoard* board;
 
 @end
