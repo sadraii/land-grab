@@ -42,40 +42,42 @@
 
 #pragma mark - View lifecycle
 
+- (void) viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	[self reset];
+	
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    // Do any additional setup after loading the view from its nib.
+}
 
-    MJViewController *mjVC = [[MJViewController alloc] initWithCoder:nil];
+- (void) reset {
+	MJViewController *mjVC = [[MJViewController alloc] initWithCoder:nil];
     _mjViewController = mjVC;
     
     GameSetUpData *tmp = [[GameSetUpData alloc] init];
     _gameSetUp = tmp;
-    
-    _timeBasedButton.alpha = 0.0;
-    _timeBasedButton.userInteractionEnabled = NO;
-    _turnBasedButton.alpha = 0.0;
-    _turnBasedButton.userInteractionEnabled = NO;
-    _twoMinutesButton.alpha = 0.0;
-    _twoMinutesButton.userInteractionEnabled = NO;
-    _fiveMinutesButton.alpha = 0.0;
-    _fiveMinutesButton.userInteractionEnabled = NO;
-    _tenMinutesButton.alpha = 0.0;
-    _tenMinutesButton.userInteractionEnabled = NO;
-    _twentyTurnsButton.alpha = 0.0;
-    _twentyTurnsButton.userInteractionEnabled = NO;
-    _fiftyTurnsButton.alpha = 0.0;
-    _fiftyTurnsButton.userInteractionEnabled = NO;
-    _hundredTurnsButton.alpha = 0.0;
-    _hundredTurnsButton.userInteractionEnabled = NO;
-    _boardsize20x20.alpha = 0.0;
-    _boardsize20x20.userInteractionEnabled =NO;
-    _boardsize30x30.alpha = 0.0;
-    _boardsize30x30.userInteractionEnabled =NO;
-    _boardsize50x50.alpha = 0.0;
-    _boardsize50x50.userInteractionEnabled =NO;
-    
-    // Do any additional setup after loading the view from its nib.
+	
+    [_label setText:@"How many players?"];
+    _timeBasedButton.hidden = YES;
+    _turnBasedButton.hidden = YES;
+    _twoMinutesButton.hidden = YES;
+    _fiveMinutesButton.hidden = YES;
+    _tenMinutesButton.hidden = YES;
+    _twentyTurnsButton.hidden = YES;
+    _fiftyTurnsButton.hidden = YES;
+    _hundredTurnsButton.hidden = YES;
+    _boardsize20x20.hidden = YES;
+    _boardsize30x30.hidden = YES;
+    _boardsize50x50.hidden = YES;
+	_twoPlayersButton.hidden = NO;
+	_threePlayersButton.hidden = NO;
+	_fourPlayersButton.hidden = NO;
 }
 
 - (void)viewDidUnload
@@ -110,7 +112,7 @@
     _mjViewController = [segue destinationViewController]; 
     
 //    [UIView animateWithDuration:1.5 delay:0.0 options:UIViewAnimationCurveEaseIn animations:^ {
-//        self.view.alpha = 0.0;
+//        self.view.hidden = YES;
 //    }completion:^(BOOL finished) {
         if ([segueIdentifer isEqualToString:@"from2MinToGame"]) {
             _gameSetUp.numberOfSeconds = 120;
@@ -160,20 +162,17 @@
         _gameSetUp.numberOfPlayers = 4;
     }
     [UIView animateWithDuration:0.25 animations:^ {
-        _twoPlayersButton.alpha = 0.0;
-        _threePlayersButton.alpha = 0.0;
-        _fourPlayersButton.alpha = 0.0;
-        _label.alpha = 0.0;
+        _twoPlayersButton.hidden = YES;
+        _threePlayersButton.hidden = YES;
+        _fourPlayersButton.hidden = YES;
+        _label.hidden = YES;
     }completion:^(BOOL finished) {
-        _twoPlayersButton.userInteractionEnabled = NO;
-        _threePlayersButton.userInteractionEnabled = NO;
-        _fourPlayersButton.userInteractionEnabled = NO;
         _label.text = @"What board size do you want?";
         [UIView animateWithDuration:0.25 animations:^ {
-            _boardsize20x20.alpha = 1.0;
-            _boardsize30x30.alpha = 1.0;
-            _boardsize50x50.alpha = 1.0;
-            _label.alpha = 1.0;
+            _boardsize20x20.hidden = NO;
+            _boardsize30x30.hidden = NO;
+            _boardsize50x50.hidden = NO;
+            _label.hidden = NO;
         }completion:^(BOOL finished) {
             _boardsize20x20.userInteractionEnabled = YES;
             _boardsize30x30.userInteractionEnabled = YES;
@@ -193,19 +192,19 @@
         _gameSetUp.boardSize = CGSizeMake(50, 50);
     }
     [UIView animateWithDuration:0.25 animations:^ {
-        _boardsize20x20.alpha = 0.0;
-        _boardsize30x30.alpha = 0.0;
-        _boardsize50x50.alpha = 0.0;
-        _label.alpha = 0.0;
+        _boardsize20x20.hidden = YES;
+        _boardsize30x30.hidden = YES;
+        _boardsize50x50.hidden = YES;
+        _label.hidden = YES;
     }completion:^(BOOL finished) {
         _boardsize20x20.userInteractionEnabled = NO;
         _boardsize30x30.userInteractionEnabled = NO;
         _boardsize50x50.userInteractionEnabled = NO;
         _label.text = @"What type of game do you want?";
         [UIView animateWithDuration:0.25 animations:^ {
-            _timeBasedButton.alpha = 1.0;
-            _turnBasedButton.alpha = 1.0;
-            _label.alpha = 1.0;
+            _timeBasedButton.hidden = NO;
+            _turnBasedButton.hidden = NO;
+            _label.hidden = NO;
         }completion:^(BOOL finished) {
             _timeBasedButton.userInteractionEnabled = YES;
             _turnBasedButton.userInteractionEnabled = YES;
@@ -222,19 +221,19 @@
     }
 
     [UIView animateWithDuration:0.25 animations:^ {
-        _timeBasedButton.alpha = 0.0;
-        _turnBasedButton.alpha = 0.0;
-        _label.alpha = 0.0;
+        _timeBasedButton.hidden = YES;
+        _turnBasedButton.hidden = YES;
+        _label.hidden = YES;
     }completion:^(BOOL finished) {
         _timeBasedButton.userInteractionEnabled = NO;
         _turnBasedButton.userInteractionEnabled = NO;
         if (button.tag == 1) {
             _label.text = @"How many minutes would you like to play for?";
             [UIView animateWithDuration:0.25 animations:^ {
-                _twoMinutesButton.alpha = 1.0;
-                _fiveMinutesButton.alpha = 1.0;
-                _tenMinutesButton.alpha = 1.0;
-                _label.alpha = 1.0;
+                _twoMinutesButton.hidden = NO;
+                _fiveMinutesButton.hidden = NO;
+                _tenMinutesButton.hidden = NO;
+                _label.hidden = NO;
             }completion:^(BOOL finished) {
                 _twoMinutesButton.userInteractionEnabled = YES;
                 _fiveMinutesButton.userInteractionEnabled = YES;
@@ -244,10 +243,10 @@
         if (button.tag == 2) {
             _label.text = @"How many turns would you like to play for?";
             [UIView animateWithDuration:0.25 animations:^ {
-                _twentyTurnsButton.alpha = 1.0;
-                _fiftyTurnsButton.alpha = 1.0;
-                _hundredTurnsButton.alpha = 1.0;
-                _label.alpha = 1.0;
+                _twentyTurnsButton.hidden = NO;
+                _fiftyTurnsButton.hidden = NO;
+                _hundredTurnsButton.hidden = NO;
+                _label.hidden = NO;
             }completion:^(BOOL finished) {
                 _twentyTurnsButton.userInteractionEnabled = YES;
                 _fiftyTurnsButton.userInteractionEnabled = YES;

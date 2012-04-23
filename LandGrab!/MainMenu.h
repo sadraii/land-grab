@@ -34,6 +34,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *boardsize30x30;
 @property (weak, nonatomic) IBOutlet UIButton *boardsize50x50;
 
+
+
+
+
 //-(IBAction)tappedNewGame:(id)sender;
 -(IBAction)tappedHowManyPlayers:(UIButton *)button;
 -(IBAction)tappedTypeOfGame:(UIButton *)button;
@@ -41,6 +45,6 @@
 
 
 
--(void)setBoolCorrectly;
+//-(void)setBoolCorrectly;
 
 @end

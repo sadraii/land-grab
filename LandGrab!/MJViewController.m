@@ -445,6 +445,11 @@
 
 #pragma mark - End Sequence and Segue
 
+
+- (IBAction)endGameButtonPressed {
+	[self endSequence];
+}
+
 - (void)endSequence {
     
     for (MJPlayer* player in _players) {

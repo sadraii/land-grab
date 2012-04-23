@@ -38,6 +38,12 @@
 }
 */
 
+- (IBAction)newGame:(id)sender {
+	[[self navigationController] popToRootViewControllerAnimated:YES];
+}
+
+
+
 -(id)initWithCoder:(NSCoder *)aDecoder {
     
     if (self = [super initWithCoder:aDecoder]) {

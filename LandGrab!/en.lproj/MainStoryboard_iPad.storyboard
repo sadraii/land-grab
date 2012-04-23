@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="aLU-nh-xDf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="h32-Gx-S7q">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
@@ -12,11 +12,11 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
                 <viewController id="2" customClass="MJViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="gE6-AP-9Rm" customClass="MJBoard">
-                                <rect key="frame" x="0.0" y="126" width="768" height="781"/>
+                                <rect key="frame" x="0.0" y="126" width="768" height="801"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <connections>
@@ -51,7 +51,7 @@
                                         <rect key="frame" x="15" y="38" width="104" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Main Menu">
+                                        <state key="normal" title="End Game">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -59,8 +59,8 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="endGameButtonPressed" destination="2" eventType="touchUpInside" id="6FH-GW-aKf"/>
                                             <action selector="newGame:" destination="2" eventType="touchUpInside" id="VCi-at-PYI"/>
-                                            <segue destination="aLU-nh-xDf" kind="modal" identifier="backToMainMenu" modalTransitionStyle="crossDissolve" id="UeM-9m-pLZ"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Player:" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="cUh-Sy-Mp7">
@@ -106,7 +106,7 @@
                                 </subviews>
                             </view>
                             <view contentMode="scaleToFill" id="kUq-3y-reL" customClass="MJToolbar">
-                                <rect key="frame" x="0.0" y="905" width="768" height="101"/>
+                                <rect key="frame" x="0.0" y="925" width="768" height="101"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="TopBar_Gray.png" id="m3J-gZ-Qq1">
@@ -137,11 +137,11 @@
                         <outlet property="toolbar" destination="kUq-3y-reL" id="Rvx-zD-KaY"/>
                         <outlet property="topbar" destination="naf-t9-EUm" id="FDN-6E-1uH"/>
                         <outlet property="zoomStepper" destination="Wg0-Qm-3dD" id="4a2-qb-cDq"/>
-                        <segue destination="8Md-J0-lCq" kind="modal" identifier="toEndGame" modalTransitionStyle="crossDissolve" id="Fvi-yY-s2C"/>
+                        <segue destination="8Md-J0-lCq" kind="push" identifier="toEndGame" id="Fvi-yY-s2C"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-874" y="-89"/>
+            <point key="canvasLocation" x="100" y="-89"/>
         </scene>
         <!--End Game View Controller-->
         <scene sceneID="F3Q-L9-LzF">
@@ -149,7 +149,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mbM-xl-VVQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="8Md-J0-lCq" customClass="EndGameViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3ZS-Nf-UlN">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Game End Results!" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="nAb-g6-BcL">
@@ -194,6 +194,21 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="h7o-Rl-50l">
+                                <rect key="frame" x="303" y="730" width="162" height="83"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="New Game">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="newGame:" destination="8Md-J0-lCq" eventType="touchUpInside" id="XZB-g7-qwu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -206,7 +221,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="28" y="-99"/>
+            <point key="canvasLocation" x="1002" y="-99"/>
         </scene>
         <!--Main Menu-->
         <scene sceneID="J6F-kW-AKv">
@@ -270,7 +285,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="2" kind="modal" identifier="from2MinToGame" modalTransitionStyle="crossDissolve" id="0Eh-xx-9v9"/>
+                                    <segue destination="2" kind="push" identifier="from2MinToGame" id="0Eh-xx-9v9"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Dxa-f8-94x">
@@ -285,7 +300,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="2" kind="modal" identifier="from20TurnsToGame" modalTransitionStyle="crossDissolve" id="jH1-9b-Uly"/>
+                                    <segue destination="2" kind="push" identifier="from20TurnsToGame" id="jH1-9b-Uly"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="2XU-Ld-QSY">
@@ -300,7 +315,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="2" kind="modal" identifier="from50TurnsToGame" modalTransitionStyle="crossDissolve" id="lS4-0V-NW4"/>
+                                    <segue destination="2" kind="push" identifier="from50TurnsToGame" id="lS4-0V-NW4"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="lHv-7i-CS3">
@@ -315,7 +330,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="2" kind="modal" identifier="from100TurnsToGame" modalTransitionStyle="crossDissolve" id="yms-to-PeV"/>
+                                    <segue destination="2" kind="push" identifier="from100TurnsToGame" id="yms-to-PeV"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="RIf-TL-IDD">
@@ -330,7 +345,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="2" kind="modal" identifier="from5MinToGame" modalTransitionStyle="crossDissolve" id="HFR-uo-9PD"/>
+                                    <segue destination="2" kind="push" identifier="from5MinToGame" id="HFR-uo-9PD"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="1gT-ND-mD6">
@@ -345,7 +360,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="2" kind="modal" identifier="from10MinToGame" modalTransitionStyle="crossDissolve" id="fHg-ON-ARg"/>
+                                    <segue destination="2" kind="push" identifier="from10MinToGame" id="fHg-ON-ARg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="56H-2X-EbF">
@@ -441,6 +456,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ZbR-1w-wB3"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="boardsize20x20" destination="fdL-OV-yBc" id="XfQ-Dk-LcD"/>
@@ -460,6 +476,25 @@
                         <outlet property="twoPlayersButton" destination="thA-3u-V6t" id="kbr-QC-AlW"/>
                     </connections>
                 </viewController>
+            </objects>
+            <point key="canvasLocation" x="-818" y="-98"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="QOB-CX-3b4">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iAQ-EH-332" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController navigationBarHidden="YES" id="h32-Gx-S7q" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="BGc-vA-iX3">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="aLU-nh-xDf" kind="relationship" relationship="rootViewController" id="dtZ-jp-vVF"/>
+                    </connections>
+                </navigationController>
             </objects>
             <point key="canvasLocation" x="-1792" y="-98"/>
         </scene>
@@ -545,6 +580,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="yms-to-PeV"/>
+        <segue reference="fHg-ON-ARg"/>
     </inferredMetricsTieBreakers>
 </document>
