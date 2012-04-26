@@ -219,10 +219,79 @@
         _Player4Score.text = [NSString stringWithFormat:@"%@: %d", forthPlace.handle, forthPlace.combinedScore];
         if (firstPlace.handle == @"Blue") {
             _PlayerWinLabel.textColor = [UIColor blueColor];
-            
+            _Player1Score.textColor = [UIColor blueColor];
+            if (secondPlace.handle == @"Red") {
+                _Player2Score.textColor = [UIColor redColor];
+                if (thirdPlace.handle == @"Green") {
+                    _Player3Score.textColor = [UIColor greenColor];
+                    _Player4Score.textColor = [UIColor yellowColor];
+                }
+                else {
+                    _Player3Score.textColor = [UIColor yellowColor];
+                    _Player4Score.textColor = [UIColor greenColor];
+                }
+            }
+            if (secondPlace.handle == @"Green") {
+                _Player2Score.textColor = [UIColor greenColor];
+                if (thirdPlace.handle == @"Blue") {
+                    _Player3Score.textColor = [UIColor blueColor];
+                    _Player4Score.textColor = [UIColor yellowColor];
+                }
+                else {
+                    _Player3Score.textColor = [UIColor yellowColor];
+                    _Player4Score.textColor = [UIColor blueColor];
+                }
+            }
+            if (secondPlace.handle == @"Yellow") {
+                _Player2Score.textColor = [UIColor yellowColor];
+                if (thirdPlace.handle == @"Blue") {
+                    _Player3Score.textColor = [UIColor blueColor];
+                    _Player4Score.textColor = [UIColor greenColor];
+                }
+                else {
+                    _Player3Score.textColor = [UIColor greenColor];
+                    _Player4Score.textColor = [UIColor blueColor];
+                }
+            }
         }
         else if(firstPlace.handle == @"Red") {
             _PlayerWinLabel.textColor = [UIColor redColor];
+            _Player1Score.textColor = [UIColor redColor];
+            if (secondPlace.handle == @"Blue") {
+                _Player2Score.textColor = [UIColor blueColor];
+                if (thirdPlace.handle == @"Green") {
+                    _Player3Score.textColor = [UIColor greenColor];
+                    _Player4Score.textColor = [UIColor yellowColor];
+                }
+                else {
+                    _Player3Score.textColor = [UIColor yellowColor];
+                    _Player4Score.textColor = [UIColor greenColor];
+                }
+            }
+            if (secondPlace.handle == @"Green") {
+                _Player2Score.textColor = [UIColor greenColor];
+                if (thirdPlace.handle == @"Blue") {
+                    _Player3Score.textColor = [UIColor blueColor];
+                    _Player4Score.textColor = [UIColor yellowColor];
+                }
+                else {
+                    _Player3Score.textColor = [UIColor yellowColor];
+                    _Player4Score.textColor = [UIColor blueColor];
+                }
+            }
+            if (secondPlace.handle == @"Yellow") {
+                _Player2Score.textColor = [UIColor yellowColor];
+                if (thirdPlace.handle == @"Blue") {
+                    _Player3Score.textColor = [UIColor blueColor];
+                    _Player4Score.textColor = [UIColor greenColor];
+                }
+                else {
+                    _Player3Score.textColor = [UIColor greenColor];
+                    _Player4Score.textColor = [UIColor blueColor];
+                }
+            }
+
+            
         }
         else if(firstPlace.handle == @"Green") {
             _PlayerWinLabel.textColor = [UIColor greenColor];
