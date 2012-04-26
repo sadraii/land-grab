@@ -400,6 +400,7 @@
         if ([resourceCollision isMemberOfClass:[MJClusterResource class]]) {
             MJClusterResource *tmpResource = (MJClusterResource*)[self resourceAtCoordinate:tile.coordinate];
             NSLog(@"%@ found a cluster resource worth %i tiles!", tile.player.handle, [(MJClusterResource*)tmpResource generateTiles]);
+            [self zoomOutAnimated:YES];
             [self animateClusterResources:0 :tile];
             [self addClusterTilesWith:tile];
             
@@ -409,7 +410,7 @@
             MJNegativeResource *tmpResource = (MJNegativeResource*)[self resourceAtCoordinate:tile.coordinate];
             NSLog(@"%@ aww found a negative resource worth %i points", tile.player.handle, tmpResource.value);
             [self animateNegativePointResources:tmpResource.value :tile];
-            tile.player.score += tmpResource.value;
+            tile.player.score += -25;
             didRecieveResource = YES;
             [player updateScore];
         }
@@ -741,10 +742,26 @@
 //            
 //        }
 //    }
+    
+//    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(addClusterTilesWith:) userInfo:tile repeats:NO];
+//    [timer fire];
+//    [timer invalidate];
+//    
+//    int i = 1;
+//            MJTile* tmpTile1 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x+i, tile.coordinate.y)];
+//                UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
+//                UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
+//                [imageView setFrame:tmpTile1.bounds];
+//                [tmpTile1 addSubview:imageView];
+//                //[self performSelector:@selector(addClusterTilesToTerritoryWith:) withObject:tmpTile1 afterDelay:1.0];
+//                [self addClusterTilesToTerritoryWith:tmpTile1];
+    
 
-    for (int j = 0; j <2; j++) {
+
+    for (int j = 0; j < 4; j++) {
         
-        NSUInteger chance = arc4random_uniform(4)+1;
+        NSUInteger chance = j+1;
+        
         
         if (chance == 1) {
             for (int i = 1; i <= 5; i++) {
@@ -753,7 +770,10 @@
                 UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
                 [imageView setFrame:tmpTile1.bounds];
                 [tmpTile1 addSubview:imageView];
+                //[self performSelector:@selector(addClusterTilesToTerritoryWith:) withObject:tmpTile1 afterDelay:1.0];
                 [self addClusterTilesToTerritoryWith:tmpTile1];
+                [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.05]];
+                
             }
         }
         
@@ -765,6 +785,7 @@
                 [imageView setFrame:tmpTile1.bounds];
                 [tmpTile1 addSubview:imageView];
                 [self addClusterTilesToTerritoryWith:tmpTile1];
+                [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.05]];
             }
         }
         
@@ -776,6 +797,7 @@
                 [imageView setFrame:tmpTile1.bounds];
                 [tmpTile1 addSubview:imageView];
                 [self addClusterTilesToTerritoryWith:tmpTile1];
+                [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.05]];
             }
         }
         
@@ -787,6 +809,7 @@
                 [imageView setFrame:tmpTile1.bounds];
                 [tmpTile1 addSubview:imageView];
                 [self addClusterTilesToTerritoryWith:tmpTile1];
+                [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.05]];
             }
         }
         
@@ -838,7 +861,14 @@
 }
 
 - (void) addClusterTilesToTerritoryWith:(MJTile *)tile {
-	
+    
+    if(![self isCoordinateOnBoard:tile.coordinate]) {
+		NSLog(@"Cannot place a tile off the board;");
+		//[tile touchesCancelled:nil withEvent:nil];
+        //[tile.toolbar animateInventoryCounter];
+        
+		return;
+	}
 	// Check if tile is placed ontop of one of your own tiles
 MJTile* tileCollision = [self tileAtCoordinate:tile.coordinate];
 //	if (tile.player == tileCollision.player) {
@@ -848,10 +878,10 @@ MJTile* tileCollision = [self tileAtCoordinate:tile.coordinate];
 //	}
 	
 	// Check if tile is placed ontop of another player's tile
-    if (tileCollision && tile.player != tileCollision.player) {
+   if (tileCollision && tile.player != tileCollision.player) {
 
         NSLog(@"Collision with %@'s tile", tileCollision.player.handle);
-
+//
 		return;
 	}
 	
@@ -873,6 +903,9 @@ MJTile* tileCollision = [self tileAtCoordinate:tile.coordinate];
         
 		//Add it to the board (container view)
         //[self addSubview:tile];
+        
+        tile.alpha = 0.0;
+    
 		[_containerView addSubview:tile];
 		
 		//Add tile to the current player
@@ -880,11 +913,11 @@ MJTile* tileCollision = [self tileAtCoordinate:tile.coordinate];
 		[player setLastPlayedTile:tile];
 		[tile setPlayer:player];
 		[player.playedPieces addObject:tile];
-        NSLog(@"Print of player.playedPieces array: %@", player.playedPieces);
+      
 		[_pieces addObject:tile];
-        NSLog(@"Print of _pieces array:%@", _pieces);
+       
         didRecieveResource = NO;
-		
+    
 		id resourceCollision = [self resourceAtCoordinate:tile.coordinate];
         
 		if ([resourceCollision isMemberOfClass:[MJResource class]]) {
@@ -930,6 +963,12 @@ MJTile* tileCollision = [self tileAtCoordinate:tile.coordinate];
             didRecieveResource = YES;
             [player updateScore];
         }
+        
+    [UIView animateWithDuration:0.1 animations:^ {
+        tile.alpha = 1.0;
+    }completion:^(BOOL finished) {
+        
+    }];
 //	}
 }
 

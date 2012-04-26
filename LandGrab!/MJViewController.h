@@ -26,6 +26,7 @@
     BOOL _backgroundMusicPlaying;
 	BOOL _backgroundMusicInterrupted;
 	UInt32 _otherMusicIsPlaying;
+    float angle;
 }
 @property (strong, nonatomic)   IBOutlet    MJTopBar                *topbar;
 @property (strong, nonatomic)   IBOutlet    UILabel                 *handle;
@@ -55,6 +56,7 @@
 @property (readwrite, nonatomic)            NSInteger               resourcePoints;
 
 @property (strong, nonatomic)               AVAudioPlayer           *backgroundMusicPlayer;
+@property (strong, nonatomic)               UIImageView             *bigResource;
 
 //@property (strong, nonatomic)               MJClockWidget           *clock;
 
@@ -71,6 +73,8 @@
 - (void) updateTurnCount;
 - (void) endSequence;
 - (void) tryPlayMusic;
+
+- (void) animateBigResource;
 //- (void) updateScore;
 
 @end

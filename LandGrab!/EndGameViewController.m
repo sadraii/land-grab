@@ -156,9 +156,9 @@
         MJPlayer *secondPlace = [sortedArray objectAtIndex:1];
         
         NSString *lower1 = [firstPlace.handle lowercaseString];
-        NSString *firstColor = [NSString stringWithFormat:@"%@Color",lower1];
+        
         NSString *lower2 = [secondPlace.handle lowercaseString];
-        NSString *secondColor = [NSString stringWithFormat:@"%@Color",lower2];
+        
          
         _PlayerWinLabel.text = [NSString stringWithFormat:@"%@ won the Game!", firstPlace.handle];
         _Player1Score.text = [NSString stringWithFormat:@"%@: %d", firstPlace.handle, firstPlace.combinedScore];
@@ -219,6 +219,7 @@
         _Player4Score.text = [NSString stringWithFormat:@"%@: %d", forthPlace.handle, forthPlace.combinedScore];
         if (firstPlace.handle == @"Blue") {
             _PlayerWinLabel.textColor = [UIColor blueColor];
+            
         }
         else if(firstPlace.handle == @"Red") {
             _PlayerWinLabel.textColor = [UIColor redColor];

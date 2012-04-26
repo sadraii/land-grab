@@ -56,6 +56,7 @@
 @synthesize roundCount = _roundCount;
 @synthesize resourcePoints = _resourcePoints;
 @synthesize backgroundMusicPlayer = _backgroundMusicPlayer;
+@synthesize bigResource = _bigResource;
 
 //@synthesize clock = _clock;
 
@@ -185,8 +186,9 @@
         UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"bigResource.jpg"]]];
         [imageView setFrame:resource.bounds];
         [imageView setContentMode:UIViewContentModeScaleAspectFill];
+        _bigResource = imageView;
         dispatch_sync(dispatch_get_main_queue(), ^{
-            [resource addSubview:imageView];
+            [resource addSubview:_bigResource];
             [_board addResource:resource];
         });
         
@@ -252,10 +254,10 @@
                                 });
                             }
                             
-                            if (randomResourceInt ==4) { //negative point resource
+                            if (randomResourceInt == 4) { //negative point resource
                                 
                                 __block MJNegativeResource* resource = [[MJNegativeResource alloc] initWithCoordinate:point];
-                                [resource setValue: (_resourcePoints)*-1];
+                                [resource setValue: -25];
                                 NSLog(@"Resource at coordinate:%@ has %i value", NSStringFromCGPoint(resource.coordinate) ,resource.value);
                                 //		NSArray* coords = [[NSArray alloc] initWithObjects:@"0,0", @"1,0", @"1,1", @"0,1", nil];
                                 //			[resource setTilesWithCoordinateArray:coords];
@@ -409,9 +411,12 @@
 
 - (void) nextPlayer {
 	if (_isInitalLaunch) {
+
         _isInitalLaunch = NO;
     }
 	else {
+        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(animateBigResource) userInfo:nil repeats:YES];
+        [timer fire];
         [_board zoomOutAnimated:YES];
         
 		if ([_gameSetUpData.gameType isEqualToString:@"turnBased"]) {
@@ -580,6 +585,19 @@
 		[_backgroundMusicPlayer play];
 		_backgroundMusicPlaying = YES;
 	}	
+}
+
+- (void)animateBigResource {
+    
+
+    angle += 0.01;
+    if (angle > M_PI*2) { 
+        angle = 0;
+    }
+
+    CGAffineTransform transform = CGAffineTransformMakeRotation(angle);
+    _bigResource.transform = CGAffineTransformScale(transform, 2, 2);
+    
 }
 
 @end
