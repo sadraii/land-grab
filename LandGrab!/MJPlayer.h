@@ -15,6 +15,7 @@
 
 
 @interface MJPlayer : NSObject {
+    
 }
 
 @property (weak, nonatomic)         MJViewController*   viewController;
@@ -36,7 +37,8 @@
 @property (readwrite, nonatomic)    NSUInteger          combinedScore;
 @property (readwrite, nonatomic)    NSUInteger          numberOfTilesToPlay;
 @property (readwrite, nonatomic)    NSUInteger          numberOfBombsToPlay;
-@property (nonatomic)				BOOL          playedBomb;
+@property (nonatomic)				BOOL                playedBomb;
+@property (readwrite, nonatomic)    int                 totalScore;
 
 
 - (void) updateScore;

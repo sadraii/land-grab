@@ -86,6 +86,10 @@
     NSString *getBombSoundPath = [[NSBundle mainBundle] pathForResource:@"getBombSound" ofType:@"aif"];
 	NSURL *getBombSoundURL = [NSURL fileURLWithPath:getBombSoundPath];
 	AudioServicesCreateSystemSoundID((__bridge CFURLRef)getBombSoundURL, &_getBombSound);
+    
+    NSString *clusterSoundPath = [[NSBundle mainBundle] pathForResource:@"cluster" ofType:@"aif"];
+	NSURL *clusterSoundURL = [NSURL fileURLWithPath:clusterSoundPath];
+	AudioServicesCreateSystemSoundID((__bridge CFURLRef)clusterSoundURL, &_clusterSound);
 	
 }
 
@@ -396,6 +400,7 @@
         if ([resourceCollision isMemberOfClass:[MJClusterResource class]]) {
             MJClusterResource *tmpResource = (MJClusterResource*)[self resourceAtCoordinate:tile.coordinate];
             NSLog(@"%@ found a cluster resource worth %i tiles!", tile.player.handle, [(MJClusterResource*)tmpResource generateTiles]);
+            [self animateClusterResources:0 :tile];
             [self addClusterTilesWith:tile];
             
         }
@@ -572,6 +577,29 @@
     
 }
 
+- (void) animateClusterResources:(NSUInteger)withValue :(MJTile *)tile {
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tile.player.lastPlayedTile.coordinate.x*64 - 75, tile.player.lastPlayedTile.coordinate.y*64, 500, 200)];
+    
+    label.text = [NSString stringWithFormat:@"Territory Expansion!"];
+    label.textColor = [UIColor cyanColor];
+    label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:90.0];
+    label.alpha = 1.0;
+    label.backgroundColor = [UIColor clearColor];
+    
+    [self addSubview:label];
+    
+    AudioServicesPlaySystemSound(_clusterSound);
+    [UIView animateWithDuration:0.85 delay:0.0 options:UIViewAnimationCurveEaseIn animations:^ {
+        label.alpha = 0.0; 
+        label.transform = CGAffineTransformTranslate(label.transform, 0, -300);
+    }completion:^(BOOL finished) {
+        
+        [label removeFromSuperview]; 
+        
+    }];
+
+}
+
 - (void) animateBombResources:(NSUInteger)withValue :(MJTile*)tile {
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tile.player.lastPlayedTile.coordinate.x*64 - 125, tile.player.lastPlayedTile.coordinate.y*64, 500, 200)];
@@ -704,28 +732,87 @@
     
     
     
-    /*for (MJTile* tile in tile.player.playedPieces) {
-        if (tile.player == player) {
-            //do
-            MJTile* tmpTile = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x+1, tile.coordinate.y+1)];
-            //[_viewController addTile:tmpTile];
-            NSLog(@"Frame from tile: %@", NSStringFromCGRect(tile.frame));
-            NSLog(@"Frame from tmptTile: %@", NSStringFromCGRect(tmpTile.frame));
-            
-            NSLog(@"Frame from tmpTile after snapToPoint: %@", NSStringFromCGRect(tmpTile.frame));
-            
-            [self addClusterTilesToTerritoryWith:tmpTile];
-            return;
-            
-        }
-    }*/
+//    for (MJTile* tile in tile.player.playedPieces) {
+//        if (tile.player == player) {
+//            //do
+//
+//            //[self addClusterTilesToTerritoryWith:tmpTile];
+//            return;
+//            
+//        }
+//    }
 
-//    MJTile* tmpTile1 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x+1, tile.coordinate.y)];
-//    UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
-//    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
-//    [imageView setFrame:tmpTile1.bounds];
-//    [tmpTile1 addSubview:imageView];
-//    [self addClusterTilesToTerritoryWith:tmpTile1];
+    for (int j = 0; j <2; j++) {
+        
+        NSUInteger chance = arc4random_uniform(4)+1;
+        
+        if (chance == 1) {
+            for (int i = 1; i <= 5; i++) {
+                MJTile* tmpTile1 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x+i, tile.coordinate.y)];
+                UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
+                UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
+                [imageView setFrame:tmpTile1.bounds];
+                [tmpTile1 addSubview:imageView];
+                [self addClusterTilesToTerritoryWith:tmpTile1];
+            }
+        }
+        
+        if (chance == 2) {
+            for (int i = 1; i <= 5; i++) {
+                MJTile* tmpTile1 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x, tile.coordinate.y+i)];
+                UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
+                UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
+                [imageView setFrame:tmpTile1.bounds];
+                [tmpTile1 addSubview:imageView];
+                [self addClusterTilesToTerritoryWith:tmpTile1];
+            }
+        }
+        
+        if (chance == 3) {
+            for (int i = 1; i <= 5; i++) {
+                MJTile* tmpTile1 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x-i, tile.coordinate.y)];
+                UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
+                UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
+                [imageView setFrame:tmpTile1.bounds];
+                [tmpTile1 addSubview:imageView];
+                [self addClusterTilesToTerritoryWith:tmpTile1];
+            }
+        }
+        
+        if (chance == 4) {
+            for (int i = 1; i <= 5; i++) {
+                MJTile* tmpTile1 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x, tile.coordinate.y-i)];
+                UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
+                UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
+                [imageView setFrame:tmpTile1.bounds];
+                [tmpTile1 addSubview:imageView];
+                [self addClusterTilesToTerritoryWith:tmpTile1];
+            }
+        }
+        
+    }
+//    for (int i = 1; i <= 10; i++) {
+//        
+//        NSUInteger chance = arc4random_uniform(4)+1;
+//        
+//        NSLog(@"%i", chance);
+//        
+//        if (chance == 1) {
+//        }
+//        if (chance == 2) {
+//        
+//            MJTile* tmpTile1 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x, tile.coordinate.y+i)];
+//            UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
+//            UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
+//            [imageView setFrame:tmpTile1.bounds];
+//            [tmpTile1 addSubview:imageView];
+//            [self addClusterTilesToTerritoryWith:tmpTile1];
+//        }
+//        
+//       
+//
+//    }
+
 //    
 //    MJTile* tmpTile2 = [[MJTile alloc] initWithCoordinate:CGPointMake(tile.coordinate.x, tile.coordinate.y+1)];
 //    UIImage* image2 = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Tile_TileSize.png", tile.player.imageColor]];
@@ -752,28 +839,29 @@
 
 - (void) addClusterTilesToTerritoryWith:(MJTile *)tile {
 	
-//	// Check if tile is placed ontop of one of your own tiles
-//	MJTile* tileCollision = [self tileAtCoordinate:tile.coordinate];
+	// Check if tile is placed ontop of one of your own tiles
+MJTile* tileCollision = [self tileAtCoordinate:tile.coordinate];
 //	if (tile.player == tileCollision.player) {
 //		NSLog(@"Cluster Tile generated ontop of own piece, need new coordinate");
 //        
 //		return;
 //	}
-//	
-//	// Check if tile is placed ontop of another player's tile
-//	else if (tileCollision && tile.player != tileCollision.player) {
-//
-//        NSLog(@"Collision with %@'s tile", tileCollision.player.handle);
-//
-//		return;
-//	}
-//	
-//	BOOL isTileConnected = [self isTileConnectedTo:tile];
-//	
-//    
+	
+	// Check if tile is placed ontop of another player's tile
+    if (tileCollision && tile.player != tileCollision.player) {
+
+        NSLog(@"Collision with %@'s tile", tileCollision.player.handle);
+
+		return;
+	}
+	
+	//BOOL isTileConnected = [self isTileConnectedTo:tile];
+	
+    
 //	if (!isTileConnected) {
-//        [tile touchesCancelled:nil withEvent:nil];
-//        [tile.toolbar animateInventoryCounter];
+//        //[tile touchesCancelled:nil withEvent:nil];
+//        //[tile.toolbar animateInventoryCounter];
+//        return;
 //	}
 //	else {
 
@@ -797,52 +885,52 @@
         NSLog(@"Print of _pieces array:%@", _pieces);
         didRecieveResource = NO;
 		
-//		id resourceCollision = [self resourceAtCoordinate:tile.coordinate];
-//        
-//		if ([resourceCollision isMemberOfClass:[MJResource class]]) {
-//			MJResource *tmpResource = [self resourceAtCoordinate:tile.coordinate];
-//            tile.player.score += tmpResource.value;
-//			NSLog(@"%@ found a resource worth %i bananas!", tile.player.handle, tmpResource.value);
-//            [self animatePositivePointResources:tmpResource.value:tile.coordinate];
-//            didRecieveResource = YES;
-//            [player updateScore];
-//		}
-//        
-//        if ([resourceCollision isMemberOfClass:[MJAddTilesResource class]]) {
-//            MJResource *tmpResource = [self resourceAtCoordinate:tile.coordinate];
-//            NSLog(@"%@ found an AddTile resource worth %i tiles!", tile.player.handle, [(MJAddTilesResource*)tmpResource tilesGenerated]);
-//            [tile.player updateNumberOfTilesToPlayWithNumber:[(MJAddTilesResource*)tmpResource tilesGenerated]];
-//            [tile.toolbar animateInventoryCounter];
-//            [self animateAddTileResources:[(MJAddTilesResource*)tmpResource tilesGenerated]:tile.coordinate];
-//        }
-//        
-//        if ([resourceCollision isMemberOfClass:[MJBombResource class]]) {
-//            MJBombResource *tmpResource = (MJBombResource*)[self resourceAtCoordinate:tile.coordinate];
-//            NSLog(@"%@ found an Bomb resource worth %i bombs!", tile.player.handle, tmpResource.bombs);
-//            [tile.player updateNumberOfBombsToPlayWithNumber:tmpResource.bombs];
-//            didRecieveResource = YES;
-//            [self animateBombResources:1 :tile.coordinate];
-//            //MJBombTile *tmpBombTile = [[MJBombTile alloc] init];
-//            //[tile.player.toolBarPieces addObject:tmpBombTile];
-//            [tile.toolbar addBombToToolBar:tile.player];
-//            [tile.toolbar animateBombCounter];
-//        }
-//        
-//        if ([resourceCollision isMemberOfClass:[MJClusterResource class]]) {
-//            MJClusterResource *tmpResource = (MJClusterResource*)[self resourceAtCoordinate:tile.coordinate];
-//            NSLog(@"%@ found a cluster resource worth %i tiles!", tile.player.handle, [(MJClusterResource*)tmpResource generateTiles]);
-//            [self addClusterTilesFor:tile.player];
-//            
-//        }
-//        
-//        if ([resourceCollision isMemberOfClass:[MJNegativeResource class]]) {
-//            MJNegativeResource *tmpResource = (MJNegativeResource*)[self resourceAtCoordinate:tile.coordinate];
-//            NSLog(@"%@ aww found a negative resource worth %i points", tile.player.handle, tmpResource.value);
-//            [self animateNegativePointResources:tmpResource.value :tile.coordinate];
-//            didRecieveResource = YES;
-//            [player updateScore];
-//        }
-	//}
+		id resourceCollision = [self resourceAtCoordinate:tile.coordinate];
+        
+		if ([resourceCollision isMemberOfClass:[MJResource class]]) {
+			MJResource *tmpResource = [self resourceAtCoordinate:tile.coordinate];
+            tile.player.score += tmpResource.value;
+			NSLog(@"%@ found a resource worth %i bananas!", tile.player.handle, tmpResource.value);
+            [self animatePositivePointResources:tmpResource.value:tile];
+            didRecieveResource = YES;
+            [player updateScore];
+		}
+        
+        if ([resourceCollision isMemberOfClass:[MJAddTilesResource class]]) {
+            MJResource *tmpResource = [self resourceAtCoordinate:tile.coordinate];
+            NSLog(@"%@ found an AddTile resource worth %i tiles!", tile.player.handle, [(MJAddTilesResource*)tmpResource tilesGenerated]);
+            [tile.player updateNumberOfTilesToPlayWithNumber:[(MJAddTilesResource*)tmpResource tilesGenerated]];
+            [tile.toolbar animateInventoryCounter];
+            [self animateAddTileResources:[(MJAddTilesResource*)tmpResource tilesGenerated]:tile];
+        }
+        
+        if ([resourceCollision isMemberOfClass:[MJBombResource class]]) {
+            MJBombResource *tmpResource = (MJBombResource*)[self resourceAtCoordinate:tile.coordinate];
+            NSLog(@"%@ found an Bomb resource worth %i bombs!", tile.player.handle, tmpResource.bombs);
+            [tile.player updateNumberOfBombsToPlayWithNumber:tmpResource.bombs];
+            didRecieveResource = YES;
+            [self animateBombResources:1 :tile];
+            //MJBombTile *tmpBombTile = [[MJBombTile alloc] init];
+            //[tile.player.toolBarPieces addObject:tmpBombTile];
+            [tile.toolbar addBombToToolBar:tile.player];
+            [tile.toolbar animateBombCounter];
+        }
+        
+        if ([resourceCollision isMemberOfClass:[MJClusterResource class]]) {
+            MJClusterResource *tmpResource = (MJClusterResource*)[self resourceAtCoordinate:tile.coordinate];
+            NSLog(@"%@ found a cluster resource worth %i tiles!", tile.player.handle, [(MJClusterResource*)tmpResource generateTiles]);
+            [self addClusterTilesWith:tile];
+            
+        }
+        
+        if ([resourceCollision isMemberOfClass:[MJNegativeResource class]]) {
+            MJNegativeResource *tmpResource = (MJNegativeResource*)[self resourceAtCoordinate:tile.coordinate];
+            NSLog(@"%@ aww found a negative resource worth %i points", tile.player.handle, tmpResource.value);
+            [self animateNegativePointResources:tmpResource.value :tile];
+            didRecieveResource = YES;
+            [player updateScore];
+        }
+//	}
 }
 
 @end

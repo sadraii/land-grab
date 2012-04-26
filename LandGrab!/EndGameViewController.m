@@ -64,9 +64,13 @@
     
     _PlayerWinLabel.alpha = 0.0;
     _Player1Score.alpha = 0.0;
+    
     _Player2Score.alpha = 0.0;
+   
     _Player3Score.alpha = 0.0;
+ 
     _Player4Score.alpha = 0.0;
+  
     
     [self calculateEndGame];
     
@@ -142,7 +146,7 @@
 -(void) calculateEndGame {
     
     NSSortDescriptor *sortDescriptor;
-    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"score"
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"combinedScore"
                                                   ascending:NO];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     NSArray *sortedArray  = [_players sortedArrayUsingDescriptors:sortDescriptors];
@@ -150,32 +154,81 @@
     if (_numberOfPlayers == 2) {
         MJPlayer *firstPlace = [sortedArray objectAtIndex:0];
         MJPlayer *secondPlace = [sortedArray objectAtIndex:1];
-        _PlayerWinLabel.text = [NSString stringWithFormat:@"%@ won the Game! YEA!", firstPlace.handle];
-        _Player1Score.text = [NSString stringWithFormat:@"%@: %d", firstPlace.handle, firstPlace.score];
-        _Player2Score.text = [NSString stringWithFormat:@"%@: %d", secondPlace.handle, secondPlace.score];
+        
+        NSString *lower1 = [firstPlace.handle lowercaseString];
+        NSString *firstColor = [NSString stringWithFormat:@"%@Color",lower1];
+        NSString *lower2 = [secondPlace.handle lowercaseString];
+        NSString *secondColor = [NSString stringWithFormat:@"%@Color",lower2];
+         
+        _PlayerWinLabel.text = [NSString stringWithFormat:@"%@ won the Game!", firstPlace.handle];
+        _Player1Score.text = [NSString stringWithFormat:@"%@: %d", firstPlace.handle, firstPlace.combinedScore];
+        
+        _Player2Score.text = [NSString stringWithFormat:@"%@: %d", secondPlace.handle, secondPlace.combinedScore];
         _Player3Score.alpha = 0.0;
         _Player4Score.alpha = 0.0;
+        if (firstPlace.handle == @"Blue") {
+            _PlayerWinLabel.textColor = [UIColor blueColor];
+            _Player1Score.textColor = [UIColor blueColor];
+            _Player2Score.textColor = [UIColor redColor];
+        }
+        else {
+            _PlayerWinLabel.textColor = [UIColor redColor];
+            _Player1Score.textColor = [UIColor redColor];
+            _Player2Score.textColor = [UIColor blueColor];
+        }
     }
     if (_numberOfPlayers == 3) {
         MJPlayer *firstPlace = [sortedArray objectAtIndex:0];
         MJPlayer *secondPlace = [sortedArray objectAtIndex:1];
         MJPlayer *thirdPlace = [sortedArray objectAtIndex:2];
-        _PlayerWinLabel.text = [NSString stringWithFormat:@"%@ won the Game! YEA!", firstPlace.handle];
-        _Player1Score.text = [NSString stringWithFormat:@"%@: %d", firstPlace.handle, firstPlace.score];
-        _Player2Score.text = [NSString stringWithFormat:@"%@: %d", secondPlace.handle,secondPlace.score];
-        _Player3Score.text = [NSString stringWithFormat:@"%@: %d", thirdPlace.handle, thirdPlace.score];
+        _PlayerWinLabel.text = [NSString stringWithFormat:@"%@ won the Game!", firstPlace.handle];
+        _Player1Score.text = [NSString stringWithFormat:@"%@: %d", firstPlace.handle, firstPlace.combinedScore];
+        _Player2Score.text = [NSString stringWithFormat:@"%@: %d", secondPlace.handle,secondPlace.combinedScore];
+        _Player3Score.text = [NSString stringWithFormat:@"%@: %d", thirdPlace.handle, thirdPlace.combinedScore];
         _Player4Score.alpha = 0.0;
+        
+        if (firstPlace.handle == @"Blue") {
+            _PlayerWinLabel.textColor = [UIColor blueColor];
+            
+            _Player1Score.textColor = [UIColor blueColor];
+            if (secondPlace.handle == @"Red") {
+                _Player2Score.textColor = [UIColor redColor];
+                _Player3Score.textColor = [UIColor greenColor];
+            }
+            if (secondPlace.handle == @"Green") {
+                _Player2Score.textColor = [UIColor greenColor];
+                _Player3Score.textColor = [UIColor redColor];
+            }
+        }
+        else if(firstPlace.handle == @"Red") {
+             _PlayerWinLabel.textColor = [UIColor redColor];
+        }
+        else {
+            _PlayerWinLabel.textColor = [UIColor greenColor];
+        }
     }
     if (_numberOfPlayers == 4) {
         MJPlayer *firstPlace = [sortedArray objectAtIndex:0];
         MJPlayer *secondPlace = [sortedArray objectAtIndex:1];
         MJPlayer *thirdPlace = [sortedArray objectAtIndex:2];
         MJPlayer *forthPlace = [sortedArray objectAtIndex:3];
-        _PlayerWinLabel.text = [NSString stringWithFormat:@"%@ won the Game! YEA!", firstPlace.handle];
-        _Player1Score.text = [NSString stringWithFormat:@"%@: %d", firstPlace.handle, firstPlace.score];
-        _Player2Score.text = [NSString stringWithFormat:@"%@: %d", secondPlace.handle, secondPlace.score];
-        _Player3Score.text = [NSString stringWithFormat:@"%@: %d", thirdPlace.handle, thirdPlace.score];
-        _Player4Score.text = [NSString stringWithFormat:@"%@: %d", forthPlace.handle, forthPlace.score];
+        _PlayerWinLabel.text = [NSString stringWithFormat:@"%@ won the Game!", firstPlace.handle];
+        _Player1Score.text = [NSString stringWithFormat:@"%@: %d", firstPlace.handle, firstPlace.combinedScore];
+        _Player2Score.text = [NSString stringWithFormat:@"%@: %d", secondPlace.handle, secondPlace.combinedScore];
+        _Player3Score.text = [NSString stringWithFormat:@"%@: %d", thirdPlace.handle, thirdPlace.combinedScore];
+        _Player4Score.text = [NSString stringWithFormat:@"%@: %d", forthPlace.handle, forthPlace.combinedScore];
+        if (firstPlace.handle == @"Blue") {
+            _PlayerWinLabel.textColor = [UIColor blueColor];
+        }
+        else if(firstPlace.handle == @"Red") {
+            _PlayerWinLabel.textColor = [UIColor redColor];
+        }
+        else if(firstPlace.handle == @"Green") {
+            _PlayerWinLabel.textColor = [UIColor greenColor];
+        }
+        else {
+            _PlayerWinLabel.textColor = [UIColor yellowColor];
+        }
     }
 }
 

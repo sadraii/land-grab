@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="h32-Gx-S7q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="h32-Gx-S7q">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
+        <deployment defaultVersion="1280" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
         <scene sceneID="4">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
@@ -143,7 +142,6 @@
             </objects>
             <point key="canvasLocation" x="100" y="-89"/>
         </scene>
-        <!--End Game View Controller-->
         <scene sceneID="F3Q-L9-LzF">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mbM-xl-VVQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -152,6 +150,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="mainMenuBackground.jpg" id="FP6-bx-8or">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Game End Results!" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="nAb-g6-BcL">
                                 <rect key="frame" x="0.0" y="5" width="768" height="64"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -160,37 +162,37 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="Uj8-GB-B59" userLabel="PlayerWinLabel">
-                                <rect key="frame" x="0.0" y="181" width="768" height="40"/>
+                                <rect key="frame" x="0.0" y="181" width="768" height="95"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="52"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="80"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="wta-fe-kcn" userLabel="Player1Score">
-                                <rect key="frame" x="0.0" y="423" width="768" height="40"/>
+                                <rect key="frame" x="0.0" y="413" width="768" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="25"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="50"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="SFc-rE-dgJ" userLabel="Player2Score">
-                                <rect key="frame" x="0.0" y="471" width="768" height="40"/>
+                                <rect key="frame" x="0.0" y="469" width="768" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="25"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="50"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="Exi-M7-F9s" userLabel="Player3Score">
-                                <rect key="frame" x="0.0" y="519" width="768" height="40"/>
+                                <rect key="frame" x="0.0" y="522" width="768" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="25"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="50"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="1WW-gP-XiR" userLabel="Player4Score">
-                                <rect key="frame" x="0.0" y="567" width="768" height="40"/>
+                                <rect key="frame" x="0.0" y="575" width="768" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="25"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="50"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -223,7 +225,6 @@
             </objects>
             <point key="canvasLocation" x="1002" y="-99"/>
         </scene>
-        <!--Main Menu-->
         <scene sceneID="J6F-kW-AKv">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Amo-yL-TRi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -479,7 +480,6 @@
             </objects>
             <point key="canvasLocation" x="-818" y="-98"/>
         </scene>
-        <!--Navigation Controller-->
         <scene sceneID="QOB-CX-3b4">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iAQ-EH-332" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -503,77 +503,6 @@
         <image name="TopBar_Gray.png" width="2000" height="512"/>
         <image name="mainMenuBackground.jpg" width="768" height="1024"/>
     </resources>
-    <classes>
-        <class className="EndGameViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EndGameViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="Player1Score" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="Player2Score" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="Player3Score" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="Player4Score" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="PlayerWinLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="MJBoard" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJBoard.h"/>
-            <relationships>
-                <relationship kind="outlet" name="viewController" candidateClass="MJViewController"/>
-            </relationships>
-        </class>
-        <class className="MJClockWidget" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJClockWidget.h"/>
-        </class>
-        <class className="MJToolbar" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJToolbar.h"/>
-            <relationships>
-                <relationship kind="outlet" name="viewController" candidateClass="MJViewController"/>
-            </relationships>
-        </class>
-        <class className="MJTopBar" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJTopBar.h"/>
-        </class>
-        <class className="MJViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MJViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="newGame:"/>
-                <relationship kind="action" name="zoom:"/>
-                <relationship kind="outlet" name="board" candidateClass="MJBoard"/>
-                <relationship kind="outlet" name="gameTypeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="gameTypeLabelCounter" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="handle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mainMenuViewController" candidateClass="MainMenu"/>
-                <relationship kind="outlet" name="score" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="territory" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="MJToolbar"/>
-                <relationship kind="outlet" name="topbar" candidateClass="MJTopBar"/>
-                <relationship kind="outlet" name="zoomStepper" candidateClass="UIStepper"/>
-            </relationships>
-        </class>
-        <class className="MainMenu" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainMenu.h"/>
-            <relationships>
-                <relationship kind="action" name="tappedHowManyPlayers:" candidateClass="UIButton"/>
-                <relationship kind="action" name="tappedTypeOfGame:" candidateClass="UIButton"/>
-                <relationship kind="action" name="tappedboardsize:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="boardsize20x20" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="boardsize30x30" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="boardsize50x50" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="fiftyTurnsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="fiveMinutesButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="fourPlayersButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="hundredTurnsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="label" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="startNewGame" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="tenMinutesButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="threePlayersButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="timeBasedButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="turnBasedButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="twentyTurnsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="twoMinutesButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="twoPlayersButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

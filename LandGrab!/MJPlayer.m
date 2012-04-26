@@ -34,6 +34,7 @@
 @synthesize numberOfTilesToPlay = _numberOfTilesToPlay;
 @synthesize numberOfBombsToPlay = _numberOfBombsToPlay;
 @synthesize playedBomb = _playedBomb;
+@synthesize totalScore = _totalScore;
 
 -(id) init {
     if ((self = [super init]) == nil) {
@@ -51,6 +52,7 @@
 	_capital = nil;
 	_playedPieces = [[NSMutableArray alloc] init];
     _toolBarPieces = [[NSMutableArray alloc] init];
+    _totalScore = 0;
 	
     return self;
 }
@@ -58,17 +60,17 @@
 - (void) updateScore {
 	[self updateTerritory];
 	[_viewController.territory setText:[NSString stringWithFormat:@"%i",self.territory]];
-    int score = 0;
+    
     if (self.score == 0) {
-        score = self.territory;
+        _totalScore = self.territory;
     }
     else if (self.score < 0) {
-        score = self.score + self.territory;
+        _totalScore = self.score + self.territory;
     }
     else {
-        score = self.score * self.territory;
+        _totalScore = self.score * self.territory;
     }
-	[_viewController.score setText:[NSString stringWithFormat:@"%i",score]];
+	[_viewController.score setText:[NSString stringWithFormat:@"%i",_totalScore]];
 }
 
 - (void) updateTerritory {

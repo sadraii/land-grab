@@ -26,6 +26,7 @@
     SystemSoundID _bombSound;
     SystemSoundID _addTileSound;
     SystemSoundID _getBombSound;
+    SystemSoundID _clusterSound;
 }
 
 @property (weak, nonatomic) IBOutlet    MJViewController*   viewController;
@@ -66,7 +67,7 @@
 - (void) animateNegativePointResources:(NSUInteger)withValue:(MJTile*)tile;
 - (void) animateAddTileResources:(NSUInteger)withValue:(MJTile*)tile;
 - (void) animateBombResources:(NSUInteger)withValue:(MJTile*)tile;
-//- (void) animateClusterResources:(NSUInteger)withValue:(MJTile*)tile;
+- (void) animateClusterResources:(NSUInteger)withValue:(MJTile*)tile;
 
 - (void) bombAnimationWith:(MJTile*)tile;
 
