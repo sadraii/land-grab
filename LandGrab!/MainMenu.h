@@ -43,6 +43,8 @@
 -(IBAction)tappedTypeOfGame:(UIButton *)button;
 -(IBAction)tappedboardsize:(UIButton *)button;
 
+-(void)reset;
+
 
 
 //-(void)setBoolCorrectly;
